@@ -1,6 +1,6 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]--><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="Asciidoctor 1.5.6.1"><title>AddressBook Level 4 - User Guide</title><link rel="stylesheet" href="stylesheets/gh-pages.css">
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]--><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="Asciidoctor 1.5.6.1"><title>Erium - User Guide</title><link rel="stylesheet" href="stylesheets/gh-pages.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="stylesheets/coderay-asciidoctor.css"></head><body class="article"><div id="header"><h1>AddressBook Level 4 - User Guide</h1></div><div id="content"><div id="preamble">
+<link rel="stylesheet" href="stylesheets/coderay-asciidoctor.css"></head><body class="article"><div id="header"><h1>Erium - User Guide</h1></div><div id="content"><div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
 <p>By: <code>Team SE-EDU</code>      Since: <code>Jun 2016</code>      Licence: <code>MIT</code></p>
@@ -11,26 +11,68 @@
 <ul class="sectlevel1">
 <li><a href="#introduction">1. Introduction</a></li>
 <li><a href="#quick-start">2. Quick Start</a></li>
-<li><a href="#Features">3. Features</a>
+<li><a href="#Features">3. Features</a></li>
+<li><a href="#common">4. common</a>
 <ul class="sectlevel2">
-<li><a href="#viewing-help-code-help-code">3.1. Viewing help : <code>help</code></a></li>
-<li><a href="#adding-a-person-code-add-code">3.2. Adding a person: <code>add</code></a></li>
-<li><a href="#listing-all-persons-code-list-code">3.3. Listing all persons : <code>list</code></a></li>
-<li><a href="#editing-a-person-code-edit-code">3.4. Editing a person : <code>edit</code></a></li>
-<li><a href="#locating-persons-by-name-code-find-code">3.5. Locating persons by name: <code>find</code></a></li>
-<li><a href="#deleting-a-person-code-delete-code">3.6. Deleting a person : <code>delete</code></a></li>
-<li><a href="#selecting-a-person-code-select-code">3.7. Selecting a person : <code>select</code></a></li>
-<li><a href="#listing-entered-commands-code-history-code">3.8. Listing entered commands : <code>history</code></a></li>
-<li><a href="#undoing-previous-command-code-undo-code">3.9. Undoing previous command : <code>undo</code></a></li>
-<li><a href="#redoing-the-previously-undone-command-code-redo-code">3.10. Redoing the previously undone command : <code>redo</code></a></li>
-<li><a href="#clearing-all-entries-code-clear-code">3.11. Clearing all entries : <code>clear</code></a></li>
-<li><a href="#exiting-the-program-code-exit-code">3.12. Exiting the program : <code>exit</code></a></li>
-<li><a href="#saving-the-data">3.13. Saving the data</a></li>
-<li><a href="#encrypting-data-files-code-coming-in-v2-0-code">3.14. Encrypting data files <code>[coming in v2.0]</code></a></li>
+<li><a href="#viewing-help-code-help-code">4.1. Viewing help : <code>help</code></a></li>
+<li><a href="#exiting-the-program-code-exit-code">4.2. Exiting the program : <code>exit</code></a></li>
+<li><a href="#saving-the-data">4.3. Saving the data</a></li>
 </ul>
 </li>
-<li><a href="#faq">4. FAQ</a></li>
-<li><a href="#command-summary">5. Command Summary</a></li>
+<li><a href="#friends-zhi-wei">5. Friends(Zhi Wei)</a>
+<ul class="sectlevel2">
+<li><a href="#adding-a-person-code-add_friend-code">5.1. Adding a person: <code>add_friend</code></a></li>
+<li><a href="#listing-all-friends-code-list_friends-code">5.2. Listing all friends : <code>list_friends</code></a></li>
+<li><a href="#editing-a-friend-code-edit_friend-code">5.3. Editing a friend : <code>edit_friend</code></a></li>
+<li><a href="#locating-friend-by-name-code-find_friend-code">5.4. Locating friend by name: <code>find_friend</code></a></li>
+<li><a href="#deleting-a-person-code-delete_friend-code">5.5. Deleting a person : <code>delete_friend</code></a></li>
+<li><a href="#clearing-all-entries-code-clear_friend-code">5.6. Clearing all entries : <code>clear_friend</code></a></li>
+<li><a href="#list-all-groups-friend-is-in-code-grouplist-code">5.7. List all groups friend is in : <code>grouplist</code></a></li>
+</ul>
+</li>
+<li><a href="#timetable-wen-kai">6. Timetable(Wen Kai)</a>
+<ul class="sectlevel2">
+<li><a href="#adding-a-timetable-code-add_timetable-code">6.1. Adding a timetable: <code>add_timetable</code></a></li>
+<li><a href="#listing-all-timetable-code-list_timetables-code">6.2. Listing all timetable: <code>list_timetables</code></a></li>
+<li><a href="#download-timetable-code-download_timetable-code">6.3. Download timetable : <code>download_timetable</code></a></li>
+<li><a href="#locating-a-timetable-by-name-code-find_timetable-code">6.4. Locating a timetable by name: <code>find_timetable</code></a></li>
+<li><a href="#deleting-a-timetable-code-delete_timetable-code">6.5. Deleting a timetable : <code>delete_timetable</code></a></li>
+<li><a href="#view-timetable-code-view_timetable-code">6.6. view timetable : <code>view_timetable</code></a></li>
+<li><a href="#clearing-all-timetable-entries-code-clear_timetable-code">6.7. Clearing all timetable entries : <code>clear_timetable</code></a></li>
+</ul>
+</li>
+<li><a href="#groups-melodies">7. Groups (Melodies)</a>
+<ul class="sectlevel2">
+<li><a href="#adding-a-group-code-add_group-code">7.1. Adding a group: <code>add_group</code></a></li>
+<li><a href="#listing-all-groups-code-list_groups-code">7.2. Listing all Groups : <code>list_groups</code></a></li>
+<li><a href="#editing-a-friend-code-edit_group-code">7.3. Editing a friend : <code>edit_group</code></a></li>
+<li><a href="#locating-group-by-name-find_group">7.4. Locating group by name: `find_group `</a></li>
+<li><a href="#deleting-a-group-code-delete_group-code">7.5. Deleting a group : <code>delete_group</code></a></li>
+<li><a href="#clearing-all-group-code-clear_group-code">7.6. Clearing all group : <code>clear_group</code></a></li>
+<li><a href="#list-all-members-of-a-group-code-viewgroup-code">7.7. List all members of a group : <code>viewgroup</code></a></li>
+<li><a href="#add-a-friend-to-group-code-register-code">7.8. add a friend to group : <code>register</code></a></li>
+</ul>
+</li>
+<li><a href="#find-common-time-slot-in-group-nigel">8. Find common time slot in group (Nigel)</a>
+<ul class="sectlevel2">
+<li><a href="#find-kth-best-common-time-slot-in-group-code-find_time-code">8.1. Find kth best common time slot in group: <code>find_time</code></a></li>
+</ul>
+</li>
+<li><a href="#security-leslie">9. Security (Leslie)</a>
+<ul class="sectlevel2">
+<li><a href="#create-an-account-code-create-code">9.1. Create an account: <code>create</code></a></li>
+<li><a href="#login-to-an-account-code-login-code">9.2. login to an account : <code>login</code></a></li>
+<li><a href="#changing-password-update_pw">9.3. Changing password: `update_pw `</a></li>
+<li><a href="#encrypt-timetable-data-encrypt">9.4. Encrypt timetable data : `encrypt `</a></li>
+<li><a href="#decrypt-timetable-data-decrypt">9.5. Decrypt timetable data  : `decrypt `</a></li>
+<li><a href="#get-security-question-password-code-get-code">9.6. get Security question password : <code>get</code></a></li>
+<li><a href="#reset-password-code-reset-code">9.7. Reset password  : <code>reset</code></a></li>
+<li><a href="#changing-security-question-and-answer-code-update_sq-code">9.8. Changing security question and answer : <code>update_sq</code></a></li>
+<li><a href="#suggest-requesting-new-password-code-coming-in-v2-0-code">9.9. Suggest, Requesting new password <code>[coming in v2.0]</code></a></li>
+</ul>
+</li>
+<li><a href="#faq">10. FAQ</a></li>
+<li><a href="#command-summary">11. Command Summary</a></li>
 </ul>
 </div>
 </div>
@@ -38,7 +80,7 @@
 <h2 id="introduction"><a class="link" href="#introduction">1. Introduction</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>AddressBook Level 4 (AB4) is for those who <strong>prefer to use a desktop app for managing contacts</strong>. More importantly, AB4 is <strong>optimized for those who prefer to work with a Command Line Interface</strong> (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB4 can get your contact management tasks done faster than traditional GUI apps. Interested? Jump to the <a href="#quick-start">Section 2, &#8220;Quick Start&#8221;</a> to get started. Enjoy!</p>
+<p>Erium is for those who <strong>Wants to find a convenient time slot for the people who are joining his/her event</strong>. More importantly, Erium is <strong>optimized for those who prefer to work with a Command Line Interface</strong> (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast,Erium can get your contact management tasks done faster than traditional GUI apps. Interested? Jump to the <a href="#quick-start">Section 2, &#8220;Quick Start&#8221;</a> to get started. Enjoy!</p>
 </div>
 </div>
 </div>
@@ -51,10 +93,10 @@
 <p>Ensure you have Java version <code>9</code> or later installed in your Computer.</p>
 </li>
 <li>
-<p>Download the latest <code>addressbook.jar</code> <a href="https://github.com/se-edu/addressbook-level4/releases">here</a>.</p>
+<p>Download the latest <code>addressbook.jar</code> <a href="https://github.com/CS2103-AY1819S1-F11-4/main/releases">here</a>.</p>
 </li>
 <li>
-<p>Copy the file to the folder you want to use as the home folder for your Address Book.</p>
+<p>Copy the file to the folder you want to use as the home folder for Erium.</p>
 </li>
 <li>
 <p>Double-click the file to start the app. The GUI should appear in a few seconds.</p>
@@ -73,13 +115,13 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 <div class="ulist">
 <ul>
 <li>
-<p><strong><code>list</code></strong> : lists all contacts</p>
+<p><strong><code>list_friends</code></strong> : lists all friends you added</p>
 </li>
 <li>
-<p><strong><code>add</code></strong><code>n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01</code> : adds a contact named <code>John Doe</code> to the Address Book.</p>
+<p><strong><code>add_friend</code></strong><code>add u/Damith C. Rajapakse</code> : adds a friend named `Damith C. Rajapakse ` to Erium.</p>
 </li>
 <li>
-<p><strong><code>delete</code></strong><code>3</code> : deletes the 3rd contact shown in the current list</p>
+<p><strong><code>delete</code></strong><code>3</code> : deletes the 3rd friend shown in the current friend list</p>
 </li>
 <li>
 <p><strong><code>exit</code></strong> : exits the app</p>
@@ -105,44 +147,56 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 <div class="ulist">
 <ul>
 <li>
-<p>Words in <code>UPPER_CASE</code> are the parameters to be supplied by the user e.g. in <code>add n/NAME</code>, <code>NAME</code> is a parameter which can be used as <code>add n/John Doe</code>.</p>
+<p>Words in <code>UPPER_CASE</code> are the parameters to be supplied by the user e.g. in <code>n/NAME_OF_FRIEND</code>, <code>NAME_OF_FRIEND</code> is a parameter which can be used as <code>add n/John Doe</code>.</p>
 </li>
 <li>
-<p>Items in square brackets are optional e.g <code>n/NAME [t/TAG]</code> can be used as <code>n/John Doe t/friend</code> or as <code>n/John Doe</code>.</p>
+<p>Items in square brackets are optional e.g <code>n/NAME [i/INDEX_OF_TIMETABLE]</code> can be used as <code>n/John Doe i/1</code> or as <code>n/John Doe</code>.</p>
 </li>
 <li>
-<p>Items with <code>…</code>​ after them can be used multiple times including zero times e.g. <code>[t/TAG]&#8230;&#8203;</code> can be used as <code>&#160;</code> (i.e. 0 times), <code>t/friend</code>, <code>t/friend t/family</code> etc.</p>
+<p>Items in square brackets /\ square brackets means have to choose either left choice or right choice e.g <code>add_timetable [f/FILENAME l/FILE_LOCATION ] /\ [o/LINK]</code> can be used as <code>add_timetable f/mytimetable.png l/C://Users/abc/mysecretstash</code> or <code>add_timetable o/http://modsn.us/wJsFc</code> but not <code>add_timetable f/mytimetable.png l/C://Users/abc/mysecretstash o/http://modsn.us/wJsFc</code></p>
 </li>
 <li>
-<p>Parameters can be in any order e.g. if the command specifies <code>n/NAME p/PHONE_NUMBER</code>, <code>p/PHONE_NUMBER n/NAME</code> is also acceptable.</p>
+<p>Parameters can be in any order e.g. if the command specifies <code>n/NAME_OF_FRIEND i/INDEX_OF_TIMETABLE</code>, <code>i/INDEX_OF_TIMETABLE n/NAME_OF_FRIEND</code> is also acceptable.</p>
 </li>
 </ul>
 </div>
 </div>
 </div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="common"><a class="link" href="#common">4. common</a></h2>
+<div class="sectionbody">
 <div class="sect2">
-<h3 id="viewing-help-code-help-code"><a class="link" href="#viewing-help-code-help-code">3.1. Viewing help : <code>help</code></a></h3>
+<h3 id="viewing-help-code-help-code"><a class="link" href="#viewing-help-code-help-code">4.1. Viewing help : <code>help</code></a></h3>
 <div class="paragraph">
 <p>Format: <code>help</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="adding-a-person-code-add-code"><a class="link" href="#adding-a-person-code-add-code">3.2. Adding a person: <code>add</code></a></h3>
+<h3 id="exiting-the-program-code-exit-code"><a class="link" href="#exiting-the-program-code-exit-code">4.2. Exiting the program : <code>exit</code></a></h3>
 <div class="paragraph">
-<p>Adds a person to the address book<br>
-Format: <code>add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]&#8230;&#8203;</code></p>
+<p>Exits the program.<br>
+Format: <code>exit</code></p>
 </div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-A person can have any number of tags (including 0)
-</td>
-</tr>
-</table>
+</div>
+<div class="sect2">
+<h3 id="saving-the-data"><a class="link" href="#saving-the-data">4.3. Saving the data</a></h3>
+<div class="paragraph">
+<p>Address book data are saved in the hard disk automatically after any command that changes the data.<br>
+There is no need to save manually.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="friends-zhi-wei"><a class="link" href="#friends-zhi-wei">5. Friends(Zhi Wei)</a></h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="adding-a-person-code-add_friend-code"><a class="link" href="#adding-a-person-code-add_friend-code">5.1. Adding a person: <code>add_friend</code></a></h3>
+<div class="paragraph">
+<p>Adds a person in the system,if there is index of timetable, it will add the person with the timetable or If there is a text file given, it will iterate over the text file and add all the person and add the respective their timetables if available.<br>
+Format: <code>add_friend n/NAME_OF_FRIEND [t/TEXT_FILE l/TEXT_FILE_LOCATION] [i/INDEX_OF_TIMETABLE]</code></p>
 </div>
 <div class="paragraph">
 <p>Examples:</p>
@@ -150,26 +204,23 @@ A person can have any number of tags (including 0)
 <div class="ulist">
 <ul>
 <li>
-<p><code>add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01</code></p>
-</li>
-<li>
-<p><code>add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal</code></p>
+<p><code>add u/Damith C. Rajapakse [i/1] [t/friends.txt l/C://Users/abc/mysecretstash]</code></p>
 </li>
 </ul>
 </div>
 </div>
 <div class="sect2">
-<h3 id="listing-all-persons-code-list-code"><a class="link" href="#listing-all-persons-code-list-code">3.3. Listing all persons : <code>list</code></a></h3>
+<h3 id="listing-all-friends-code-list_friends-code"><a class="link" href="#listing-all-friends-code-list_friends-code">5.2. Listing all friends : <code>list_friends</code></a></h3>
 <div class="paragraph">
-<p>Shows a list of all persons in the address book.<br>
-Format: <code>list</code></p>
+<p>Shows a list of all friends with their timetable indexes if they have .<br>
+Format: <code>list_friends</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="editing-a-person-code-edit-code"><a class="link" href="#editing-a-person-code-edit-code">3.4. Editing a person : <code>edit</code></a></h3>
+<h3 id="editing-a-friend-code-edit_friend-code"><a class="link" href="#editing-a-friend-code-edit_friend-code">5.3. Editing a friend : <code>edit_friend</code></a></h3>
 <div class="paragraph">
-<p>Edits an existing person in the address book.<br>
-Format: <code>edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]&#8230;&#8203;</code></p>
+<p>Edit a friend’s name, updates a timetable by uploading a new timetable by the index and deletes the current timetable the friend have. If there is no input for the new name, system will keep the old name<br>
+Format: <code>edit_friend [n/NEW_NAME] i/INDEX_OF_FRIEND [t/TIMETABLE_INDEX]</code></p>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -184,12 +235,6 @@ Format: <code>edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]&#8230;
 <li>
 <p>Existing values will be updated to the input values.</p>
 </li>
-<li>
-<p>When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.</p>
-</li>
-<li>
-<p>You can remove all the person&#8217;s tags by typing <code>t/</code> without specifying any tags after it.</p>
-</li>
 </ul>
 </div>
 </div>
@@ -200,21 +245,16 @@ Format: <code>edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]&#8230;
 <div class="ulist">
 <ul>
 <li>
-<p><code>edit 1 p/91234567 e/johndoe@example.com</code><br>
-Edits the phone number and email address of the 1st person to be <code>91234567</code> and <code>johndoe@example.com</code> respectively.</p>
-</li>
-<li>
-<p><code>edit 2 n/Betsy Crower t/</code><br>
-Edits the name of the 2nd person to be <code>Betsy Crower</code> and clears all existing tags.</p>
+<p>`edit_friend [n/iamgod] i/1 [t/1] `<br></p>
 </li>
 </ul>
 </div>
 </div>
 <div class="sect2">
-<h3 id="locating-persons-by-name-code-find-code"><a class="link" href="#locating-persons-by-name-code-find-code">3.5. Locating persons by name: <code>find</code></a></h3>
+<h3 id="locating-friend-by-name-code-find_friend-code"><a class="link" href="#locating-friend-by-name-code-find_friend-code">5.4. Locating friend by name: <code>find_friend</code></a></h3>
 <div class="paragraph">
-<p>Finds persons whose names contain any of the given keywords.<br>
-Format: <code>find KEYWORD [MORE_KEYWORDS]</code></p>
+<p>Find a friend’s index whose names contain any of the given keywords<br>
+Format: <code>find_friend  KEYWORD [MORE_KEYWORDS]</code></p>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -256,17 +296,17 @@ Returns any person having names <code>Betsy</code>, <code>Tim</code>, or <code>J
 </div>
 </div>
 <div class="sect2">
-<h3 id="deleting-a-person-code-delete-code"><a class="link" href="#deleting-a-person-code-delete-code">3.6. Deleting a person : <code>delete</code></a></h3>
+<h3 id="deleting-a-person-code-delete_friend-code"><a class="link" href="#deleting-a-person-code-delete_friend-code">5.5. Deleting a person : <code>delete_friend</code></a></h3>
 <div class="paragraph">
-<p>Deletes the specified person from the address book.<br>
-Format: <code>delete INDEX</code></p>
+<p>Delete a friend in the system by index<br>
+Format: `delete i/INDEX_OF_FRIEND `</p>
 </div>
 <div class="sidebarblock">
 <div class="content">
 <div class="ulist">
 <ul>
 <li>
-<p>Deletes the person at the specified <code>INDEX</code>.</p>
+<p>Deletes the person at the specified <code>INDEX_OF_FRIEND</code>.</p>
 </li>
 <li>
 <p>The index refers to the index number shown in the displayed person list.</p>
@@ -284,36 +324,79 @@ Format: <code>delete INDEX</code></p>
 <div class="ulist">
 <ul>
 <li>
-<p><code>list</code><br>
-<code>delete 2</code><br>
+<p><code>list_friend</code><br>
+<code>delete_friend 2</code><br>
 Deletes the 2nd person in the address book.</p>
 </li>
 <li>
 <p><code>find Betsy</code><br>
 <code>delete 1</code><br>
-Deletes the 1st person in the results of the <code>find</code> command.</p>
+Deletes the 1st person in the results of the <code>find_friend</code> command.</p>
 </li>
 </ul>
 </div>
 </div>
 <div class="sect2">
-<h3 id="selecting-a-person-code-select-code"><a class="link" href="#selecting-a-person-code-select-code">3.7. Selecting a person : <code>select</code></a></h3>
+<h3 id="clearing-all-entries-code-clear_friend-code"><a class="link" href="#clearing-all-entries-code-clear_friend-code">5.6. Clearing all entries : <code>clear_friend</code></a></h3>
 <div class="paragraph">
-<p>Selects the person identified by the index number used in the displayed person list.<br>
-Format: <code>select INDEX</code></p>
+<p>Clears all friends from the System.<br>
+Format: <code>clear</code></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="list-all-groups-friend-is-in-code-grouplist-code"><a class="link" href="#list-all-groups-friend-is-in-code-grouplist-code">5.7. List all groups friend is in : <code>grouplist</code></a></h3>
+<div class="paragraph">
+<p>Shows a list of all groups a friend is in.<br>
+Format: <code>grouplist</code></p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="timetable-wen-kai"><a class="link" href="#timetable-wen-kai">6. Timetable(Wen Kai)</a></h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="adding-a-timetable-code-add_timetable-code"><a class="link" href="#adding-a-timetable-code-add_timetable-code">6.1. Adding a timetable: <code>add_timetable</code></a></h3>
+<div class="paragraph">
+<p>Add a timetable to the System, if there is no link input we add the timetable where the mode has to be specified via the filename of the csv file and file location, if there is both, we add the timetable where the mode has to be specified via the link.<br>
+Format: <code>add_timetable n/NAME [f/FILENAME l/FILE_LOCATION]/\ [o/link] m/MODE</code></p>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>add_timetable n/mytimetable f/mytimetable.png l/C://Users/abc/mysecretstash</code></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="listing-all-timetable-code-list_timetables-code"><a class="link" href="#listing-all-timetable-code-list_timetables-code">6.2. Listing all timetable: <code>list_timetables</code></a></h3>
+<div class="paragraph">
+<p>Shows a list of all timetable with their indexes .<br>
+Format: <code>list_timetables</code></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="download-timetable-code-download_timetable-code"><a class="link" href="#download-timetable-code-download_timetable-code">6.3. Download timetable : <code>download_timetable</code></a></h3>
+<div class="paragraph">
+<p>Download a timetable in the System as a png file or csv file in preferred mode if no mode is selected, default is horizontal mode.+
+Format: <code>download_timetable i/TIMETABLE_INDEX p/PASSWORD o/FILE_OPTION l/DOWNLOAD_FILE_LOCATION [m/MODE]</code></p>
 </div>
 <div class="sidebarblock">
 <div class="content">
 <div class="ulist">
 <ul>
 <li>
-<p>Selects the person and loads the Google search page the person at the specified <code>INDEX</code>.</p>
+<p>Download the timetable at the specified <code>TIMETABLE_INDEX</code>.</p>
 </li>
 <li>
-<p>The index refers to the index number shown in the displayed person list.</p>
+<p>The index refers to the index number shown in the displayed timetable list.</p>
 </li>
 <li>
-<p>The index <strong>must be a positive integer</strong> <code>1, 2, 3, &#8230;&#8203;</code></p>
+<p>The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
 </li>
 </ul>
 </div>
@@ -325,58 +408,39 @@ Format: <code>select INDEX</code></p>
 <div class="ulist">
 <ul>
 <li>
-<p><code>list</code><br>
-<code>select 2</code><br>
-Selects the 2nd person in the address book.</p>
-</li>
-<li>
-<p><code>find Betsy</code><br>
-<code>select 1</code><br>
-Selects the 1st person in the results of the <code>find</code> command.</p>
+<p>`download_timetable i/1 p/kamisama o/png m/vertical l/C://Users/abc/mysecretstash `<br></p>
 </li>
 </ul>
 </div>
 </div>
 <div class="sect2">
-<h3 id="listing-entered-commands-code-history-code"><a class="link" href="#listing-entered-commands-code-history-code">3.8. Listing entered commands : <code>history</code></a></h3>
+<h3 id="locating-a-timetable-by-name-code-find_timetable-code"><a class="link" href="#locating-a-timetable-by-name-code-find_timetable-code">6.4. Locating a timetable by name: <code>find_timetable</code></a></h3>
 <div class="paragraph">
-<p>Lists all the commands that you have entered in reverse chronological order.<br>
-Format: <code>history</code></p>
+<p>Find a timetable’s index whose names contain any of the given keywords<br>
+Format: <code>find_timetable  KEYWORD [MORE_KEYWORDS]</code></p>
 </div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-<div class="paragraph">
-<p>Pressing the <kbd>&uarr;</kbd> and <kbd>&darr;</kbd> arrows will display the previous and next input respectively in the command box.</p>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>The search is case insensitive. e.g <code>hans</code> will match <code>Hans</code></p>
+</li>
+<li>
+<p>The order of the keywords does not matter. e.g. <code>Hans Bo</code> will match <code>Bo Hans</code></p>
+</li>
+<li>
+<p>Only the name is searched.</p>
+</li>
+<li>
+<p>Only full words will be matched e.g. <code>Han</code> will not match <code>Hans</code></p>
+</li>
+<li>
+<p>Persons matching at least one keyword will be returned (i.e. <code>OR</code> search). e.g. <code>Hans Bo</code> will return <code>Hans Gruber</code>, <code>Bo Yang</code></p>
+</li>
+</ul>
 </div>
-</td>
-</tr>
-</table>
 </div>
-</div>
-<div class="sect2">
-<h3 id="undoing-previous-command-code-undo-code"><a class="link" href="#undoing-previous-command-code-undo-code">3.9. Undoing previous command : <code>undo</code></a></h3>
-<div class="paragraph">
-<p>Restores the address book to the state before the previous <em>undoable</em> command was executed.<br>
-Format: <code>undo</code></p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-<div class="paragraph">
-<p>Undoable commands: those commands that modify the address book&#8217;s content (<code>add</code>, <code>delete</code>, <code>edit</code> and <code>clear</code>).</p>
-</div>
-</td>
-</tr>
-</table>
 </div>
 <div class="paragraph">
 <p>Examples:</p>
@@ -384,30 +448,38 @@ Format: <code>undo</code></p>
 <div class="ulist">
 <ul>
 <li>
-<p><code>delete 1</code><br>
-<code>list</code><br>
-<code>undo</code> (reverses the <code>delete 1</code> command)<br></p>
+<p><code>find_timetable John</code><br>
+Returns <code>john</code> and <code>John Doe</code></p>
 </li>
 <li>
-<p><code>select 1</code><br>
-<code>list</code><br>
-<code>undo</code><br>
-The <code>undo</code> command fails as there are no undoable commands executed previously.</p>
-</li>
-<li>
-<p><code>delete 1</code><br>
-<code>clear</code><br>
-<code>undo</code> (reverses the <code>clear</code> command)<br>
-<code>undo</code> (reverses the <code>delete 1</code> command)<br></p>
+<p><code>find_timetable Betsy Tim John</code><br>
+Returns any timetable having names <code>Betsy</code>, <code>Tim</code>, or <code>John</code></p>
 </li>
 </ul>
 </div>
 </div>
 <div class="sect2">
-<h3 id="redoing-the-previously-undone-command-code-redo-code"><a class="link" href="#redoing-the-previously-undone-command-code-redo-code">3.10. Redoing the previously undone command : <code>redo</code></a></h3>
+<h3 id="deleting-a-timetable-code-delete_timetable-code"><a class="link" href="#deleting-a-timetable-code-delete_timetable-code">6.5. Deleting a timetable : <code>delete_timetable</code></a></h3>
 <div class="paragraph">
-<p>Reverses the most recent <code>undo</code> command.<br>
-Format: <code>redo</code></p>
+<p>Delete a timetable in the system by index<br>
+Format: `delete_timetable p/PASSWORD i/TIMETABLE_INDEX  `</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Deletes the timetable at the specified <code>TIMETABLE_INDEX</code>.</p>
+</li>
+<li>
+<p>The index refers to the index number shown in the displayed timetable list.</p>
+</li>
+<li>
+<p>The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
+</li>
+</ul>
+</div>
+</div>
 </div>
 <div class="paragraph">
 <p>Examples:</p>
@@ -415,57 +487,464 @@ Format: <code>redo</code></p>
 <div class="ulist">
 <ul>
 <li>
-<p><code>delete 1</code><br>
-<code>undo</code> (reverses the <code>delete 1</code> command)<br>
-<code>redo</code> (reapplies the <code>delete 1</code> command)<br></p>
+<p><code>list_timetable</code><br>
+<code>delete_timetable 2</code><br>
+Deletes the 2nd timetable in the address book.</p>
 </li>
 <li>
-<p><code>delete 1</code><br>
-<code>redo</code><br>
-The <code>redo</code> command fails as there are no <code>undo</code> commands executed previously.</p>
-</li>
-<li>
-<p><code>delete 1</code><br>
-<code>clear</code><br>
-<code>undo</code> (reverses the <code>clear</code> command)<br>
-<code>undo</code> (reverses the <code>delete 1</code> command)<br>
-<code>redo</code> (reapplies the <code>delete 1</code> command)<br>
-<code>redo</code> (reapplies the <code>clear</code> command)<br></p>
+<p><code>find_timetable Betsy</code><br>
+<code>delete 1</code><br>
+Deletes the 1st timetable in the results of the <code>find_timetable</code> command.</p>
 </li>
 </ul>
 </div>
 </div>
 <div class="sect2">
-<h3 id="clearing-all-entries-code-clear-code"><a class="link" href="#clearing-all-entries-code-clear-code">3.11. Clearing all entries : <code>clear</code></a></h3>
+<h3 id="view-timetable-code-view_timetable-code"><a class="link" href="#view-timetable-code-view_timetable-code">6.6. view timetable : <code>view_timetable</code></a></h3>
 <div class="paragraph">
-<p>Clears all entries from the address book.<br>
-Format: <code>clear</code></p>
+<p>Shows timetable of the given timetable index in horizontal or vertical mode if no mode is selected, default is horizontal mode.+
+Format: <code>view_timetable i/1 [m/MODE]</code></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>view the timetable at the specified <code>TIMETABLE_INDEX</code>.</p>
+</li>
+<li>
+<p>The index refers to the index number shown in the displayed timetable list.</p>
+</li>
+<li>
+<p>The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>view i/1 m/horizontal</code><br></p>
+</li>
+</ul>
 </div>
 </div>
 <div class="sect2">
-<h3 id="exiting-the-program-code-exit-code"><a class="link" href="#exiting-the-program-code-exit-code">3.12. Exiting the program : <code>exit</code></a></h3>
+<h3 id="clearing-all-timetable-entries-code-clear_timetable-code"><a class="link" href="#clearing-all-timetable-entries-code-clear_timetable-code">6.7. Clearing all timetable entries : <code>clear_timetable</code></a></h3>
 <div class="paragraph">
-<p>Exits the program.<br>
-Format: <code>exit</code></p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="saving-the-data"><a class="link" href="#saving-the-data">3.13. Saving the data</a></h3>
-<div class="paragraph">
-<p>Address book data are saved in the hard disk automatically after any command that changes the data.<br>
-There is no need to save manually.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="encrypting-data-files-code-coming-in-v2-0-code"><a class="link" href="#encrypting-data-files-code-coming-in-v2-0-code">3.14. Encrypting data files <code>[coming in v2.0]</code></a></h3>
-<div class="paragraph">
-<p><em>{explain how the user can enable/disable data encryption}</em></p>
+<p>Clears all timetable from the System.<br>
+Format: <code>clear_timetable</code></p>
 </div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="faq"><a class="link" href="#faq">4. FAQ</a></h2>
+<h2 id="groups-melodies"><a class="link" href="#groups-melodies">7. Groups (Melodies)</a></h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="adding-a-group-code-add_group-code"><a class="link" href="#adding-a-group-code-add_group-code">7.1. Adding a group: <code>add_group</code></a></h3>
+<div class="paragraph">
+<p>Make a group in the System, status is set as open.<br>
+Format: <code>add_group g/GROUPNAME d/GROUPDESCRIPTION m/MAXNUMBEROFPEOPLE</code></p>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>`add_group g/happyfriends d/a group of happy friends m/3 `</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="listing-all-groups-code-list_groups-code"><a class="link" href="#listing-all-groups-code-list_groups-code">7.2. Listing all Groups : <code>list_groups</code></a></h3>
+<div class="paragraph">
+<p>Shows a list of all groups, along with their details.<br>
+Format: <code>list_groups</code></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="editing-a-friend-code-edit_group-code"><a class="link" href="#editing-a-friend-code-edit_group-code">7.3. Editing a friend : <code>edit_group</code></a></h3>
+<div class="paragraph">
+<p>Edit a group you created in the System for the creator of the group. If there is no new input, the system will assume the old data (group name,group description,max number of people), there is only open/closed for status, closed status means you cannot add friend to the group<br>
+Format: <code>edit_group i/GROUPINDEX [g/NEWGROUPNAME] [d/NEWGROUPDESCRIPTION] [m/NEWMAXNUMBEROFPEOPLE]  [s/STATUS]</code></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Edits the group at the specified <code>INDEX_OF_GROUP</code>. The index refers to the index number shown in the displayed group list. The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
+</li>
+<li>
+<p>At least one of the optional fields must be provided.</p>
+</li>
+<li>
+<p>Existing values will be updated to the input values.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>`edit_group i/1 g/sadfriends d/sad because of cs2103 s/closed `<br></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="locating-group-by-name-find_group"><a class="link" href="#locating-group-by-name-find_group">7.4. Locating group by name: `find_group `</a></h3>
+<div class="paragraph">
+<p>Find a group’s index whose names contain any of the given keywords<br>
+Format: <code>find_group   KEYWORD [MORE_KEYWORDS]</code></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>The search is case insensitive. e.g <code>hans</code> will match <code>Hans</code></p>
+</li>
+<li>
+<p>The order of the keywords does not matter. e.g. <code>Hans Bo</code> will match <code>Bo Hans</code></p>
+</li>
+<li>
+<p>Only the name is searched.</p>
+</li>
+<li>
+<p>Only full words will be matched e.g. <code>Han</code> will not match <code>Hans</code></p>
+</li>
+<li>
+<p>Persons matching at least one keyword will be returned (i.e. <code>OR</code> search). e.g. <code>Hans Bo</code> will return <code>Hans Gruber</code>, <code>Bo Yang</code></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>find_group John</code><br>
+Returns <code>john</code> and <code>John Doe</code></p>
+</li>
+<li>
+<p><code>find_group Betsy Tim John</code><br>
+Returns any group having names <code>Betsy</code>, <code>Tim</code>, or <code>John</code></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="deleting-a-group-code-delete_group-code"><a class="link" href="#deleting-a-group-code-delete_group-code">7.5. Deleting a group : <code>delete_group</code></a></h3>
+<div class="paragraph">
+<p>Delete a group in the system by index<br>
+Format: `delete_group g/GROUPINDEX `</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Deletes the group at the specified <code>GROUPINDEX</code>.</p>
+</li>
+<li>
+<p>The index refers to the index number shown in the displayed group list.</p>
+</li>
+<li>
+<p>The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>list_group</code><br>
+<code>delete_group 2</code><br>
+Deletes the 2nd group in the Erium.</p>
+</li>
+<li>
+<p><code>find_group Betsy</code><br>
+<code>delete_group 1</code><br>
+Deletes the 1st group in the results of the <code>find_group</code> command.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="clearing-all-group-code-clear_group-code"><a class="link" href="#clearing-all-group-code-clear_group-code">7.6. Clearing all group : <code>clear_group</code></a></h3>
+<div class="paragraph">
+<p>Clears all group from the System.<br>
+Format: <code>clear_group</code></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="list-all-members-of-a-group-code-viewgroup-code"><a class="link" href="#list-all-members-of-a-group-code-viewgroup-code">7.7. List all members of a group : <code>viewgroup</code></a></h3>
+<div class="paragraph">
+<p>shows a list of all members in a group, along with their details and the group details.<br>
+Format: <code>view_group i/GROUP_INDEX</code></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>List all members of a group at the specified <code>GROUPINDEX</code>. The index refers to the index number shown in the displayed group list. The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
+</li>
+<li>
+<p>At least one of the optional fields must be provided.</p>
+</li>
+<li>
+<p>Existing values will be updated to the input values.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>` view_group i/1`<br></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="add-a-friend-to-group-code-register-code"><a class="link" href="#add-a-friend-to-group-code-register-code">7.8. add a friend to group : <code>register</code></a></h3>
+<div class="paragraph">
+<p>Adds a friend to a group if the status of the group is open.<br>
+Format: <code>register f/FRIEND_INDEX g/GROUP_INDEX</code></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Edits the group at the specified <code>GROUPINDEX</code>. The index refers to the index number shown in the displayed group list. The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
+</li>
+<li>
+<p>Edits the group at the specified <code>INDEX_OF_FRIEND</code>. The index refers to the index number shown in the displayed person list. The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>`register f/1 g/1 `<br></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="find-common-time-slot-in-group-nigel"><a class="link" href="#find-common-time-slot-in-group-nigel">8. Find common time slot in group (Nigel)</a></h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="find-kth-best-common-time-slot-in-group-code-find_time-code"><a class="link" href="#find-kth-best-common-time-slot-in-group-code-find_time-code">8.1. Find kth best common time slot in group: <code>find_time</code></a></h3>
+<div class="paragraph">
+<p>Find the kth best available time slot of all the people in the group you are in<br>
+Format: `find k/KTH_BEST g/GROUPINDEX `</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Edits the group at the specified <code>INDEX_OF_GROUP</code>. The index refers to the index number shown in the displayed group list. The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>find k/1 g/1</code><br></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="security-leslie"><a class="link" href="#security-leslie">9. Security (Leslie)</a></h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="create-an-account-code-create-code"><a class="link" href="#create-an-account-code-create-code">9.1. Create an account: <code>create</code></a></h3>
+<div class="paragraph">
+<p>Create an account in the system. The password and security answer are both case sensitive.<br>
+Format: <code>create u/USERNAME p/PASSWORD e/EMAIL q/SECURITY_QUESTION a/SECURITY_ANSWER</code></p>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>create u/iamgod p/kamisama e/enel@skypiea.com q/Where is fairy vearth? a/Near the moon</code></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="login-to-an-account-code-login-code"><a class="link" href="#login-to-an-account-code-login-code">9.2. login to an account : <code>login</code></a></h3>
+<div class="paragraph">
+<p>Login into the system.<br>
+Format: <code>login u/USERNAME p/PASSWORD</code>
+Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>login u/iamgod p/kamisama</code></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="changing-password-update_pw"><a class="link" href="#changing-password-update_pw">9.3. Changing password: `update_pw `</a></h3>
+<div class="paragraph">
+<p>Change the user password, requires user to be logged in first.<br>
+Format: <code>update_pw c/CURRENT_PASSWORD n/NEW_PASSWORD</code></p>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>update_pw c/password n/newpass</code></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="encrypt-timetable-data-encrypt"><a class="link" href="#encrypt-timetable-data-encrypt">9.4. Encrypt timetable data : `encrypt `</a></h3>
+<div class="paragraph">
+<p>Encrypt a timetable, requires user to be logged in first.<br>
+Format: <code>encrypt t/TIMETABLE_INDEX</code></p>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>encrypt t/1</code></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="decrypt-timetable-data-decrypt"><a class="link" href="#decrypt-timetable-data-decrypt">9.5. Decrypt timetable data  : `decrypt `</a></h3>
+<div class="paragraph">
+<p>Decrypt a timetable, requires user to be logged in first.<br>
+Format: <code>decrypt t/TIMETABLE_INDEX</code></p>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>decrypt t/1</code></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="get-security-question-password-code-get-code"><a class="link" href="#get-security-question-password-code-get-code">9.6. get Security question password : <code>get</code></a></h3>
+<div class="paragraph">
+<p>Shows the security question .<br>
+Format: <code>get</code></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="reset-password-code-reset-code"><a class="link" href="#reset-password-code-reset-code">9.7. Reset password  : <code>reset</code></a></h3>
+<div class="paragraph">
+<p>Resets a password by answering the security question correctly.<br>
+Format: <code>reset a/SECURITY_ANSWER n/NEW_PASSWORD</code></p>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>reset a/Near the moon</code></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="changing-security-question-and-answer-code-update_sq-code"><a class="link" href="#changing-security-question-and-answer-code-update_sq-code">9.8. Changing security question and answer : <code>update_sq</code></a></h3>
+<div class="paragraph">
+<p>Change the user security question and answer, requires user to be logged in first.<br>
+Format: <code>update_sq c/CURRENT_PASSWORD [n/NEWSECURITY_QUESTION]  [a/SECURITY_ANSWER]</code></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>At least one of the optional fields must be provided.</p>
+</li>
+<li>
+<p>Existing values will be updated to the input values.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>update_pw c/password n/why me? a/because it is cs2103</code></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="suggest-requesting-new-password-code-coming-in-v2-0-code"><a class="link" href="#suggest-requesting-new-password-code-coming-in-v2-0-code">9.9. Suggest, Requesting new password <code>[coming in v2.0]</code></a></h3>
+
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="faq"><a class="link" href="#faq">10. FAQ</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p><strong>Q</strong>: How do I transfer my data to another Computer?<br>
@@ -474,49 +953,130 @@ There is no need to save manually.</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="command-summary"><a class="link" href="#command-summary">5. Command Summary</a></h2>
+<h2 id="command-summary"><a class="link" href="#command-summary">11. Command Summary</a></h2>
 <div class="sectionbody">
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Add</strong> <code>add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]&#8230;&#8203;</code><br>
-e.g. <code>add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague</code></p>
+<p><strong>help</strong> : <code>help</code></p>
 </li>
 <li>
-<p><strong>Clear</strong> : <code>clear</code></p>
+<p><strong>Add_friend</strong> <code>add_friend n/NAME_OF_FRIEND [t/TEXT_FILE l/TEXT_FILE_LOCATION] [i/INDEX_OF_TIMETABLE]</code><br>
+e.g. <code>add u/Damith C. Rajapakse [i/1] [t/friends.txt l/C://Users/abc/mysecretstash]</code></p>
 </li>
 <li>
-<p><strong>Delete</strong> : <code>delete INDEX</code><br>
-e.g. <code>delete 3</code></p>
+<p><strong>list_friends</strong> : <code>list_friends</code></p>
 </li>
 <li>
-<p><strong>Edit</strong> : <code>edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]&#8230;&#8203;</code><br>
-e.g. <code>edit 2 n/James Lee e/jameslee@example.com</code></p>
+<p><strong>edit_friend</strong> : <code>edit_friend [n/NEW_NAME] i/INDEX_OF_FRIEND [t/TIMETABLE_INDEX]</code><br>
+e.g. <code>edit_friend [n/iamgod] i/1 [t/1]</code></p>
 </li>
 <li>
-<p><strong>Find</strong> : <code>find KEYWORD [MORE_KEYWORDS]</code><br>
-e.g. <code>find James Jake</code></p>
+<p><strong>find_friend</strong> : <code>find_friend  KEYWORD [MORE_KEYWORDS]</code><br>
+e.g. <code>find_friend James Jake</code></p>
 </li>
 <li>
-<p><strong>List</strong> : <code>list</code></p>
+<p><strong>delete_friend</strong> : <code>delete i/INDEX_OF_FRIEND</code><br>
+e.g. <code>delete_friend 3</code></p>
 </li>
 <li>
-<p><strong>Help</strong> : <code>help</code></p>
+<p><strong>clear_friend</strong> : <code>clear_friend</code></p>
 </li>
 <li>
-<p><strong>Select</strong> : <code>select INDEX</code><br>
-e.g.<code>select 2</code></p>
+<p><strong>grouplist</strong> : <code>listgroup</code></p>
 </li>
 <li>
-<p><strong>History</strong> : <code>history</code></p>
+<p><strong>add_timetable</strong> <code>add_timetable n/NAME [f/FILENAME l/FILE_LOCATION]/\ [o/link] m/MODE</code><br>
+e.g. <code>add_timetable n/mytimetable f/mytimetable.png l/C://Users/abc/mysecretstash</code></p>
 </li>
 <li>
-<p><strong>Undo</strong> : <code>undo</code></p>
+<p><strong>list_timetables</strong> : <code>list_timetables</code></p>
 </li>
 <li>
-<p><strong>Redo</strong> : <code>redo</code></p>
+<p><strong>download_timetable</strong> : <code>download_timetable i/TIMETABLE_INDEX p/PASSWORD o/FILE_OPTION l/DOWNLOAD_FILE_LOCATION [m/MODE]</code><br>
+e.g. <code>download_timetable i/1 p/kamisama o/png m/vertical l/C://Users/abc/mysecretstash</code></p>
+</li>
+<li>
+<p><strong>find_timetable</strong> : <code>find_timetable  KEYWORD [MORE_KEYWORDS]</code><br>
+e.g. <code>find_timetable James Jake</code></p>
+</li>
+<li>
+<p><strong>delete_timetable</strong> : <code>delete i/INDEX_OF_TIMETABLE</code><br>
+e.g. <code>delete_timetable 3</code></p>
+</li>
+<li>
+<p><strong>view_timetable</strong> : <code>view_timetable i/1 [m/MODE]</code>+
+e.g. <code>view i/1 m/horizontal</code></p>
+</li>
+<li>
+<p><strong>clear_timetable</strong> : <code>clear_timetable</code></p>
+</li>
+<li>
+<p><strong>add_group</strong> <code>add_group g/GROUPNAME d/GROUPDESCRIPTION m/MAXNUMBEROFPEOPLE</code><br>
+e.g. <code>add_group g/happyfriends d/a group of happy friends m/3</code></p>
+</li>
+<li>
+<p><strong>list_groups</strong> : <code>list_groups</code></p>
+</li>
+<li>
+<p><strong>edit_group</strong> : <code>edit_group i/GROUPINDEX [g/NEWGROUPNAME] [d/NEWGROUPDESCRIPTION] [m/NEWMAXNUMBEROFPEOPLE]  [s/STATUS]</code><br>
+e.g. <code>edit_group i/1 g/sadfriends d/sad because of cs2103 s/closed</code></p>
+</li>
+<li>
+<p><strong>find_group</strong> : <code>find_friend  KEYWORD [MORE_KEYWORDS]</code><br>
+e.g. <code>find_group James Jake</code></p>
+</li>
+<li>
+<p><strong>delete_group</strong> : <code>delete i/INDEX_OF_FRIEND</code><br>
+e.g. <code>delete_group 3</code></p>
+</li>
+<li>
+<p><strong>clear_groups</strong> : <code>clear_groups</code></p>
+</li>
+<li>
+<p><strong>viewgroup</strong> : <code>view_group i/GROUP_INDEX</code>+
+e.g. <code>viewgroup 3</code></p>
+</li>
+<li>
+<p><strong>register</strong> <code>register f/FRIEND_INDEX g/GROUP_INDEX</code><br>
+e.g. <code>register f/1 g/1</code></p>
+</li>
+<li>
+<p><strong>find_time</strong> : <code>find k/KTH_BEST g/GROUPINDEX</code><br>
+e.g. <code>find k/1 g/1</code></p>
+</li>
+<li>
+<p><strong>create</strong> : <code>create u/USERNAME p/PASSWORD e/EMAIL q/SECURITY_QUESTION a/SECURITY_ANSWER</code><br>
+e.g. <code>create u/iamgod p/kamisama e/enel@skypiea.com q/Where is fairy vearth? a/Near the moon</code></p>
+</li>
+<li>
+<p><strong>login</strong> : <code>login u/USERNAME p/PASSWORD</code><br>
+e.g. <code>login u/James Jake p/gg</code></p>
+</li>
+<li>
+<p><strong>update_pw</strong> : <code>update_pw c/CURRENT_PASSWORD n/NEW_PASSWORD</code><br>
+e.g. <code>update_pw c/password n/newpass</code></p>
+</li>
+<li>
+<p><strong>encrypt</strong> : <code>encrypt t/TIMETABLE_INDEX</code><br>
+e.g. <code>encrypt t/1</code></p>
+</li>
+<li>
+<p><strong>decrypt</strong> : <code>decrypt t/TIMETABLE_INDEX</code><br>
+e.g. <code>decrypt t/1</code></p>
+</li>
+<li>
+<p><strong>get</strong> : <code>get</code></p>
+</li>
+<li>
+<p><strong>reset</strong> : <code>reset a/SECURITY_ANSWER n/NEW_PASSWORD</code><br>
+e.g. <code>reset a/SECURITY_ANSWER n/NEW_PASSWORD</code></p>
+</li>
+<li>
+<p><strong>update_sq</strong> : <code>update_sq c/CURRENT_PASSWORD [n/NEWSECURITY_QUESTION]  [a/SECURITY_ANSWER]</code><br>
+e.g. <code>update_pw c/password n/why me? a/because it is cs2103</code></p>
 </li>
 </ul>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-09-18 13:16:28 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-09-28 09:37:47 UTC</div></div></div></body></html>
