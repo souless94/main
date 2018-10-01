@@ -19,7 +19,6 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.group.Group;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
@@ -89,15 +88,6 @@ public class AddCommandTest {
      * A default model stub that have all of the methods failing.
      */
     private class ModelStub implements Model {
-        //group operation
-        @Override
-        public void addGroup(Group group) { throw new AssertionError("This method should not be called."); }
-
-        @Override
-        public void deleteGroup(Group target) {
-            throw new AssertionError("This method should not be called.");
-        }
-
         @Override
         public void addPerson(Person person) {
             throw new AssertionError("This method should not be called.");
@@ -178,7 +168,7 @@ public class AddCommandTest {
         @Override
         public boolean hasPerson(Person person) {
             requireNonNull(person);
-            return this.person.isSame(person);
+            return this.person.isSamePerson(person);
         }
     }
 
@@ -191,7 +181,7 @@ public class AddCommandTest {
         @Override
         public boolean hasPerson(Person person) {
             requireNonNull(person);
-            return personsAdded.stream().anyMatch(person::isSame);
+            return personsAdded.stream().anyMatch(person::isSamePerson);
         }
 
         @Override
