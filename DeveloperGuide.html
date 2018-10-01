@@ -1,6 +1,6 @@
 <!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]--><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="Asciidoctor 1.5.6.1"><title>AddressBook Level 4 - Developer Guide</title><link rel="stylesheet" href="stylesheets/gh-pages.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="stylesheets/coderay-asciidoctor.css"></head><body class="article"><div id="seedu-header"><nav class="navbar navbar-lg navbar-light bg-lighter"><div class="container"><a class="navbar-brand" href="https://se-edu.github.io/"><img src="images/SeEduLogo.png" alt="SE-EDU"></a><ul class="navbar-nav"><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/addressbook-level1">AB-1</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/addressbook-level2">AB-2</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/addressbook-level3">AB-3</a></li><li class="nav-item"><a class="nav-link active" href="index.html">AB-4</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/collate">Collate</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/se-book">Book</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/learningresources">Resources</a></li></ul></div></nav></div><div id="site-header"><nav class="navbar navbar-light bg-light"><div class="container"><a class="navbar-brand" href="index.html">AddressBook-Level4</a><ul class="navbar-nav"><li class="nav-item"><a class="nav-link" href="UserGuide.html">User Guide</a></li><li class="nav-item"><a class="nav-link active" href="DeveloperGuide.html">Developer Guide</a></li><li class="nav-item"><a class="nav-link" href="LearningOutcomes.html">LOs</a></li><li class="nav-item"><a class="nav-link" href="AboutUs.html">About Us</a></li><li class="nav-item"><a class="nav-link" href="ContactUs.html">Contact Us</a></li><li class="navitem"><a class="nav-link" href="https://github.com/se-edu/addressbook-level4"><span class="fa fa-github fa-lg" aria-hidden="true"></span>&nbsp;View on GitHub</a></li></ul></div></nav></div><div id="header"><h1>AddressBook Level 4 - Developer Guide</h1></div><div id="content"><div id="preamble">
+<link rel="stylesheet" href="stylesheets/coderay-asciidoctor.css"></head><body class="article"><div id="seedu-header"><nav class="navbar navbar-lg navbar-light bg-lighter"><div class="container"><a class="navbar-brand" href="https://se-edu.github.io/"><img src="images/SeEduLogo.png" alt="SE-EDU"></a><ul class="navbar-nav"><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/addressbook-level1">AB-1</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/addressbook-level2">AB-2</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/addressbook-level3">AB-3</a></li><li class="nav-item"><a class="nav-link active" href="index.html">AB-4</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/collate">Collate</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/se-book">Book</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/learningresources">Resources</a></li></ul></div></nav></div><div id="site-header"><nav class="navbar navbar-light bg-light"><div class="container"><a class="navbar-brand" href="index.html">NUS Hangs</a><ul class="navbar-nav"><li class="nav-item"><a class="nav-link" href="UserGuide.html">User Guide</a></li><li class="nav-item"><a class="nav-link active" href="DeveloperGuide.html">Developer Guide</a></li><li class="nav-item"><a class="nav-link" href="LearningOutcomes.html">LOs</a></li><li class="nav-item"><a class="nav-link" href="AboutUs.html">About Us</a></li><li class="nav-item"><a class="nav-link" href="ContactUs.html">Contact Us</a></li><li class="navitem"><a class="nav-link" href="https://github.com/CS2103-AY1819S1-F11-4/main"><span class="fa fa-github fa-lg" aria-hidden="true"></span>&nbsp;View on GitHub</a></li></ul></div></nav></div><div id="header"><h1>AddressBook Level 4 - Developer Guide</h1></div><div id="content"><div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
 <p>By: <code>Team F11-4</code>      Since: <code>Aug 2018</code>      Licence: <code>MIT</code></p>
@@ -1021,29 +1021,14 @@ Do take a look at <a href="#Design-Model">Section 2.4, &#8220;Model component&#8
 <h2 id="product-scope"><a class="link" href="#product-scope">Appendix A: Product Scope</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p><strong>Target user profile</strong>:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Target interest group executive communities in NUS (timetable scheme like nusmod / Venues booking in NUS) who have flexible timetable</p>
-</li>
-<li>
-<p>People who have flexible timetable</p>
-</li>
-<li>
-<p>Wants to create/join projects for people to join</p>
-</li>
-<li>
-<p>Wants to find a convenient time slot for the people who are joining his/her event</p>
-</li>
-<li>
-<p>Maximum meeting group size: 30</p>
-</li>
-</ul>
+<p><strong>Target user profile</strong>:
+.We target:
+. Small to medium scale interest groups in NUS
+. Groups who find organising a common / least conflicted dtime slot to meet a hassle</p>
 </div>
 <div class="paragraph">
-<p><strong>Value proposition</strong>: Organise meetings faster than a typical chat app</p>
+<p><strong>Value proposition</strong>:
+Automate the process of organising meetings and finding least conflicted time slot for the group in a way faster than manually checking everyone&#8217;s timetables.</p>
 </div>
 </div>
 </div>
@@ -1261,7 +1246,7 @@ In excel format</p></td>
 <h2 id="use-cases"><a class="link" href="#use-cases">Appendix C: Use Cases</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>(For all use cases below, the <strong>System</strong> is the <code>Erium</code> and the <strong>Actor</strong> is the <code>user</code>, unless specified otherwise)</p>
+<p>(For all use cases below, the <strong>System</strong> is the <code>NUS Hangs</code> and the <strong>Actor</strong> is the <code>user</code>, unless specified otherwise)</p>
 </div>
 <h3 id="use-case-help" class="discrete">Use case: help</h3>
 <div class="paragraph">
@@ -1284,16 +1269,16 @@ In excel format</p></td>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>User logins to System and prompts to add a friend</p>
+<p>User logins to System and requests help to add a friend</p>
 </li>
 <li>
-<p>System shows how to add a friend</p>
+<p>System shows him how to add a friend</p>
 </li>
 <li>
-<p>User adds inputs accordingly</p>
+<p>User input add command accordingly</p>
 </li>
 <li>
-<p>System shows friend is added successfully</p>
+<p>System displays friend is added successfully</p>
 </li>
 </ol>
 </div>
@@ -1324,13 +1309,13 @@ In excel format</p></td>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>User logins to System and prompts to find a friend</p>
+<p>User logins to System and requests help to find a friend</p>
 </li>
 <li>
 <p>System shows how to find a friend</p>
 </li>
 <li>
-<p>User inputs accordingly</p>
+<p>User inputs command accordingly</p>
 </li>
 <li>
 <p>System shows friend details</p>
@@ -1370,7 +1355,7 @@ In excel format</p></td>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>User logins to System and prompts to list all friends</p>
+<p>User logins to System and requests help to list all friends</p>
 </li>
 <li>
 <p>System shows a list of all friends</p>
@@ -1384,16 +1369,16 @@ In excel format</p></td>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>User logins to System and prompts to delete a friend</p>
+<p>User logins to System and requests help to delete a friend</p>
 </li>
 <li>
 <p>System shows how to delete a friend</p>
 </li>
 <li>
-<p>User enter input accordingly</p>
+<p>User enters input accordingly</p>
 </li>
 <li>
-<p>System ask user for confirmation.</p>
+<p>System asks user for confirmation.</p>
 </li>
 <li>
 <p>User confirms his choice.</p>
@@ -1449,16 +1434,16 @@ In excel format</p></td>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>User logins to System and prompts to edit a friend</p>
+<p>User logins to System and requests help to edit a friend</p>
 </li>
 <li>
 <p>System shows how to edit a friend</p>
 </li>
 <li>
-<p>User enter input accordingly</p>
+<p>User enters input accordingly</p>
 </li>
 <li>
-<p>System ask user for confirmation.</p>
+<p>System asks user for confirmation.</p>
 </li>
 <li>
 <p>User confirms his choice.</p>
@@ -1514,7 +1499,7 @@ In excel format</p></td>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>User logins to System and prompts to list all groups a friend have</p>
+<p>User logins to System and requests help to list all groups a friend have</p>
 </li>
 <li>
 <p>System shows a list of all groups a friend have</p>
@@ -1528,7 +1513,7 @@ In excel format</p></td>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>User logins to System and prompts to add a timetable</p>
+<p>User logins to System and requests help to add a timetable</p>
 </li>
 <li>
 <p>System shows how to add a timetable</p>
@@ -1540,7 +1525,7 @@ In excel format</p></td>
 <p>System shows his timetable and ask user for confirmation.</p>
 </li>
 <li>
-<p>User confirm the addition of his timetable into the System.</p>
+<p>User confirms the addition of his timetable into the System.</p>
 </li>
 <li>
 <p>System shows his timetable is added successfully.</p>
@@ -1590,7 +1575,7 @@ In excel format</p></td>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>User logins to System and prompts to find a timetable</p>
+<p>User logins to System and requests help to find a timetable</p>
 </li>
 <li>
 <p>System shows how to find a timetable</p>
@@ -1646,7 +1631,7 @@ In excel format</p></td>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>User logins to System and prompts to list all timetable</p>
+<p>User logins to System and requests help to list all timetable</p>
 </li>
 <li>
 <p>System shows a list of all timetable</p>
@@ -1660,16 +1645,16 @@ In excel format</p></td>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>User logins to System and prompts to delete a timetable</p>
+<p>User logins to System and requests help to delete a timetable</p>
 </li>
 <li>
 <p>System shows how to delete a timetable</p>
 </li>
 <li>
-<p>User enter input accordingly</p>
+<p>User enters input accordingly</p>
 </li>
 <li>
-<p>System ask user for confirmation.</p>
+<p>System asks user for confirmation.</p>
 </li>
 <li>
 <p>User confirms his choice.</p>
@@ -1725,7 +1710,7 @@ In excel format</p></td>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>User logins to System and prompts to see available time slots</p>
+<p>User logins to System and requests help to see available time slots</p>
 </li>
 <li>
 <p>System shows how to find available time slot of the group</p>
@@ -1781,7 +1766,7 @@ In excel format</p></td>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>User logins to System and prompts to create a group</p>
+<p>User logins to System and requests help to create a group</p>
 </li>
 <li>
 <p>System shows how to create a group</p>
@@ -1821,7 +1806,7 @@ In excel format</p></td>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>User logins to System and prompts to find a group</p>
+<p>User logins to System and requests help to find a group</p>
 </li>
 <li>
 <p>System shows how to find a group</p>
@@ -1867,7 +1852,7 @@ In excel format</p></td>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>User logins to System and prompts to list all groups</p>
+<p>User logins to System and requests help to list all groups</p>
 </li>
 <li>
 <p>System shows a list of all groups</p>
@@ -1881,16 +1866,16 @@ In excel format</p></td>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>User logins to System and prompts to delete a group</p>
+<p>User logins to System and requests help to delete a group</p>
 </li>
 <li>
 <p>System shows how to delete a group</p>
 </li>
 <li>
-<p>User enter input accordingly</p>
+<p>User enters input accordingly</p>
 </li>
 <li>
-<p>System ask user for confirmation.</p>
+<p>System asks user for confirmation.</p>
 </li>
 <li>
 <p>User confirms his choice.</p>
@@ -1946,16 +1931,16 @@ In excel format</p></td>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>User logins to System and prompts to edit a group</p>
+<p>User logins to System and requests help to edit a group</p>
 </li>
 <li>
 <p>System shows how to edit a group</p>
 </li>
 <li>
-<p>User enter input accordingly</p>
+<p>User enters input accordingly</p>
 </li>
 <li>
-<p>System ask user for confirmation.</p>
+<p>System asks user for confirmation.</p>
 </li>
 <li>
 <p>User confirms his choice.</p>
@@ -2011,7 +1996,7 @@ In excel format</p></td>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>User logins to System and prompts to list all members a group have</p>
+<p>User logins to System and requests help to list all members a group have</p>
 </li>
 <li>
 <p>System shows a list of all members a group have</p>
@@ -2025,13 +2010,13 @@ In excel format</p></td>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>User logins to System and prompts to add a member to a group</p>
+<p>User logins to System and requests help to add a member to a group</p>
 </li>
 <li>
 <p>System shows how to add a member to a group</p>
 </li>
 <li>
-<p>User enter input accordingly</p>
+<p>User enters input accordingly</p>
 </li>
 <li>
 <p>System shows a member is added to a group successfully.</p>
@@ -2084,16 +2069,13 @@ In excel format</p></td>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>New user prompted to create an account</p>
+<p>New user requests help to create an account</p>
 </li>
 <li>
 <p>System shows a prompt on account creation</p>
 </li>
 <li>
-<p>User enters username and password as per prompt</p>
-</li>
-<li>
-<p>User prompted to login</p>
+<p>User enters username and password as prompted</p>
 </li>
 <li>
 <p>Login successful, user now have access to enabled features</p>
@@ -2126,7 +2108,7 @@ In excel format</p></td>
 <p>4a1.System shows an error message.</p>
 </li>
 <li>
-<p>4a2. User prompted to login again</p>
+<p>4a2. User attempts to login again</p>
 <div class="paragraph">
 <p>Use case resumes at step 4.</p>
 </div>
@@ -2322,4 +2304,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-09-29 04:01:00 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-01 06:39:47 UTC</div></div></div></body></html>
