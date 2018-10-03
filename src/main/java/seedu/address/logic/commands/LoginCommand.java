@@ -13,9 +13,9 @@ import seedu.address.storage.UserAccountStorage;
 /**
  * Creates a user for address book.
  */
-public class CreateCommand extends Command {
+public class LoginCommand extends Command {
 
-    public static final String COMMAND_WORD = "create";
+    public static final String COMMAND_WORD = "login";
 
     //TODO: update MESSAGE_USAGE
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the address book. "
@@ -27,22 +27,19 @@ public class CreateCommand extends Command {
             + PREFIX_USERNAME + "username "
             + PREFIX_PASSWORD + "password ";
 
-    public static final String MESSAGE_SUCCESS = "New user added: %1$s";
-    public static final String MESSAGE_FAILURE = "User already exist!";
+    public static final String MESSAGE_SUCCESS = "Login successful!";
+    public static final String MESSAGE_FAILURE = "Login failed!";
+    //TODO: throw exception message
 
     /**
-     * Creates an CreateCommand to add the specified {@code Person}
+     * Login
      */
-    public CreateCommand(Accounts account) {
-        if (!UserAccountStorage.checkDuplicateUser(account.getUsername())) {
-            UserAccountStorage.addNewAccount(account.getUsername(), account.getPassword());
+    public LoginCommand(Accounts account) {
+        if (UserAccountStorage.checkPasswordMatch(account.getUsername(), account.getPassword())) {
             System.out.println(MESSAGE_SUCCESS);
-            System.out.println("Account created. Username: " + account.getUsername()
-                    + " Password: " + account.getPassword());
         } else {
             System.out.println(MESSAGE_FAILURE);
         }
-
     }
 
     @Override

@@ -5,7 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_USERNAME;
 
 import java.util.stream.Stream;
 
-import seedu.address.logic.commands.CreateCommand;
+import seedu.address.logic.commands.LoginCommand;
 
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Accounts;
@@ -13,7 +13,7 @@ import seedu.address.model.person.Accounts;
 /**
  * Parses input arguments and creates a new AddCommand object
  */
-public class CreateCommandParser {
+public class LoginCommandParser {
 
     /**
      * Parses the given {@code String} of arguments in the context of the CreateCommand
@@ -21,7 +21,7 @@ public class CreateCommandParser {
      *
      * @throws ParseException if the user input does not conform the expected format
      */
-    public CreateCommand parse(String args) throws ParseException {
+    public LoginCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_USERNAME, PREFIX_PASSWORD);
 
@@ -32,7 +32,7 @@ public class CreateCommandParser {
 
         Accounts account = new Accounts(username, password);
 
-        return new CreateCommand(account);
+        return new LoginCommand(account);
     }
 
     /**
