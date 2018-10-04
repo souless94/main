@@ -44,13 +44,11 @@
 <li><a href="#groups-melodies">7. Groups (Melodies)</a>
 <ul class="sectlevel2">
 <li><a href="#adding-a-group-code-add_group-code">7.1. Adding a group: <code>add_group</code></a></li>
-<li><a href="#listing-all-groups-code-list_groups-code">7.2. Listing all Groups : <code>list_groups</code></a></li>
-<li><a href="#editing-a-friend-code-edit_group-code">7.3. Editing a friend : <code>edit_group</code></a></li>
-<li><a href="#locating-group-by-name-code-find_group-code">7.4. Locating group by name: <code>find_group</code></a></li>
-<li><a href="#deleting-a-group-code-delete_group-code">7.5. Deleting a group : <code>delete_group</code></a></li>
-<li><a href="#clearing-all-group-code-clear_group-code">7.6. Clearing all group : <code>clear_group</code></a></li>
-<li><a href="#list-all-members-of-a-group-code-viewgroup-code">7.7. List all members of a group : <code>viewgroup</code></a></li>
-<li><a href="#add-a-friend-to-group-code-register-code">7.8. add a friend to group : <code>register</code></a></li>
+<li><a href="#editing-a-group-code-edit_group-code">7.2. Editing a group : <code>edit_group</code></a></li>
+<li><a href="#locating-group-by-name-code-find_group-code">7.3. Locating group by name: <code>find_group</code></a></li>
+<li><a href="#deleting-a-group-code-delete_group-code">7.4. Deleting a group : <code>delete_group</code></a></li>
+<li><a href="#list-all-members-of-a-group-code-view_group-code">7.5. List all members of a group : <code>view_group</code></a></li>
+<li><a href="#add-a-friend-to-group-code-register-code">7.6. add a friend to group : <code>register</code></a></li>
 </ul>
 </li>
 <li><a href="#find-common-time-slot-in-group-nigel">8. Find common time slot in group (Nigel)</a>
@@ -358,8 +356,26 @@ Format: <code>grouplist</code></p>
 <div class="sect2">
 <h3 id="adding-a-timetable-code-add_timetable-code"><a class="link" href="#adding-a-timetable-code-add_timetable-code">6.1. Adding a timetable: <code>add_timetable</code></a></h3>
 <div class="paragraph">
-<p>Add a timetable to the System, if there is no link input we add the timetable where the mode has to be specified via the filename of the csv file and file location, if there is both, we add the timetable where the mode has to be specified via the link.<br>
-Format: <code>add_timetable n/NAME [f/FILENAME l/FILE_LOCATION]/\ [o/link] m/MODE</code></p>
+<p>Depending on the mode, if mode is new, we add a new timetable to friend via the index.
+if mode is existing,we add a timetable in the form of csv to tfriend via the index, if there is no link input we add the timetable via the filename of the csv file and file location. Format of the timetable has to be specified in format.<br>
+Format: <code>add_timetable INDEX m/MODE [f/FILENAME l/FILE_LOCATION]/\ [o/link] f/FORMAT</code></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Add the timetable at the specified <code>INDEX</code>.</p>
+</li>
+<li>
+<p>The index refers to the index number shown in the displayed person list.</p>
+</li>
+<li>
+<p>The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
+</li>
+</ul>
+</div>
+</div>
 </div>
 <div class="paragraph">
 <p>Examples:</p>
@@ -367,7 +383,7 @@ Format: <code>add_timetable n/NAME [f/FILENAME l/FILE_LOCATION]/\ [o/link] m/MOD
 <div class="ulist">
 <ul>
 <li>
-<p><code>add_timetable n/mytimetable f/mytimetable.png l/C://Users/abc/mysecretstash</code></p>
+<p><code>add_timetable n/mytimetable f/mytimetable l/C://Users/abc/mysecretstash m/horizontal</code></p>
 </li>
 </ul>
 </div>
@@ -383,17 +399,17 @@ Format: <code>list_timetables</code></p>
 <h3 id="download-timetable-code-download_timetable-code"><a class="link" href="#download-timetable-code-download_timetable-code">6.3. Download timetable : <code>download_timetable</code></a></h3>
 <div class="paragraph">
 <p>Download a timetable in the System as a png file or csv file in preferred mode if no mode is selected, default is horizontal mode.+
-Format: <code>download_timetable i/TIMETABLE_INDEX p/PASSWORD o/FILE_OPTION l/DOWNLOAD_FILE_LOCATION [m/MODE]</code></p>
+Format: `download_timetable INDEX p/PASSWORD o/FILE_OPTION l/DOWNLOAD_FILE_LOCATION `</p>
 </div>
 <div class="sidebarblock">
 <div class="content">
 <div class="ulist">
 <ul>
 <li>
-<p>Download the timetable at the specified <code>TIMETABLE_INDEX</code>.</p>
+<p>Download the timetable at the specified <code>INDEX</code>.</p>
 </li>
 <li>
-<p>The index refers to the index number shown in the displayed timetable list.</p>
+<p>The index refers to the index number shown in the displayed person list.</p>
 </li>
 <li>
 <p>The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
@@ -548,8 +564,8 @@ Format: <code>clear_timetable</code></p>
 <div class="sect2">
 <h3 id="adding-a-group-code-add_group-code"><a class="link" href="#adding-a-group-code-add_group-code">7.1. Adding a group: <code>add_group</code></a></h3>
 <div class="paragraph">
-<p>Make a group in the System, status is set as open.<br>
-Format: <code>add_group g/GROUPNAME d/GROUPDESCRIPTION m/MAXNUMBEROFPEOPLE</code></p>
+<p>Add a group to the System<br>
+Format: add_group n/GROUPNAME d/GROUPDESCRIPTION `</p>
 </div>
 <div class="paragraph">
 <p>Examples:</p>
@@ -557,40 +573,19 @@ Format: <code>add_group g/GROUPNAME d/GROUPDESCRIPTION m/MAXNUMBEROFPEOPLE</code
 <div class="ulist">
 <ul>
 <li>
-<p>`add_group g/happyfriends d/a group of happy friends m/3 `</p>
+<p><code>add_group n/happyfriends d/a group of happy friends</code></p>
 </li>
 </ul>
 </div>
 </div>
 <div class="sect2">
-<h3 id="listing-all-groups-code-list_groups-code"><a class="link" href="#listing-all-groups-code-list_groups-code">7.2. Listing all Groups : <code>list_groups</code></a></h3>
+<h3 id="editing-a-group-code-edit_group-code"><a class="link" href="#editing-a-group-code-edit_group-code">7.2. Editing a group : <code>edit_group</code></a></h3>
 <div class="paragraph">
-<p>Shows a list of all groups, along with their details.<br>
-Format: <code>list_groups</code></p>
+<p>Edit a group&#8217;s details. There must be at least 1 field non-empty.<br>
+If field is empty, system assumes that the field remains unedited.</p>
 </div>
-</div>
-<div class="sect2">
-<h3 id="editing-a-friend-code-edit_group-code"><a class="link" href="#editing-a-friend-code-edit_group-code">7.3. Editing a friend : <code>edit_group</code></a></h3>
 <div class="paragraph">
-<p>Edit a group you created in the System for the creator of the group. If there is no new input, the system will assume the old data (group name,group description,max number of people), there is only open/closed for status, closed status means you cannot add friend to the group<br>
-Format: <code>edit_group i/GROUPINDEX [g/NEWGROUPNAME] [d/NEWGROUPDESCRIPTION] [m/NEWMAXNUMBEROFPEOPLE]  [s/STATUS]</code></p>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="ulist">
-<ul>
-<li>
-<p>Edits the group at the specified <code>INDEX_OF_GROUP</code>. The index refers to the index number shown in the displayed group list. The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
-</li>
-<li>
-<p>At least one of the optional fields must be provided.</p>
-</li>
-<li>
-<p>Existing values will be updated to the input values.</p>
-</li>
-</ul>
-</div>
-</div>
+<p>Format: <code>edit_group OLDGROUPNAME [n/NEWGROUPNAME] [d/NEWGROUPDESCRIPTION]</code></p>
 </div>
 <div class="paragraph">
 <p>Examples:</p>
@@ -598,13 +593,16 @@ Format: <code>edit_group i/GROUPINDEX [g/NEWGROUPNAME] [d/NEWGROUPDESCRIPTION] [
 <div class="ulist">
 <ul>
 <li>
-<p>`edit_group i/1 g/sadfriends d/sad because of cs2103 s/closed `<br></p>
+<p><code>edit_group happyfriends n/sadfriends d/sad because of cs2103</code><br></p>
+</li>
+<li>
+<p><code>edit_group happyfriends d/very sad because of cs2103</code><br></p>
 </li>
 </ul>
 </div>
 </div>
 <div class="sect2">
-<h3 id="locating-group-by-name-code-find_group-code"><a class="link" href="#locating-group-by-name-code-find_group-code">7.4. Locating group by name: <code>find_group</code></a></h3>
+<h3 id="locating-group-by-name-code-find_group-code"><a class="link" href="#locating-group-by-name-code-find_group-code">7.3. Locating group by name: <code>find_group</code></a></h3>
 <div class="paragraph">
 <p>Find a group’s index whose names contain any of the given keywords<br>
 Format: <code>find_group   KEYWORD [MORE_KEYWORDS]</code></p>
@@ -639,7 +637,7 @@ Format: <code>find_group   KEYWORD [MORE_KEYWORDS]</code></p>
 <ul>
 <li>
 <p><code>find_group John</code><br>
-Returns <code>john</code> and <code>John Doe</code></p>
+Returns <code>john family</code> and <code>John House</code></p>
 </li>
 <li>
 <p><code>find_group Betsy Tim John</code><br>
@@ -649,10 +647,10 @@ Returns any group having names <code>Betsy</code>, <code>Tim</code>, or <code>Jo
 </div>
 </div>
 <div class="sect2">
-<h3 id="deleting-a-group-code-delete_group-code"><a class="link" href="#deleting-a-group-code-delete_group-code">7.5. Deleting a group : <code>delete_group</code></a></h3>
+<h3 id="deleting-a-group-code-delete_group-code"><a class="link" href="#deleting-a-group-code-delete_group-code">7.4. Deleting a group : <code>delete_group</code></a></h3>
 <div class="paragraph">
 <p>Delete a group in the system by index<br>
-Format: `delete_group g/GROUPINDEX `</p>
+Format: `delete_group n/GROUPNAME `</p>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -677,43 +675,23 @@ Format: `delete_group g/GROUPINDEX `</p>
 <div class="ulist">
 <ul>
 <li>
-<p><code>list_group</code><br>
-<code>delete_group 2</code><br>
-Deletes the 2nd group in the Erium.</p>
-</li>
-<li>
-<p><code>find_group Betsy</code><br>
-<code>delete_group 1</code><br>
-Deletes the 1st group in the results of the <code>find_group</code> command.</p>
+<p><code>delete_group n/happyfriends</code></p>
 </li>
 </ul>
 </div>
 </div>
 <div class="sect2">
-<h3 id="clearing-all-group-code-clear_group-code"><a class="link" href="#clearing-all-group-code-clear_group-code">7.6. Clearing all group : <code>clear_group</code></a></h3>
+<h3 id="list-all-members-of-a-group-code-view_group-code"><a class="link" href="#list-all-members-of-a-group-code-view_group-code">7.5. List all members of a group : <code>view_group</code></a></h3>
 <div class="paragraph">
-<p>Clears all group from the System.<br>
-Format: <code>clear_group</code></p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="list-all-members-of-a-group-code-viewgroup-code"><a class="link" href="#list-all-members-of-a-group-code-viewgroup-code">7.7. List all members of a group : <code>viewgroup</code></a></h3>
-<div class="paragraph">
-<p>shows a list of all members in a group, along with their details and the group details.<br>
-Format: <code>view_group i/GROUP_INDEX</code></p>
+<p>shows a list of all members in a group<br>
+Format: <code>view_group n/GROUP_NAME</code></p>
 </div>
 <div class="sidebarblock">
 <div class="content">
 <div class="ulist">
 <ul>
 <li>
-<p>List all members of a group at the specified <code>GROUPINDEX</code>. The index refers to the index number shown in the displayed group list. The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
-</li>
-<li>
-<p>At least one of the optional fields must be provided.</p>
-</li>
-<li>
-<p>Existing values will be updated to the input values.</p>
+<p>List all members of a group at the specified <code>GROUPNAME</code>.</p>
 </li>
 </ul>
 </div>
@@ -725,23 +703,23 @@ Format: <code>view_group i/GROUP_INDEX</code></p>
 <div class="ulist">
 <ul>
 <li>
-<p>` view_group i/1`<br></p>
+<p>` view_group n/happyfriends`<br></p>
 </li>
 </ul>
 </div>
 </div>
 <div class="sect2">
-<h3 id="add-a-friend-to-group-code-register-code"><a class="link" href="#add-a-friend-to-group-code-register-code">7.8. add a friend to group : <code>register</code></a></h3>
+<h3 id="add-a-friend-to-group-code-register-code"><a class="link" href="#add-a-friend-to-group-code-register-code">7.6. add a friend to group : <code>register</code></a></h3>
 <div class="paragraph">
 <p>Adds a friend to a group if the status of the group is open.<br>
-Format: <code>register f/FRIEND_INDEX g/GROUP_INDEX</code></p>
+Format: <code>register FRIEND_INDEX n/GROUP_NAME</code></p>
 </div>
 <div class="sidebarblock">
 <div class="content">
 <div class="ulist">
 <ul>
 <li>
-<p>Edits the group at the specified <code>GROUPINDEX</code>. The index refers to the index number shown in the displayed group list. The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
+<p>Edits the group of unique <code>GROUPNAME</code>.</p>
 </li>
 <li>
 <p>Edits the group at the specified <code>INDEX_OF_FRIEND</code>. The index refers to the index number shown in the displayed person list. The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
@@ -756,7 +734,7 @@ Format: <code>register f/FRIEND_INDEX g/GROUP_INDEX</code></p>
 <div class="ulist">
 <ul>
 <li>
-<p>`register f/1 g/1 `<br></p>
+<p>`register 1 n/happyfriends `<br></p>
 </li>
 </ul>
 </div>
@@ -986,15 +964,15 @@ e.g. <code>delete_friend 3</code></p>
 <p><strong>grouplist</strong> : <code>listgroup</code></p>
 </li>
 <li>
-<p><strong>add_timetable</strong> <code>add_timetable n/NAME [f/FILENAME l/FILE_LOCATION]/\ [o/link] m/MODE</code><br>
-e.g. <code>add_timetable n/mytimetable f/mytimetable.png l/C://Users/abc/mysecretstash</code></p>
+<p><strong>add_timetable</strong> <code>add_timetable INDEX m/MODE [fn/FILENAME l/FILE_LOCATION]/\ [o/link] f/FORMAT</code><br>
+e.g. <code>add_timetable m/existing fn/mytimetable l/C://Users/abc/mysecretstash f/horizontal</code></p>
 </li>
 <li>
 <p><strong>list_timetables</strong> : <code>list_timetables</code></p>
 </li>
 <li>
-<p><strong>download_timetable</strong> : <code>download_timetable i/TIMETABLE_INDEX p/PASSWORD o/FILE_OPTION l/DOWNLOAD_FILE_LOCATION [m/MODE]</code><br>
-e.g. <code>download_timetable i/1 p/kamisama o/png m/vertical l/C://Users/abc/mysecretstash</code></p>
+<p><strong>download_timetable</strong> : <code>download_timetable INDEX p/PASSWORD o/FILE_OPTION l/DOWNLOAD_FILE_LOCATION</code><br>
+e.g. <code>download_timetable i/1 p/kamisama o/png l/C://Users/abc/mysecretstash</code></p>
 </li>
 <li>
 <p><strong>find_timetable</strong> : <code>find_timetable  KEYWORD [MORE_KEYWORDS]</code><br>
@@ -1079,4 +1057,4 @@ e.g. <code>update_pw c/password n/why me? a/because it is cs2103</code></p>
 </ul>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-04 03:29:24 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-04 16:00:40 UTC</div></div></div></body></html>
