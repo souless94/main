@@ -40,7 +40,7 @@ public class Timetable extends Entity {
         String[][] timetableMatrix = this.matrix.getTimetable();
         for (int i = 0; i < matrix.getRows(); i++) {
             for (int j = 0; j < matrix.getColumns(); j++) {
-                if (i == matrix.getRows() - 1 && j == matrix.getColumns() -1) {
+                if (i == matrix.getRows() - 1 && j == matrix.getColumns() - 1) {
                     timetableString += timetableMatrix[i][j];
                 } else {
                     timetableString += timetableMatrix[i][j] + ",";
