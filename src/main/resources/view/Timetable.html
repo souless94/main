@@ -17,15 +17,16 @@
       var matrixArray = matrixAsString.split(",");
       var rows = 8
       var columns = 17
-      var inter=[];
       var counter =0;
+      //@@author souless94 -resued
+      // used code from marchen in https://stackoverflow.com/questions/39242313/how-to-create-nxn-matrix-array-in-javascript
       function matrix(m, n) {
-    var result = []
-    for(var i = 0; i < m; i++) {
-        result.push(new Array(n).fill(" "))
-    }
-    return result
-}
+          var result = [];
+          for(var i = 0; i < m; i++) {
+              result.push(new Array(n).fill(0));
+          }
+          return result;
+      }
       var m= matrix(rows,columns);
       for (var i =0;i <rows; i++){
           for(var j=0 ; j < columns ;j++){
@@ -34,13 +35,16 @@
           }
       }
 
-      
+
   </script>
 </head>
 <body>
 <table id="myTable" border=1>
 </table>
     <script>
+        //@@author souless94 -resued
+        // used code from 1BestCsharp blog in http://1bestcsharp.blogspot.com/2017/03/javascript-populate-html-table-from-array.html
+
         table = document.getElementById("myTable");
         for(var i = 0; i < m.length; i++)
            {
@@ -50,12 +54,13 @@
                {
                    // create a new cell
                    var cell = newRow.insertCell(j);
-                   
+
                    // add value to the cell
                    cell.innerHTML = m[i][j];
                }
            }
-    
+        //@@ author
+
     </script>
   <ol>
     <li>This file (<code>docs/DummySearchPage.html</code>).</li>
