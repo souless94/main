@@ -18,12 +18,14 @@ public class TimetableData {
     private final int noOfDays = days.length;
     private final int rows;
     private final int columns;
+    private final String format;
 
 
     /**
      * creates a timetable based on the format the user wants and timetable file user has
      */
     public TimetableData(String format, String locationOfFile) {
+        this.format = format;
         String[][] aTimetable = generateNewHorizontalTimetable();
         int noOfRows = 0;
         int noOfColumns = 0;
@@ -45,6 +47,7 @@ public class TimetableData {
      * reates a timetable based on the format the user wants
      */
     public TimetableData(String format) {
+        this.format = format;
         String[][] newTimetable = generateNewHorizontalTimetable();
         int noOfRows = 0;
         int noOfColumns = 0;
@@ -147,6 +150,7 @@ public class TimetableData {
     private String[][] generateNewHorizontalTimetable() {
         String[][] horizontalTimetable = getNewHorizontalMatrix();
         // set first row to be days
+        horizontalTimetable[0][0] = this.format;
         for (int i = 1; i < noOfDays + 1; i++) {
             horizontalTimetable[i][0] = days[i - 1];
         }
@@ -175,6 +179,7 @@ public class TimetableData {
      */
     private String[][] generateNewVerticalTimetable() {
         String[][] verticalTimetable = getNewVerticalMatrix();
+        verticalTimetable[0][0] = this.format;
         // set first row to be days
         for (int i = 1; i < noOfDays + 1; i++) {
             verticalTimetable[0][i] = days[i - 1];
@@ -194,8 +199,8 @@ public class TimetableData {
     }
 
     /**
-     * download timetable data as csv
-     * unable to download if same filename exists
+     * download timetable data as csv unable to download if same filename exists
+     *
      * @param locationTo location of where to save the file
      */
     public void downloadTimetableData(String locationTo) {
