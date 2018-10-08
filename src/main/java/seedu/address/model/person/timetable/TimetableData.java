@@ -1,7 +1,13 @@
 package seedu.address.model.person.timetable;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Scanner;
 
 /**
@@ -18,12 +24,14 @@ public class TimetableData {
     private final int noOfDays = days.length;
     private final int rows;
     private final int columns;
+    private final String format;
 
 
     /**
      * creates a timetable based on the format the user wants and timetable file user has
      */
     public TimetableData(String format, String locationOfFile) {
+        this.format = format;
         String[][] aTimetable = generateNewHorizontalTimetable();
         int noOfRows = 0;
         int noOfColumns = 0;
@@ -45,6 +53,7 @@ public class TimetableData {
      * reates a timetable based on the format the user wants
      */
     public TimetableData(String format) {
+        this.format = format;
         String[][] newTimetable = generateNewHorizontalTimetable();
         int noOfRows = 0;
         int noOfColumns = 0;
@@ -76,28 +85,31 @@ public class TimetableData {
      */
     private String[][] readHorizontalTimetableData(String locationOfFile) {
         String[][] timetableMatrix;
-        Scanner inputStream;
-        //Solution below adapted from mikeL
-        // from https://stackoverflow.com/questions/40074840/reading-a-csv-file-into-a-array
+        // @@author souless94 -reused
+        //Solution below gotten from Javin Paul
+        // from http://www.java67.com/2015/08/how-to-load-data-from-csv-file-in-java.html
+        Path pathToFile = Paths.get(locationOfFile);
         timetableMatrix = generateNewHorizontalTimetable();
-        try {
-            File toRead = new File(locationOfFile);
-            if (toRead.exists()) {
-                inputStream = new Scanner(toRead);
-                int i = 0;
-                while (inputStream.hasNext()) {
-                    String line = inputStream.next();
-                    String[] entries = line.split(",");
-                    timetableMatrix[i] = entries;
-                    i++;
-                }
-                inputStream.close();
+        int i = 0;
+        try (BufferedReader br = Files.newBufferedReader(pathToFile, StandardCharsets.US_ASCII)) {
+            String line = br.readLine();
+            while (line != null) {
+                // regex expression gotten from Achintya Jha in
+                // https://stackoverflow.com/questions/15738918/
+                // splitting-a-csv-file-with-quotes-as-text-delimiter-using-string-split
+                String[] attributes = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1);
+                timetableMatrix[i] = attributes;
+                i++;
+                line = br.readLine();
             }
-        } catch (Exception e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
+        //@@author
+        timetableMatrix[0][0] = this.format;
         return timetableMatrix;
     }
+
 
     /**
      * takes in a csv file via the location of the file and read the file
@@ -147,6 +159,7 @@ public class TimetableData {
     private String[][] generateNewHorizontalTimetable() {
         String[][] horizontalTimetable = getNewHorizontalMatrix();
         // set first row to be days
+        horizontalTimetable[0][0] = this.format;
         for (int i = 1; i < noOfDays + 1; i++) {
             horizontalTimetable[i][0] = days[i - 1];
         }
@@ -175,6 +188,7 @@ public class TimetableData {
      */
     private String[][] generateNewVerticalTimetable() {
         String[][] verticalTimetable = getNewVerticalMatrix();
+        verticalTimetable[0][0] = this.format;
         // set first row to be days
         for (int i = 1; i < noOfDays + 1; i++) {
             verticalTimetable[0][i] = days[i - 1];
@@ -194,8 +208,8 @@ public class TimetableData {
     }
 
     /**
-     * download timetable data as csv
-     * unable to download if same filename exists
+     * download timetable data as csv unable to download if same filename exists
+     *
      * @param locationTo location of where to save the file
      */
     public void downloadTimetableData(String locationTo) {

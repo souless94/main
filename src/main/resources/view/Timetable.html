@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Dummy Search Page</title>
+  <script type="text/javascript">
+    function getJsonFromUrl() {
+      var query = location.search.substr(1);
+      var result = {};
+      query.split("&").forEach(function(part) {
+        var item = part.split("=");
+        result[item[0]] = decodeURIComponent(item[1]);
+      });
+      return result;
+    }
+      var matrixAsString =getJsonFromUrl().name;
+      //@@author souless94 -reused
+      // solution from ridgerunner in https://stackoverflow.com/questions/8493195/how-can-i-parse-a-csv-string-with-javascript-which-contains-comma-in-data
+      // Return array of string values, or NULL if CSV string not well formed.
+      function CSVtoArray(text) {
+          var re_valid = /^\s*(?:'[^'\\]*(?:\\[\S\s][^'\\]*)*'|"[^"\\]*(?:\\[\S\s][^"\\]*)*"|[^,'"\s\\]*(?:\s+[^,'"\s\\]+)*)\s*(?:,\s*(?:'[^'\\]*(?:\\[\S\s][^'\\]*)*'|"[^"\\]*(?:\\[\S\s][^"\\]*)*"|[^,'"\s\\]*(?:\s+[^,'"\s\\]+)*)\s*)*$/;
+          var re_value = /(?!\s*$)\s*(?:'([^'\\]*(?:\\[\S\s][^'\\]*)*)'|"([^"\\]*(?:\\[\S\s][^"\\]*)*)"|([^,'"\s\\]*(?:\s+[^,'"\s\\]+)*))\s*(?:,|$)/g;
+            // Return NULL if input string is not well formed CSV string.
+          if (!re_valid.test(text)) return null;
+          var a = [];                     // Initialize array to receive values.
+          text.replace(re_value, // "Walk" the string using replace with callback.
+                       function(m0, m1, m2, m3) {
+              // Remove backslash from \' in single quoted values.
+              if      (m1 !== undefined) a.push(m1.replace(/\\'/g, "'"));
+              // Remove backslash from \" in double quoted values.
+              else if (m2 !== undefined) a.push(m2.replace(/\\"/g, '"'));
+              else if (m3 !== undefined) a.push(m3);
+              return ''; // Return empty string.
+          })
+          // Handle special case of empty last value.
+          if (/,\s*$/.test(text)) a.push('');
+          return a;
+      }
+      // @@author
+      var matrixArray = CSVtoArray(matrixAsString);
+      console.log(matrixArray);
+      var rows = 8;
+      var columns = 17;
+      if (matrixArray[0] == "vertical"){
+          //means vertical
+          rows=17;
+          columns=8;
+      }
+      var counter =0;
+      //@@author souless94 -resued
+      // used code from marchen in https://stackoverflow.com/questions/39242313/how-to-create-nxn-matrix-array-in-javascript
+      function matrix(m, n) {
+          var result = [];
+          for(var i = 0; i < m; i++) {
+              result.push(new Array(n).fill(0));
+          }
+          return result;
+      }
+      var m= matrix(rows,columns);
+      for (var i =0;i <rows; i++){
+          for(var j=0 ; j < columns ;j++){
+             m[i][j] =matrixArray[counter];
+             counter+=1;
+          }
+      }
+
+
+  </script>
+</head>
+<body>
+<table id="myTable" border=1>
+</table>
+    <script>
+        //@@author souless94 -resued
+        // used code from 1BestCsharp blog in http://1bestcsharp.blogspot.com/2017/03/javascript-populate-html-table-from-array.html
+
+        table = document.getElementById("myTable");
+        for(var i = 0; i < m.length; i++)
+           {
+               // create a new row
+               var newRow = table.insertRow(table.length);
+               for(var j = 0; j < m[i].length; j++)
+               {
+                   // create a new cell
+                   var cell = newRow.insertCell(j);
+
+                   // add value to the cell
+                   cell.innerHTML = m[i][j];
+               }
+           }
+        //@@ author
+
+    </script>
+  <ol>
+    <li>This file (<code>docs/DummySearchPage.html</code>).</li>
+    <li>Task <code>copyDummySearchPage</code> in both <code>build.gradle</code> and <code>.travis.yml</code>.</li>
+  </ol>
+</body>
+</html>
