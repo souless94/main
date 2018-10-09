@@ -352,11 +352,11 @@ Examples:
 === Create an account: `create`
 
 Create an account in the system. The password and security answer are both case sensitive. +
-Format: `create u/sampleUser pw/dontUseWeakPassword
+Format: `create u/USERNAME pw/PASSWORD`
 
 Examples:
 
-* `create u/username pw/password`
+* `create u/sampleUser pw/dontUseWeakPassword`
 
 === login to an account : `login`
 Login into the system. +
