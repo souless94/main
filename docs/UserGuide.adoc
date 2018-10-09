@@ -379,18 +379,18 @@ Examples:
 === Create an account: `create`
 
 Create an account in the system. The password and security answer are both case sensitive. +
-Format: `create u/USERNAME p/PASSWORD e/EMAIL q/SECURITY_QUESTION a/SECURITY_ANSWER`
+Format: `create u/USERNAME pw/PASSWORD`
 
 Examples:
 
-* `create u/iamgod p/kamisama e/enel@skypiea.com q/Where is fairy vearth? a/Near the moon`
+* `create u/iamgod pw/kamisama
 
 === login to an account : `login`
 Login into the system. +
 Format: `login u/USERNAME p/PASSWORD`
 Examples:
 
-* `login u/iamgod p/kamisama`
+* `login u/iamgod pw/kamisama`
 
 === Changing password: `update_pw `
 
