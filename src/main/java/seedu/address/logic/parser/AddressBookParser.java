@@ -29,6 +29,7 @@ import seedu.address.logic.commands.RegisterCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.ViewGroupCommand;
+import seedu.address.logic.commands.ViewTimetablePropertiesCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -59,6 +60,9 @@ public class AddressBookParser {
         switch (commandWord) {
         case AddTimetableCommand.COMMAND_WORD:
             return new AddTimetableCommandParser().parse(arguments);
+
+        case ViewTimetablePropertiesCommand.COMMAND_WORD:
+            return new ViewTimetablePropertiesCommandParser().parse(arguments);
 
         case DownloadTimetableCommand.COMMAND_WORD:
             return new DownloadTimetableCommandParser().parse(arguments);
