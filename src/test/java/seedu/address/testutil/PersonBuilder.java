@@ -75,18 +75,24 @@ public class PersonBuilder {
     }
 
     /**
-     * Sets the {@code timetable} of the {@code Person} that we are building.
+     * Sets the {@code format} of the {@code Person} that we are building.
      */
     public PersonBuilder withformat(String format) {
         this.format = format;
         return this;
     }
 
+    /**
+     * Sets the {@code storedLocation} of the {@code Person} that we are building.
+     */
     public PersonBuilder withStoredLocation(String storedLocation) {
         this.storedLocation = storedLocation;
         return this;
     }
 
+    /**
+     * Sets the {@code downloadLocation} of the {@code Person} that we are building.
+     */
     public PersonBuilder withDownloadLocation(String downloadLocation) {
         this.downloadLocation = downloadLocation;
         return this;
@@ -125,6 +131,10 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     *
+     * @return a person
+     */
     public Person build() {
         return new Person(name, phone, email, address, tags, format, storedLocation,
             downloadLocation);
