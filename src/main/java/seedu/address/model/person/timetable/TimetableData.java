@@ -8,7 +8,6 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Scanner;
 
 /**
  * timetable data which will process the inputs and create a timetable
@@ -74,6 +73,12 @@ public class TimetableData {
         }
         return timetableMatrix;
     }
+
+    /**
+     * read the data from the csv file in the stored location and write it to timetable Matrix
+     *
+     * @return timetableMatrix with values
+     */
 
     private String[][] readTimetableData(String storedLocation, String[][] timetableMatrix) {
         // @@author souless94 -reused
