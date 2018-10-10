@@ -1,7 +1,6 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_FILE_LOCATION;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
@@ -25,23 +24,19 @@ public class DownloadTimetableCommand extends Command {
             + "by the index number used in the displayed person list. "
             + "file must not be created in the download folder location \n"
             + "Parameters : INDEX (must be a positive integer) "
-            + "[" + PREFIX_FILE_LOCATION + "] \n"
-            + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_FILE_LOCATION + "C:\\Users\\admin\\Downloads";
+            + "Example: " + COMMAND_WORD + " 1 ";
 
     public static final String MESSAGE_DOWNLOAD_TIMETABLE_SUCCESS = "timetable downloaded successfully";
     private final Index index;
-    private final String locationTo;
 
     /**
-     * /**
      *
+     * location of the download is gotten from the person
      * @param index of the person in the filtered person list to edit
-     * @param locationTo to save the file of timetable to
+     *
      */
-    public DownloadTimetableCommand(Index index, String locationTo) {
+    public DownloadTimetableCommand(Index index) {
         this.index = index;
-        this.locationTo = locationTo;
     }
 
     @Override
@@ -55,7 +50,7 @@ public class DownloadTimetableCommand extends Command {
 
         Person personToDownloadTimetable = lastShownList.get(index.getZeroBased());
         Timetable timetable = personToDownloadTimetable.getTimetable();
-        timetable.downloadTimetable(locationTo);
+        timetable.downloadTimetable(personToDownloadTimetable.getDownloadLocation());
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         model.commitAddressBook();
         return new CommandResult(String.format(MESSAGE_DOWNLOAD_TIMETABLE_SUCCESS));

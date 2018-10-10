@@ -30,66 +30,56 @@ public class TimetableData {
     /**
      * creates a timetable based on the format the user wants and timetable file user has
      */
-    public TimetableData(String format, String locationOfFile) {
+    public TimetableData(String format, String storedLocation) {
         this.format = format;
-        String[][] aTimetable = generateNewHorizontalTimetable();
         int noOfRows = 0;
         int noOfColumns = 0;
         if (format.equals("vertical")) {
             noOfRows = noOfTimings;
             noOfColumns = noOfDays;
-            aTimetable = readVerticalTimetableData(locationOfFile);
-        } else if (format.equals("horizontal")) {
-            noOfRows = noOfDays;
-            noOfColumns = noOfTimings;
-            aTimetable = readHorizontalTimetableData(locationOfFile);
-        }
-        this.rows = noOfRows;
-        this.columns = noOfColumns;
-        this.timetable = aTimetable;
-    }
-
-    /**
-     * reates a timetable based on the format the user wants
-     */
-    public TimetableData(String format) {
-        this.format = format;
-        String[][] newTimetable = generateNewHorizontalTimetable();
-        int noOfRows = 0;
-        int noOfColumns = 0;
-        if (format.equals("vertical")) {
-            noOfRows = noOfTimings;
-            noOfColumns = noOfDays;
-            newTimetable = generateNewVerticalTimetable();
         } else if (format.equals("horizontal")) {
             noOfRows = noOfDays;
             noOfColumns = noOfTimings;
         }
         this.rows = noOfRows;
         this.columns = noOfColumns;
-        this.timetable = newTimetable;
+        File toRead = new File(storedLocation);
+        if (!toRead.exists()) {
+            this.timetable = createNewTimetable();
+            downloadTimetableData(storedLocation);
+        } else {
+            this.timetable = getTimetableData(storedLocation);
+        }
     }
 
     public int getRows() {
-        return rows + 1;
+        return this.rows + 1;
     }
 
     public int getColumns() {
-        return columns + 1;
+        return this.columns + 1;
     }
 
     /**
      * takes in a csv file via the location of the file and read the file
      *
-     * @return string matrix of timetable in horizontal form
+     * @return string matrix of timetable in its format
      */
-    private String[][] readHorizontalTimetableData(String locationOfFile) {
-        String[][] timetableMatrix;
+    private String[][] getTimetableData(String storedLocation) {
+        String[][] timetableMatrix = createNewTimetable();
+        timetableMatrix[0][0] = this.format;
+        File toRead = new File(storedLocation);
+        if (toRead.exists()) {
+            timetableMatrix = readTimetableData(storedLocation, timetableMatrix);
+        }
+        return timetableMatrix;
+    }
+
+    private String[][] readTimetableData(String storedLocation, String[][] timetableMatrix) {
         // @@author souless94 -reused
         //Solution below gotten from Javin Paul
         // from http://www.java67.com/2015/08/how-to-load-data-from-csv-file-in-java.html
-        Path pathToFile = Paths.get(locationOfFile);
-        timetableMatrix = generateNewHorizontalTimetable();
+        Path pathToFile = Paths.get(storedLocation);
         int i = 0;
         try (BufferedReader br = Files.newBufferedReader(pathToFile, StandardCharsets.US_ASCII)) {
             String line = br.readLine();
@@ -106,98 +96,65 @@ public class TimetableData {
             e.printStackTrace();
         }
         //@@author
-        timetableMatrix[0][0] = this.format;
         return timetableMatrix;
     }
 
+    /**
+     * @return initialise a string matrix
+     */
+    private String[][] createNewMatrix() {
+        String[][] matrix = new String[this.getRows()][this.getColumns()];
+        for (int i = 0; i < this.getRows(); i++) {
+            for (int j = 0; j < this.getColumns(); j++) {
+                matrix[i][j] = " ";
+            }
+        }
+        return matrix;
+    }
 
     /**
-     * takes in a csv file via the location of the file and read the file
+     * fills the matrix with the days and timings according to format
      *
-     * @return string matrix of timetable in vertical form
+     * @return a string matrix of timetable
      */
-    private String[][] readVerticalTimetableData(String locationOfFile) {
-        String[][] timetableMatrix;
-        Scanner inputStream;
-        //Solution below adapted from mikeL
-        // from https://stackoverflow.com/questions/40074840/reading-a-csv-file-into-a-array
-        timetableMatrix = generateNewVerticalTimetable();
-        try {
-            File toRead = new File(locationOfFile);
-            if (!toRead.exists()) {
-                inputStream = new Scanner(toRead);
-                int i = 0;
-                while (inputStream.hasNext()) {
-                    String line = inputStream.next();
-                    String[] entries = line.split(",");
-                    timetableMatrix[i] = entries;
-                }
-                inputStream.close();
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
+    private String[][] createNewTimetable() {
+        String[][] timetable = createNewMatrix();
+
+        timetable[0][0] = this.format;
+        if (this.format.equals("horizontal")) {
+            fillHorizontalTimetableData(timetable);
+        } else if (this.format.equals("vertical")) {
+            fillVerticalTimetableData(timetable);
         }
-        return timetableMatrix;
+        return timetable;
     }
 
     /**
-     * @return initialise a horizontal string matrix
+     * set first row of timetable to be timings and set first column of timetable to be days
      */
-    private String[][] getNewHorizontalMatrix() {
-        String[][] matrix = new String[noOfDays + 1][noOfTimings + 1];
-        for (int i = 0; i < noOfDays + 1; i++) {
-            for (int j = 0; j < noOfTimings + 1; j++) {
-                matrix[i][j] = " ";
-            }
-        }
-        return matrix;
-    }
-
-    /**
-     * @return a string matrix of timetable in horizontal form
-     */
-    private String[][] generateNewHorizontalTimetable() {
-        String[][] horizontalTimetable = getNewHorizontalMatrix();
-        // set first row to be days
-        horizontalTimetable[0][0] = this.format;
-        for (int i = 1; i < noOfDays + 1; i++) {
-            horizontalTimetable[i][0] = days[i - 1];
-        }
+    private void fillHorizontalTimetableData(String[][] timetable) {
         // set first column to be days
-        for (int j = 1; j < noOfTimings + 1; j++) {
-            horizontalTimetable[0][j] = timings[j - 1];
+        for (int i = 1; i < this.getRows(); i++) {
+            timetable[i][0] = days[i - 1];
         }
-        return horizontalTimetable;
+        // set first row  to be timings
+        for (int j = 1; j < this.getColumns(); j++) {
+            timetable[0][j] = timings[j - 1];
+        }
     }
 
     /**
-     * @return initialise a vertical string matrix
+     * set first row of timetable to be days and set first column of timetable to be timings
      */
-    private String[][] getNewVerticalMatrix() {
-        String[][] matrix = new String[noOfTimings + 1][noOfDays + 1];
-        for (int i = 0; i < noOfTimings + 1; i++) {
-            for (int j = 0; j < noOfDays + 1; j++) {
-                matrix[i][j] = " ";
-            }
-        }
-        return matrix;
-    }
-
-    /**
-     * @return a string matrix of timetable in vertical form
-     */
-    private String[][] generateNewVerticalTimetable() {
-        String[][] verticalTimetable = getNewVerticalMatrix();
-        verticalTimetable[0][0] = this.format;
+    private void fillVerticalTimetableData(String[][] timetable) {
         // set first row to be days
-        for (int i = 1; i < noOfDays + 1; i++) {
-            verticalTimetable[0][i] = days[i - 1];
+        for (int i = 1; i < this.getColumns(); i++) {
+            timetable[0][i] = days[i - 1];
         }
-        // set first column to be days
-        for (int j = 1; j < noOfTimings + 1; j++) {
-            verticalTimetable[j][0] = timings[j - 1];
+        // set first column to be timings
+        for (int j = 1; j < this.getRows(); j++) {
+            timetable[j][0] = timings[j - 1];
         }
-        return verticalTimetable;
     }
 
     /**
@@ -221,7 +178,7 @@ public class TimetableData {
             if (!toWrite.exists()) {
                 toWrite.createNewFile();
                 FileWriter writer = new FileWriter(toWrite, true);
-                for (int i = 0; i < this.getRows() + 1; i++) {
+                for (int i = 0; i < this.getRows(); i++) {
                     for (int j = 0; j < this.getColumns(); j++) {
                         writer.append(this.timetable[i][j]);
                         writer.flush();
@@ -237,5 +194,4 @@ public class TimetableData {
             e.printStackTrace();
         }
     }
-
 }

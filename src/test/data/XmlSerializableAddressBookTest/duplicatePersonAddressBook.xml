@@ -7,7 +7,9 @@
         <email>alice@example.com</email>
         <address>123, Jurong West Ave 6, #08-111</address>
         <tagged>friends</tagged>
-		<format></format>
+        <format></format>
+        <storedLocation></storedLocation>
+        <downloadLocation></downloadLocation>
     </persons>
 
     <!-- Person with same identity as Alice Pauline -->
@@ -16,7 +18,9 @@
         <phone>94351253</phone>
         <email>pauline@example.com</email>
         <address>4th street</address>
-		<format></format>
+        <format></format>
+        <storedLocation></storedLocation>
+        <downloadLocation></downloadLocation>
     </persons>
 
 </addressbook>

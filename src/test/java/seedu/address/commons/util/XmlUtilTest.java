@@ -2,6 +2,7 @@ package seedu.address.commons.util;
 
 import static org.junit.Assert.assertEquals;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -46,6 +47,12 @@ public class XmlUtilTest {
     private static final List<XmlAdaptedTag> VALID_TAGS = Collections
         .singletonList(new XmlAdaptedTag("friends"));
     private static final String VALID_FORMAT = "horizontal";
+    private static final String VALID_STORED_LOCATION =
+        new File("").getAbsolutePath().replace("\\", "/")
+            + "/src/main/resources/timetable/stored";
+    private static final String VALID_DOWNLOAD_LOCATION =
+        new File("").getAbsolutePath().replace("\\", "/")
+            + "/src/main/resources/timetable/download";
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
@@ -86,7 +93,8 @@ public class XmlUtilTest {
         XmlAdaptedPerson actualPerson = XmlUtil.getDataFromFile(
             MISSING_PERSON_FIELD_FILE, XmlAdaptedPersonWithRootElement.class);
         XmlAdaptedPerson expectedPerson = new XmlAdaptedPerson(
-            null, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_FORMAT, VALID_TAGS);
+            null, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_TAGS,VALID_FORMAT, VALID_STORED_LOCATION,
+            VALID_DOWNLOAD_LOCATION);
         assertEquals(expectedPerson, actualPerson);
     }
 
@@ -95,7 +103,8 @@ public class XmlUtilTest {
         XmlAdaptedPerson actualPerson = XmlUtil.getDataFromFile(
             INVALID_PERSON_FIELD_FILE, XmlAdaptedPersonWithRootElement.class);
         XmlAdaptedPerson expectedPerson = new XmlAdaptedPerson(
-            VALID_NAME, INVALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_FORMAT, VALID_TAGS);
+            VALID_NAME, INVALID_PHONE, VALID_EMAIL, VALID_ADDRESS,VALID_TAGS,VALID_FORMAT, VALID_STORED_LOCATION,
+            VALID_DOWNLOAD_LOCATION);
         assertEquals(expectedPerson, actualPerson);
     }
 
@@ -104,7 +113,8 @@ public class XmlUtilTest {
         XmlAdaptedPerson actualPerson = XmlUtil.getDataFromFile(
             VALID_PERSON_FILE, XmlAdaptedPersonWithRootElement.class);
         XmlAdaptedPerson expectedPerson = new XmlAdaptedPerson(
-            VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_FORMAT, VALID_TAGS);
+            VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_TAGS,VALID_FORMAT, VALID_STORED_LOCATION,
+            VALID_DOWNLOAD_LOCATION);
         assertEquals(expectedPerson, actualPerson);
     }
 

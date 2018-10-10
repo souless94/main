@@ -2,6 +2,8 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.io.File;
+
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
@@ -26,31 +28,41 @@ public class Person extends Entity {
     private final Address address;
     private final Timetable timetable;
     private final Set<Tag> tags = new HashSet<>();
+    private final String format;
+    private final String downloadLocation;
+    private final String storedLocation;
 
     /**
-     * Every field must be present and not null. creates a person with empty horizontal timetable
+     * Every field must be present and not null. creates a person with timetable
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
+    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags,
+        String format, String storedLocation, String downloadLocation) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
-        this.timetable = new Timetable(this.name.toString(), "horizontal");
-    }
-
-    /**
-     * @param timetable takes in params and create a person object with timetable
-     */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags,
-        Timetable timetable) {
-        this.name = name;
-        this.phone = phone;
-        this.email = email;
-        this.address = address;
-        this.tags.addAll(tags);
-        this.timetable = timetable;
+        if (format.equals("default")) {
+            this.format = "horizontal";
+        } else {
+            this.format = format;
+        }
+        if (storedLocation.equals("default")) {
+            this.storedLocation = new File("").getAbsolutePath().replace("\\", "/")
+                + "/src/main/resources/timetable/stored";
+        } else {
+            this.storedLocation = storedLocation.replace("\\", "/");
+        }
+        if (downloadLocation.equals("default")) {
+            String defaultDownloadLocation = new File("").getAbsolutePath().replace("\\", "/")
+                + "/src/main/resources/timetable/download";
+            this.downloadLocation = defaultDownloadLocation;
+        } else {
+            this.downloadLocation = downloadLocation.replace("\\", "/");
+        }
+        this.timetable = new Timetable(this.name.toString(), this.format, this.storedLocation,
+            this.downloadLocation);
     }
 
     public Name getName() {
@@ -67,6 +79,18 @@ public class Person extends Entity {
 
     public Address getAddress() {
         return address;
+    }
+
+    public String getFormat() {
+        return format;
+    }
+
+    public String getDownloadLocation() {
+        return downloadLocation;
+    }
+
+    public String getStoredLocation() {
+        return storedLocation;
     }
 
     public Timetable getTimetable() {

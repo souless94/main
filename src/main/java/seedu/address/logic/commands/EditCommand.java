@@ -104,8 +104,14 @@ public class EditCommand extends Command {
         Address updatedAddress = editPersonDescriptor.getAddress()
             .orElse(personToEdit.getAddress());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+        String format = editPersonDescriptor.getFormat().orElse(personToEdit.getFormat());
+        String storedLocation = editPersonDescriptor.getStoredLocation()
+            .orElse(personToEdit.getStoredLocation());
+        String downloadLocation = editPersonDescriptor.getDownloadLocation()
+            .orElse(personToEdit.getDownloadLocation());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags,
+            format, storedLocation, downloadLocation);
     }
 
     @Override
@@ -136,7 +142,9 @@ public class EditCommand extends Command {
         private Phone phone;
         private Email email;
         private Address address;
-        private Timetable timetable;
+        private String format;
+        private String downloadLocation;
+        private String storedLocation;
         private Set<Tag> tags;
 
         public EditPersonDescriptor() {
@@ -150,7 +158,9 @@ public class EditCommand extends Command {
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
             setAddress(toCopy.address);
-            setTimetable(toCopy.timetable);
+            setFormat(toCopy.format);
+            setDownloadLocation(toCopy.downloadLocation);
+            setStoredLocation(toCopy.storedLocation);
             setTags(toCopy.tags);
         }
 
@@ -162,12 +172,28 @@ public class EditCommand extends Command {
             return CollectionUtil.isAnyNonNull(name, phone, email, address, tags);
         }
 
-        public void setTimetable(Timetable timetable) {
-            this.timetable = timetable;
+        public void setDownloadLocation(String downloadLocation) {
+            this.downloadLocation = downloadLocation;
         }
 
-        public Optional<Timetable> getTimetable() {
-            return Optional.ofNullable(timetable);
+        public Optional<String> getDownloadLocation() {
+            return Optional.ofNullable(downloadLocation);
+        }
+
+        public void setStoredLocation(String storedLocation) {
+            this.storedLocation = storedLocation;
+        }
+
+        public Optional<String> getStoredLocation() {
+            return Optional.ofNullable(storedLocation);
+        }
+
+        public void setFormat(String format) {
+            this.format = format;
+        }
+
+        public Optional<String> getFormat() {
+            return Optional.ofNullable(format);
         }
 
         public void setName(Name name) {

@@ -9,7 +9,8 @@ public class Timetable extends Entity {
 
     // Identity fields
     private final String fileName;
-    private final String locationOfFile;
+    private final String storedLocation;
+    private final String downloadLocation;
     private final String format;
 
     // create timetable data
@@ -21,18 +22,13 @@ public class Timetable extends Entity {
      * @param fileName
      * @param format
      */
-    public Timetable(String fileName, String format, String locationFrom) {
+    public Timetable(String fileName, String format, String storedLocation,
+        String downloadLocation) {
         this.fileName = fileName + ".csv";
         this.format = format;
-        locationOfFile = locationFrom.replace("\\", "/") + "/" + this.fileName;
-        matrix = new TimetableData(format, locationOfFile);
-    }
-
-    public Timetable(String fileName, String format) {
-        this.fileName = fileName + ".csv";
-        this.format = format;
-        locationOfFile = null;
-        matrix = new TimetableData(format);
+        this.storedLocation = storedLocation.replace("\\", "/") + "/" + this.fileName;
+        this.downloadLocation = downloadLocation + "/" + this.fileName;
+        matrix = new TimetableData(format, this.storedLocation);
     }
 
     public String getTimetableAsString() {
@@ -52,7 +48,7 @@ public class Timetable extends Entity {
 
 
     public String getFormat() {
-        return format;
+        return this.format;
     }
 
     public TimetableData getTimetable() {
