@@ -6,10 +6,19 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.ViewTimetablePropertiesCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
+/**
+ * Parses input arguments and creates a new ViewTimetablePropertiesCommand object
+ */
 public class ViewTimetablePropertiesCommandParser implements
     Parser<ViewTimetablePropertiesCommand> {
 
-    @Override
+    /**
+     * Parses the given {@code String} of arguments in the context of the
+     * ViewTimetablePropertiesCommand and returns an ViewTimetablePropertiesCommand object for
+     * execution.
+     *
+     * @throws ParseException if the user input does not conform the expected format
+     */
     public ViewTimetablePropertiesCommand parse(String args) throws ParseException {
         try {
             Index index = ParserUtil.parseIndex(args);

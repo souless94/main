@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.io.File;
 
 import java.util.List;
+
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
@@ -12,6 +13,9 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 
+/**
+ * view timetable stored folder and download folder from person
+ */
 public class ViewTimetablePropertiesCommand extends Command {
 
     public static final String COMMAND_WORD = "view_timetable";
@@ -49,16 +53,13 @@ public class ViewTimetablePropertiesCommand extends Command {
         boolean doesDownloadFolderExists = new File(personToViewTimetable.getDownloadLocation())
             .exists();
         String message;
-        if (!doesDownloadFolderExists){
-            message="there is no such download folder in your computer";
-        }
-        else if(!doesStoredFolderExists){
-            message ="there is no such stored folder in your computer";
-        }
-        else if (!doesStoredFolderExists&&!doesDownloadFolderExists){
+        if (!doesDownloadFolderExists) {
+            message = "there is no such download folder in your computer";
+        } else if (!doesStoredFolderExists) {
+            message = "there is no such stored folder in your computer";
+        } else if (!doesStoredFolderExists && !doesDownloadFolderExists) {
             message = "there is no such download and stored folder in your computer";
-        }
-        else {
+        } else {
             message =
                 "location of download folder is at : " + personToViewTimetable.getDownloadLocation()
                     + ".\n"
