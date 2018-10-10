@@ -54,8 +54,9 @@ public class DeleteTimetableCommand extends Command {
 
         Person personToDeleteTimetable = lastShownList.get(index.getZeroBased());
         File toBeDeleted = new File(
-            personToDeleteTimetable.getStoredLocation() + "/" +
-                personToDeleteTimetable.getName().toString() + ".csv");
+            personToDeleteTimetable.getStoredLocation()
+                + "/"
+                + personToDeleteTimetable.getName().toString() + ".csv");
         if (toBeDeleted.exists()) {
             toBeDeleted.delete();
         } else {
@@ -68,6 +69,10 @@ public class DeleteTimetableCommand extends Command {
         return new CommandResult(String.format(MESSAGE_DELETE_TIMETABLE_SUCCESS, updatedPerson));
     }
 
+    /**
+     * it creates a new person with a default timetable while not changing other details of person
+     * Creates and returns a {@code Person} with the details of {@code personToEdit}
+     */
     private Person createPersonWithNewTimetable(Person personToEdit) {
         assert personToEdit != null;
 
