@@ -25,6 +25,7 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.HistoryCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.LoginCommand;
+import seedu.address.logic.commands.OpenTimetableCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.RegisterCommand;
 import seedu.address.logic.commands.SelectCommand;
@@ -64,6 +65,9 @@ public class AddressBookParser {
 
         case DeleteTimetableCommand.COMMAND_WORD:
             return new DeleteTimetableCommandParser().parse(arguments);
+
+        case OpenTimetableCommand.COMMAND_WORD:
+            return new OpenTimetableCommandParser().parse(arguments);
 
         case ViewTimetablePropertiesCommand.COMMAND_WORD:
             return new ViewTimetablePropertiesCommandParser().parse(arguments);

@@ -46,6 +46,9 @@ public class Timetable extends Entity {
         return timetableString;
     }
 
+    public String getStoredLocation() {
+        return this.storedLocation;
+    }
 
     public String getFormat() {
         return this.format;
