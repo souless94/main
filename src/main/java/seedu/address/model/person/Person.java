@@ -51,6 +51,10 @@ public class Person extends Entity {
         if (storedLocation.equals("default")) {
             this.storedLocation = new File("").getAbsolutePath().replace("\\", "/")
                 + "/src/main/resources/timetable/stored";
+            File directory = new File(this.storedLocation);
+            if(!directory.exists()){
+                directory.mkdirs();
+            }
         } else {
             this.storedLocation = storedLocation.replace("\\", "/");
         }
@@ -58,6 +62,11 @@ public class Person extends Entity {
             String defaultDownloadLocation = new File("").getAbsolutePath().replace("\\", "/")
                 + "/src/main/resources/timetable/download";
             this.downloadLocation = defaultDownloadLocation;
+            File directory = new File(this.downloadLocation);
+            if(!directory.exists()){
+                directory.mkdirs();
+            }
+
         } else {
             this.downloadLocation = downloadLocation.replace("\\", "/");
         }
