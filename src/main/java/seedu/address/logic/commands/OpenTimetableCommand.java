@@ -57,6 +57,6 @@ public class OpenTimetableCommand extends Command {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return new CommandResult("file opened successfully");
+        return new CommandResult(MESSAGE_OPEN_TIMETABLE_SUCCESS);
     }
 }

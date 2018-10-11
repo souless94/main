@@ -6,10 +6,14 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.OpenTimetableCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
-public class OpenTimetableCommandParser implements Parser <OpenTimetableCommand> {
+/**
+ * Parses input arguments and creates a new OpemTimetableCommand object
+ */
+public class OpenTimetableCommandParser implements Parser<OpenTimetableCommand> {
+
     /**
-     * Parses the given {@code String} of arguments in the context of the DeleteTimetableCommand and
-     * returns an DeleteTimetableCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the OpenTimetableCommand and
+     * returns an OpenTimetableCommand object for execution.
      *
      * @throws ParseException if the user input does not conform the expected format
      */
