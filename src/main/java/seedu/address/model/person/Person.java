@@ -52,7 +52,7 @@ public class Person extends Entity {
             this.storedLocation = new File("").getAbsolutePath().replace("\\", "/")
                 + "/src/main/resources/timetable/stored";
             File directory = new File(this.storedLocation);
-            if(!directory.exists()){
+            if (!directory.exists()) {
                 directory.mkdirs();
             }
         } else {
@@ -63,7 +63,7 @@ public class Person extends Entity {
                 + "/src/main/resources/timetable/download";
             this.downloadLocation = defaultDownloadLocation;
             File directory = new File(this.downloadLocation);
-            if(!directory.exists()){
+            if (!directory.exists()) {
                 directory.mkdirs();
             }
 
