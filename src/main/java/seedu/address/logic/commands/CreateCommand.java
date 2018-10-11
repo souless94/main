@@ -30,23 +30,22 @@ public class CreateCommand extends Command {
     public static final String MESSAGE_SUCCESS = "New user added: %1$s";
     public static final String MESSAGE_FAILURE = "User already exist!";
 
+    private final Accounts newAccount;
+
     /**
      * Creates an CreateCommand to add the specified {@code Person}
      */
     public CreateCommand(Accounts account) {
-        if (!UserAccountStorage.checkDuplicateUser(account.getUsername())) {
-            UserAccountStorage.addNewAccount(account.getUsername(), account.getPassword());
-            System.out.println(MESSAGE_SUCCESS);
-            System.out.println("Account created. Username: " + account.getUsername()
-                    + " Password: " + account.getPassword());
-        } else {
-            System.out.println(MESSAGE_FAILURE);
-        }
 
+        newAccount = account;
+
+        if (!UserAccountStorage.checkDuplicateUser(account.getUsername())) {
+            UserAccountStorage.addNewAccount(newAccount.getUsername(), newAccount.getPassword());
+        }
     }
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
-        return null;
+        return new CommandResult(String.format(MESSAGE_SUCCESS));
     }
 }
