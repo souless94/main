@@ -9,6 +9,7 @@
         <tagged>friends</tagged>
         <format></format>
         <storedLocation></storedLocation>
+        <timetableString></timetableString>
     </persons>
 
     <!-- Person with same identity as Alice Pauline -->
@@ -19,6 +20,7 @@
         <address>4th street</address>
         <format></format>
         <storedLocation></storedLocation>
+        <timetableString></timetableString>
     </persons>
 
 </addressbook>

@@ -67,7 +67,7 @@ public class PersonListPanelTest extends GuiUnitTest {
      */
     @Test
     public void performanceTest() throws Exception {
-        ObservableList<Person> backingList = createBackingList(10);
+        ObservableList<Person> backingList = createBackingList(10000);
 
         assertTimeoutPreemptively(ofMillis(CARD_CREATION_AND_DELETION_TIMEOUT), () -> {
             initUi(backingList);
@@ -102,6 +102,7 @@ public class PersonListPanelTest extends GuiUnitTest {
             builder.append("<address>a</address>\n");
             builder.append("<format>horizontal</format>\n");
             builder.append("<storedLocation>default</storedLocation>\n");
+            builder.append("<timetableString>default</timetableString>\n");
             builder.append("</persons>\n");
 
         }

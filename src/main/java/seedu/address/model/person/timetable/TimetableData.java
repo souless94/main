@@ -29,7 +29,7 @@ public class TimetableData {
     /**
      * creates a timetable based on the format the user wants and timetable file user has
      */
-    public TimetableData(String format, String storedLocation) {
+    public TimetableData(String format, String filename, String storedLocation) {
         this.format = format;
         int noOfRows = 0;
         int noOfColumns = 0;
@@ -42,12 +42,38 @@ public class TimetableData {
         }
         this.rows = noOfRows;
         this.columns = noOfColumns;
-        File toRead = new File(storedLocation);
-        if (!toRead.exists()) {
-            this.timetable = createNewTimetable();
-            downloadTimetableData(storedLocation);
+        this.timetable = getTimetableData(storedLocation + filename);
+    }
+
+    public TimetableData(String format, String timetableString) {
+        this.format = format;
+        int noOfRows = 0;
+        int noOfColumns = 0;
+        if (format.equals("vertical")) {
+            noOfRows = noOfTimings;
+            noOfColumns = noOfDays;
+        } else if (format.equals("horizontal")) {
+            noOfRows = noOfDays;
+            noOfColumns = noOfTimings;
+        }
+        this.rows = noOfRows;
+        this.columns = noOfColumns;
+        this.timetable = getTimetableFromString(timetableString);
+    }
+
+    /**
+     * uses timetableString and create a timetable matrix
+     */
+    private String[][] getTimetableFromString(String timetableString) {
+        String[][] timetableMatrix = createNewTimetable();
+        if (timetableString.equals("default")) {
+            return timetableMatrix;
         } else {
-            this.timetable = getTimetableData(storedLocation);
+            String[] rows = timetableString.split("\n");
+            for (int i = 0; i < getRows(); i++) {
+                timetableMatrix[i] = rows[i].split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1);
+            }
+            return timetableMatrix;
         }
     }
 

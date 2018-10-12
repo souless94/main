@@ -1,5 +1,7 @@
 package seedu.address.model.person.timetable;
 
+import java.io.File;
+
 import seedu.address.model.Entity;
 
 /**
@@ -11,6 +13,7 @@ public class Timetable extends Entity {
     private final String fileName;
     private final String storedLocation;
     private final String format;
+    private final String timetableString;
 
     // create timetable data
     private final TimetableData matrix;
@@ -21,13 +24,23 @@ public class Timetable extends Entity {
      * @param fileName
      * @param format
      */
-    public Timetable(String fileName, String format, String storedLocation) {
+    public Timetable(String fileName, String format, String storedLocation,
+        String timetableString) {
         this.fileName = fileName + ".csv";
         this.format = format;
-        this.storedLocation = storedLocation.replace("\\", "/") + "/" + this.fileName;
-        matrix = new TimetableData(format, this.storedLocation);
+        this.storedLocation = storedLocation.replace("\\", "/") + "/";
+        File toRead = new File(storedLocation + fileName);
+        if (toRead.exists()) {
+            matrix = new TimetableData(format, this.fileName, this.storedLocation);
+        } else {
+            matrix = new TimetableData(format, timetableString);
+        }
+        this.timetableString = getTimetableDataString();
     }
 
+    /**
+     * @return a timetable String for the ui
+     */
     public String getTimetableAsString() {
         String timetableString = "";
         String[][] timetableMatrix = this.matrix.getTimetable();
@@ -41,6 +54,25 @@ public class Timetable extends Entity {
             }
         }
         return timetableString;
+    }
+
+    /**
+     * @return a timetable string for the xml storage
+     */
+    public String getTimetableDataString() {
+        String timetableDataString = "";
+        String[][] timetableMatrix = this.matrix.getTimetable();
+        for (int i = 0; i < matrix.getRows(); i++) {
+            for (int j = 0; j < matrix.getColumns(); j++) {
+                if (j == matrix.getColumns() - 1) {
+                    timetableDataString += timetableMatrix[i][j];
+                } else {
+                    timetableDataString += timetableMatrix[i][j] + ",";
+                }
+            }
+            timetableDataString += "\n";
+        }
+        return timetableDataString;
     }
 
     public String getStoredLocation() {

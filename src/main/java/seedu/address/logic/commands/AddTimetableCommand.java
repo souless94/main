@@ -65,8 +65,8 @@ public class AddTimetableCommand extends Command {
     }
 
     /**
-     * it updates the timetableData of the person.
-     * Creates and returns a {@code Person} with the details of {@code personToEdit}
+     * it updates the timetableData of the person. Creates and returns a {@code Person} with the
+     * details of {@code personToEdit}
      */
     private static Person createUpdatedPerson(Person personToEdit) {
         assert personToEdit != null;
@@ -78,8 +78,9 @@ public class AddTimetableCommand extends Command {
         Set<Tag> updatedTags = personToEdit.getTags();
         String format = personToEdit.getFormat();
         String storedLocation = personToEdit.getStoredLocation();
+        String timetableString = personToEdit.getTimetable().getTimetableDataString();
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags,
-            format, storedLocation);
+            format, storedLocation, timetableString);
     }
 }

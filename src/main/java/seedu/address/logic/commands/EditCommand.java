@@ -103,12 +103,12 @@ public class EditCommand extends Command {
         Address updatedAddress = editPersonDescriptor.getAddress()
             .orElse(personToEdit.getAddress());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
-        String format = editPersonDescriptor.getFormat().orElse(personToEdit.getFormat());
-        String storedLocation = editPersonDescriptor.getStoredLocation()
-            .orElse(personToEdit.getStoredLocation());
+        String format = personToEdit.getFormat();
+        String storedLocation = personToEdit.getStoredLocation();
+        String timetableString = personToEdit.getTimetable().getTimetableDataString();
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags,
-            format, storedLocation);
+            format, storedLocation, timetableString);
     }
 
     @Override

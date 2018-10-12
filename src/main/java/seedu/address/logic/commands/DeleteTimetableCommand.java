@@ -59,8 +59,6 @@ public class DeleteTimetableCommand extends Command {
                 + personToDeleteTimetable.getName().toString() + ".csv");
         if (toBeDeleted.exists()) {
             toBeDeleted.delete();
-        } else {
-            throw new CommandException("timetable is not in location");
         }
         Person updatedPerson = createPersonWithNewTimetable(personToDeleteTimetable);
         model.updatePerson(personToDeleteTimetable, updatedPerson);
@@ -82,6 +80,6 @@ public class DeleteTimetableCommand extends Command {
         Address updatedAddress = personToEdit.getAddress();
         Set<Tag> updatedTags = personToEdit.getTags();
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags,
-            "default", "default");
+            "default", "default", "default");
     }
 }

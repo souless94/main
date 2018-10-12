@@ -50,6 +50,7 @@ public class XmlUtilTest {
     private static final String VALID_STORED_LOCATION =
         new File("").getAbsolutePath().replace("\\", "/")
             + "/data/timetable";
+    private static final String VALID_TIMETABLE_STRING = "default";
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
@@ -91,7 +92,7 @@ public class XmlUtilTest {
             MISSING_PERSON_FIELD_FILE, XmlAdaptedPersonWithRootElement.class);
         XmlAdaptedPerson expectedPerson = new XmlAdaptedPerson(
             null, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_TAGS, VALID_FORMAT,
-            VALID_STORED_LOCATION);
+            VALID_STORED_LOCATION, VALID_TIMETABLE_STRING);
         assertEquals(expectedPerson, actualPerson);
     }
 
@@ -101,7 +102,7 @@ public class XmlUtilTest {
             INVALID_PERSON_FIELD_FILE, XmlAdaptedPersonWithRootElement.class);
         XmlAdaptedPerson expectedPerson = new XmlAdaptedPerson(
             VALID_NAME, INVALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_TAGS, VALID_FORMAT,
-            VALID_STORED_LOCATION);
+            VALID_STORED_LOCATION, VALID_TIMETABLE_STRING);
         assertEquals(expectedPerson, actualPerson);
     }
 
@@ -111,7 +112,7 @@ public class XmlUtilTest {
             VALID_PERSON_FILE, XmlAdaptedPersonWithRootElement.class);
         XmlAdaptedPerson expectedPerson = new XmlAdaptedPerson(
             VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_TAGS, VALID_FORMAT,
-            VALID_STORED_LOCATION);
+            VALID_STORED_LOCATION, VALID_TIMETABLE_STRING);
         assertEquals(expectedPerson, actualPerson);
     }
 

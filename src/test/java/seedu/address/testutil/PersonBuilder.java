@@ -27,12 +27,14 @@ public class PersonBuilder {
     public static final String DEFAULT_STORED_LOCATION =
         new File("").getAbsolutePath().replace("\\", "/")
             + "/data/timetable";
+    public static final String DEFAULT_TIMETABLE_STRING = "default";
     private Name name;
     private Phone phone;
     private Email email;
     private Address address;
     private String format;
     private String storedLocation;
+    private String timetableString;
     private Timetable timetable;
     private Set<Tag> tags;
 
@@ -43,6 +45,7 @@ public class PersonBuilder {
         address = new Address(DEFAULT_ADDRESS);
         format = DEFAULT_FORMAT;
         storedLocation = DEFAULT_STORED_LOCATION;
+        timetableString = DEFAULT_TIMETABLE_STRING;
         tags = new HashSet<>();
     }
 
@@ -56,8 +59,8 @@ public class PersonBuilder {
         address = personToCopy.getAddress();
         format = personToCopy.getFormat();
         storedLocation = personToCopy.getStoredLocation();
+        timetableString = personToCopy.getTimetable().getTimetableDataString();
         tags = new HashSet<>(personToCopy.getTags());
-        timetable = new Timetable(name.toString(), format, storedLocation);
     }
 
     /**
@@ -121,7 +124,8 @@ public class PersonBuilder {
      * @return a person
      */
     public Person build() {
-        return new Person(name, phone, email, address, tags, format, storedLocation);
+        return new Person(name, phone, email, address, tags, format, storedLocation,
+            timetableString);
     }
 
 }
