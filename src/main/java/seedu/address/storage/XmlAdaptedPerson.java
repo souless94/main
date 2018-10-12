@@ -36,8 +36,6 @@ public class XmlAdaptedPerson {
     private String format;
     @XmlElement(required = true)
     private String storedLocation;
-    @XmlElement(required = true)
-    private String downloadLocation;
 
     @XmlElement
     private List<XmlAdaptedTag> tagged = new ArrayList<>();
@@ -52,14 +50,13 @@ public class XmlAdaptedPerson {
      * Constructs an {@code XmlAdaptedPerson} with the given person details.
      */
     public XmlAdaptedPerson(String name, String phone, String email, String address,
-        List<XmlAdaptedTag> tagged, String format, String storedLocation, String downloadLocation) {
+        List<XmlAdaptedTag> tagged, String format, String storedLocation) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.format = format;
         this.storedLocation = storedLocation;
-        this.downloadLocation = downloadLocation;
         if (tagged != null) {
             this.tagged = new ArrayList<>(tagged);
         }
@@ -77,7 +74,6 @@ public class XmlAdaptedPerson {
         address = source.getAddress().value;
         format = source.getFormat();
         storedLocation = source.getStoredLocation();
-        downloadLocation = source.getDownloadLocation();
         tagged = source.getTags().stream()
             .map(XmlAdaptedTag::new)
             .collect(Collectors.toList());
@@ -132,7 +128,7 @@ public class XmlAdaptedPerson {
         final Address modelAddress = new Address(address);
         final Set<Tag> modelTags = new HashSet<>(personTags);
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags, format,
-            storedLocation, downloadLocation);
+            storedLocation);
     }
 
     @Override

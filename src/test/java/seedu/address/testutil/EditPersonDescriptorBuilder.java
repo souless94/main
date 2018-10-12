@@ -39,7 +39,6 @@ public class EditPersonDescriptorBuilder {
         descriptor.setTags(person.getTags());
         descriptor.setFormat(person.getFormat());
         descriptor.setStoredLocation(person.getStoredLocation());
-        descriptor.setDownloadLocation(person.getDownloadLocation());
     }
 
     /**

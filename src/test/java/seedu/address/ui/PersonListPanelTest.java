@@ -67,11 +67,12 @@ public class PersonListPanelTest extends GuiUnitTest {
      */
     @Test
     public void performanceTest() throws Exception {
-        ObservableList<Person> backingList = createBackingList(10000);
+        ObservableList<Person> backingList = createBackingList(10);
 
         assertTimeoutPreemptively(ofMillis(CARD_CREATION_AND_DELETION_TIMEOUT), () -> {
             initUi(backingList);
             guiRobot.interact(backingList::clear);
+
         }, "Creation and deletion of person cards exceeded time limit");
     }
 
@@ -101,7 +102,6 @@ public class PersonListPanelTest extends GuiUnitTest {
             builder.append("<address>a</address>\n");
             builder.append("<format>horizontal</format>\n");
             builder.append("<storedLocation>default</storedLocation>\n");
-            builder.append("<downloadLocation>default</downloadLocation>\n");
             builder.append("</persons>\n");
 
         }

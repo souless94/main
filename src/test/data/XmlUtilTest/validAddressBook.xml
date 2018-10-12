@@ -7,7 +7,6 @@
         <address isPrivate="false">4th street</address>
         <format></format>
         <storedLocation></storedLocation>
-        <downloadLocation></downloadLocation>
     </persons>
     <persons>
         <name>Ruth Mueller</name>
@@ -16,7 +15,6 @@
         <address isPrivate="false">81th street</address>
         <format></format>
         <storedLocation></storedLocation>
-        <downloadLocation></downloadLocation>
     </persons>
     <persons>
         <name>Heinz Kurz</name>
@@ -25,7 +23,6 @@
         <address isPrivate="false">wall street</address>
         <format></format>
         <storedLocation></storedLocation>
-        <downloadLocation></downloadLocation>
     </persons>
     <persons>
         <name>Cornelia Meier</name>
@@ -34,7 +31,6 @@
         <address isPrivate="false">10th street</address>
         <format></format>
         <storedLocation></storedLocation>
-        <downloadLocation></downloadLocation>
     </persons>
     <persons>
         <name>Werner Meyer</name>
@@ -43,7 +39,6 @@
         <address isPrivate="false">michegan ave</address>
         <format></format>
         <storedLocation></storedLocation>
-        <downloadLocation></downloadLocation>
     </persons>
     <persons>
         <name>Lydia Kunz</name>
@@ -52,7 +47,6 @@
         <address isPrivate="false">little tokyo</address>
         <format></format>
         <storedLocation></storedLocation>
-        <downloadLocation></downloadLocation>
     </persons>
     <persons>
         <name>Anna Best</name>
@@ -61,7 +55,6 @@
         <address isPrivate="false">4th street</address>
         <format></format>
         <storedLocation></storedLocation>
-        <downloadLocation></downloadLocation>
     </persons>
     <persons>
         <name>Stefan Meier</name>
@@ -70,7 +63,6 @@
         <address isPrivate="false">little india</address>
         <format></format>
         <storedLocation></storedLocation>
-        <downloadLocation></downloadLocation>
     </persons>
     <persons>
         <name>Martin Mueller</name>
@@ -79,6 +71,5 @@
         <address isPrivate="false">chicago ave</address>
         <format></format>
         <storedLocation></storedLocation>
-        <downloadLocation></downloadLocation>
     </persons>
 </addressbook>

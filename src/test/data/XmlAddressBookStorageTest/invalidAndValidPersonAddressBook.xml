@@ -8,7 +8,6 @@
         <address isPrivate="false">4th street</address>
         <format></format>
         <storedLocation></storedLocation>
-        <downloadLocation></downloadLocation>
     </persons>
     <!-- Person with invalid phone field -->
     <persons>
@@ -18,6 +17,5 @@
         <address isPrivate="false">4th street</address>
         <format></format>
         <storedLocation></storedLocation>
-        <downloadLocation></downloadLocation>
     </persons>
 </addressbook>

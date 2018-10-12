@@ -10,7 +10,6 @@ public class Timetable extends Entity {
     // Identity fields
     private final String fileName;
     private final String storedLocation;
-    private final String downloadLocation;
     private final String format;
 
     // create timetable data
@@ -22,12 +21,10 @@ public class Timetable extends Entity {
      * @param fileName
      * @param format
      */
-    public Timetable(String fileName, String format, String storedLocation,
-        String downloadLocation) {
+    public Timetable(String fileName, String format, String storedLocation) {
         this.fileName = fileName + ".csv";
         this.format = format;
         this.storedLocation = storedLocation.replace("\\", "/") + "/" + this.fileName;
-        this.downloadLocation = downloadLocation + "/" + this.fileName;
         matrix = new TimetableData(format, this.storedLocation);
     }
 

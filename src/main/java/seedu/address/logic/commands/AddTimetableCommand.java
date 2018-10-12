@@ -78,9 +78,8 @@ public class AddTimetableCommand extends Command {
         Set<Tag> updatedTags = personToEdit.getTags();
         String format = personToEdit.getFormat();
         String storedLocation = personToEdit.getStoredLocation();
-        String downloadLocation = personToEdit.getDownloadLocation();
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags,
-            format, storedLocation, downloadLocation);
+            format, storedLocation);
     }
 }

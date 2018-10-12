@@ -29,14 +29,13 @@ public class Person extends Entity {
     private final Timetable timetable;
     private final Set<Tag> tags = new HashSet<>();
     private final String format;
-    private final String downloadLocation;
     private final String storedLocation;
 
     /**
      * Every field must be present and not null. creates a person with timetable
      */
     public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags,
-        String format, String storedLocation, String downloadLocation) {
+        String format, String storedLocation) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
@@ -50,7 +49,7 @@ public class Person extends Entity {
         }
         if (storedLocation.equals("default")) {
             this.storedLocation = new File("").getAbsolutePath().replace("\\", "/")
-                + "/src/main/resources/timetable/stored";
+                + "/data/timetable";
             File directory = new File(this.storedLocation);
             if (!directory.exists()) {
                 directory.mkdirs();
@@ -58,21 +57,8 @@ public class Person extends Entity {
         } else {
             this.storedLocation = storedLocation.replace("\\", "/");
         }
-        if (downloadLocation.equals("default")) {
-            String defaultDownloadLocation = new File("").getAbsolutePath().replace("\\", "/")
-                + "/src/main/resources/timetable/download";
-            this.downloadLocation = defaultDownloadLocation;
-            File directory = new File(this.downloadLocation);
-            if (!directory.exists()) {
-                directory.mkdirs();
-            }
-
-        } else {
-            this.downloadLocation = downloadLocation.replace("\\", "/");
-        }
         this.timetable = new Timetable(this.name.toString() + " timetable", this.format,
-            this.storedLocation,
-            this.downloadLocation);
+            this.storedLocation);
     }
 
     public Name getName() {
@@ -93,10 +79,6 @@ public class Person extends Entity {
 
     public String getFormat() {
         return format;
-    }
-
-    public String getDownloadLocation() {
-        return downloadLocation;
     }
 
     public String getStoredLocation() {

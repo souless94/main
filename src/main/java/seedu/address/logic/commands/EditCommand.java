@@ -106,11 +106,9 @@ public class EditCommand extends Command {
         String format = editPersonDescriptor.getFormat().orElse(personToEdit.getFormat());
         String storedLocation = editPersonDescriptor.getStoredLocation()
             .orElse(personToEdit.getStoredLocation());
-        String downloadLocation = editPersonDescriptor.getDownloadLocation()
-            .orElse(personToEdit.getDownloadLocation());
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags,
-            format, storedLocation, downloadLocation);
+            format, storedLocation);
     }
 
     @Override

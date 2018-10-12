@@ -9,7 +9,6 @@
         <tagged>friends</tagged>
         <format></format>
         <storedLocation></storedLocation>
-        <downloadLocation></downloadLocation>
     </persons>
     <persons>
         <name>Benson Meier</name>
@@ -20,7 +19,6 @@
         <tagged>friends</tagged>
         <format></format>
         <storedLocation></storedLocation>
-        <downloadLocation></downloadLocation>
     </persons>
     <persons>
         <name>Carl Kurz</name>
@@ -29,7 +27,6 @@
         <address>wall street</address>
         <format></format>
         <storedLocation></storedLocation>
-        <downloadLocation></downloadLocation>
     </persons>
     <persons>
         <name>Daniel Meier</name>
@@ -39,7 +36,6 @@
         <tagged>friends</tagged>
         <format></format>
         <storedLocation></storedLocation>
-        <downloadLocation></downloadLocation>
     </persons>
     <persons>
         <name>Elle Meyer</name>
@@ -48,7 +44,6 @@
         <address>michegan ave</address>
         <format></format>
         <storedLocation></storedLocation>
-        <downloadLocation></downloadLocation>
     </persons>
     <persons>
         <name>Fiona Kunz</name>
@@ -57,7 +52,6 @@
         <address>little tokyo</address>
         <format></format>
         <storedLocation></storedLocation>
-        <downloadLocation></downloadLocation>
     </persons>
     <persons>
         <name>George Best</name>
@@ -66,6 +60,5 @@
         <address>4th street</address>
         <format></format>
         <storedLocation></storedLocation>
-        <downloadLocation></downloadLocation>
     </persons>
 </addressbook>

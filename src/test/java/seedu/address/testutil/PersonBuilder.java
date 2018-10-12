@@ -26,10 +26,7 @@ public class PersonBuilder {
     public static final String DEFAULT_FORMAT = "horizontal";
     public static final String DEFAULT_STORED_LOCATION =
         new File("").getAbsolutePath().replace("\\", "/")
-            + "/src/main/resources/timetable/stored";
-    public static final String DEFAULT_DOWNLOAD_LOCATION =
-        new File("").getAbsolutePath().replace("\\", "/")
-            + "/src/main/resources/timetable/download";
+            + "/data/timetable";
     private Name name;
     private Phone phone;
     private Email email;
@@ -47,7 +44,6 @@ public class PersonBuilder {
         address = new Address(DEFAULT_ADDRESS);
         format = DEFAULT_FORMAT;
         storedLocation = DEFAULT_STORED_LOCATION;
-        downloadLocation = DEFAULT_DOWNLOAD_LOCATION;
         tags = new HashSet<>();
     }
 
@@ -61,9 +57,8 @@ public class PersonBuilder {
         address = personToCopy.getAddress();
         format = personToCopy.getFormat();
         storedLocation = personToCopy.getStoredLocation();
-        downloadLocation = personToCopy.getDownloadLocation();
         tags = new HashSet<>(personToCopy.getTags());
-        timetable = new Timetable(name.toString(), format, storedLocation, downloadLocation);
+        timetable = new Timetable(name.toString(), format, storedLocation);
     }
 
     /**
@@ -87,14 +82,6 @@ public class PersonBuilder {
      */
     public PersonBuilder withStoredLocation(String storedLocation) {
         this.storedLocation = storedLocation;
-        return this;
-    }
-
-    /**
-     * Sets the {@code downloadLocation} of the {@code Person} that we are building.
-     */
-    public PersonBuilder withDownloadLocation(String downloadLocation) {
-        this.downloadLocation = downloadLocation;
         return this;
     }
 
@@ -132,12 +119,10 @@ public class PersonBuilder {
     }
 
     /**
-     *
      * @return a person
      */
     public Person build() {
-        return new Person(name, phone, email, address, tags, format, storedLocation,
-            downloadLocation);
+        return new Person(name, phone, email, address, tags, format, storedLocation);
     }
 
 }
