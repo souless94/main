@@ -291,21 +291,6 @@ Deletes the 2nd timetable in the address book.
 `delete_timetable 1 p/password` +
 Deletes the 1st timetable in the results of the `find_timetable` command.
 
-=== view timetable : `view_timetable`
-
-Shows the stored folder and the download folder of the person.+
-Format: `view_timetable INDEX`
-
-****
-* view the timetable at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index *must be a positive integer* 1, 2, 3, ...
-****
-
-Examples:
-
-* `view 1` +
-
 == Groups (Melodies)
 === Adding a group: `add_group`
 
@@ -505,8 +490,6 @@ e.g. `add_timetable 1`
 e.g. `download_timetable 1 l/C://Users/abc/mysecretstash`
 * *delete_timetable* : `delete INDEX p/password` +
 e.g. `delete_timetable 3 p/password`
-* *view_timetable* : `view_timetable INDEX `+
-e.g. `view 1 `
 * *add_group* `add_group g/GROUPNAME d/GROUPDESCRIPTION m/MAXNUMBEROFPEOPLE` +
 e.g. `add_group g/happyfriends d/a group of happy friends m/3`
 * *list_groups* : `list_groups`
