@@ -140,7 +140,6 @@ public class EditCommand extends Command {
         private Email email;
         private Address address;
         private String format;
-        private String downloadLocation;
         private String storedLocation;
         private Set<Tag> tags;
 
@@ -156,7 +155,6 @@ public class EditCommand extends Command {
             setEmail(toCopy.email);
             setAddress(toCopy.address);
             setFormat(toCopy.format);
-            setDownloadLocation(toCopy.downloadLocation);
             setStoredLocation(toCopy.storedLocation);
             setTags(toCopy.tags);
         }
@@ -167,14 +165,6 @@ public class EditCommand extends Command {
          */
         public boolean isAnyFieldEdited() {
             return CollectionUtil.isAnyNonNull(name, phone, email, address, tags);
-        }
-
-        public void setDownloadLocation(String downloadLocation) {
-            this.downloadLocation = downloadLocation;
-        }
-
-        public Optional<String> getDownloadLocation() {
-            return Optional.ofNullable(downloadLocation);
         }
 
         public void setStoredLocation(String storedLocation) {

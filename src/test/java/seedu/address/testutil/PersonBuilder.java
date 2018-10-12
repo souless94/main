@@ -33,7 +33,6 @@ public class PersonBuilder {
     private Address address;
     private String format;
     private String storedLocation;
-    private String downloadLocation;
     private Timetable timetable;
     private Set<Tag> tags;
 

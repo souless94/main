@@ -3,7 +3,6 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DOWNLOAD_LOCATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -38,7 +37,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         ArgumentMultimap argMultimap =
             ArgumentTokenizer
                 .tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG,
-                    PREFIX_FORMAT, PREFIX_STORED_LOCATION, PREFIX_DOWNLOAD_LOCATION);
+                    PREFIX_FORMAT, PREFIX_STORED_LOCATION);
 
         Index index;
 
@@ -73,10 +72,6 @@ public class EditCommandParser implements Parser<EditCommand> {
         if (argMultimap.getValue(PREFIX_STORED_LOCATION).isPresent()) {
             editPersonDescriptor
                 .setStoredLocation(argMultimap.getValue(PREFIX_STORED_LOCATION).get());
-        }
-        if (argMultimap.getValue(PREFIX_DOWNLOAD_LOCATION).isPresent()) {
-            editPersonDescriptor
-                .setDownloadLocation(argMultimap.getValue(PREFIX_DOWNLOAD_LOCATION).get());
         }
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG))
             .ifPresent(editPersonDescriptor::setTags);

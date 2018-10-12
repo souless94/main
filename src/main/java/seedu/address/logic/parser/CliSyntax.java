@@ -16,7 +16,6 @@ public class CliSyntax {
     public static final Prefix PREFIX_PASSWORD = new Prefix("pw/");
 
     public static final Prefix PREFIX_STORED_LOCATION = new Prefix("sl/");
-    public static final Prefix PREFIX_DOWNLOAD_LOCATION = new Prefix("dl/");
     public static final Prefix PREFIX_FORMAT = new Prefix("f/");
     public static final Prefix PREFIX_DESCRIPTION = new Prefix("d/");
 
