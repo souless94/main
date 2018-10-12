@@ -42,7 +42,7 @@ public class TimetableData {
         }
         this.rows = noOfRows;
         this.columns = noOfColumns;
-        this.timetable = getTimetableData(storedLocation + filename);
+        this.timetable = getTimetableData(storedLocation + "/" + filename);
     }
 
     public TimetableData(String format, String timetableString) {

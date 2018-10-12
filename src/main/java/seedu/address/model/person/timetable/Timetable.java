@@ -28,8 +28,8 @@ public class Timetable extends Entity {
         String timetableString) {
         this.fileName = fileName + ".csv";
         this.format = format;
-        this.storedLocation = storedLocation.replace("\\", "/") + "/";
-        File toRead = new File(storedLocation + fileName);
+        this.storedLocation = storedLocation.replace("\\", "/");
+        File toRead = new File(this.storedLocation + "/" + this.fileName);
         if (toRead.exists()) {
             matrix = new TimetableData(format, this.fileName, this.storedLocation);
         } else {
