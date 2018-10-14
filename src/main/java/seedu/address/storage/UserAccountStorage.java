@@ -4,6 +4,7 @@ import java.util.HashMap;
 
 import seedu.address.logic.security.Encrypt;
 
+//@@author aspiringdevslog
 /**
  * Storage of username and passwords
  */
