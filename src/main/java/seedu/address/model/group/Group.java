@@ -73,7 +73,8 @@ public class Group extends Entity {
 
     /**
      * Returns true if both groups of the same name.
-     * This defines a weaker notion of equality between two groups.
+     * For group, isSame is the same function as equals
+     * since groups are uniquely identified by their names.
      */
     @Override
     public boolean isSame(Object other) {

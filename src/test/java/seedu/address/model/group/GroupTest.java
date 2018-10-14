@@ -1,99 +1,87 @@
-package seedu.address.model.person;
+package seedu.address.model.group;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
-import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.testutil.TypicalPersons.BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUP_DESCRIPTION;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUP_NAME_BESTFRIEND;
+import static seedu.address.testutil.TypicalGroups.BESTFRIENDS;
+import static seedu.address.testutil.TypicalGroups.FAMILY;
 
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.GroupBuilder;
 
-public class PersonTest {
+public class GroupTest {
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
     @Test
     public void asObservableList_modifyList_throwsUnsupportedOperationException() {
-        Person person = new PersonBuilder().build();
+        Group group = new GroupBuilder().build();
         thrown.expect(UnsupportedOperationException.class);
-        person.getTags().remove(0);
+        group.getGroupMembers().remove(0);
     }
 
     @Test
-    public void isSamePerson() {
+    public void isSameGroup() {
         // same object -> returns true
-        assertTrue(ALICE.isSame(ALICE));
+        assertTrue(FAMILY.isSame(FAMILY));
 
         // null -> returns false
-        assertFalse(ALICE.isSame(null));
+        assertFalse(FAMILY.isSame(null));
 
-        // different phone and email -> returns false
-        Person editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).build();
-        assertFalse(ALICE.isSame(editedAlice));
+        // same name but different group Members -> returns true
+        Group editedFamily = new GroupBuilder(FAMILY).withSampleMembers().build();
+        assertTrue(FAMILY.isSame(editedFamily));
 
-        // different name -> returns false
-        editedAlice = new PersonBuilder(ALICE).withName(VALID_NAME_BOB).build();
-        assertFalse(ALICE.isSame(editedAlice));
+        // same name but different description -> returns true
+        editedFamily = new GroupBuilder(FAMILY).withDescription("").build();
+        assertTrue(FAMILY.isSame(editedFamily));
 
-        // same name, same phone, different attributes -> returns true
-        editedAlice = new PersonBuilder(ALICE).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
-                .withTags(VALID_TAG_HUSBAND).build();
-        assertTrue(ALICE.isSame(editedAlice));
+        // different name, same description, same group members -> returns false
+        editedFamily = new GroupBuilder(FAMILY).withName(VALID_GROUP_NAME_BESTFRIEND).build();
+        assertFalse(FAMILY.isSame(editedFamily));
 
-        // same name, same email, different attributes -> returns true
-        editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).withAddress(VALID_ADDRESS_BOB)
-                .withTags(VALID_TAG_HUSBAND).build();
-        assertTrue(ALICE.isSame(editedAlice));
-
-        // same name, same phone, same email, different attributes -> returns true
-        editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND).build();
-        assertTrue(ALICE.isSame(editedAlice));
+        // different name, different description, different group members -> returns false
+        editedFamily = new GroupBuilder(FAMILY).withName(VALID_GROUP_NAME_BESTFRIEND)
+                .withDescription(VALID_GROUP_DESCRIPTION)
+                .withSampleMembers().build();
+        assertFalse(FAMILY.isSame(editedFamily));
     }
 
     @Test
     public void equals() {
-        // same values -> returns true
-        Person aliceCopy = new PersonBuilder(ALICE).build();
-        assertTrue(ALICE.equals(aliceCopy));
-
         // same object -> returns true
-        assertTrue(ALICE.equals(ALICE));
+        assertTrue(FAMILY.equals(FAMILY));
 
         // null -> returns false
-        assertFalse(ALICE.equals(null));
+        assertFalse(FAMILY.equals(null));
 
         // different type -> returns false
-        assertFalse(ALICE.equals(5));
+        assertFalse(FAMILY.equals(5));
+        assertFalse(FAMILY.equals("FAMILY"));
 
-        // different person -> returns false
-        assertFalse(ALICE.equals(BOB));
+        // different groups -> returns false
+        assertFalse(FAMILY.equals(BESTFRIENDS));
 
-        // different name -> returns false
-        Person editedAlice = new PersonBuilder(ALICE).withName(VALID_NAME_BOB).build();
-        assertFalse(ALICE.equals(editedAlice));
+        // same name but different group Members -> returns true
+        Group editedFamily = new GroupBuilder(FAMILY).withSampleMembers().build();
+        assertTrue(FAMILY.equals(editedFamily));
 
-        // different phone -> returns false
-        editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).build();
-        assertFalse(ALICE.equals(editedAlice));
+        // same name but different description -> returns true
+        editedFamily = new GroupBuilder(FAMILY).withDescription("").build();
+        assertTrue(FAMILY.equals(editedFamily));
 
-        // different email -> returns false
-        editedAlice = new PersonBuilder(ALICE).withEmail(VALID_EMAIL_BOB).build();
-        assertFalse(ALICE.equals(editedAlice));
+        // different name, same description, same group members -> returns false
+        editedFamily = new GroupBuilder(FAMILY).withName(VALID_GROUP_NAME_BESTFRIEND).build();
+        assertFalse(FAMILY.equals(editedFamily));
 
-        // different address -> returns false
-        editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).build();
-        assertFalse(ALICE.equals(editedAlice));
-
-        // different tags -> returns false
-        editedAlice = new PersonBuilder(ALICE).withTags(VALID_TAG_HUSBAND).build();
-        assertFalse(ALICE.equals(editedAlice));
+        // different name, different description, different group members -> returns false
+        editedFamily = new GroupBuilder(FAMILY).withName(VALID_GROUP_NAME_BESTFRIEND)
+                .withDescription(VALID_GROUP_DESCRIPTION)
+                .withSampleMembers().build();
+        assertFalse(FAMILY.equals(editedFamily));
     }
 }
