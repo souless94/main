@@ -5,6 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_GROUPS;
 
+import java.util.List;
 import java.util.Optional;
 
 import seedu.address.commons.util.CollectionUtil;
@@ -34,8 +35,8 @@ public class EditGroupCommand extends Command {
             + PREFIX_DESCRIPTION + "A family group";
 
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    private static final String MESSAGE_EDIT_GROUP_SUCCESS = "Edited Group: %1$s";
-    private static final String MESSAGE_DUPLICATE_GROUP = "This person already exists in the address book.";
+    public static final String MESSAGE_EDIT_GROUP_SUCCESS = "Edited Group: %1$s";
+    public static final String MESSAGE_DUPLICATE_GROUP = "This person already exists in the address book.";
 
     private final Name oldName;
     private final EditGroupDescriptor editGroupDescriptor;
@@ -79,10 +80,12 @@ public class EditGroupCommand extends Command {
 
         Name updatedName = editGroupDescriptor.getName().orElse(groupToBeEdited.getName());
         String updatedDescription = editGroupDescriptor.getDescription().orElse(groupToBeEdited.getDescription());
-        UniqueList<Person> existingGroupMembers = new UniqueList<>();
-        existingGroupMembers.setElements(groupToBeEdited.getGroupMembers());
 
-        return new Group(updatedName, updatedDescription, existingGroupMembers);
+        UniqueList<Person> newGroupMembers = new UniqueList<>();
+        List<Person> memberList = editGroupDescriptor.getGroupMembers().orElse(groupToBeEdited.getGroupMembers());
+        newGroupMembers.setElements(memberList);
+
+        return new Group(updatedName, updatedDescription, newGroupMembers);
     }
 
     @Override
@@ -110,6 +113,7 @@ public class EditGroupCommand extends Command {
     public static class EditGroupDescriptor {
         private Name name;
         private String description;
+        private List<Person> memberList;
 
         public EditGroupDescriptor() {}
 
@@ -117,8 +121,17 @@ public class EditGroupCommand extends Command {
          * Copy constructor.
          */
         public EditGroupDescriptor(EditGroupDescriptor toCopy) {
-            setName(toCopy.name);
-            setDescription(toCopy.description);
+            if (toCopy.getName().isPresent()) {
+                setName(toCopy.name);
+            }
+
+            if (toCopy.getDescription().isPresent()) {
+                setDescription(toCopy.description);
+            }
+
+            if (toCopy.getGroupMembers().isPresent()) {
+                setGroupMembers(toCopy.memberList);
+            }
         }
 
         /**
@@ -144,6 +157,14 @@ public class EditGroupCommand extends Command {
             return Optional.ofNullable(description);
         }
 
+        public void setGroupMembers(List<Person> memberList) {
+            this.memberList = memberList;
+        }
+
+        public Optional<List<Person>> getGroupMembers() {
+            return Optional.ofNullable(memberList);
+        }
+
 
         @Override
         public boolean equals(Object other) {
@@ -161,7 +182,8 @@ public class EditGroupCommand extends Command {
             EditGroupDescriptor e = (EditGroupDescriptor) other;
 
             return getName().equals(e.getName())
-                    && getDescription().equals(e.getDescription());
+                    && getDescription().equals(e.getDescription())
+                    && getGroupMembers().equals(e.getGroupMembers());
         }
     }
 }

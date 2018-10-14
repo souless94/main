@@ -2,8 +2,11 @@ package seedu.address.testutil;
 
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
-import static seedu.address.testutil.TypicalPersons.BOB;
+import static seedu.address.testutil.TypicalPersons.CARL;
 import static seedu.address.testutil.TypicalPersons.DANIEL;
+import static seedu.address.testutil.TypicalPersons.ELLE;
+import static seedu.address.testutil.TypicalPersons.FIONA;
+import static seedu.address.testutil.TypicalPersons.GEORGE;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -21,12 +24,12 @@ public class TypicalGroups {
 
     public static final Group FAMILY = new GroupBuilder().withName("Family")
             .withDescription("Family Group")
-            .withMembers(new Person[]{ALICE, BOB, BENSON, DANIEL})
+            .withMembers(new Person[]{ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE})
             .build();
 
     public static final Group BESTFRIENDS = new GroupBuilder().withName("Best Friends")
             .withDescription("Best Friend Group")
-            .withMembers(new Person[]{ALICE, BOB, BENSON, DANIEL})
+            .withMembers(new Person[]{ALICE, BENSON, DANIEL})
             .build();
 
     public static final String KEYWORD_MATCHING_BEST = "Best"; // A keyword that matches best
@@ -39,10 +42,15 @@ public class TypicalGroups {
     public static AddressBook getTypicalAddressBook() {
         AddressBook ab = new AddressBook();
         ab.add(ALICE);
-        ab.add(BOB);
         ab.add(BENSON);
+        ab.add(CARL);
         ab.add(DANIEL);
+        ab.add(ELLE);
+        ab.add(FIONA);
+        ab.add(GEORGE);
+
         List<Person> samplePersons = Arrays.asList(SampleDataUtil.getSamplePersons());
+
         for (Person person : samplePersons) {
             ab.add(person);
         }

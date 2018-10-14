@@ -3,7 +3,7 @@ package seedu.address.model.group;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUP_DESCRIPTION;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUP_NAME_BESTFRIEND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUP_NAME_BOO;
 import static seedu.address.testutil.TypicalGroups.BESTFRIENDS;
 import static seedu.address.testutil.TypicalGroups.FAMILY;
 
@@ -41,11 +41,11 @@ public class GroupTest {
         assertTrue(FAMILY.isSame(editedFamily));
 
         // different name, same description, same group members -> returns false
-        editedFamily = new GroupBuilder(FAMILY).withName(VALID_GROUP_NAME_BESTFRIEND).build();
+        editedFamily = new GroupBuilder(FAMILY).withName(VALID_GROUP_NAME_BOO).build();
         assertFalse(FAMILY.isSame(editedFamily));
 
         // different name, different description, different group members -> returns false
-        editedFamily = new GroupBuilder(FAMILY).withName(VALID_GROUP_NAME_BESTFRIEND)
+        editedFamily = new GroupBuilder(FAMILY).withName(VALID_GROUP_NAME_BOO)
                 .withDescription(VALID_GROUP_DESCRIPTION)
                 .withSampleMembers().build();
         assertFalse(FAMILY.isSame(editedFamily));
@@ -75,11 +75,11 @@ public class GroupTest {
         assertTrue(FAMILY.equals(editedFamily));
 
         // different name, same description, same group members -> returns false
-        editedFamily = new GroupBuilder(FAMILY).withName(VALID_GROUP_NAME_BESTFRIEND).build();
+        editedFamily = new GroupBuilder(FAMILY).withName(VALID_GROUP_NAME_BOO).build();
         assertFalse(FAMILY.equals(editedFamily));
 
         // different name, different description, different group members -> returns false
-        editedFamily = new GroupBuilder(FAMILY).withName(VALID_GROUP_NAME_BESTFRIEND)
+        editedFamily = new GroupBuilder(FAMILY).withName(VALID_GROUP_NAME_BOO)
                 .withDescription(VALID_GROUP_DESCRIPTION)
                 .withSampleMembers().build();
         assertFalse(FAMILY.equals(editedFamily));
