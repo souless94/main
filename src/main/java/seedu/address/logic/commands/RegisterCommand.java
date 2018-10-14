@@ -12,10 +12,10 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.UniqueList;
+import seedu.address.model.exceptions.DuplicateElementException;
 import seedu.address.model.group.Group;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
-import seedu.address.model.exceptions.DuplicateElementException;
 
 /**
  * Adds an existing person to an existing group in the address book.

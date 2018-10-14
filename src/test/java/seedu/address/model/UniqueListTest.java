@@ -19,10 +19,10 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import seedu.address.model.group.Group;
-import seedu.address.model.person.Person;
 import seedu.address.model.exceptions.DuplicateElementException;
 import seedu.address.model.exceptions.NotFoundException;
+import seedu.address.model.group.Group;
+import seedu.address.model.person.Person;
 import seedu.address.testutil.GroupBuilder;
 import seedu.address.testutil.PersonBuilder;
 
