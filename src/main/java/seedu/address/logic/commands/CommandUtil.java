@@ -10,9 +10,15 @@ import seedu.address.model.group.Group;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 
+/**
+ * Contains helper methods for commands.
+ */
 public class CommandUtil {
 
-    public static Group retrieveGroupFromIndex (Model model, Name groupName) throws CommandException{
+    /**
+     * Retrieves the group with index in displayed Group list
+     */
+    public static Group retrieveGroupFromIndex (Model model, Name groupName) throws CommandException {
         // Make sure that group exists
         List<Group> lastShownList = model.getFilteredGroupList();
         Group groupToBeEdited = new Group(groupName, ""); //do not know description and groupMembers
@@ -24,6 +30,9 @@ public class CommandUtil {
         return lastShownList.get(lastShownList.indexOf(groupToBeEdited)); //retrieves original group
     }
 
+    /**
+     * Retrieves the person with index in displayed Group list
+     */
     public static Person retrievePersonFromIndex (Model model, Index targetIndex) throws CommandException {
         List<Person> lastShownList = model.getFilteredPersonList();
 
@@ -34,3 +43,4 @@ public class CommandUtil {
         return lastShownList.get(targetIndex.getZeroBased());
     }
 }
+
