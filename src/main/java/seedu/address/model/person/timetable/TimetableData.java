@@ -71,7 +71,12 @@ public class TimetableData {
         } else {
             String[] rows = timetableString.split("\n");
             for (int i = 0; i < getRows(); i++) {
+                // @@author souless94 -reused
+                // regex expression gotten from Achintya Jha in
+                // https://stackoverflow.com/questions/15738918/
+                // splitting-a-csv-file-with-quotes-as-text-delimiter-using-string-split
                 timetableMatrix[i] = rows[i].split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1);
+                // @@author
             }
             return timetableMatrix;
         }
