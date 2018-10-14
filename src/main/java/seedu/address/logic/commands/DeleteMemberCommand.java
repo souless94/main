@@ -12,7 +12,6 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.UniqueList;
-import seedu.address.model.exceptions.NotFoundException;
 import seedu.address.model.group.Group;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -20,22 +19,22 @@ import seedu.address.model.person.Person;
 /**
  * Delete an existing member of an existing group in the address book.
  */
-    public class DeleteMemberCommand extends Command {
+public class DeleteMemberCommand extends Command {
 
-        public static final String COMMAND_WORD = "delete_member";
+    public static final String COMMAND_WORD = "delete_member";
 
-        public static final String MESSAGE_USAGE = COMMAND_WORD + ": Delete an existing member of an existing group "
-                + "Parameters: INDEX of person in view_group (must be a positive integer)\n"
-                + "[" + PREFIX_NAME + " GROUP NAME]\n"
-                + "Example: " + COMMAND_WORD + " 1 "
-                + PREFIX_NAME + "Family ";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Delete an existing member of an existing group "
+            + "Parameters: INDEX of person in view_group (must be a positive integer)\n"
+            + "[" + PREFIX_NAME + " GROUP NAME]\n"
+            + "Example: " + COMMAND_WORD + " 1 "
+            + PREFIX_NAME + "Family ";
 
-        public static final String MISSING_GROUP_NAME = "Please enter group name.";
-        private static final String MESSAGE_EDIT_GROUP_SUCCESS = "Deleted member from group: %1$s";
-        private static final String NO_MEMBER_WITH_GIVEN_INDEX = "Please input the correct index of person to delete.";
+    public static final String MISSING_GROUP_NAME = "Please enter group name.";
+    private static final String MESSAGE_EDIT_GROUP_SUCCESS = "Deleted member from group: %1$s";
+    private static final String NO_MEMBER_WITH_GIVEN_INDEX = "Please input the correct index of person to delete.";
 
 
-        private final Index index;
+    private final Index index;
     private final Name groupName;
 
     /**
