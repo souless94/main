@@ -49,7 +49,6 @@ public class ModelManager extends ComponentManager implements Model {
 
     // timetable operations
 
-
     //group operations
     @Override
     public void deleteGroup(Group target) {
