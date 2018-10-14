@@ -61,7 +61,7 @@ public class DeleteCommandTest {
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS, personToDelete);
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.deletePerson(personToDelete);
+        expectedModel.delete(personToDelete);
         expectedModel.commitAddressBook();
         showNoPerson(expectedModel);
 
@@ -86,7 +86,7 @@ public class DeleteCommandTest {
         Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PERSON);
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.deletePerson(personToDelete);
+        expectedModel.delete(personToDelete);
         expectedModel.commitAddressBook();
 
         // delete -> first person deleted
@@ -128,7 +128,7 @@ public class DeleteCommandTest {
 
         showPersonAtIndex(model, INDEX_SECOND_PERSON);
         Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        expectedModel.deletePerson(personToDelete);
+        expectedModel.delete(personToDelete);
         expectedModel.commitAddressBook();
 
         // delete -> deletes second person in unfiltered person list / first person in filtered person list

@@ -114,34 +114,12 @@ public class AddCommandTest {
         }
 
         @Override
-        public void addPerson(Person person) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        // timetable operations
-
-        @Override
         public void resetData(ReadOnlyAddressBook newData) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public ReadOnlyAddressBook getAddressBook() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public boolean hasPerson(Person person) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void deletePerson(Person target) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void updatePerson(Person target, Person editedPerson) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -204,9 +182,12 @@ public class AddCommandTest {
         }
 
         @Override
-        public boolean hasPerson(Person person) {
-            requireNonNull(person);
-            return this.person.isSame(person);
+        public boolean has(Entity target) {
+            requireNonNull(target);
+            if (target instanceof Person) {
+                return this.person.isSame(target);
+            }
+            return false;
         }
     }
 
@@ -218,15 +199,20 @@ public class AddCommandTest {
         final ArrayList<Person> personsAdded = new ArrayList<>();
 
         @Override
-        public boolean hasPerson(Person person) {
-            requireNonNull(person);
-            return personsAdded.stream().anyMatch(person::isSame);
+        public boolean has(Entity target) {
+            requireNonNull(target);
+            if (target instanceof Person) {
+                return personsAdded.stream().anyMatch(target::isSame);
+            }
+            return false;
         }
 
         @Override
-        public void addPerson(Person person) {
-            requireNonNull(person);
-            personsAdded.add(person);
+        public void add(Entity target) {
+            requireNonNull(target);
+            if (target instanceof Person) {
+                personsAdded.add((Person) target);
+            }
         }
 
         @Override
