@@ -383,14 +383,14 @@ Format: `create u/USERNAME pw/PASSWORD`
 
 Examples:
 
-* `create u/iamgod pw/kamisama
+* `create u/username pw/dontUseWeakPassword`
 
 === login to an account : `login`
 Login into the system. +
 Format: `login u/USERNAME p/PASSWORD`
 Examples:
 
-* `login u/iamgod pw/kamisama`
+* `login u/username pw/dontUseWeakPassword`
 
 === Changing password: `update_pw `
 
