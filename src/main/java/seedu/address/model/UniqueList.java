@@ -8,8 +8,8 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.person.exceptions.DuplicatePersonException;
-import seedu.address.model.person.exceptions.PersonNotFoundException;
+import seedu.address.model.exceptions.DuplicateElementException;
+import seedu.address.model.exceptions.NotFoundException;
 
 /**
  * A generic list of type that extends from Entity class that enforces uniqueness between its elements
@@ -47,7 +47,7 @@ public class UniqueList<T extends Entity> implements Iterable<T> {
     public void add(T toAdd) {
         requireNonNull(toAdd);
         if (contains(toAdd)) {
-            throw new DuplicatePersonException();
+            throw new DuplicateElementException();
         }
         internalList.add(toAdd);
     }
@@ -62,11 +62,11 @@ public class UniqueList<T extends Entity> implements Iterable<T> {
 
         int index = internalList.indexOf(target);
         if (index == -1) {
-            throw new PersonNotFoundException();
+            throw new NotFoundException();
         }
 
         if (!target.isSame(edited) && contains(edited)) {
-            throw new DuplicatePersonException();
+            throw new DuplicateElementException();
         }
 
         internalList.set(index, edited);
@@ -79,7 +79,7 @@ public class UniqueList<T extends Entity> implements Iterable<T> {
     public void remove(T toRemove) {
         requireNonNull(toRemove);
         if (!internalList.remove(toRemove)) {
-            throw new PersonNotFoundException();
+            throw new NotFoundException();
         }
     }
 
@@ -95,7 +95,7 @@ public class UniqueList<T extends Entity> implements Iterable<T> {
     public void setElements(List<T> elements) {
         requireAllNonNull(elements);
         if (!elementsAreUnique(elements)) {
-            throw new DuplicatePersonException();
+            throw new DuplicateElementException();
         }
 
         internalList.setAll(elements);

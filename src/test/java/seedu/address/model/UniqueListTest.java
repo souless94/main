@@ -1,10 +1,11 @@
-package seedu.address.model.person;
+package seedu.address.model;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.testutil.TypicalGroups.FAMILY;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BOB;
 
@@ -16,16 +17,18 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import seedu.address.model.UniqueList;
-import seedu.address.model.person.exceptions.DuplicatePersonException;
-import seedu.address.model.person.exceptions.PersonNotFoundException;
+import seedu.address.model.group.Group;
+import seedu.address.model.person.Person;
+import seedu.address.model.exceptions.DuplicateElementException;
+import seedu.address.model.exceptions.NotFoundException;
 import seedu.address.testutil.PersonBuilder;
 
-public class UniquePersonListTest {
+public class UniqueListTest {
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
     private final UniqueList<Person> uniquePersonList = new UniqueList<>();
+    private final UniqueList<Group> uniqueGroupList = new UniqueList<>();
 
     @Test
     public void contains_nullPerson_throwsNullPointerException() {
@@ -34,8 +37,19 @@ public class UniquePersonListTest {
     }
 
     @Test
-    public void contains_personNotInList_returnsFalse() {
+    public void contains_nullGroup_throwsNullPointerException() {
+        thrown.expect(NullPointerException.class);
+        uniqueGroupList.contains(null);
+    }
+
+    @Test
+    public void contains_personNotInPersonList_returnsFalse() {
         assertFalse(uniquePersonList.contains(ALICE));
+    }
+
+    @Test
+    public void contains_groupNotInGroupList_returnsFalse() {
+        assertFalse(uniqueGroupList.contains(FAMILY));
     }
 
     @Test
@@ -59,9 +73,9 @@ public class UniquePersonListTest {
     }
 
     @Test
-    public void add_duplicatePerson_throwsDuplicatePersonException() {
+    public void add_duplicatePerson_throwsDuplicateElementException() {
         uniquePersonList.add(ALICE);
-        thrown.expect(DuplicatePersonException.class);
+        thrown.expect(DuplicateElementException.class);
         uniquePersonList.add(ALICE);
     }
 
@@ -78,8 +92,8 @@ public class UniquePersonListTest {
     }
 
     @Test
-    public void setPerson_targetPersonNotInList_throwsPersonNotFoundException() {
-        thrown.expect(PersonNotFoundException.class);
+    public void setPerson_targetPersonNotInList_throwsNotFoundException() {
+        thrown.expect(NotFoundException.class);
         uniquePersonList.setElement(ALICE, ALICE);
     }
 
@@ -113,10 +127,10 @@ public class UniquePersonListTest {
     }
 
     @Test
-    public void setPerson_editedPersonHasNonUniqueIdentity_throwsDuplicatePersonException() {
+    public void setPerson_editedPersonHasNonUniqueIdentity_throwsDuplicateElementException() {
         uniquePersonList.add(ALICE);
         uniquePersonList.add(BOB);
-        thrown.expect(DuplicatePersonException.class);
+        thrown.expect(DuplicateElementException.class);
         uniquePersonList.setElement(ALICE, BOB);
     }
 
@@ -127,8 +141,8 @@ public class UniquePersonListTest {
     }
 
     @Test
-    public void remove_personDoesNotExist_throwsPersonNotFoundException() {
-        thrown.expect(PersonNotFoundException.class);
+    public void remove_personDoesNotExist_throwsNotFoundException() {
+        thrown.expect(NotFoundException.class);
         uniquePersonList.remove(ALICE);
     }
 
@@ -172,9 +186,9 @@ public class UniquePersonListTest {
     }
 
     @Test
-    public void setPersons_listWithDuplicatePersons_throwsDuplicatePersonException() {
+    public void setPersons_listWithDuplicatePersons_throwsDuplicateElementException() {
         List<Person> listWithDuplicatePersons = Arrays.asList(ALICE, ALICE);
-        thrown.expect(DuplicatePersonException.class);
+        thrown.expect(DuplicateElementException.class);
         uniquePersonList.setElements(listWithDuplicatePersons);
     }
 

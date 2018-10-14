@@ -15,7 +15,7 @@ import seedu.address.model.UniqueList;
 import seedu.address.model.group.Group;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.exceptions.DuplicatePersonException;
+import seedu.address.model.exceptions.DuplicateElementException;
 
 /**
  * Adds an existing person to an existing group in the address book.
@@ -80,7 +80,7 @@ public class RegisterCommand extends Command {
             model.commitAddressBook();
             return new CommandResult(String.format(MESSAGE_EDIT_GROUP_SUCCESS, editedGroup));
 
-        } catch (DuplicatePersonException e) {
+        } catch (DuplicateElementException e) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
@@ -90,7 +90,7 @@ public class RegisterCommand extends Command {
      * Creates and returns a {@code group} with a new member {@code personToAdd}
      * in {@code groupToBeEdited}
      */
-    private static Group addMemberToGroup(Group groupToBeEdited, Person personToAdd) throws DuplicatePersonException {
+    private static Group addMemberToGroup(Group groupToBeEdited, Person personToAdd) throws DuplicateElementException {
         assert groupToBeEdited != null;
 
         UniqueList<Person> newGroupMembers = new UniqueList<>();
