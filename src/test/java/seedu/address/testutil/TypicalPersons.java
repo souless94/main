@@ -63,11 +63,7 @@ public class TypicalPersons {
      * Returns an {@code AddressBook} with all the typical persons.
      */
     public static AddressBook getTypicalAddressBook() {
-        AddressBook ab = new AddressBook();
-        for (Person person : getTypicalPersons()) {
-            ab.add(person);
-        }
-        return ab;
+        return TypicalGroups.getTypicalAddressBook();
     }
 
     public static List<Person> getTypicalPersons() {

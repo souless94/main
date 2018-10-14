@@ -1,7 +1,7 @@
 package seedu.address.logic.commands;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
@@ -25,7 +25,7 @@ class AddTimetableCommandTest {
     void execute_timetableAcceptedByModel_addNewHorizontalSuccess() {
         Person editedPerson = new PersonBuilder().build();
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(editedPerson).build();
-        AddTimetableCommand addTimetableCommand = new AddTimetableCommand(INDEX_FIRST_PERSON,
+        AddTimetableCommand addTimetableCommand = new AddTimetableCommand(INDEX_FIRST,
             descriptor);
         String expectedMessage = String
             .format(AddTimetableCommand.MESSAGE_ADD_TIMETABLE_SUCCESS, editedPerson);
