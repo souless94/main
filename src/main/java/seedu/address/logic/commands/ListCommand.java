@@ -9,6 +9,7 @@ import seedu.address.model.Model;
 
 /**
  * Lists all persons and groups in the address book to the user.
+ * #TODO: Edit User Guide list function
  */
 public class ListCommand extends Command {
 
