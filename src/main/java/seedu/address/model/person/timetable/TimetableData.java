@@ -221,7 +221,7 @@ public class TimetableData {
             if (!toWrite.exists()) {
                 toWrite.createNewFile();
                 FileWriter writer = new FileWriter(toWrite, true);
-                for (int i = 0; i < this.getRows() + 1; i++) {
+                for (int i = 0; i < this.getRows(); i++) {
                     for (int j = 0; j < this.getColumns(); j++) {
                         writer.append(this.timetable[i][j]);
                         writer.flush();

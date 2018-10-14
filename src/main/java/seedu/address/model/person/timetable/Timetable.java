@@ -52,7 +52,7 @@ public class Timetable extends Entity {
 
 
     public String getFormat() {
-        return format;
+        return this.format;
     }
 
     public TimetableData getTimetable() {

@@ -34,7 +34,7 @@ public class XmlAdaptedPerson {
     @XmlElement(required = true)
     private String address;
     @XmlElement(required = true)
-    private String format;
+    private String format = "horizontal";
 
     @XmlElement
     private List<XmlAdaptedTag> tagged = new ArrayList<>();
