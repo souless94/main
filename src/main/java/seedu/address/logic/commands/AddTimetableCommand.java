@@ -63,7 +63,8 @@ public class AddTimetableCommand extends Command {
         String filePath = personToEdit.getStoredLocation()
             + "/" + personToEdit.getName().toString()
             + " timetable";
-        File toRead = new File(filePath);
+        File toRead = new File(filePath
+            + index.getZeroBased() + ".csv");
         if (toRead.exists()) {
             Timetable timetable = new Timetable(filePath,
                 personToEdit.getFormat(), index.getZeroBased());
