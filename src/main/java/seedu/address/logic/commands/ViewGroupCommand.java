@@ -40,16 +40,7 @@ public class ViewGroupCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
-
-        // Make sure that group exists
-        List<Group> lastShownList = model.getFilteredGroupList();
-        Group group = new Group(groupName, ""); //do not know description and groupMembers
-
-        if (!lastShownList.contains(group)) {
-            throw new CommandException(Messages.MESSAGE_NO_MATCH_TO_EXISTING_GROUP);
-        }
-
-        group = lastShownList.get(lastShownList.indexOf(group)); //retrieves original group
+        Group group = CommandUtil.retrieveGroupFromIndex(model, groupName);
 
         model.updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
         return new CommandResult(MESSAGE_SUCCESS + group.printMembers());

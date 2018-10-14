@@ -53,24 +53,9 @@ public class RegisterCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
 
-        // Make sure that group exists
-        List<Group> lastShownList = model.getFilteredGroupList();
-        Group groupToBeEdited = new Group(groupName, ""); //do not know description and groupMembers
+        Group groupToBeEdited = CommandUtil.retrieveGroupFromIndex(model, groupName);
 
-        if (!lastShownList.contains(groupToBeEdited)) {
-            throw new CommandException(Messages.MESSAGE_NO_MATCH_TO_EXISTING_GROUP);
-        }
-
-        groupToBeEdited = lastShownList.get(lastShownList.indexOf(groupToBeEdited)); //retrieves original group
-
-        // Retrieves person from index
-        List<Person> lastShownPersonList = model.getFilteredPersonList();
-
-        if (index.getZeroBased() >= lastShownPersonList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-        }
-
-        Person personToAdd = lastShownPersonList.get(index.getZeroBased());
+        Person personToAdd = CommandUtil.retrievePersonFromIndex(model, index);
 
         try {
             Group editedGroup = addMemberToGroup(groupToBeEdited, personToAdd);

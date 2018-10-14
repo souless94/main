@@ -57,14 +57,7 @@ public class EditGroupCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
-        List<Group> lastShownList = model.getFilteredGroupList();
-        Group groupToBeEdited = new Group(oldName, ""); //do not know description and groupMembers
-
-        if (!lastShownList.contains(groupToBeEdited)) {
-            throw new CommandException(Messages.MESSAGE_NO_MATCH_TO_EXISTING_GROUP);
-        }
-
-        groupToBeEdited = lastShownList.get(lastShownList.indexOf(groupToBeEdited)); //retrieves original group
+        Group groupToBeEdited = CommandUtil.retrieveGroupFromIndex(model, oldName);
 
         Group editedGroup = createEditedGroup(groupToBeEdited, editGroupDescriptor);
 

@@ -22,4 +22,8 @@ public class ClearCommand extends Command {
         model.commitAddressBook();
         return new CommandResult(MESSAGE_SUCCESS);
     }
+
+    public static class CommandUtil {
+
+    }
 }
