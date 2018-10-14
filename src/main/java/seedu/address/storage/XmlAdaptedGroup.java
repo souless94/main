@@ -84,7 +84,7 @@ public class XmlAdaptedGroup {
         }
 
         final String modelDescription = description;
-        
+
         final UniqueList<Person> modelGroupMembers = new UniqueList<>();
         modelGroupMembers.setElements(groupMembers);
 
