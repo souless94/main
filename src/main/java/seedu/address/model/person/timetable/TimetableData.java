@@ -27,24 +27,8 @@ public class TimetableData {
 
 
     /**
-     * creates a timetable based on the format the user wants and timetable file user has
+     * uses format and timetableString to create a
      */
-    public TimetableData(String format, String filename, String storedLocation) {
-        this.format = format;
-        int noOfRows = 0;
-        int noOfColumns = 0;
-        if (format.equals("vertical")) {
-            noOfRows = noOfTimings;
-            noOfColumns = noOfDays;
-        } else if (format.equals("horizontal")) {
-            noOfRows = noOfDays;
-            noOfColumns = noOfTimings;
-        }
-        this.rows = noOfRows;
-        this.columns = noOfColumns;
-        this.timetable = getTimetableData(storedLocation + "/" + filename);
-    }
-
     public TimetableData(String format, String timetableString) {
         this.format = format;
         int noOfRows = 0;
@@ -59,6 +43,24 @@ public class TimetableData {
         this.rows = noOfRows;
         this.columns = noOfColumns;
         this.timetable = getTimetableFromString(timetableString);
+    }
+
+    public TimetableData(String format, String fileName, int index) {
+
+        this.format = format;
+        int noOfRows = 0;
+        int noOfColumns = 0;
+        if (format.equals("vertical")) {
+            noOfRows = noOfTimings;
+            noOfColumns = noOfDays;
+        } else if (format.equals("horizontal")) {
+            noOfRows = noOfDays;
+            noOfColumns = noOfTimings;
+        }
+        this.rows = noOfRows;
+        this.columns = noOfColumns;
+        String locationFrom = fileName + String.valueOf(index) + ".csv";
+        this.timetable = getTimetableData(locationFrom);
     }
 
     /**
@@ -95,7 +97,7 @@ public class TimetableData {
      *
      * @return string matrix of timetable in its format
      */
-    private String[][] getTimetableData(String storedLocation) {
+    public String[][] getTimetableData(String storedLocation) {
         String[][] timetableMatrix = createNewTimetable();
         timetableMatrix[0][0] = this.format;
         File toRead = new File(storedLocation);
@@ -205,10 +207,10 @@ public class TimetableData {
      *
      * @param locationTo location of where to save the file
      */
-    public void downloadTimetableData(String locationTo) {
+    public void downloadTimetableData(int index, String locationTo) {
         // Solution below adapted from bit-question
         // from https://stackoverflow.com/questions/6271796/issues-of-saving-a-matrix-to-a-csv-file
-        String filePath = locationTo;
+        String filePath = locationTo + String.valueOf(index) + ".csv";
         try {
             File toWrite = new File(filePath);
             if (!toWrite.exists()) {

@@ -1,7 +1,5 @@
 package seedu.address.model.person.timetable;
 
-import java.io.File;
-
 import seedu.address.model.Entity;
 
 /**
@@ -11,7 +9,6 @@ public class Timetable extends Entity {
 
     // Identity fields
     private final String fileName;
-    private final String storedLocation;
     private final String format;
     private final String timetableString;
 
@@ -20,21 +17,26 @@ public class Timetable extends Entity {
 
 
     /**
-     *
+     * Construct a timetable using the timetableString
+     */
+    public Timetable(String fileName, String format,
+        String timetableString) {
+        this.fileName = fileName + " timetable";
+        this.format = format;
+        this.matrix = new TimetableData(format, timetableString);
+        this.timetableString = getTimetableDataString();
+    }
+
+    /**
+     *   construct a timetable using a csv timetable file
      * @param fileName
      * @param format
+     * @param index
      */
-    public Timetable(String fileName, String format, String storedLocation,
-        String timetableString) {
-        this.fileName = fileName + ".csv";
+    public Timetable(String fileName, String format, int index) {
+        this.fileName = fileName;
         this.format = format;
-        this.storedLocation = storedLocation.replace("\\", "/");
-        File toRead = new File(this.storedLocation + "/" + this.fileName);
-        if (toRead.exists()) {
-            matrix = new TimetableData(format, this.fileName, this.storedLocation);
-        } else {
-            matrix = new TimetableData(format, timetableString);
-        }
+        this.matrix = new TimetableData(format, fileName, index);
         this.timetableString = getTimetableDataString();
     }
 
@@ -75,10 +77,6 @@ public class Timetable extends Entity {
         return timetableDataString;
     }
 
-    public String getStoredLocation() {
-        return this.storedLocation;
-    }
-
     public String getFormat() {
         return this.format;
     }
@@ -90,9 +88,9 @@ public class Timetable extends Entity {
     /**
      * download timetable to the given location
      */
-    public void downloadTimetable(String locationTo) {
-        String filePath = locationTo.replace("\\", "/") + "/" + this.fileName;
-        this.matrix.downloadTimetableData(filePath);
+    public void downloadTimetable(int index) {
+        String filepath = this.fileName;
+        this.matrix.downloadTimetableData(index, filepath);
     }
 
     @Override

@@ -3,6 +3,8 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
+import java.io.File;
+
 import java.util.List;
 import java.util.Set;
 
@@ -16,6 +18,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.timetable.Timetable;
 import seedu.address.model.tag.Tag;
 
 
@@ -57,18 +60,28 @@ public class AddTimetableCommand extends Command {
         }
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
-        Person updatedPerson = createUpdatedPerson(personToEdit);
-        model.updatePerson(personToEdit, updatedPerson);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        model.commitAddressBook();
-        return new CommandResult(String.format(MESSAGE_ADD_TIMETABLE_SUCCESS, updatedPerson));
+        String filePath = personToEdit.getStoredLocation()
+            + "/" + personToEdit.getName().toString()
+            + " timetable";
+        File toRead = new File(filePath);
+        if (toRead.exists()) {
+            Timetable timetable = new Timetable(filePath,
+                personToEdit.getFormat(), index.getZeroBased());
+            Person updatedPerson = createUpdatedPerson(personToEdit, timetable);
+            model.updatePerson(personToEdit, updatedPerson);
+            model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+            model.commitAddressBook();
+            return new CommandResult(String.format(MESSAGE_ADD_TIMETABLE_SUCCESS, updatedPerson));
+        } else {
+            throw new CommandException("timetable to be added is not found");
+        }
     }
 
     /**
      * it updates the timetableData of the person. Creates and returns a {@code Person} with the
      * details of {@code personToEdit}
      */
-    private static Person createUpdatedPerson(Person personToEdit) {
+    private static Person createUpdatedPerson(Person personToEdit, Timetable timetable) {
         assert personToEdit != null;
 
         Name updatedName = personToEdit.getName();
@@ -78,7 +91,7 @@ public class AddTimetableCommand extends Command {
         Set<Tag> updatedTags = personToEdit.getTags();
         String format = personToEdit.getFormat();
         String storedLocation = personToEdit.getStoredLocation();
-        String timetableString = personToEdit.getTimetable().getTimetableDataString();
+        String timetableString = timetable.getTimetableDataString();
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags,
             format, storedLocation, timetableString);
