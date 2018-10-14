@@ -37,7 +37,7 @@ public class DeleteGroupCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
         try {
-            model.deleteGroup(groupToBeDeleted);
+            model.delete(groupToBeDeleted);
             model.commitAddressBook();
             return new CommandResult(String.format(MESSAGE_SUCCESS, groupToBeDeleted));
         } catch (NotFoundException e) {

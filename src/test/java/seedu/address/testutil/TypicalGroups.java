@@ -38,17 +38,17 @@ public class TypicalGroups {
      */
     public static AddressBook getTypicalAddressBook() {
         AddressBook ab = new AddressBook();
-        ab.addPerson(ALICE);
-        ab.addPerson(BOB);
-        ab.addPerson(BENSON);
-        ab.addPerson(DANIEL);
+        ab.add(ALICE);
+        ab.add(BOB);
+        ab.add(BENSON);
+        ab.add(DANIEL);
         List<Person> samplePersons = Arrays.asList(SampleDataUtil.getSamplePersons());
         for (Person person : samplePersons) {
-            ab.addPerson(person);
+            ab.add(person);
         }
 
         for (Group group : getTypicalGroups()) {
-            ab.addGroup(group);
+            ab.add(group);
         }
         return ab;
     }

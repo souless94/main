@@ -57,7 +57,7 @@ public class RegisterCommand extends Command {
         try {
             Group editedGroup = addMemberToGroup(groupToBeEdited, personToAdd);
 
-            model.updateGroup(groupToBeEdited, editedGroup);
+            model.update(groupToBeEdited, editedGroup);
             model.updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
             model.commitAddressBook();
             return new CommandResult(String.format(MESSAGE_EDIT_GROUP_SUCCESS, editedGroup));

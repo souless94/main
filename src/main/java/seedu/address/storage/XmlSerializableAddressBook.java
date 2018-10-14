@@ -56,18 +56,18 @@ public class XmlSerializableAddressBook {
         AddressBook addressBook = new AddressBook();
         for (XmlAdaptedPerson p : persons) {
             Person person = p.toModelType();
-            if (addressBook.hasPerson(person)) {
+            if (addressBook.has(person)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
             }
-            addressBook.addPerson(person);
+            addressBook.add(person);
         }
 
         for (XmlAdaptedGroup g : groups) {
             Group group = g.toModelType();
-            if (addressBook.hasGroup(group)) {
+            if (addressBook.has(group)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_GROUP);
             }
-            addressBook.addGroup(group);
+            addressBook.add(group);
         }
         return addressBook;
     }

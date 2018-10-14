@@ -55,7 +55,7 @@ public class DeleteMemberCommand extends Command {
         try {
             Group editedGroup = deleteMemberFromGroup(groupToBeEdited, index);
 
-            model.updateGroup(groupToBeEdited, editedGroup);
+            model.update(groupToBeEdited, editedGroup);
             model.updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
             model.commitAddressBook();
             return new CommandResult(String.format(MESSAGE_EDIT_GROUP_SUCCESS, editedGroup));

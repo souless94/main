@@ -60,11 +60,11 @@ public class EditGroupCommand extends Command {
         Group editedGroup = createEditedGroup(groupToBeEdited, editGroupDescriptor);
 
 
-        if (!groupToBeEdited.isSame(editedGroup) && model.hasGroup(editedGroup)) {
+        if (!groupToBeEdited.isSame(editedGroup) && model.has(editedGroup)) {
             throw new CommandException(MESSAGE_DUPLICATE_GROUP);
         }
 
-        model.updateGroup(groupToBeEdited, editedGroup);
+        model.update(groupToBeEdited, editedGroup);
         model.updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
         model.commitAddressBook();
         return new CommandResult(String.format(MESSAGE_EDIT_GROUP_SUCCESS, editedGroup));

@@ -17,6 +17,7 @@ import javafx.collections.ObservableList;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
+import seedu.address.model.Entity;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.group.Group;
@@ -92,24 +93,23 @@ public class AddCommandTest {
      */
     private class ModelStub implements Model {
 
-        //group operation
         @Override
-        public void addGroup(Group group) {
+        public void add(Entity key) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void deleteGroup(Group target) {
+        public void delete(Entity key) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public boolean hasGroup(Group group) {
+        public boolean has(Entity key) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void updateGroup(Group target, Group editedGroup) {
+        public void update(Entity target, Entity edited) {
             throw new AssertionError("This method should not be called.");
         }
 

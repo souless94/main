@@ -83,7 +83,7 @@ public class AddTimetableCommand extends Command {
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
         Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
-        model.updatePerson(personToEdit, editedPerson);
+        model.update(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         model.commitAddressBook();
         return new CommandResult(String.format(MESSAGE_ADD_TIMETABLE_SUCCESS, editedPerson));
