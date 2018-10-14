@@ -11,7 +11,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Accounts;
 
 /**
- * Parses input arguments and creates a new AddCommand object
+ * Parses input arguments and creates a new CreateCommand object
  */
 public class CreateCommandParser {
 
@@ -25,10 +25,8 @@ public class CreateCommandParser {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_USERNAME, PREFIX_PASSWORD);
 
-
         String username = ParserUtil.parseUsername(argMultimap.getValue(PREFIX_USERNAME).get());
         String password = ParserUtil.parsePassword(argMultimap.getValue(PREFIX_PASSWORD).get());
-
 
         Accounts account = new Accounts(username, password);
 
