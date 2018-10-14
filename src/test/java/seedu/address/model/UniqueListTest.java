@@ -4,7 +4,9 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUP_DESCRIPTION;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.testutil.TypicalGroups.BESTFRIENDS;
 import static seedu.address.testutil.TypicalGroups.FAMILY;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BOB;
@@ -21,6 +23,7 @@ import seedu.address.model.group.Group;
 import seedu.address.model.person.Person;
 import seedu.address.model.exceptions.DuplicateElementException;
 import seedu.address.model.exceptions.NotFoundException;
+import seedu.address.testutil.GroupBuilder;
 import seedu.address.testutil.PersonBuilder;
 
 public class UniqueListTest {
@@ -59,6 +62,12 @@ public class UniqueListTest {
     }
 
     @Test
+    public void contains_groupInList_returnsTrue() {
+        uniqueGroupList.add(FAMILY);
+        assertTrue(uniqueGroupList.contains(FAMILY));
+    }
+
+    @Test
     public void contains_personWithSameIdentityFieldsInList_returnsTrue() {
         uniquePersonList.add(ALICE);
         Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
@@ -67,9 +76,22 @@ public class UniqueListTest {
     }
 
     @Test
+    public void contains_groupWithSameIdentityFieldsInList_returnsTrue() {
+        uniqueGroupList.add(FAMILY);
+        Group editedFamily = new GroupBuilder(FAMILY).withDescription(VALID_GROUP_DESCRIPTION).build();
+        assertTrue(uniqueGroupList.contains(editedFamily));
+    }
+
+    @Test
     public void add_nullPerson_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
         uniquePersonList.add(null);
+    }
+
+    @Test
+    public void add_nullGroup_throwsNullPointerException() {
+        thrown.expect(NullPointerException.class);
+        uniqueGroupList.add(null);
     }
 
     @Test
@@ -80,9 +102,22 @@ public class UniqueListTest {
     }
 
     @Test
+    public void add_duplicateGroup_throwsDuplicateElementException() {
+        uniqueGroupList.add(FAMILY);
+        thrown.expect(DuplicateElementException.class);
+        uniqueGroupList.add(FAMILY);
+    }
+
+    @Test
     public void setPerson_nullTargetPerson_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
         uniquePersonList.setElement(null, ALICE);
+    }
+
+    @Test
+    public void setGroup_nullTargetGroup_throwsNullPointerException() {
+        thrown.expect(NullPointerException.class);
+        uniqueGroupList.setElement(null, FAMILY);
     }
 
     @Test
@@ -92,10 +127,23 @@ public class UniqueListTest {
     }
 
     @Test
+    public void setGroup_nullEditedGroup_throwsNullPointerException() {
+        thrown.expect(NullPointerException.class);
+        uniqueGroupList.setElement(FAMILY, null);
+    }
+
+    @Test
     public void setPerson_targetPersonNotInList_throwsNotFoundException() {
         thrown.expect(NotFoundException.class);
         uniquePersonList.setElement(ALICE, ALICE);
     }
+
+    @Test
+    public void setGroup_targetGroupNotInList_throwsNotFoundException() {
+        thrown.expect(NotFoundException.class);
+        uniqueGroupList.setElement(FAMILY, FAMILY);
+    }
+
 
     @Test
     public void setPerson_editedPersonIsSamePerson_success() {
@@ -104,6 +152,15 @@ public class UniqueListTest {
         UniqueList<Person> expectedUniquePersonList = new UniqueList<>();
         expectedUniquePersonList.add(ALICE);
         assertEquals(expectedUniquePersonList, uniquePersonList);
+    }
+
+    @Test
+    public void setGroup_editedGroupIsSameGroup_success() {
+        uniqueGroupList.add(FAMILY);
+        uniqueGroupList.setElement(FAMILY, FAMILY);
+        UniqueList<Group> expectedUniqueGroupList = new UniqueList<>();
+        expectedUniqueGroupList.add(FAMILY);
+        assertEquals(expectedUniqueGroupList, uniqueGroupList);
     }
 
     @Test
@@ -118,12 +175,31 @@ public class UniqueListTest {
     }
 
     @Test
+    public void setGroup_editedGroupHasSameIdentity_success() {
+        uniqueGroupList.add(FAMILY);
+        Group editedFamily = new GroupBuilder(FAMILY).withDescription(VALID_GROUP_DESCRIPTION).build();
+        uniqueGroupList.setElement(FAMILY, editedFamily);
+        UniqueList<Group> expectedUniqueGroupList = new UniqueList<>();
+        expectedUniqueGroupList.add(editedFamily);
+        assertEquals(expectedUniqueGroupList, uniqueGroupList);
+    }
+
+    @Test
     public void setPerson_editedPersonHasDifferentIdentity_success() {
         uniquePersonList.add(ALICE);
         uniquePersonList.setElement(ALICE, BOB);
         UniqueList<Person> expectedUniquePersonList = new UniqueList<>();
         expectedUniquePersonList.add(BOB);
         assertEquals(expectedUniquePersonList, uniquePersonList);
+    }
+
+    @Test
+    public void setGroup_editedGroupHasDifferentIdentity_success() {
+        uniqueGroupList.add(FAMILY);
+        uniqueGroupList.setElement(FAMILY, BESTFRIENDS);
+        UniqueList<Group> expectedUniqueGroupList = new UniqueList<>();
+        expectedUniqueGroupList.add(BESTFRIENDS);
+        assertEquals(expectedUniqueGroupList, uniqueGroupList);
     }
 
     @Test
@@ -135,15 +211,35 @@ public class UniqueListTest {
     }
 
     @Test
+    public void setGroup_editedGroupHasNonUniqueIdentity_throwsDuplicateElementException() {
+        uniqueGroupList.add(FAMILY);
+        uniqueGroupList.add(BESTFRIENDS);
+        thrown.expect(DuplicateElementException.class);
+        uniqueGroupList.setElement(FAMILY, BESTFRIENDS);
+    }
+
+    @Test
     public void remove_nullPerson_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
         uniquePersonList.remove(null);
     }
 
     @Test
+    public void remove_nullGroup_throwsNullPointerException() {
+        thrown.expect(NullPointerException.class);
+        uniqueGroupList.remove(null);
+    }
+
+    @Test
     public void remove_personDoesNotExist_throwsNotFoundException() {
         thrown.expect(NotFoundException.class);
         uniquePersonList.remove(ALICE);
+    }
+
+    @Test
+    public void remove_groupDoesNotExist_throwsNotFoundException() {
+        thrown.expect(NotFoundException.class);
+        uniqueGroupList.remove(FAMILY);
     }
 
     @Test
@@ -155,9 +251,23 @@ public class UniqueListTest {
     }
 
     @Test
+    public void remove_existingGroup_removesGroup() {
+        uniqueGroupList.add(FAMILY);
+        uniqueGroupList.remove(FAMILY);
+        UniqueList<Person> expectedUniqueGroupList = new UniqueList<>();
+        assertEquals(expectedUniqueGroupList, uniqueGroupList);
+    }
+
+    @Test
     public void setPersons_nullUniquePersonList_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
         uniquePersonList.setElements((UniqueList<Person>) null);
+    }
+
+    @Test
+    public void setGroups_nullUniqueGroupList_throwsNullPointerException() {
+        thrown.expect(NullPointerException.class);
+        uniqueGroupList.setElements((UniqueList<Group>) null);
     }
 
     @Test
@@ -170,9 +280,24 @@ public class UniqueListTest {
     }
 
     @Test
+    public void setGroups_uniqueGroupList_replacesOwnListWithProvidedUniqueGroupList() {
+        uniqueGroupList.add(FAMILY);
+        UniqueList<Group> expectedUniqueGroupList = new UniqueList<>();
+        expectedUniqueGroupList.add(BESTFRIENDS);
+        uniqueGroupList.setElements(expectedUniqueGroupList);
+        assertEquals(expectedUniqueGroupList, uniqueGroupList);
+    }
+
+    @Test
     public void setPersons_nullList_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
         uniquePersonList.setElements((List<Person>) null);
+    }
+
+    @Test
+    public void setGroups_nullList_throwsNullPointerException() {
+        thrown.expect(NullPointerException.class);
+        uniqueGroupList.setElements((List<Group>) null);
     }
 
     @Test
@@ -186,6 +311,16 @@ public class UniqueListTest {
     }
 
     @Test
+    public void setGroups_list_replacesOwnListWithProvidedList() {
+        uniqueGroupList.add(FAMILY);
+        List<Group> groupList = Collections.singletonList(BESTFRIENDS);
+        uniqueGroupList.setElements(groupList);
+        UniqueList<Group> expectedUniqueGroupList = new UniqueList<>();
+        expectedUniqueGroupList.add(BESTFRIENDS);
+        assertEquals(expectedUniqueGroupList, uniqueGroupList);
+    }
+
+    @Test
     public void setPersons_listWithDuplicatePersons_throwsDuplicateElementException() {
         List<Person> listWithDuplicatePersons = Arrays.asList(ALICE, ALICE);
         thrown.expect(DuplicateElementException.class);
@@ -193,8 +328,21 @@ public class UniqueListTest {
     }
 
     @Test
-    public void asUnmodifiableObservableList_modifyList_throwsUnsupportedOperationException() {
+    public void setGroups_listWithDuplicateGroups_throwsDuplicateElementException() {
+        List<Group> listWithDuplicateGroups = Arrays.asList(FAMILY, FAMILY);
+        thrown.expect(DuplicateElementException.class);
+        uniqueGroupList.setElements(listWithDuplicateGroups);
+    }
+
+    @Test
+    public void asUnmodifiableObservableList_modifyPersonList_throwsUnsupportedOperationException() {
         thrown.expect(UnsupportedOperationException.class);
         uniquePersonList.asUnmodifiableObservableList().remove(0);
+    }
+
+    @Test
+    public void asUnmodifiableObservableList_modifyGroupList_throwsUnsupportedOperationException() {
+        thrown.expect(UnsupportedOperationException.class);
+        uniqueGroupList.asUnmodifiableObservableList().remove(0);
     }
 }
