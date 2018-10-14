@@ -10,11 +10,9 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Collections;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
-import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.CommandHistory;
@@ -89,7 +87,7 @@ public class EditCommand extends Command {
      * Creates and returns a {@code Person} with the details of {@code personToEdit} edited with
      * {@code editPersonDescriptor}.
      */
-    private static Person createEditedPerson(Person personToEdit,
+    public static Person createEditedPerson(Person personToEdit,
         EditPersonDescriptor editPersonDescriptor) {
         assert personToEdit != null;
 
@@ -98,9 +96,11 @@ public class EditCommand extends Command {
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress()
             .orElse(personToEdit.getAddress());
+        Timetable updatedTimetable = editPersonDescriptor.getTimetable()
+                .orElse(personToEdit.getTimetable());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, updatedTimetable);
     }
 
     @Override
