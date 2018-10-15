@@ -2,11 +2,8 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_GROUPS;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
@@ -62,11 +59,17 @@ public class DeleteCommand extends Command {
         model.delete(personToDelete);
 
         model.updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         model.commitAddressBook();
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, personToDelete));
     }
 
+    /**
+     *
+     * @param groupToBeEdited
+     * @param personToDelete
+     * @return updated group that has {@code personToDelete} deleted from its member list
+     * @throws CommandException
+     */
     public Group deleteMemberFromGroup(Group groupToBeEdited, Person personToDelete) throws CommandException {
         try {
             UniqueList<Person> newGroupMembers = new UniqueList<>();

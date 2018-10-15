@@ -99,7 +99,9 @@ public class Person extends Entity {
         return timetable;
     }
 
-    public List<Group> getGroups() { return groups.asUnmodifiableObservableList(); }
+    public List<Group> getGroups() {
+        return groups.asUnmodifiableObservableList();
+    }
 
     public void setGroups(List<Group> groupList) {
         this.groups = new UniqueList<>();
