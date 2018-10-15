@@ -1,8 +1,11 @@
 package seedu.address.logic.commands;
 
+import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+
+import java.io.File;
 
 import org.junit.jupiter.api.Test;
 
@@ -13,26 +16,27 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
 
-class AddTimetableCommandTest {
+class DownloadTimetableCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     private CommandHistory commandHistory = new CommandHistory();
 
     @Test
-    void execute_timetableAcceptedByModel_addSuccess() {
-        Person personToAddTimetable = model.getFilteredPersonList()
+    void downloadTimetableSuccess() {
+        Person personToDownloadTimetable = model.getFilteredPersonList()
             .get(INDEX_FIRST.getZeroBased());
-        personToAddTimetable.getTimetable().downloadTimetable(INDEX_FIRST.getZeroBased());
-        AddTimetableCommand addTimetableCommand = new AddTimetableCommand(INDEX_FIRST);
+        DownloadTimetableCommand downloadTimetableCommand = new DownloadTimetableCommand(
+            INDEX_FIRST);
         String expectedMessage = String
-            .format(AddTimetableCommand.MESSAGE_ADD_TIMETABLE_SUCCESS, personToAddTimetable);
+            .format(DownloadTimetableCommand.MESSAGE_DOWNLOAD_TIMETABLE_SUCCESS,
+                personToDownloadTimetable);
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
             new UserPrefs());
-
-        expectedModel.update(model.getFilteredPersonList().get(0), personToAddTimetable);
+        expectedModel.update(model.getFilteredPersonList().get(0), personToDownloadTimetable);
         expectedModel.commitAddressBook();
-        assertCommandSuccess(addTimetableCommand, model, commandHistory, expectedMessage,
+        assertCommandSuccess(downloadTimetableCommand, model, commandHistory, expectedMessage,
             expectedModel);
-    }
 
+        assertTrue(new File(personToDownloadTimetable.getStoredLocation()).exists());
+    }
 }

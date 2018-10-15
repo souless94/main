@@ -1,5 +1,7 @@
 package seedu.address.testutil;
 
+import java.io.File;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -22,11 +24,17 @@ public class PersonBuilder {
     public static final String DEFAULT_EMAIL = "alice@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_FORMAT = "horizontal";
-
+    public static final String DEFAULT_STORED_LOCATION =
+        new File("").getAbsolutePath().replace("\\", "/")
+            + "/data/timetable";
+    public static final String DEFAULT_TIMETABLE_STRING = "default";
     private Name name;
     private Phone phone;
     private Email email;
     private Address address;
+    private String format;
+    private String storedLocation;
+    private String timetableString;
     private Timetable timetable;
     private Set<Tag> tags;
 
@@ -35,7 +43,9 @@ public class PersonBuilder {
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
-        timetable = new Timetable(name.toString(), DEFAULT_FORMAT);
+        format = DEFAULT_FORMAT;
+        storedLocation = DEFAULT_STORED_LOCATION;
+        timetableString = DEFAULT_TIMETABLE_STRING;
         tags = new HashSet<>();
     }
 
@@ -47,7 +57,9 @@ public class PersonBuilder {
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
-        timetable = personToCopy.getTimetable();
+        format = personToCopy.getFormat();
+        storedLocation = personToCopy.getStoredLocation();
+        timetableString = personToCopy.getTimetable().getTimetableDataString();
         tags = new HashSet<>(personToCopy.getTags());
     }
 
@@ -60,10 +72,18 @@ public class PersonBuilder {
     }
 
     /**
-     * Sets the {@code timetable} of the {@code Person} that we are building.
+     * Sets the {@code format} of the {@code Person} that we are building.
      */
-    public PersonBuilder withTimetable(String format) {
-        this.timetable = new Timetable(this.name.toString(), format);
+    public PersonBuilder withformat(String format) {
+        this.format = format;
+        return this;
+    }
+
+    /**
+     * Sets the {@code storedLocation} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withStoredLocation(String storedLocation) {
+        this.storedLocation = storedLocation;
         return this;
     }
 
@@ -100,8 +120,12 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * @return a person
+     */
     public Person build() {
-        return new Person(name, phone, email, address, tags);
+        return new Person(name, phone, email, address, tags, format, storedLocation,
+            timetableString);
     }
 
 }

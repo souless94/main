@@ -25,8 +25,9 @@ import seedu.address.model.person.Person;
 import seedu.address.storage.XmlSerializableAddressBook;
 
 public class PersonListPanelTest extends GuiUnitTest {
+
     private static final ObservableList<Person> TYPICAL_PERSONS =
-            FXCollections.observableList(getTypicalPersons());
+        FXCollections.observableList(getTypicalPersons());
 
     private static final JumpToListRequestEvent JUMP_TO_SECOND_EVENT = new JumpToListRequestEvent(INDEX_SECOND);
 
@@ -62,8 +63,8 @@ public class PersonListPanelTest extends GuiUnitTest {
     }
 
     /**
-     * Verifies that creating and deleting large number of persons in {@code PersonListPanel} requires lesser than
-     * {@code CARD_CREATION_AND_DELETION_TIMEOUT} milliseconds to execute.
+     * Verifies that creating and deleting large number of persons in {@code PersonListPanel}
+     * requires lesser than {@code CARD_CREATION_AND_DELETION_TIMEOUT} milliseconds to execute.
      */
     @Test
     public void performanceTest() throws Exception {
@@ -72,6 +73,7 @@ public class PersonListPanelTest extends GuiUnitTest {
         assertTimeoutPreemptively(ofMillis(CARD_CREATION_AND_DELETION_TIMEOUT), () -> {
             initUi(backingList);
             guiRobot.interact(backingList::clear);
+
         }, "Creation and deletion of person cards exceeded time limit");
     }
 
@@ -82,12 +84,13 @@ public class PersonListPanelTest extends GuiUnitTest {
     private ObservableList<Person> createBackingList(int personCount) throws Exception {
         Path xmlFile = createXmlFileWithPersons(personCount);
         XmlSerializableAddressBook xmlAddressBook =
-                XmlUtil.getDataFromFile(xmlFile, XmlSerializableAddressBook.class);
+            XmlUtil.getDataFromFile(xmlFile, XmlSerializableAddressBook.class);
         return FXCollections.observableArrayList(xmlAddressBook.toModelType().getPersonList());
     }
 
     /**
-     * Returns a .xml file containing {@code personCount} persons. This file will be deleted when the JVM terminates.
+     * Returns a .xml file containing {@code personCount} persons. This file will be deleted when
+     * the JVM terminates.
      */
     private Path createXmlFileWithPersons(int personCount) throws Exception {
         StringBuilder builder = new StringBuilder();
@@ -99,7 +102,9 @@ public class PersonListPanelTest extends GuiUnitTest {
             builder.append("<phone>000</phone>\n");
             builder.append("<email>a@aa</email>\n");
             builder.append("<address>a</address>\n");
-            builder.append("<format>horizontal</format>");
+            builder.append("<format>horizontal</format>\n");
+            builder.append("<storedLocation>default</storedLocation>\n");
+            builder.append("<timetableString>default</timetableString>\n");
             builder.append("</persons>\n");
 
         }
@@ -113,14 +118,14 @@ public class PersonListPanelTest extends GuiUnitTest {
     }
 
     /**
-     * Initializes {@code personListPanelHandle} with a {@code PersonListPanel} backed by {@code backingList}.
-     * Also shows the {@code Stage} that displays only {@code PersonListPanel}.
+     * Initializes {@code personListPanelHandle} with a {@code PersonListPanel} backed by {@code
+     * backingList}. Also shows the {@code Stage} that displays only {@code PersonListPanel}.
      */
     private void initUi(ObservableList<Person> backingList) {
         PersonListPanel personListPanel = new PersonListPanel(backingList);
         uiPartRule.setUiPart(personListPanel);
 
         personListPanelHandle = new PersonListPanelHandle(getChildNode(personListPanel.getRoot(),
-                PersonListPanelHandle.PERSON_LIST_VIEW_ID));
+            PersonListPanelHandle.PERSON_LIST_VIEW_ID));
     }
 }

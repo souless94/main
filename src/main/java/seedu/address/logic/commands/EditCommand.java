@@ -23,7 +23,6 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.person.timetable.Timetable;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -96,11 +95,13 @@ public class EditCommand extends Command {
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress()
             .orElse(personToEdit.getAddress());
-        Timetable updatedTimetable = editPersonDescriptor.getTimetable()
-                .orElse(personToEdit.getTimetable());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+        String format = personToEdit.getFormat();
+        String storedLocation = personToEdit.getStoredLocation();
+        String timetableString = personToEdit.getTimetable().getTimetableDataString();
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, updatedTimetable);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags,
+            format, storedLocation, timetableString);
     }
 
     @Override
@@ -131,7 +132,8 @@ public class EditCommand extends Command {
         private Phone phone;
         private Email email;
         private Address address;
-        private Timetable timetable;
+        private String format;
+        private String storedLocation;
         private Set<Tag> tags;
 
         public EditPersonDescriptor() {
@@ -145,7 +147,8 @@ public class EditCommand extends Command {
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
             setAddress(toCopy.address);
-            setTimetable(toCopy.timetable);
+            setFormat(toCopy.format);
+            setStoredLocation(toCopy.storedLocation);
             setTags(toCopy.tags);
         }
 
@@ -157,12 +160,20 @@ public class EditCommand extends Command {
             return CollectionUtil.isAnyNonNull(name, phone, email, address, tags);
         }
 
-        public void setTimetable(Timetable timetable) {
-            this.timetable = timetable;
+        public void setStoredLocation(String storedLocation) {
+            this.storedLocation = storedLocation;
         }
 
-        public Optional<Timetable> getTimetable() {
-            return Optional.ofNullable(timetable);
+        public Optional<String> getStoredLocation() {
+            return Optional.ofNullable(storedLocation);
+        }
+
+        public void setFormat(String format) {
+            this.format = format;
+        }
+
+        public Optional<String> getFormat() {
+            return Optional.ofNullable(format);
         }
 
         public void setName(Name name) {

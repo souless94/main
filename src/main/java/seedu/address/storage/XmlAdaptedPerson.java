@@ -15,7 +15,6 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.person.timetable.Timetable;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -34,7 +33,11 @@ public class XmlAdaptedPerson {
     @XmlElement(required = true)
     private String address;
     @XmlElement(required = true)
-    private String format = "horizontal";
+    private String format;
+    @XmlElement(required = true)
+    private String storedLocation;
+    @XmlElement(required = true)
+    private String timetableString;
 
     @XmlElement
     private List<XmlAdaptedTag> tagged = new ArrayList<>();
@@ -48,13 +51,15 @@ public class XmlAdaptedPerson {
     /**
      * Constructs an {@code XmlAdaptedPerson} with the given person details.
      */
-    public XmlAdaptedPerson(String name, String phone, String email, String address, String format,
-        List<XmlAdaptedTag> tagged) {
+    public XmlAdaptedPerson(String name, String phone, String email, String address,
+        List<XmlAdaptedTag> tagged, String format, String storedLocation, String timetableString) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.format = format;
+        this.storedLocation = storedLocation;
+        this.timetableString = timetableString;
         if (tagged != null) {
             this.tagged = new ArrayList<>(tagged);
         }
@@ -70,7 +75,9 @@ public class XmlAdaptedPerson {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
-        format = source.getTimetable().getFormat();
+        format = source.getFormat();
+        storedLocation = source.getStoredLocation();
+        timetableString = source.getTimetable().getTimetableDataString();
         tagged = source.getTags().stream()
             .map(XmlAdaptedTag::new)
             .collect(Collectors.toList());
@@ -123,10 +130,9 @@ public class XmlAdaptedPerson {
             throw new IllegalValueException(Address.MESSAGE_ADDRESS_CONSTRAINTS);
         }
         final Address modelAddress = new Address(address);
-        final Timetable modelTimetable = new Timetable(modelName.toString(), format);
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags,
-            modelTimetable);
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags, format,
+            storedLocation, timetableString);
     }
 
     @Override
