@@ -5,6 +5,7 @@ import java.util.HashMap;
 import seedu.address.logic.security.Encrypt;
 
 //@@author aspiringdevslog
+
 /**
  * Storage of username and passwords
  */
@@ -32,7 +33,12 @@ public class UserAccountStorage {
      */
     public static boolean checkPasswordMatch(String username, String password) {
         String encryptedPassword = Encrypt.encryptString(password);
-        // TODO: remove this line, temporary to see output. System.out.print("Encrypted password: " + encryptedPassword + " User entered: " + password + " Stored in hashmap: " + userHashMap.get(username) + " Decrypted password: " + Encrypt.decryptString(userHashMap.get(username)));
+        /*
+        TODO: remove this line, temporary to see output.
+        System.out.print("Encrypted password: " + encryptedPassword +
+        " User entered: " + password + " Stored in hashmap: " + userHashMap.get(username) + " Decrypted password: "
+        + Encrypt.decryptString(userHashMap.get(username)));
+         */
         return userHashMap.get(username).equals(encryptedPassword);
     }
 
