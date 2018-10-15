@@ -417,7 +417,7 @@ Login into the system. +
 Format: `login u/USERNAME pw/PASSWORD`
 Examples:
 
-* `login u/sampleUser pw/dontUseWeakPassword`
+* `login u/username pw/dontUseWeakPassword`
 
 === Changing password: `update_pw `
 

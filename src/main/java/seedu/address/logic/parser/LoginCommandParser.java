@@ -10,6 +10,7 @@ import seedu.address.logic.commands.LoginCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Accounts;
 
+//@@author aspiringdevslog
 /**
  * Parses input arguments and creates a new AddCommand object
  */

@@ -1,5 +1,6 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PASSWORD;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_USERNAME;
@@ -10,12 +11,14 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Accounts;
 import seedu.address.storage.UserAccountStorage;
 
+//@@author aspiringdevslog
 /**
  * Creates a user for address book.
  */
 public class LoginCommand extends Command {
 
     public static final String COMMAND_WORD = "login";
+    private static boolean loginIsSuccessful = false;
 
     //TODO: update MESSAGE_USAGE
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the address book. "
@@ -27,8 +30,8 @@ public class LoginCommand extends Command {
             + PREFIX_USERNAME + "username "
             + PREFIX_PASSWORD + "password ";
 
-    public static final String MESSAGE_SUCCESS = "Login successful!";
-    public static final String MESSAGE_FAILURE = "Login failed!";
+    private static final String MESSAGE_SUCCESS = "Login successful!";
+    private static final String MESSAGE_FAILURE = "Login failed!";
     //TODO: throw exception message
 
     /**
@@ -36,14 +39,20 @@ public class LoginCommand extends Command {
      */
     public LoginCommand(Accounts account) {
         if (UserAccountStorage.checkPasswordMatch(account.getUsername(), account.getPassword())) {
-            System.out.println(MESSAGE_SUCCESS);
+            loginIsSuccessful = true;
         } else {
-            System.out.println(MESSAGE_FAILURE);
+            loginIsSuccessful = false;
         }
     }
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
-        return null;
+        requireNonNull(model);
+
+        if (loginIsSuccessful == true) {
+            return new CommandResult(String.format(MESSAGE_SUCCESS));
+        } else {
+            return new CommandResult(String.format(MESSAGE_FAILURE));
+        }
     }
 }
