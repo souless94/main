@@ -14,6 +14,7 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CreateCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.DeleteGroupCommand;
+import seedu.address.logic.commands.DeleteTimetableCommand;
 import seedu.address.logic.commands.DownloadTimetableCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditGroupCommand;
@@ -59,6 +60,9 @@ public class AddressBookParser {
         switch (commandWord) {
         case AddTimetableCommand.COMMAND_WORD:
             return new AddTimetableCommandParser().parse(arguments);
+
+        case DeleteTimetableCommand.COMMAND_WORD:
+            return new DeleteTimetableCommandParser().parse(arguments);
 
         case DownloadTimetableCommand.COMMAND_WORD:
             return new DownloadTimetableCommandParser().parse(arguments);

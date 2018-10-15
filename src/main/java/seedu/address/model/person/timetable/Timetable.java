@@ -9,39 +9,76 @@ public class Timetable extends Entity {
 
     // Identity fields
     private final String fileName;
-    private final String locationOfFile;
     private final String format;
+    private final String timetableString;
 
     // create timetable data
     private final TimetableData matrix;
 
 
     /**
-     *
+     * Construct a timetable using the timetableString
+     */
+    public Timetable(String fileName, String format,
+        String timetableString) {
+        this.fileName = fileName + " timetable";
+        this.format = format;
+        this.matrix = new TimetableData(format, timetableString);
+        this.timetableString = getTimetableDataString();
+    }
+
+    /**
+     *   construct a timetable using a csv timetable file
      * @param fileName
      * @param format
+     * @param index
      */
-    public Timetable(String fileName, String format, String locationFrom) {
-        this.fileName = fileName + ".csv";
+    public Timetable(String fileName, String format, int index) {
+        this.fileName = fileName;
         this.format = format;
-        locationOfFile = locationFrom.replace("\\", "/") + "/" + this.fileName;
-        matrix = new TimetableData(format, locationOfFile);
+        this.matrix = new TimetableData(format, fileName, index);
+        this.timetableString = getTimetableDataString();
     }
 
-    public Timetable(String fileName, String format) {
-        this.fileName = fileName + ".csv";
-        this.format = format;
-        locationOfFile = null;
-        matrix = new TimetableData(format);
+    /**
+     * @return a timetable String for the ui
+     */
+    public String getTimetableAsString() {
+        String timetableString = "";
+        String[][] timetableMatrix = this.matrix.getTimetable();
+        for (int i = 0; i < matrix.getRows(); i++) {
+            for (int j = 0; j < matrix.getColumns(); j++) {
+                if (i == matrix.getRows() - 1 && j == matrix.getColumns() - 1) {
+                    timetableString += timetableMatrix[i][j];
+                } else {
+                    timetableString += timetableMatrix[i][j] + ",";
+                }
+            }
+        }
+        return timetableString;
     }
 
-    public String getFileName() {
-        return fileName;
+    /**
+     * @return a timetable string for the xml storage
+     */
+    public String getTimetableDataString() {
+        String timetableDataString = "";
+        String[][] timetableMatrix = this.matrix.getTimetable();
+        for (int i = 0; i < matrix.getRows(); i++) {
+            for (int j = 0; j < matrix.getColumns(); j++) {
+                if (j == matrix.getColumns() - 1) {
+                    timetableDataString += timetableMatrix[i][j];
+                } else {
+                    timetableDataString += timetableMatrix[i][j] + ",";
+                }
+            }
+            timetableDataString += "\n";
+        }
+        return timetableDataString;
     }
-
 
     public String getFormat() {
-        return format;
+        return this.format;
     }
 
     public TimetableData getTimetable() {
@@ -51,9 +88,9 @@ public class Timetable extends Entity {
     /**
      * download timetable to the given location
      */
-    public void downloadTimetable(String locationTo) {
-        String filePath = locationTo.replace("\\", "/") + "/" + this.fileName;
-        this.matrix.downloadTimetableData(filePath);
+    public void downloadTimetable(int index) {
+        String filepath = this.fileName;
+        this.matrix.downloadTimetableData(index, filepath);
     }
 
     @Override
