@@ -316,7 +316,7 @@ Examples:
 === Locating group by name: `find_group`
 
 Find a group’s index whose names contain any of the given keywords +
-Format: `find_group   KEYWORD [MORE_KEYWORDS]`
+Format: `find_group KEYWORD [MORE_KEYWORDS]`
 
 ****
 * The search is case insensitive. e.g `hans` will match `Hans`
@@ -335,13 +335,11 @@ Returns any group having names `Betsy`, `Tim`, or `John`
 
 === Deleting a group : `delete_group`
 
-Delete a group in the system by index +
+Delete a group in the system by name +
 Format: `delete_group n/GROUPNAME `
 
 ****
-* Deletes the group at the specified `GROUPINDEX`.
-* The index refers to the index number shown in the displayed group list.
-* The index *must be a positive integer* 1, 2, 3, ...
+* Deletes the group with the specified `GROUPNAME`
 ****
 
 Examples:

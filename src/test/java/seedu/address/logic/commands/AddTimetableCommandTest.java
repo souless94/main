@@ -1,7 +1,7 @@
 package seedu.address.logic.commands;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
@@ -21,14 +21,15 @@ class AddTimetableCommandTest {
     @Test
     void execute_timetableAcceptedByModel_addSuccess() {
         Person personToAddTimetable = model.getFilteredPersonList()
-            .get(INDEX_FIRST_PERSON.getZeroBased());
-        personToAddTimetable.getTimetable().downloadTimetable(INDEX_FIRST_PERSON.getZeroBased());
-        AddTimetableCommand addTimetableCommand = new AddTimetableCommand(INDEX_FIRST_PERSON);
+            .get(INDEX_FIRST.getZeroBased());
+        personToAddTimetable.getTimetable().downloadTimetable(INDEX_FIRST.getZeroBased());
+        AddTimetableCommand addTimetableCommand = new AddTimetableCommand(INDEX_FIRST);
         String expectedMessage = String
             .format(AddTimetableCommand.MESSAGE_ADD_TIMETABLE_SUCCESS, personToAddTimetable);
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
             new UserPrefs());
-        expectedModel.updatePerson(model.getFilteredPersonList().get(0), personToAddTimetable);
+
+        expectedModel.update(model.getFilteredPersonList().get(0), personToAddTimetable);
         expectedModel.commitAddressBook();
         assertCommandSuccess(addTimetableCommand, model, commandHistory, expectedMessage,
             expectedModel);

@@ -50,7 +50,7 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code Name} of the {@code EditPersonDescriptor} that we are building.
+     * Sets the {@code Timetable} of the {@code EditPersonDescriptor} that we are building.
      */
     public EditPersonDescriptorBuilder withFormat(String format) {
         descriptor.setFormat(format);

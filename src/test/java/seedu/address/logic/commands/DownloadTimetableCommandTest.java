@@ -2,7 +2,7 @@ package seedu.address.logic.commands;
 
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.io.File;
@@ -24,15 +24,15 @@ class DownloadTimetableCommandTest {
     @Test
     void downloadTimetableSuccess() {
         Person personToDownloadTimetable = model.getFilteredPersonList()
-            .get(INDEX_FIRST_PERSON.getZeroBased());
+            .get(INDEX_FIRST.getZeroBased());
         DownloadTimetableCommand downloadTimetableCommand = new DownloadTimetableCommand(
-            INDEX_FIRST_PERSON);
+            INDEX_FIRST);
         String expectedMessage = String
             .format(DownloadTimetableCommand.MESSAGE_DOWNLOAD_TIMETABLE_SUCCESS,
                 personToDownloadTimetable);
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
             new UserPrefs());
-        expectedModel.updatePerson(model.getFilteredPersonList().get(0), personToDownloadTimetable);
+        expectedModel.update(model.getFilteredPersonList().get(0), personToDownloadTimetable);
         expectedModel.commitAddressBook();
         assertCommandSuccess(downloadTimetableCommand, model, commandHistory, expectedMessage,
             expectedModel);

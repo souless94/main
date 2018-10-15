@@ -24,56 +24,28 @@ public interface Model {
     ReadOnlyAddressBook getAddressBook();
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     * Deletes the given Entity which must exist in the address book.
+     * Uses Polymorphism to determine which method to call
      */
-    boolean hasPerson(Person person);
+    public void delete(Entity target);
 
     /**
-     * Deletes the given person.
-     * The person must exist in the address book.
+     * Adds the given Entity which must not have existed in the address book.
+     * Uses Polymorphism to determine which method to call
      */
-    void deletePerson(Person target);
+    public void add(Entity target);
 
     /**
-     * Adds the given person.
-     * {@code person} must not already exist in the address book.
+     * Return true if an Entity as the same identity exists in the address book.
+     * Uses Polymorphism to determine which method to call
      */
-    void addPerson(Person person);
-
-    //timetable operations
-
-
-    //Group operations
-    /**
-     * Returns true if a group with the same identity as {@code group} exists in the address book.
-     */
-    boolean hasGroup(Group group);
+    public boolean has(Entity target);
 
     /**
-     * Adds the given group.
-     * {@code group} must not already exist in the address book. - coming v1.2
+     * Updates the given Entity which must exist in the address book.
+     * Uses Polymorphism to determine which method to call
      */
-    public void addGroup(Group group);
-
-    /**
-     * Deletes the given group.
-     * The group must exist in the address book.
-     */
-    public void deleteGroup(Group target);
-
-    /**
-     * Replaces the given group {@code target} with {@code editedGroup}.
-     * {@code target} must exist in the address book.
-     * The group identity of {@code editedGroup} must not be the same as another existing group in the address book.
-     */
-    void updateGroup(Group target, Group editedGroup);
-
-    /**
-     * Replaces the given person {@code target} with {@code editedPerson}.
-     * {@code target} must exist in the address book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
-     */
-    void updatePerson(Person target, Person editedPerson);
+    public void update(Entity target, Entity edited);
 
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();

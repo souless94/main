@@ -35,7 +35,7 @@ public class AddGroupCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
-        model.addGroup(newGroup);
+        model.add(newGroup);
         model.commitAddressBook();
         return new CommandResult(String.format(MESSAGE_SUCCESS, newGroup));
     }

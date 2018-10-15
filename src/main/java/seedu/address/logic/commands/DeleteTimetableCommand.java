@@ -5,10 +5,8 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.io.File;
 
-import java.util.List;
 import java.util.Set;
 
-import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -46,13 +44,8 @@ public class DeleteTimetableCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
+        Person personToDeleteTimetable = CommandUtil.retrievePersonFromIndex(model, index);
 
-        if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-        }
-
-        Person personToDeleteTimetable = lastShownList.get(index.getZeroBased());
         File toBeDeleted = new File(
             personToDeleteTimetable.getStoredLocation()
                 + "/"
@@ -61,7 +54,7 @@ public class DeleteTimetableCommand extends Command {
             toBeDeleted.delete();
         }
         Person updatedPerson = createPersonWithNewTimetable(personToDeleteTimetable);
-        model.updatePerson(personToDeleteTimetable, updatedPerson);
+        model.update(personToDeleteTimetable, updatedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         model.commitAddressBook();
         return new CommandResult(String.format(MESSAGE_DELETE_TIMETABLE_SUCCESS, updatedPerson));

@@ -17,8 +17,8 @@ import seedu.address.model.person.Person;
 
 
 /**
- * Represents the in-memory model of the address book data. #TO DO: Refactor methods: hasPerson -->
- * hasElements () {calls has method in Person / Group/ etc} and Group/Person
+ * Represents the in-memory model of the address book data.
+ * Uses Polymorphism Uses Polymorphism to determine which method to call
  */
 public class ModelManager extends ComponentManager implements Model {
 
@@ -47,33 +47,30 @@ public class ModelManager extends ComponentManager implements Model {
         this(new AddressBook(), new UserPrefs());
     }
 
-    // timetable operations
-
-
-    //group operations
     @Override
-    public void deleteGroup(Group target) {
-        versionedAddressBook.removeGroup(target);
+    public void delete(Entity target) {
+        versionedAddressBook.remove(target);
         indicateAddressBookChanged();
     }
 
     @Override
-    public void addGroup(Group group) {
-        versionedAddressBook.addGroup(group);
+    public void add(Entity target) {
+        versionedAddressBook.add(target);
+        //updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         indicateAddressBookChanged();
     }
 
     @Override
-    public boolean hasGroup(Group group) {
-        requireNonNull(group);
-        return versionedAddressBook.hasGroup(group);
+    public boolean has(Entity target) {
+        requireNonNull(target);
+        return versionedAddressBook.has(target);
     }
 
     @Override
-    public void updateGroup(Group target, Group editedGroup) {
-        requireAllNonNull(target, editedGroup);
+    public void update(Entity target, Entity edited) {
+        requireAllNonNull(target, edited);
 
-        versionedAddressBook.updateGroup(target, editedGroup);
+        versionedAddressBook.update(target, edited);
         indicateAddressBookChanged();
     }
 
@@ -93,33 +90,6 @@ public class ModelManager extends ComponentManager implements Model {
      */
     private void indicateAddressBookChanged() {
         raise(new AddressBookChangedEvent(versionedAddressBook));
-    }
-
-    @Override
-    public boolean hasPerson(Person person) {
-        requireNonNull(person);
-        return versionedAddressBook.hasPerson(person);
-    }
-
-    @Override
-    public void deletePerson(Person target) {
-        versionedAddressBook.removePerson(target);
-        indicateAddressBookChanged();
-    }
-
-    @Override
-    public void addPerson(Person person) {
-        versionedAddressBook.addPerson(person);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        indicateAddressBookChanged();
-    }
-
-    @Override
-    public void updatePerson(Person target, Person editedPerson) {
-        requireAllNonNull(target, editedPerson);
-
-        versionedAddressBook.updatePerson(target, editedPerson);
-        indicateAddressBookChanged();
     }
 
     //=========== Filtered Person/Group List Accessors =============================================================
