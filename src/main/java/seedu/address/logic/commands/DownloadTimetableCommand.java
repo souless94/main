@@ -49,7 +49,7 @@ public class DownloadTimetableCommand extends Command {
 
         Person personToDownloadTimetable = lastShownList.get(index.getZeroBased());
         Timetable timetable = personToDownloadTimetable.getTimetable();
-        timetable.downloadTimetable(index.getZeroBased());
+        timetable.downloadTimetable();
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         model.commitAddressBook();
         return new CommandResult(String.format(MESSAGE_DOWNLOAD_TIMETABLE_SUCCESS));
