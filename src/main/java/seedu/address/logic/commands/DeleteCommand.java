@@ -1,13 +1,21 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_GROUPS;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
+import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.UniqueList;
+import seedu.address.model.exceptions.NotFoundException;
+import seedu.address.model.group.Group;
 import seedu.address.model.person.Person;
 
 /**
@@ -44,9 +52,32 @@ public class DeleteCommand extends Command {
         if (timetableToBeDeleted.exists()) {
             timetableToBeDeleted.delete();
         }
+
+        for (Group group : personToDelete.getGroups()) {
+            Group groupToUpdate = CommandUtil.retrieveGroupFromName(model, group.getName());
+            groupToUpdate = deleteMemberFromGroup(groupToUpdate, personToDelete);
+            model.update(group, groupToUpdate);
+        }
+
         model.delete(personToDelete);
+
+        model.updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         model.commitAddressBook();
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, personToDelete));
+    }
+
+    public Group deleteMemberFromGroup(Group groupToBeEdited, Person personToDelete) throws CommandException {
+        try {
+            UniqueList<Person> newGroupMembers = new UniqueList<>();
+            newGroupMembers.setElements(groupToBeEdited.getGroupMembers());
+
+            newGroupMembers.remove(personToDelete);
+
+            return new Group(groupToBeEdited.getName(), groupToBeEdited.getDescription(), newGroupMembers);
+        } catch (NotFoundException e) {
+            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        }
     }
 
     @Override

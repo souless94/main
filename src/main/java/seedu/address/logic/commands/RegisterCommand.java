@@ -70,7 +70,7 @@ public class RegisterCommand extends Command {
             model.updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
             model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
             model.commitAddressBook();
-            return new CommandResult(String.format(MESSAGE_EDIT_GROUP_SUCCESS, editedGroup));
+            return new CommandResult(String.format(MESSAGE_EDIT_GROUP_SUCCESS, updatedPersonToAdd));
 
         } catch (DuplicateElementException e) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
@@ -88,8 +88,9 @@ public class RegisterCommand extends Command {
             throws DuplicateElementException {
         assert groupToBeEdited != null;
 
-        List<Group> groupList = new ArrayList<>(personToAdd.getGroups());
+        List<Group> groupList = new ArrayList<>();
         groupList.add(groupToBeEdited);
+        groupList.addAll(personToAdd.getGroups());
         personToAdd.setGroups(groupList);
 
         UniqueList<Person> newGroupMembers = new UniqueList<>();
