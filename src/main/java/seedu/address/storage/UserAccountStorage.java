@@ -2,6 +2,10 @@ package seedu.address.storage;
 
 import java.util.HashMap;
 
+import seedu.address.logic.security.Encrypt;
+
+//@@author aspiringdevslog
+
 /**
  * Storage of username and passwords
  */
@@ -12,12 +16,30 @@ public class UserAccountStorage {
     public UserAccountStorage() {
     }
 
+    /**
+     * @param username
+     * @param password
+     */
+
     public static void addNewAccount(String username, String password) {
-        userHashMap.put(username, password);
+        String encryptedPassword = Encrypt.encryptString(password);
+        userHashMap.put(username, encryptedPassword);
     }
 
+    /**
+     * @param username
+     * @param password
+     * @return
+     */
     public static boolean checkPasswordMatch(String username, String password) {
-        return userHashMap.get(username).equals(password);
+        String encryptedPassword = Encrypt.encryptString(password);
+        /*
+        TODO: remove this line, temporary to see output.
+        System.out.print("Encrypted password: " + encryptedPassword +
+        " User entered: " + password + " Stored in hashmap: " + userHashMap.get(username) + " Decrypted password: "
+        + Encrypt.decryptString(userHashMap.get(username)));
+         */
+        return userHashMap.get(username).equals(encryptedPassword);
     }
 
     public static boolean checkDuplicateUser(String username) {
