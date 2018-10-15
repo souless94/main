@@ -24,7 +24,7 @@ NUS Hangs is for those who *Wants to find a convenient time slot for the people 
 
 .  Ensure you have Java version `9` or later installed in your Computer.
 .  Download the latest `addressbook.jar` link:{repoURL}/releases[here].
-.  Copy the file to the folder you want to use as the home folder for Erium.
+.  Copy the file to the folder you want to use as the home folder for Nus Hangs.
 .  Double-click the file to start the app. The GUI should appear in a few seconds.
 +
 image::Ui.png[width="790"]
@@ -69,40 +69,51 @@ Address book data are saved in the hard disk automatically after any command tha
 There is no need to save manually.
 
 == Friends(Zhi Wei)
-=== Adding a person: `add_friend`
+=== Adding a person: `add`
 
-Adds a person in the system,if there is index of timetable, it will add the person with the timetable or If there is a text file given, it will iterate over the text file and add all the person and add the respective their timetables if available. +
-Format: `add_friend n/NAME_OF_FRIEND [t/TEXT_FILE l/TEXT_FILE_LOCATION] [i/INDEX_OF_TIMETABLE]`
+Adds a person to the address book +
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...`
+
+[TIP]
+A person can have any number of tags (including 0)
 
 Examples:
 
-* `add u/Damith C. Rajapakse [i/1] [t/friends.txt l/C://Users/abc/mysecretstash]`
+* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
+* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
 
-=== Listing all friends : `list_friends`
+=== Listing all persons : `list`
 
-Shows a list of all friends with their timetable indexes if they have . +
-Format: `list_friends`
+Shows a list of all persons in the address book. +
+Format: `list`
 
-=== Editing a friend : `edit_friend`
+=== Editing a person : `edit`
 
-Edit a friend’s name, updates a timetable by uploading a new timetable by the index and deletes the current timetable the friend have. If there is no input for the new name, system will keep the old name +
-Format: `edit_friend [n/NEW_NAME] i/INDEX_OF_FRIEND [t/TIMETABLE_INDEX]`
+Edits an existing person in the address book. +
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [f/FORMAT]
+[sl/STORED_LOCATION] [dl/DOWNLOAD_LOCATION] [t/TAG]...`
 
 ****
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index *must be a positive integer* 1, 2, 3, ...
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
+* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
+* You can remove all the person's tags by typing `t/` without specifying any tags after it.
 ****
 
 Examples:
 
-* `edit_friend [n/iamgod] i/1 [t/1] ` +
+* `edit 1 p/91234567 e/johndoe@example.com` +
+Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
+* `edit 2 n/Betsy Crower t/` +
+Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+* `edit 1 f/vertical sl/C:\Users\admin\Downloads\cs2103\tiredAndSadness` +
+Edits the format and stored location of the 1st person to be `vertical` and `C:/Users/admin/Downloads/cs2103/tiredAndSadness/` respectively.
 
+=== Locating persons by name: `find`
 
-=== Locating friend by name: `find_friend`
-
-Find a friend’s index whose names contain any of the given keywords +
-Format: `find_friend  KEYWORD [MORE_KEYWORDS]`
+Finds persons whose names contain any of the given keywords. +
+Format: `find KEYWORD [MORE_KEYWORDS]`
 
 ****
 * The search is case insensitive. e.g `hans` will match `Hans`
@@ -119,31 +130,111 @@ Returns `john` and `John Doe`
 * `find Betsy Tim John` +
 Returns any person having names `Betsy`, `Tim`, or `John`
 
-=== Deleting a person : `delete_friend`
+=== Deleting a person : `delete`
 
-Delete a friend in the system by index +
-Format: `delete i/INDEX_OF_FRIEND `
+Deletes the specified person from the address book. +
+Format: `delete INDEX`
 
 ****
-* Deletes the person at the specified `INDEX_OF_FRIEND`.
+* Deletes the person at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list.
 * The index *must be a positive integer* 1, 2, 3, ...
 ****
 
 Examples:
 
-* `list_friend` +
-`delete_friend 2` +
+* `list` +
+`delete 2` +
 Deletes the 2nd person in the address book.
 * `find Betsy` +
 `delete 1` +
-Deletes the 1st person in the results of the `find_friend` command.
+Deletes the 1st person in the results of the `find` command.
 
+=== Selecting a person : `select`
 
-=== Clearing all entries : `clear_friend`
+Selects the person identified by the index number used in the displayed person list. +
+Format: `select INDEX`
 
-Clears all friends from the System. +
+****
+* Selects the person and loads the Google search page the person at the specified `INDEX`.
+* The index refers to the index number shown in the displayed person list.
+* The index *must be a positive integer* `1, 2, 3, ...`
+****
+
+Examples:
+
+* `list` +
+`select 2` +
+Selects the 2nd person in the address book.
+* `find Betsy` +
+`select 1` +
+Selects the 1st person in the results of the `find` command.
+
+=== Listing entered commands : `history`
+
+Lists all the commands that you have entered in reverse chronological order. +
+Format: `history`
+
+[NOTE]
+====
+Pressing the kbd:[&uarr;] and kbd:[&darr;] arrows will display the previous and next input respectively in the command box.
+====
+
+// tag::undoredo[]
+=== Undoing previous command : `undo`
+
+Restores the address book to the state before the previous _undoable_ command was executed. +
+Format: `undo`
+
+[NOTE]
+====
+Undoable commands: those commands that modify the address book's content (`add`, `delete`, `edit` and `clear`).
+====
+
+Examples:
+
+* `delete 1` +
+`list` +
+`undo` (reverses the `delete 1` command) +
+
+* `select 1` +
+`list` +
+`undo` +
+The `undo` command fails as there are no undoable commands executed previously.
+
+* `delete 1` +
+`clear` +
+`undo` (reverses the `clear` command) +
+`undo` (reverses the `delete 1` command) +
+
+=== Redoing the previously undone command : `redo`
+
+Reverses the most recent `undo` command. +
+Format: `redo`
+
+Examples:
+
+* `delete 1` +
+`undo` (reverses the `delete 1` command) +
+`redo` (reapplies the `delete 1` command) +
+
+* `delete 1` +
+`redo` +
+The `redo` command fails as there are no `undo` commands executed previously.
+
+* `delete 1` +
+`clear` +
+`undo` (reverses the `clear` command) +
+`undo` (reverses the `delete 1` command) +
+`redo` (reapplies the `delete 1` command) +
+`redo` (reapplies the `clear` command) +
+// end::undoredo[]
+
+=== Clearing all entries : `clear`
+
+Clears all entries from the address book. +
 Format: `clear`
+
 
 === List all groups friend is in : `grouplist`
 
@@ -152,72 +243,41 @@ Format: `grouplist`
 
 == Timetable(Wen Kai)
 === Adding a timetable: `add_timetable`
-
-Add a timetable in the form of csv to the System, if there is no link input we add the timetable via the filename of the csv file and file location. Format of the timetable has to be specified in mode. +
-Format: `add_timetable n/NAME [f/FILENAME l/FILE_LOCATION]/\ [o/link] m/MODE`
-
-Examples:
-
-* `add_timetable n/mytimetable f/mytimetable l/C://Users/abc/mysecretstash m/horizontal`
-
-=== Generate a new timetable: `new_timetable`
-
-Generate a new timetable in the form of a csv file to a desired folder in horizontal format or vertical format depending on the mode. +
-Format: `new_timetable n/NAME f/FILENAME l/FILE_LOCATION m/MODE`
-
-Examples:
-
-* `new_timetable n/mytimetable f/mytimetable l/C://Users/abc/mysecretstash`
-
-
-=== Listing all timetable: `list_timetables`
-
-Shows a list of all timetable with their indexes . +
-Format: `list_timetables`
-
-=== Download timetable : `download_timetable`
-
-Download a timetable in the System as a png file or csv file in preferred mode if no mode is selected, default is horizontal mode.+
-Format: `download_timetable i/TIMETABLE_INDEX p/PASSWORD o/FILE_OPTION l/DOWNLOAD_FILE_LOCATION [m/MODE]`
+add a timetable from the stored folder in NUS Hangs +
+Format: `add_timetable INDEX `
 
 ****
-* Download the timetable at the specified `TIMETABLE_INDEX`.
-* The index refers to the index number shown in the displayed timetable list.
+* Add the timetable at the specified `INDEX`.
+* The index refers to the index number shown in the displayed person list.
 * The index *must be a positive integer* 1, 2, 3, ...
 ****
 
 Examples:
 
-* `download_timetable i/1 p/kamisama o/png m/vertical l/C://Users/abc/mysecretstash ` +
+* `add_timetable 1`
 
+=== Download timetable : `download_timetable`
 
-=== Locating a timetable by name: `find_timetable`
-
-Find a timetable’s index whose names contain any of the given keywords +
-Format: `find_timetable  KEYWORD [MORE_KEYWORDS]`
+Download a timetable in the System as a png file or csv file in the format of the person.+
+Format: `download_timetable INDEX p/PASSWORD `
 
 ****
-* The search is case insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* Download the timetable at the specified `INDEX`.
+* The index refers to the index number shown in the displayed person list.
+* The index *must be a positive integer* 1, 2, 3, ...
 ****
 
 Examples:
 
-* `find_timetable John` +
-Returns `john` and `John Doe`
-* `find_timetable Betsy Tim John` +
-Returns any timetable having names `Betsy`, `Tim`, or `John`
+* `download_timetable 1 p/password` +
 
 === Deleting a timetable : `delete_timetable`
 
 Delete a timetable in the system by index +
-Format: `delete_timetable p/PASSWORD i/TIMETABLE_INDEX  `
+Format: `delete_timetable INDEX p/password`
 
 ****
-* Deletes the timetable at the specified `TIMETABLE_INDEX`.
+* Deletes the timetable at the specified `INDEX`.
 * The index refers to the index number shown in the displayed timetable list.
 * The index *must be a positive integer* 1, 2, 3, ...
 ****
@@ -225,67 +285,38 @@ Format: `delete_timetable p/PASSWORD i/TIMETABLE_INDEX  `
 Examples:
 
 * `list_timetable` +
-`delete_timetable 2` +
+`delete_timetable 2 p/password` +
 Deletes the 2nd timetable in the address book.
 * `find_timetable Betsy` +
-`delete 1` +
+`delete_timetable 1 p/password` +
 Deletes the 1st timetable in the results of the `find_timetable` command.
-
-=== view timetable : `view_timetable`
-
-Shows timetable of the given timetable index in horizontal or vertical mode if no mode is selected, default is horizontal mode.+
-Format: `view_timetable i/1 [m/MODE]`
-
-****
-* view the timetable at the specified `TIMETABLE_INDEX`.
-* The index refers to the index number shown in the displayed timetable list.
-* The index *must be a positive integer* 1, 2, 3, ...
-****
-
-Examples:
-
-* `view i/1 m/horizontal` +
-
-=== Clearing all timetable entries : `clear_timetable`
-
-Clears all timetable from the System. +
-Format: `clear_timetable`
 
 == Groups (Melodies)
 === Adding a group: `add_group`
 
-Make a group in the System, status is set as open. +
-Format: `add_group g/GROUPNAME d/GROUPDESCRIPTION m/MAXNUMBEROFPEOPLE`
+Add a group to the System +
+Format: add_group n/GROUPNAME d/GROUPDESCRIPTION `
 
 Examples:
 
-* `add_group g/happyfriends d/a group of happy friends m/3 `
+* `add_group n/happyfriends d/a group of happy friends`
 
-===	Listing all Groups : `list_groups`
+=== Editing a group : `edit_group`
 
-Shows a list of all groups, along with their details. +
-Format: `list_groups`
+Edit a group's details. There must be at least 1 field non-empty. +
+If field is empty, system assumes that the field remains unedited.
 
-=== Editing a friend : `edit_group`
-
-Edit a group you created in the System for the creator of the group. If there is no new input, the system will assume the old data (group name,group description,max number of people), there is only open/closed for status, closed status means you cannot add friend to the group +
-Format: `edit_group i/GROUPINDEX [g/NEWGROUPNAME] [d/NEWGROUPDESCRIPTION] [m/NEWMAXNUMBEROFPEOPLE]  [s/STATUS]`
-
-****
-* Edits the group at the specified `INDEX_OF_GROUP`. The index refers to the index number shown in the displayed group list. The index *must be a positive integer* 1, 2, 3, ...
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-****
+Format: `edit_group OLDGROUPNAME [n/NEWGROUPNAME] [d/NEWGROUPDESCRIPTION]`
 
 Examples:
 
-* `edit_group i/1 g/sadfriends d/sad because of cs2103 s/closed ` +
-
+* `edit_group happyfriends n/sadfriends d/sad because of cs2103` +
+* `edit_group happyfriends d/very sad because of cs2103` +
 
 === Locating group by name: `find_group`
 
 Find a group’s index whose names contain any of the given keywords +
-Format: `find_group   KEYWORD [MORE_KEYWORDS]`
+Format: `find_group KEYWORD [MORE_KEYWORDS]`
 
 ****
 * The search is case insensitive. e.g `hans` will match `Hans`
@@ -298,67 +329,51 @@ Format: `find_group   KEYWORD [MORE_KEYWORDS]`
 Examples:
 
 * `find_group John` +
-Returns `john` and `John Doe`
+Returns `john family` and `John House`
 * `find_group Betsy Tim John` +
 Returns any group having names `Betsy`, `Tim`, or `John`
 
 === Deleting a group : `delete_group`
 
-Delete a group in the system by index +
-Format: `delete_group g/GROUPINDEX `
+Delete a group in the system by name +
+Format: `delete_group n/GROUPNAME `
 
 ****
-* Deletes the group at the specified `GROUPINDEX`.
-* The index refers to the index number shown in the displayed group list.
-* The index *must be a positive integer* 1, 2, 3, ...
+* Deletes the group with the specified `GROUPNAME`
 ****
 
 Examples:
 
-* `list_group` +
-`delete_group 2` +
-Deletes the 2nd group in the Erium.
-* `find_group Betsy` +
-`delete_group 1` +
-Deletes the 1st group in the results of the `find_group` command.
+* `delete_group n/happyfriends`
 
 
-=== Clearing all group : `clear_group`
+=== List all members of a group : `view_group`
 
-Clears all group from the System. +
-Format: `clear_group`
-
-
-
-=== List all members of a group : `viewgroup`
-
-shows a list of all members in a group, along with their details and the group details. +
-Format: `view_group i/GROUP_INDEX`
+shows a list of all members in a group +
+Format: `view_group n/GROUP_NAME`
 
 ****
-* List all members of a group at the specified `GROUPINDEX`. The index refers to the index number shown in the displayed group list. The index *must be a positive integer* 1, 2, 3, ...
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
+* List all members of a group at the specified `GROUPNAME`.
 ****
 
 
 Examples:
 
-* ` view_group i/1` +
+* ` view_group n/happyfriends` +
 
 === add a friend to group : `register`
 
 Adds a friend to a group if the status of the group is open. +
-Format: `register f/FRIEND_INDEX g/GROUP_INDEX`
+Format: `register FRIEND_INDEX n/GROUP_NAME`
 
 ****
-* Edits the group at the specified `GROUPINDEX`. The index refers to the index number shown in the displayed group list. The index *must be a positive integer* 1, 2, 3, ...
+* Edits the group of unique `GROUPNAME`.
 * Edits the group at the specified `INDEX_OF_FRIEND`. The index refers to the index number shown in the displayed person list. The index *must be a positive integer* 1, 2, 3, ...
 ****
 
 Examples:
 
-* `register f/1 g/1 ` +
+* `register 1 n/happyfriends ` +
 
 == Find common time slot in group (Nigel)
 
@@ -383,11 +398,11 @@ Format: `create u/USERNAME pw/PASSWORD`
 
 Examples:
 
-* `create u/username pw/dontUseWeakPassword`
+* `create u/sampleUser pw/dontUseWeakPassword`
 
 === login to an account : `login`
 Login into the system. +
-Format: `login u/USERNAME p/PASSWORD`
+Format: `login u/USERNAME pw/PASSWORD`
 Examples:
 
 * `login u/username pw/dontUseWeakPassword`
@@ -467,20 +482,12 @@ e.g. `find_friend James Jake`
 e.g. `delete_friend 3`
 * *clear_friend* : `clear_friend`
 * *grouplist* : `listgroup`
-* *add_timetable* `add_timetable n/NAME [f/FILENAME l/FILE_LOCATION]/\ [o/link] m/MODE` +
-e.g. `add_timetable n/mytimetable f/mytimetable.png l/C://Users/abc/mysecretstash`
-* *new_timetable* `new_timetable n/NAME f/FILENAME l/FILE_LOCATION m/MODE` +
-e.g. `add_timetable n/mytimetable f/mytimetable l/C://Users/abc/mysecretstash m/horizontal`
-* *list_timetables* : `list_timetables`
-* *download_timetable* : `download_timetable i/TIMETABLE_INDEX p/PASSWORD o/FILE_OPTION l/DOWNLOAD_FILE_LOCATION [m/MODE]` +
-e.g. `download_timetable i/1 p/kamisama o/png m/vertical l/C://Users/abc/mysecretstash`
-* *find_timetable* : `find_timetable  KEYWORD [MORE_KEYWORDS]` +
-e.g. `find_timetable James Jake`
-* *delete_timetable* : `delete i/INDEX_OF_TIMETABLE` +
-e.g. `delete_timetable 3`
-* *view_timetable* : `view_timetable i/1 [m/MODE]`+
-e.g. `view i/1 m/horizontal`
-* *clear_timetable* : `clear_timetable`
+* *add_timetable* `add_timetable INDEX ` +
+e.g. `add_timetable 1`
+* *download_timetable* : `download_timetable INDEX` +
+e.g. `download_timetable 1 l/C://Users/abc/mysecretstash`
+* *delete_timetable* : `delete INDEX p/password` +
+e.g. `delete_timetable 3 p/password`
 * *add_group* `add_group g/GROUPNAME d/GROUPDESCRIPTION m/MAXNUMBEROFPEOPLE` +
 e.g. `add_group g/happyfriends d/a group of happy friends m/3`
 * *list_groups* : `list_groups`

@@ -10,6 +10,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.group.Group;
 import seedu.address.model.person.Person;
 
 /**
@@ -19,9 +20,13 @@ import seedu.address.model.person.Person;
 public class XmlSerializableAddressBook {
 
     public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
+    public static final String MESSAGE_DUPLICATE_GROUP = "Groups list contains duplicate group(s).";
 
     @XmlElement
     private List<XmlAdaptedPerson> persons;
+
+    @XmlElement
+    private List<XmlAdaptedGroup> groups;
 
     /**
      * Creates an empty XmlSerializableAddressBook.
@@ -29,6 +34,7 @@ public class XmlSerializableAddressBook {
      */
     public XmlSerializableAddressBook() {
         persons = new ArrayList<>();
+        groups = new ArrayList<>();
     }
 
     /**
@@ -37,6 +43,7 @@ public class XmlSerializableAddressBook {
     public XmlSerializableAddressBook(ReadOnlyAddressBook src) {
         this();
         persons.addAll(src.getPersonList().stream().map(XmlAdaptedPerson::new).collect(Collectors.toList()));
+        groups.addAll(src.getGroupList().stream().map(XmlAdaptedGroup::new).collect(Collectors.toList()));
     }
 
     /**
@@ -49,10 +56,18 @@ public class XmlSerializableAddressBook {
         AddressBook addressBook = new AddressBook();
         for (XmlAdaptedPerson p : persons) {
             Person person = p.toModelType();
-            if (addressBook.hasPerson(person)) {
+            if (addressBook.has(person)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
             }
-            addressBook.addPerson(person);
+            addressBook.add(person);
+        }
+
+        for (XmlAdaptedGroup g : groups) {
+            Group group = g.toModelType();
+            if (addressBook.has(group)) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_GROUP);
+            }
+            addressBook.add(group);
         }
         return addressBook;
     }
@@ -66,6 +81,7 @@ public class XmlSerializableAddressBook {
         if (!(other instanceof XmlSerializableAddressBook)) {
             return false;
         }
-        return persons.equals(((XmlSerializableAddressBook) other).persons);
+        return persons.equals(((XmlSerializableAddressBook) other).persons)
+                && groups.equals(((XmlSerializableAddressBook) other).groups);
     }
 }

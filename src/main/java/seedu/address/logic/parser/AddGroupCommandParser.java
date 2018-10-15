@@ -12,26 +12,26 @@ import seedu.address.model.group.Group;
 import seedu.address.model.person.Name;
 
 /**
- * Parses input arguments and creates a new CreateGroupCommand object
+ * Parses input arguments and creates a new AddGroupCommand object
  */
 public class AddGroupCommandParser implements Parser<AddGroupCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the CreateGroupCommand
-     * and returns an CreateGroupCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the AddGroupCommand
+     * and returns an AddGroupCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public AddGroupCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_DESCRIPTION);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_DESCRIPTION)
+        if (!arePrefixesPresent(argMultimap, PREFIX_NAME)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddGroupCommand.MESSAGE_USAGE));
         }
 
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
-        String description = argMultimap.getValue(PREFIX_DESCRIPTION).get();
+        String description = argMultimap.getValue(PREFIX_DESCRIPTION).orElse("");
 
         Group group = new Group(name, description);
 

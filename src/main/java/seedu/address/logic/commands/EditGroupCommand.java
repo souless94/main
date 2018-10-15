@@ -8,7 +8,6 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_GROUPS;
 import java.util.List;
 import java.util.Optional;
 
-import seedu.address.commons.core.Messages;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -36,8 +35,8 @@ public class EditGroupCommand extends Command {
             + PREFIX_DESCRIPTION + "A family group";
 
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    private static final String MESSAGE_EDIT_GROUP_SUCCESS = "Edited Group: %1$s";
-    private static final String MESSAGE_DUPLICATE_GROUP = "This person already exists in the address book.";
+    public static final String MESSAGE_EDIT_GROUP_SUCCESS = "Edited Group: %1$s";
+    public static final String MESSAGE_DUPLICATE_GROUP = "This person already exists in the address book.";
 
     private final Name oldName;
     private final EditGroupDescriptor editGroupDescriptor;
@@ -57,23 +56,16 @@ public class EditGroupCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
-        List<Group> lastShownList = model.getFilteredGroupList();
-        Group groupToBeEdited = new Group(oldName, ""); //do not know description and groupMembers
-
-        if (!lastShownList.contains(groupToBeEdited)) {
-            throw new CommandException(Messages.MESSAGE_NO_MATCH_TO_EXISTING_GROUP);
-        }
-
-        groupToBeEdited = lastShownList.get(lastShownList.indexOf(groupToBeEdited)); //retrieves original group
+        Group groupToBeEdited = CommandUtil.retrieveGroupFromIndex(model, oldName);
 
         Group editedGroup = createEditedGroup(groupToBeEdited, editGroupDescriptor);
 
 
-        if (!groupToBeEdited.isSame(editedGroup) && model.hasGroup(editedGroup)) {
+        if (!groupToBeEdited.isSame(editedGroup) && model.has(editedGroup)) {
             throw new CommandException(MESSAGE_DUPLICATE_GROUP);
         }
 
-        model.updateGroup(groupToBeEdited, editedGroup);
+        model.update(groupToBeEdited, editedGroup);
         model.updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
         model.commitAddressBook();
         return new CommandResult(String.format(MESSAGE_EDIT_GROUP_SUCCESS, editedGroup));
@@ -88,10 +80,12 @@ public class EditGroupCommand extends Command {
 
         Name updatedName = editGroupDescriptor.getName().orElse(groupToBeEdited.getName());
         String updatedDescription = editGroupDescriptor.getDescription().orElse(groupToBeEdited.getDescription());
-        UniqueList<Person> existingGroupMembers = new UniqueList<>();
-        existingGroupMembers.setElements(groupToBeEdited.getGroupMembers());
 
-        return new Group(updatedName, updatedDescription, existingGroupMembers);
+        UniqueList<Person> newGroupMembers = new UniqueList<>();
+        List<Person> memberList = editGroupDescriptor.getGroupMembers().orElse(groupToBeEdited.getGroupMembers());
+        newGroupMembers.setElements(memberList);
+
+        return new Group(updatedName, updatedDescription, newGroupMembers);
     }
 
     @Override
@@ -119,6 +113,7 @@ public class EditGroupCommand extends Command {
     public static class EditGroupDescriptor {
         private Name name;
         private String description;
+        private List<Person> memberList;
 
         public EditGroupDescriptor() {}
 
@@ -126,8 +121,17 @@ public class EditGroupCommand extends Command {
          * Copy constructor.
          */
         public EditGroupDescriptor(EditGroupDescriptor toCopy) {
-            setName(toCopy.name);
-            setDescription(toCopy.description);
+            if (toCopy.getName().isPresent()) {
+                setName(toCopy.name);
+            }
+
+            if (toCopy.getDescription().isPresent()) {
+                setDescription(toCopy.description);
+            }
+
+            if (toCopy.getGroupMembers().isPresent()) {
+                setGroupMembers(toCopy.memberList);
+            }
         }
 
         /**
@@ -153,6 +157,14 @@ public class EditGroupCommand extends Command {
             return Optional.ofNullable(description);
         }
 
+        public void setGroupMembers(List<Person> memberList) {
+            this.memberList = memberList;
+        }
+
+        public Optional<List<Person>> getGroupMembers() {
+            return Optional.ofNullable(memberList);
+        }
+
 
         @Override
         public boolean equals(Object other) {
@@ -170,7 +182,8 @@ public class EditGroupCommand extends Command {
             EditGroupDescriptor e = (EditGroupDescriptor) other;
 
             return getName().equals(e.getName())
-                    && getDescription().equals(e.getDescription());
+                    && getDescription().equals(e.getDescription())
+                    && getGroupMembers().equals(e.getGroupMembers());
         }
     }
 }

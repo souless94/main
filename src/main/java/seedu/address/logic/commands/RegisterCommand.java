@@ -4,18 +4,15 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_GROUPS;
 
-import java.util.List;
-
-import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.UniqueList;
+import seedu.address.model.exceptions.DuplicateElementException;
 import seedu.address.model.group.Group;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.exceptions.DuplicatePersonException;
 
 /**
  * Adds an existing person to an existing group in the address book.
@@ -53,34 +50,19 @@ public class RegisterCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
 
-        // Make sure that group exists
-        List<Group> lastShownList = model.getFilteredGroupList();
-        Group groupToBeEdited = new Group(groupName, ""); //do not know description and groupMembers
+        Group groupToBeEdited = CommandUtil.retrieveGroupFromIndex(model, groupName);
 
-        if (!lastShownList.contains(groupToBeEdited)) {
-            throw new CommandException(Messages.MESSAGE_NO_MATCH_TO_EXISTING_GROUP);
-        }
-
-        groupToBeEdited = lastShownList.get(lastShownList.indexOf(groupToBeEdited)); //retrieves original group
-
-        // Retrieves person from index
-        List<Person> lastShownPersonList = model.getFilteredPersonList();
-
-        if (index.getZeroBased() >= lastShownPersonList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-        }
-
-        Person personToAdd = lastShownPersonList.get(index.getZeroBased());
+        Person personToAdd = CommandUtil.retrievePersonFromIndex(model, index);
 
         try {
             Group editedGroup = addMemberToGroup(groupToBeEdited, personToAdd);
 
-            model.updateGroup(groupToBeEdited, editedGroup);
+            model.update(groupToBeEdited, editedGroup);
             model.updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
             model.commitAddressBook();
             return new CommandResult(String.format(MESSAGE_EDIT_GROUP_SUCCESS, editedGroup));
 
-        } catch (DuplicatePersonException e) {
+        } catch (DuplicateElementException e) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
@@ -90,7 +72,7 @@ public class RegisterCommand extends Command {
      * Creates and returns a {@code group} with a new member {@code personToAdd}
      * in {@code groupToBeEdited}
      */
-    private static Group addMemberToGroup(Group groupToBeEdited, Person personToAdd) throws DuplicatePersonException {
+    private static Group addMemberToGroup(Group groupToBeEdited, Person personToAdd) throws DuplicateElementException {
         assert groupToBeEdited != null;
 
         UniqueList<Person> newGroupMembers = new UniqueList<>();

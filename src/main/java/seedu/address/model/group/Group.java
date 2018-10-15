@@ -60,18 +60,23 @@ public class Group extends Entity {
     }
 
     /**
-     * Prints out all member of a group.
+     * Returns all member of a group as a String.
      */
-    public void printMembers() {
+    public String printMembers() {
         Iterator<Person> itr = groupMembers.iterator();
-        if (itr.hasNext()) {
-            System.out.println(itr.next() + "\n");
+        StringBuilder builder = new StringBuilder();
+        int count = 1;
+        while (itr.hasNext()) {
+            builder.append(count).append(". ").append(itr.next().getName().fullName).append("\n");
+            count += 1;
         }
+        return builder.toString();
     }
 
     /**
      * Returns true if both groups of the same name.
-     * This defines a weaker notion of equality between two groups.
+     * For group, isSame is the same function as equals
+     * since groups are uniquely identified by their names.
      */
     @Override
     public boolean isSame(Object other) {
@@ -115,9 +120,9 @@ public class Group extends Entity {
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName())
-                .append(" Description: ")
+                .append("\nDescription: ")
                 .append(getDescription())
-                .append(" Number of Members: ")
+                .append("\nNumber of Members: ")
                 .append(groupMembers.asUnmodifiableObservableList().size());
         return builder.toString();
     }

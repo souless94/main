@@ -1,5 +1,7 @@
 package seedu.address.testutil;
 
+import java.io.File;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -8,6 +10,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.timetable.Timetable;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -20,11 +23,19 @@ public class PersonBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "alice@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
-
+    public static final String DEFAULT_FORMAT = "horizontal";
+    public static final String DEFAULT_STORED_LOCATION =
+        new File("").getAbsolutePath().replace("\\", "/")
+            + "/data/timetable";
+    public static final String DEFAULT_TIMETABLE_STRING = "default";
     private Name name;
     private Phone phone;
     private Email email;
     private Address address;
+    private String format;
+    private String storedLocation;
+    private String timetableString;
+    private Timetable timetable;
     private Set<Tag> tags;
 
     public PersonBuilder() {
@@ -32,6 +43,9 @@ public class PersonBuilder {
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
+        format = DEFAULT_FORMAT;
+        storedLocation = DEFAULT_STORED_LOCATION;
+        timetableString = DEFAULT_TIMETABLE_STRING;
         tags = new HashSet<>();
     }
 
@@ -43,6 +57,9 @@ public class PersonBuilder {
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
+        format = personToCopy.getFormat();
+        storedLocation = personToCopy.getStoredLocation();
+        timetableString = personToCopy.getTimetable().getTimetableDataString();
         tags = new HashSet<>(personToCopy.getTags());
     }
 
@@ -55,9 +72,26 @@ public class PersonBuilder {
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Person} that we are building.
+     * Sets the {@code format} of the {@code Person} that we are building.
      */
-    public PersonBuilder withTags(String ... tags) {
+    public PersonBuilder withformat(String format) {
+        this.format = format;
+        return this;
+    }
+
+    /**
+     * Sets the {@code storedLocation} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withStoredLocation(String storedLocation) {
+        this.storedLocation = storedLocation;
+        return this;
+    }
+
+    /**
+     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Person} that we are
+     * building.
+     */
+    public PersonBuilder withTags(String... tags) {
         this.tags = SampleDataUtil.getTagSet(tags);
         return this;
     }
@@ -86,8 +120,12 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * @return a person
+     */
     public Person build() {
-        return new Person(name, phone, email, address, tags);
+        return new Person(name, phone, email, address, tags, format, storedLocation,
+            timetableString);
     }
 
 }

@@ -17,11 +17,11 @@ import javafx.collections.ObservableList;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
+import seedu.address.model.Entity;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.group.Group;
 import seedu.address.model.person.Person;
-import seedu.address.model.timetable.Timetable;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddCommandTest {
@@ -93,35 +93,23 @@ public class AddCommandTest {
      */
     private class ModelStub implements Model {
 
-        //group operation
         @Override
-        public void addGroup(Group group) {
+        public void add(Entity key) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void deleteGroup(Group target) {
+        public void delete(Entity key) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public boolean hasGroup(Group group) {
+        public boolean has(Entity key) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void updateGroup(Group target, Group editedGroup) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void addPerson(Person person) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        // timetable operations
-        @Override
-        public void addTimetable(Timetable timetable) {
+        public void update(Entity target, Entity edited) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -132,21 +120,6 @@ public class AddCommandTest {
 
         @Override
         public ReadOnlyAddressBook getAddressBook() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public boolean hasPerson(Person person) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void deletePerson(Person target) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void updatePerson(Person target, Person editedPerson) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -209,9 +182,12 @@ public class AddCommandTest {
         }
 
         @Override
-        public boolean hasPerson(Person person) {
-            requireNonNull(person);
-            return this.person.isSame(person);
+        public boolean has(Entity target) {
+            requireNonNull(target);
+            if (target instanceof Person) {
+                return this.person.isSame(target);
+            }
+            return false;
         }
     }
 
@@ -223,15 +199,20 @@ public class AddCommandTest {
         final ArrayList<Person> personsAdded = new ArrayList<>();
 
         @Override
-        public boolean hasPerson(Person person) {
-            requireNonNull(person);
-            return personsAdded.stream().anyMatch(person::isSame);
+        public boolean has(Entity target) {
+            requireNonNull(target);
+            if (target instanceof Person) {
+                return personsAdded.stream().anyMatch(target::isSame);
+            }
+            return false;
         }
 
         @Override
-        public void addPerson(Person person) {
-            requireNonNull(person);
-            personsAdded.add(person);
+        public void add(Entity target) {
+            requireNonNull(target);
+            if (target instanceof Person) {
+                personsAdded.add((Person) target);
+            }
         }
 
         @Override
