@@ -6,10 +6,13 @@ import java.io.File;
 
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.model.Entity;
+import seedu.address.model.UniqueList;
+import seedu.address.model.group.Group;
 import seedu.address.model.person.timetable.Timetable;
 import seedu.address.model.tag.Tag;
 
@@ -30,9 +33,11 @@ public class Person extends Entity {
     private final Set<Tag> tags = new HashSet<>();
     private final String format;
     private final String storedLocation;
+    private final UniqueList<Group> groups;
 
     /**
      * Every field must be present and not null. creates a person with timetable
+     * Initialises groups as empty list.
      */
     public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags,
         String format, String storedLocation, String timetableString) {
@@ -41,6 +46,7 @@ public class Person extends Entity {
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.groups = new UniqueList<>();
         this.tags.addAll(tags);
         if (format.equals("default")) {
             this.format = "horizontal";
@@ -90,6 +96,8 @@ public class Person extends Entity {
         return timetable;
     }
 
+    public List<Group> getGroups() { return groups.asUnmodifiableObservableList(); }
+
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException} if
      * modification is attempted.
@@ -137,7 +145,8 @@ public class Person extends Entity {
             && otherPerson.getPhone().equals(getPhone())
             && otherPerson.getEmail().equals(getEmail())
             && otherPerson.getAddress().equals(getAddress())
-            && otherPerson.getTags().equals(getTags());
+            && otherPerson.getTags().equals(getTags())
+            && otherPerson.getGroups().equals(getGroups());
     }
 
     @Override
