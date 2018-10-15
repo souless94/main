@@ -4,12 +4,15 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Iterator;
 import java.util.Objects;
+import java.util.HashSet;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.Entity;
 import seedu.address.model.UniqueList;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.timetable.Timetable;
+import seedu.address.model.person.timetable.TimetableData;
 
 /**
  * Represents a Group in the address book.
@@ -69,6 +72,86 @@ public class Group extends Entity {
         while (itr.hasNext()) {
             builder.append(count).append(". ").append(itr.next().getName().fullName).append("\n");
             count += 1;
+        }
+        return builder.toString();
+    }
+
+    /**
+     * Returns all available time slots among the group as a String.
+     */
+    public String findAvailableSlots() {
+        Iterator<Person> itr = groupMembers.iterator();
+        StringBuilder builder = new StringBuilder();
+        HashSet<Integer> available = new HashSet<>();
+        Iterator<Integer> itr2 = available.iterator();
+        boolean isFirstPerson = true;
+        while (itr.hasNext()) {
+            Person person = itr.next();
+            boolean[][] isFree = person.getTimetable().getTimetable().getBooleanTimetable();
+            if (isFirstPerson) {
+                for (int i = 1; i <= 7; i++) {
+                    for (int j = 1; j <= 16; j++) {
+                        if (isFree[i][j]) {
+                            available.add(i * 100 + j);
+                        }
+                    }
+                }
+                isFirstPerson = false;
+            }
+            else {
+                while (itr2.hasNext()) {
+                    int timeslot = itr2.next();
+                    int row = timeslot / 100;
+                    int col = timeslot % 100;
+                    if (!isFree[row][col]) {
+                        available.remove(timeslot);
+                    }
+                    if (available.isEmpty()) {
+                        return "There are no available slots!";
+                    }
+                }
+            }
+        }
+        itr2 = available.iterator();
+        while (itr2.hasNext()) {
+            int timeslot = itr2.next();
+            int day = timeslot / 100;
+            int timing = (timeslot % 100 + 7) * 100;
+            builder.append("Day: ");
+            switch (day) {
+            case 1:
+                builder.append("Monday");
+                break;
+
+            case 2:
+                builder.append("Tuesday");
+                break;
+
+            case 3:
+                builder.append("Wednesday");
+                break;
+
+            case 4:
+                builder.append("Thursday");
+                break;
+
+            case 5:
+                builder.append("Friday");
+                break;
+
+            case 6:
+                builder.append("Saturday");
+                break;
+
+            case 7:
+                builder.append("Sunday");
+                break;
+
+            default:
+                builder.append("Invalid day");
+                break; 
+            }
+            builder.append(" ").append("Time: ").append(Integer.toString(timing)).append("\n");
         }
         return builder.toString();
     }

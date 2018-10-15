@@ -15,6 +15,7 @@ import java.nio.file.Paths;
 public class TimetableData {
 
     private final String[][] timetable;
+    private final boolean[][] booleanTimetable;
     private String[] timings = {"0800", "0900", "1000", "1100", "1200", "1300",
         "1400", "1500", "1600", "1700", "1800", "1900", "2000", "2100", "2200", "2300"};
     private String[] days = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday",
@@ -43,6 +44,7 @@ public class TimetableData {
         this.rows = noOfRows;
         this.columns = noOfColumns;
         this.timetable = getTimetableFromString(timetableString);
+        this.booleanTimetable = booleanTimetableData(format, this.timetable);
     }
 
     public TimetableData(String format, String fileName, int index) {
@@ -61,6 +63,7 @@ public class TimetableData {
         this.columns = noOfColumns;
         String locationFrom = fileName + String.valueOf(index) + ".csv";
         this.timetable = getTimetableData(locationFrom);
+        this.booleanTimetable = booleanTimetableData(format, this.timetable);
     }
 
     /**
@@ -203,6 +206,13 @@ public class TimetableData {
     }
 
     /**
+     * @return a string matrix of a timetable
+     */
+    public boolean[][] getBooleanTimetable() {
+        return booleanTimetable;
+    }
+
+    /**
      * download timetable data as csv unable to download if same filename exists
      *
      * @param locationTo location of where to save the file
@@ -231,5 +241,36 @@ public class TimetableData {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+    /**
+     * creates a boolean timetable for quick access
+     * @return a boolean 2D array
+     */
+    public boolean[][] booleanTimetableData(String format, String[][] timetable) {
+        boolean[][] booleanTimetable = new boolean[noOfTimings + 1][noOfTimings + 1];
+        if (format.equals("vertical")) {
+            for (int i = 1; i <= columns; i++) {
+                for (int j = 1; j <= rows; j++) {
+                    if (timetable[i][j].equals(" ")) {
+                        booleanTimetable[i][j] = true; 
+                    }
+                    else {
+                        booleanTimetable[i][j] = false;
+                    }
+                }
+            }
+        } else if (format.equals("horizontal")) {
+            for (int i = 1; i <= rows; i++) {
+                for (int j = 1; j <= columns; j++) {
+                    if (timetable[i][j].equals(" ")) {
+                        booleanTimetable[j][i] = true; 
+                    }
+                    else {
+                        booleanTimetable[j][i] = false;
+                    }
+                }
+            }
+        }
+        return booleanTimetable;
     }
 }
