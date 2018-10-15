@@ -40,7 +40,7 @@ public class ViewGroupCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
-        Group group = CommandUtil.retrieveGroupFromIndex(model, groupName);
+        Group group = CommandUtil.retrieveGroupFromName(model, groupName);
 
         Predicate<Person> predicateShowAllGroupMembers = person -> group.getGroupMembers().contains(person);
 

@@ -33,7 +33,7 @@ public class Person extends Entity {
     private final Set<Tag> tags = new HashSet<>();
     private final String format;
     private final String storedLocation;
-    private final UniqueList<Group> groups;
+    private UniqueList<Group> groups;
 
     /**
      * Every field must be present and not null. creates a person with timetable
@@ -46,7 +46,9 @@ public class Person extends Entity {
         this.phone = phone;
         this.email = email;
         this.address = address;
+
         this.groups = new UniqueList<>();
+
         this.tags.addAll(tags);
         if (format.equals("default")) {
             this.format = "horizontal";
@@ -99,6 +101,11 @@ public class Person extends Entity {
 
     public List<Group> getGroups() { return groups.asUnmodifiableObservableList(); }
 
+    public void setGroups(List<Group> groupList) {
+        this.groups = new UniqueList<>();
+        this.groups.setElements(groupList);
+    }
+
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException} if
      * modification is attempted.
@@ -146,8 +153,7 @@ public class Person extends Entity {
             && otherPerson.getPhone().equals(getPhone())
             && otherPerson.getEmail().equals(getEmail())
             && otherPerson.getAddress().equals(getAddress())
-            && otherPerson.getTags().equals(getTags())
-            && otherPerson.getGroups().equals(getGroups());
+            && otherPerson.getTags().equals(getTags());
     }
 
     @Override
@@ -166,9 +172,10 @@ public class Person extends Entity {
             .append(getEmail())
             .append(" Address: ")
             .append(getAddress())
+            .append(" Groups enrolled in: ")
+            .append(getGroups())
             .append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();
     }
-
 }
