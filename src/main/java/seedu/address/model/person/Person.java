@@ -57,7 +57,8 @@ public class Person extends Entity {
         } else {
             this.storedLocation = storedLocation.replace("\\", "/");
         }
-        this.timetable = new Timetable(this.storedLocation + "/" + this.name.toString(),
+        this.timetable = new Timetable(this.storedLocation + "/"
+            + String.valueOf(this.hashCode()),
             this.format,
             timetableString);
     }

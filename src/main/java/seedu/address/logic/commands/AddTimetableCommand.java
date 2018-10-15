@@ -52,10 +52,9 @@ public class AddTimetableCommand extends Command {
         Person personToEdit = CommandUtil.retrievePersonFromIndex(model, index);
 
         String filePath = personToEdit.getStoredLocation()
-                + "/" + personToEdit.getName().toString()
+                + "/" + String.valueOf(personToEdit.hashCode())
                 + " timetable";
-        File toRead = new File(filePath
-                + index.getZeroBased() + ".csv");
+        File toRead = new File(filePath + ".csv");
         if (toRead.exists()) {
             Timetable timetable = new Timetable(filePath, personToEdit.getFormat(), index.getZeroBased());
             Person updatedPerson = createUpdatedPerson(personToEdit, timetable);
