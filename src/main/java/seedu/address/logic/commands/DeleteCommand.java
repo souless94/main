@@ -36,6 +36,7 @@ public class DeleteCommand extends Command {
         this.targetIndex = targetIndex;
     }
 
+    //@@author Happytreat
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);

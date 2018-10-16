@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import seedu.address.model.exceptions.DuplicateElementException;
 import seedu.address.model.exceptions.NotFoundException;
 
+//@@author Happytreat
 /**
  * A generic list of type that extends from Entity class that enforces uniqueness between its elements
  * and does not allow nulls.
