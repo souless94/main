@@ -19,6 +19,7 @@ import seedu.address.model.tag.Tag;
 /**
  * Represents a Person in the address book. Guarantees: details are present and not null, field
  * values are validated, immutable.
+ * #TODO: Remove setGroups method and combine 2 constructors into 1 (by v1.3)
  */
 public class Person extends Entity {
 
@@ -66,7 +67,7 @@ public class Person extends Entity {
             this.storedLocation = storedLocation.replace("\\", "/");
         }
         this.timetable = new Timetable(this.storedLocation + "/"
-            + String.valueOf(this.hashCode()),
+            + this.hashCode(),
             this.format,
             timetableString);
     }
@@ -211,8 +212,6 @@ public class Person extends Entity {
             .append(getEmail())
             .append(" Address: ")
             .append(getAddress())
-            .append(" Groups enrolled in: ")
-            .append(getGroups())
             .append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();
