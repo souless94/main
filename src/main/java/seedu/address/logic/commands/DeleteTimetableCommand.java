@@ -49,7 +49,7 @@ public class DeleteTimetableCommand extends Command {
         File toBeDeleted = new File(
             personToDeleteTimetable.getStoredLocation()
                 + "/"
-                + personToDeleteTimetable.getName().toString() + " timetable.csv");
+                + personToDeleteTimetable.hashCode() + " timetable.csv");
         if (toBeDeleted.exists()) {
             toBeDeleted.delete();
         }
