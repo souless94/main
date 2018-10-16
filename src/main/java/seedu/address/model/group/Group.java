@@ -196,7 +196,7 @@ public class Group extends Entity {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, description, groupMembers);
+        return Objects.hash(name, description);
     }
 
     @Override
