@@ -1,5 +1,6 @@
 package seedu.address.model;
 
+//@@author Happytreat
 /**
  * API for entity in Model such as Person and Group.
  */

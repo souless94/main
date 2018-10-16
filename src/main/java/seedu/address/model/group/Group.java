@@ -11,6 +11,7 @@ import seedu.address.model.UniqueList;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 
+//@@author Happytreat
 /**
  * Represents a Group in the address book.
  * Guarantees: Field values are validated, immutable.

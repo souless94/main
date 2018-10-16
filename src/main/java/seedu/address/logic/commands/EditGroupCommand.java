@@ -17,6 +17,7 @@ import seedu.address.model.group.Group;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 
+//@@author Happytreat
 /**
  * Edits the details of an existing group in the address book.
  */
