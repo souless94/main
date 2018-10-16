@@ -3,8 +3,11 @@ package seedu.address.testutil;
 import java.io.File;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
+import seedu.address.model.UniqueList;
+import seedu.address.model.group.Group;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -37,12 +40,14 @@ public class PersonBuilder {
     private String timetableString;
     private Timetable timetable;
     private Set<Tag> tags;
+    private UniqueList<Group> groups;
 
     public PersonBuilder() {
         name = new Name(DEFAULT_NAME);
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
+        groups = new UniqueList<>();
         format = DEFAULT_FORMAT;
         storedLocation = DEFAULT_STORED_LOCATION;
         timetableString = DEFAULT_TIMETABLE_STRING;
@@ -57,6 +62,8 @@ public class PersonBuilder {
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
+        groups = new UniqueList<>();
+        groups.setElements(personToCopy.getGroups());
         format = personToCopy.getFormat();
         storedLocation = personToCopy.getStoredLocation();
         timetableString = personToCopy.getTimetable().getTimetableDataString();
@@ -117,6 +124,15 @@ public class PersonBuilder {
      */
     public PersonBuilder withEmail(String email) {
         this.email = new Email(email);
+        return this;
+    }
+
+    /**
+     * Sets the list of groups of the {@code Person} that we are building.
+     */
+    public PersonBuilder withGroups(List<Group> groupList) {
+        this.groups = new UniqueList<>();
+        groups.setElements(groupList);
         return this;
     }
 

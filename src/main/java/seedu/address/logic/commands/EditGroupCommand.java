@@ -56,7 +56,7 @@ public class EditGroupCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
-        Group groupToBeEdited = CommandUtil.retrieveGroupFromIndex(model, oldName);
+        Group groupToBeEdited = CommandUtil.retrieveGroupFromName(model, oldName);
 
         Group editedGroup = createEditedGroup(groupToBeEdited, editGroupDescriptor);
 
