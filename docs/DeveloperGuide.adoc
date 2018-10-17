@@ -274,19 +274,19 @@ Given below is an example usage scenario and how the `add_timetable` behaves at 
 
 Step 1: The user launches the application for the first time. The NUS Hangs will initialise the person with the timetable with the details which was stored using Storage.
 
-image:: addTimetable-step-1.png[width="300"]
+image::addTimetable-step-1.png[width="300"]
 
 Step 2:  user opens a timetable of first `person` in the stored location and edits it via microsoft excel or with his preferred software.
 
-image:: addTimetable-step-2.png[width="300"]
+image::addTimetable-step-2.png[width="300"]
 
 Step 3: The user executes `add_timetable 1` to add the timetable of first `person` in stored folder to NUS hangs. A new `timetable` will be created containing the data of the `timetable` of first `person` in stored folder. The `timetable` of first `person` will be replaced by this new `timetable`. The `timetable` is then added to storage as a String.
 
-image:: addTimetable-step-3.png[width="300"]
+image::addTimetable-step-3.png[width="300"]
 
 The following sequence diagram shows how `add_timetable` works.
 
-image:: addtimetablediagram.png
+image::addtimetablediagram.png
 
 ==== Design Considerations
 * **Alternative 1 (current choice for v1.2):** adds the timetable via a csv file.
