@@ -271,7 +271,7 @@ The main objectives of the security mechanism includes:
 The following activity diagram illustrates how the workflow is restricted through the security mechanism.
 
 .Activity Diagram of Security Mechanism
-image::SecurityMechanismActivityDiagram.png[width="300"]
+image::SecurityMechanismActivityDiagram.png[width="800"]
 
 ==== Current Implementation
 
