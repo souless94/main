@@ -257,6 +257,70 @@ We are using `java.util.logging` package for logging. The `LogsCenter` class is 
 
 Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file (default: `config.json`).
 
+== Implementation
+
+This section describes some noteworthy details on how certain features are implemented.
+
+=== Security Mechanism
+
+The main objectives of the security mechanism includes:
+
+* Preventing unauthorised usage of the application
+* Preventing unauthorised access and editing rights to the data stored within the application
+
+
+==== Current Implementation
+
+*Version 1.1*
+
+The first part of securing the system is to restrict access to unauthorised users. This is accomplished by setting up `create` and `login` functions.
+
+- `create`: creates an account
+- `login`: login to account
+
+Both functions are handled by the logic component, make use of the model component and is eventually managed through the storage component. At this point, the account details are stored temporarily in a hashmap and would be transferred to a more persistent storage such as XML.
+
+Step 1: A new user launches the application for the first time. The welcome page would prompt the user to create an account and refer to `help` function for more details.
+
+image::SecurityMechanism-Step01-Diagram.png[width="300"]
+
+Step 2: The user follows the prompt to create an account, supplying a username and password.
+image::SecurityMechanism-Step02-Diagram.png[width="300"]
+
+Step 2a: The user supplies a duplicate username and is prompted to choose another.
+image::SecurityMechanism-Step02a-Diagram.png[width="300"]
+
+Step 2b: The user supplies a unique username and the account is successfully created.
+image::SecurityMechanism-Step02b-Diagram.png[width="300"]
+
+Step 3: The user is prompted to login.
+image::SecurityMechanism-Step03-Diagram.png[width="300"]
+
+Step 3a: The user supplies the wrong login credentials.
+image::SecurityMechanism-Step03a-Diagram.png[width="300"]
+
+Step 3b: The user supplies the right login credentials.
+image::SecurityMechanism-Step03b-Diagram.png[width="300"]
+
+Step 4: The user now have access to most of the commands.
+image::SecurityMechanism-Step04-Diagram.png[width="300"]
+
+In version 1.1, the implementation is up to step 3b.
+In version 1.2, the user password is encrypted to prevent loss of password.
+In version 1.3, step 4 would be implemented.
+
+In version 2.0, encryption would be extended to other essential data stored within the system.
+
+==== Design Considerations
+
+Aspect: How create and login executes
+
+Aspect: Data structure to support create and login command
+
+Aspect: How encryption executes
+
+
+
 == Documentation
 
 We use asciidoc for writing documentation.
