@@ -48,10 +48,10 @@ public class NameContainsKeywordsPredicate<T extends Entity> implements Predicat
                         .anyMatch(keyword -> person.getTags().contains(new Tag(keyword)));
             case "all":
                 return keywords.stream()
-                        .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(person.getName().fullName, keyword)||
-                                person.getTags().contains(new Tag(keyword))||
-                                StringUtil.containsWordIgnoreCase(person.getAddress().value, keyword)||
-                                StringUtil.containsWordIgnoreCase(person.getPhone().value, keyword)
+                        .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(person.getName().fullName, keyword)
+                                || person.getTags().contains(new Tag(keyword))
+                                || StringUtil.containsWordIgnoreCase(person.getAddress().value, keyword)
+                                || StringUtil.containsWordIgnoreCase(person.getPhone().value, keyword)
                         );
             default:
                 System.out.println("Invalid mode to 'NameContainsKeywordsPredicate'");

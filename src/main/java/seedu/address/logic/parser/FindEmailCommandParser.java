@@ -27,7 +27,7 @@ public class FindEmailCommandParser implements Parser<FindEmailCommand> {
 
         String[] nameKeywords = trimmedArgs.split("\\s+");
 
-        return new FindEmailCommand(new NameContainsKeywordsPredicate<>(Arrays.asList(nameKeywords),"email"));
+        return new FindEmailCommand(new NameContainsKeywordsPredicate<>(Arrays.asList(nameKeywords), "email"));
     }
 
 }

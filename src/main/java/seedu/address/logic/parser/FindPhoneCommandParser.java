@@ -27,6 +27,6 @@ public class FindPhoneCommandParser implements Parser<FindPhoneCommand> {
 
         String[] nameKeywords = trimmedArgs.split("\\s+");
 
-        return new FindPhoneCommand(new NameContainsKeywordsPredicate<>(Arrays.asList(nameKeywords),"phone"));
+        return new FindPhoneCommand(new NameContainsKeywordsPredicate<>(Arrays.asList(nameKeywords), "phone"));
     }
 }

@@ -27,7 +27,7 @@ public class FindAddressCommandParser implements Parser<FindAddressCommand> {
 
         String[] nameKeywords = trimmedArgs.split("\\s+");
 
-        return new FindAddressCommand(new NameContainsKeywordsPredicate<>(Arrays.asList(nameKeywords),"address"));
+        return new FindAddressCommand(new NameContainsKeywordsPredicate<>(Arrays.asList(nameKeywords), "address"));
     }
 
 }
