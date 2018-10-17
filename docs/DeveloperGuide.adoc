@@ -268,6 +268,8 @@ The main objectives of the security mechanism includes:
 * Preventing unauthorised usage of the application
 * Preventing unauthorised access and editing rights to the data stored within the application
 
+The following activity diagram illustrates how the workflow is restricted through the security mechanism.
+image::SecurityMechanismActivityDiagram.png[width="300"]
 
 ==== Current Implementation
 
@@ -282,27 +284,35 @@ Both functions are handled by the logic component, make use of the model compone
 
 Step 1: A new user launches the application for the first time. The welcome page would prompt the user to create an account and refer to `help` function for more details.
 
+[LeslieTODO: to be updated - add image]
 image::SecurityMechanism-Step01-Diagram.png[width="300"]
 
 Step 2: The user follows the prompt to create an account, supplying a username and password.
+[LeslieTODO: to be updated - add image]
 image::SecurityMechanism-Step02-Diagram.png[width="300"]
 
 Step 2a: The user supplies a duplicate username and is prompted to choose another.
+[LeslieTODO: to be updated - add image]
 image::SecurityMechanism-Step02a-Diagram.png[width="300"]
 
 Step 2b: The user supplies a unique username and the account is successfully created.
+[LeslieTODO: to be updated - add image]
 image::SecurityMechanism-Step02b-Diagram.png[width="300"]
 
 Step 3: The user is prompted to login.
+[LeslieTODO: to be updated - add image]
 image::SecurityMechanism-Step03-Diagram.png[width="300"]
 
 Step 3a: The user supplies the wrong login credentials.
+[LeslieTODO: to be updated - add image]
 image::SecurityMechanism-Step03a-Diagram.png[width="300"]
 
 Step 3b: The user supplies the right login credentials.
+[LeslieTODO: to be updated - add image]
 image::SecurityMechanism-Step03b-Diagram.png[width="300"]
 
 Step 4: The user now have access to most of the commands.
+[LeslieTODO: to be updated - add image]
 image::SecurityMechanism-Step04-Diagram.png[width="300"]
 
 In version 1.1, the implementation is up to step 3b.
@@ -313,11 +323,42 @@ In version 2.0, encryption would be extended to other essential data stored with
 
 ==== Design Considerations
 
-Aspect: How create and login executes
+Aspect: Create and Login
 
-Aspect: Data structure to support create and login command
+*Alternative 1 (current choice):* create stores data in a hashmap.
+
+Pros:
+
+- hashmap does not allows duplicate keys, making it easy to implement
+
+Cons:
+
+- [LeslieTODO: to be updated]
+
+*Alternative 2:*
+
+Pros:
+
+- [LeslieTODO: to be updated]
+
+Cons:
+
+- [LeslieTODO: to be updated]
+
+
+[LeslieTODO: to be updated: ]
 
 Aspect: How encryption executes
+
+*Alternative 1 (current choice):* a function call to encryption before storing password data into hashmap. when logging in, a function call encrypts the user entered password before comparing to stored password in hashmap
+
+Pros:
+
+- hashmap does not allows duplicate keys, making it easy to implement
+
+Cons:
+
+- [LeslieTODO: to be updated]
 
 
 
