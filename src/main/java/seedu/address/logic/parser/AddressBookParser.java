@@ -30,6 +30,7 @@ import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.ViewGroupCommand;
 import seedu.address.logic.commands.ViewGroupAvailableTimeslotCommand;
+import seedu.address.logic.commands.ViewGroupRankedAvailableTimeslotCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -90,6 +91,9 @@ public class AddressBookParser {
 
         case ViewGroupAvailableTimeslotCommand.COMMAND_WORD:
             return new ViewGroupAvailableTimeslotCommandParser().parse(arguments);
+
+        case ViewGroupRankedAvailableTimeslotCommand.COMMAND_WORD:
+            return new ViewGroupRankedAvailableTimeslotCommandParser().parse(arguments);
 
         case ViewGroupCommand.COMMAND_WORD:
             return new ViewGroupCommandParser().parse(arguments);

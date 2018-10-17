@@ -2,9 +2,19 @@ package seedu.address.model.group;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.Iterator;
 import java.util.Objects;
-import java.util.HashSet;
+import java.util.Iterator;
+import java.util.TreeMap;
+import java.util.TreeSet;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Collections;
+
+import static java.util.Comparator.comparing;
+import static java.util.stream.Collectors.toMap;
+
+
 
 import javafx.collections.ObservableList;
 import seedu.address.model.Entity;
@@ -78,46 +88,122 @@ public class Group extends Entity {
     }
 
     /**
-     * Returns all available time slots among the group as a String.
+     * Returns all available time slots among the group as a String in ascending order in terms of timing
      */
-    public String findAvailableSlots() {
-        Iterator<Person> itr = groupMembers.iterator();
+    public String ListAvailableTimeslots() {
+        Iterator<Person> person_itr = groupMembers.iterator();
         StringBuilder builder = new StringBuilder();
-        HashSet<Integer> available = new HashSet<>();
-        Iterator<Integer> itr2 = available.iterator();
+        TreeSet<Integer> available_slots = new TreeSet<>();
+        Iterator<Integer> slots_itr = available_slots.iterator();
         boolean isFirstPerson = true;
-        while (itr.hasNext()) {
-            Person person = itr.next();
-            boolean[][] isFree = person.getTimetable().getTimetable().getBooleanTimetable();
+        while (person_itr.hasNext()) {
+            Person curr_person = person_itr.next();
+            boolean[][] isFree = curr_person.getTimetable().getTimetable().getBooleanTimetable();
             if (isFirstPerson) {
                 for (int i = 1; i <= 7; i++) {
                     for (int j = 1; j <= 16; j++) {
                         if (isFree[i][j]) {
-                            available.add(i * 100 + j);
+                            available_slots.add(i * 100 + j);
                         }
                     }
                 }
                 isFirstPerson = false;
             }
             else {
-                while (itr2.hasNext()) {
-                    int timeslot = itr2.next();
-                    int row = timeslot / 100;
-                    int col = timeslot % 100;
+                while (slots_itr.hasNext()) {
+                    int curr_timeslot = slots_itr.next();
+                    int row = curr_timeslot / 100;
+                    int col = curr_timeslot % 100;
                     if (!isFree[row][col]) {
-                        available.remove(timeslot);
+                        available_slots.remove(curr_timeslot);
                     }
-                    if (available.isEmpty()) {
+                    if (available_slots.isEmpty()) {
                         return "There are no available slots!";
                     }
                 }
             }
         }
-        itr2 = available.iterator();
-        while (itr2.hasNext()) {
-            int timeslot = itr2.next();
-            int day = timeslot / 100;
-            int timing = (timeslot % 100 + 7) * 100;
+        slots_itr = available_slots.iterator();
+        while (slots_itr.hasNext()) {
+            int curr_timeslot_2 = slots_itr.next();
+            int day = curr_timeslot_2 / 100;
+            int timing = (curr_timeslot_2 % 100 + 7) * 100;
+            builder.append("Day: ");
+            switch (day) {
+            case 1:
+                builder.append("Monday");
+                break;
+
+            case 2:
+                builder.append("Tuesday");
+                break;
+
+            case 3:
+                builder.append("Wednesday");
+                break;
+
+            case 4:
+                builder.append("Thursday");
+                break;
+
+            case 5:
+                builder.append("Friday");
+                break;
+
+            case 6:
+                builder.append("Saturday");
+                break;
+
+            case 7:
+                builder.append("Sunday");
+                break;
+
+            default:
+                builder.append("Invalid day");
+                break; 
+            }
+            builder.append(" ").append("Time: ").append(Integer.toString(timing)).append("\n");
+        }
+        return builder.toString();
+    }
+    /**
+     * Returns the time slots among the group as a String in descending order with respect to number of people available and then ascending order in terms of timing
+     */
+    public String ListRankedAvailableTimeslots () {
+        Iterator<Person> person_itr = groupMembers.iterator();
+        StringBuilder builder = new StringBuilder();
+        TreeMap<Integer, Integer> available_slots = new TreeMap<>();
+        while (person_itr.hasNext()) {
+            Person curr_person = person_itr.next();
+            boolean[][] isFree = curr_person.getTimetable().getTimetable().getBooleanTimetable();
+            for (int i = 1; i <= 7; i++) {
+                for (int j = 1; j <= 16; j++) {
+                    if (isFree[i][j]) {
+                        int slot = i * 100 + j;
+                        if (available_slots.containsKey(slot)) {
+                            int count = available_slots.get(slot) + 1;
+                            available_slots.put(slot, count);
+                        }
+                        else {
+                            available_slots.put(slot, 1);
+                        }
+                    }
+                }
+            }
+        }
+        Map<Integer, Integer> sorted_slots = available_slots.entrySet().stream()
+                                                            .sorted(Collections.reverseOrder(comparing(Entry::getValue)))
+                                                            .collect(toMap(Entry::getKey, Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
+        int prev = 0;
+        for (Integer key : sorted_slots.keySet()) {
+            int curr_timeslot = key;
+            int day = curr_timeslot / 100;
+            int timing = (curr_timeslot % 100 + 7) * 100;
+            int available_persons = sorted_slots.get(key);
+            if (available_persons != prev) {
+                builder.append("Number of people available: " + available_persons + "\n");
+                prev = available_persons;
+            }
             builder.append("Day: ");
             switch (day) {
             case 1:
