@@ -202,6 +202,7 @@ Given below is the Sequence Diagram for interactions within the `Logic` componen
 .Interactions Inside the Logic Component for the `delete 1` Command
 image::DeletePersonSdForLogic.png[width="800"]
 
+
 [[Design-Model]]
 === Model component
 
@@ -273,16 +274,40 @@ The following activity diagram illustrates how the workflow is restricted throug
 .Activity Diagram of Security Mechanism
 image::SecurityMechanismActivityDiagram.png[width="800"]
 
+
+To prevent unauthorised access (read, edit and other commands) of application users are required to login to the application. Each users would only be able to access data created by themselves or data which they have been granted rights to access.
+
+To meet this end, various functions are implemented.
+
+
 ==== Current Implementation
 
-*Version 1.1*
 
-The first part of securing the system is to restrict access to unauthorised users. This is accomplished by setting up `create` and `login` functions.
+*Account Creation and Login* [implemented in v1.1, incomplete]
+
+The first step in securing the system is to restrict access to unauthorised users. This is accomplished by setting up `create` and `login` functions.
 
 - `create`: creates an account
 - `login`: login to account
 
-Both functions are handled by the logic component, make use of the model component and is eventually managed through the storage component. At this point, the account details are stored temporarily in a hashmap and would be transferred to a more persistent storage such as XML.
+Both functions are handled by the logic component, make use of the model component and is eventually managed through the storage component.
+
+The username is stored as a key in a hashmap while the password is encrypted and stored as the value. By using a hashmap to store the account login credentials, it becomes easy to implement the create and login function.
+
+*To be implemented: *
+
+convert hashmap storage into XML and vice-versa
+
+*Password Encryption* [implemented in v1.2, to be improved]
+
+To prevent unauthorised users from getting the password by looking at the .xml files, the password is encrypted before storage. This is done by implementing Java Cryptography module.
+
+
+*Login Status Check* [to be implemented in v1.3]
+
+Next, there is a need to check if user is logged in before executing any entered commands. This is done by implementing a check function in the AddressBookParser.
+
+
 
 Step 1: A new user launches the application for the first time. The welcome page would prompt the user to create an account and refer to `help` function for more details.
 
