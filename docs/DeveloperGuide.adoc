@@ -269,6 +269,8 @@ The main objectives of the security mechanism includes:
 * Preventing unauthorised access and editing rights to the data stored within the application
 
 The following activity diagram illustrates how the workflow is restricted through the security mechanism.
+
+.Activity Diagram of Security Mechanism
 image::SecurityMechanismActivityDiagram.png[width="300"]
 
 ==== Current Implementation
