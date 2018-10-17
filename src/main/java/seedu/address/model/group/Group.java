@@ -14,6 +14,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.timetable.Timetable;
 import seedu.address.model.person.timetable.TimetableData;
 
+//@@author Happytreat
 /**
  * Represents a Group in the address book.
  * Guarantees: Field values are validated, immutable.
@@ -196,7 +197,7 @@ public class Group extends Entity {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, description, groupMembers);
+        return Objects.hash(name, description);
     }
 
     @Override

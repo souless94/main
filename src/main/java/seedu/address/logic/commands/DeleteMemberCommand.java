@@ -50,7 +50,7 @@ public class DeleteMemberCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
 
-        Group groupToBeEdited = CommandUtil.retrieveGroupFromIndex(model, groupName);
+        Group groupToBeEdited = CommandUtil.retrieveGroupFromName(model, groupName);
 
         try {
             Group editedGroup = deleteMemberFromGroup(groupToBeEdited, index);

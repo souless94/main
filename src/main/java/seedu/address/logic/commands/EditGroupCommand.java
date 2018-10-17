@@ -17,6 +17,7 @@ import seedu.address.model.group.Group;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 
+//@@author Happytreat
 /**
  * Edits the details of an existing group in the address book.
  */
@@ -56,7 +57,7 @@ public class EditGroupCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
-        Group groupToBeEdited = CommandUtil.retrieveGroupFromIndex(model, oldName);
+        Group groupToBeEdited = CommandUtil.retrieveGroupFromName(model, oldName);
 
         Group editedGroup = createEditedGroup(groupToBeEdited, editGroupDescriptor);
 

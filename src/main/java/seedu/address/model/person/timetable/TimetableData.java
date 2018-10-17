@@ -61,7 +61,7 @@ public class TimetableData {
         }
         this.rows = noOfRows;
         this.columns = noOfColumns;
-        String locationFrom = fileName + String.valueOf(index) + ".csv";
+        String locationFrom = fileName + ".csv";
         this.timetable = getTimetableData(locationFrom);
         this.booleanTimetable = booleanTimetableData(format, this.timetable);
     }
@@ -217,10 +217,10 @@ public class TimetableData {
      *
      * @param locationTo location of where to save the file
      */
-    public void downloadTimetableData(int index, String locationTo) {
+    public void downloadTimetableData(String locationTo) {
         // Solution below adapted from bit-question
         // from https://stackoverflow.com/questions/6271796/issues-of-saving-a-matrix-to-a-csv-file
-        String filePath = locationTo + String.valueOf(index) + ".csv";
+        String filePath = locationTo + ".csv";
         try {
             File toWrite = new File(filePath);
             if (!toWrite.exists()) {

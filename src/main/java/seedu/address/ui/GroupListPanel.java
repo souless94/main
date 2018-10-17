@@ -15,10 +15,9 @@ import seedu.address.commons.events.ui.GroupPanelSelectionChangedEvent;
 import seedu.address.commons.events.ui.JumpToListRequestEvent;
 import seedu.address.model.group.Group;
 
-
-
+//@@author Happytreat
 /**
- * Panel containing the list of persons.
+ * Panel containing the list of groups.
  */
 public class GroupListPanel extends UiPart<Region> {
     private static final String FXML = "GroupListPanel.fxml";
