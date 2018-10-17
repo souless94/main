@@ -286,7 +286,7 @@ image::addTimetable-step-3.png[width="300"]
 
 The following sequence diagram shows how `add_timetable` works.
 
-image::addtimetablediagram.png
+image::addtimetablediagram.png[width="500"]
 
 ==== Design Considerations
 * **Alternative 1 (current choice for v1.2):** adds the timetable via a csv file.
