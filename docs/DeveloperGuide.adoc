@@ -1068,33 +1068,62 @@ Use case ends.
 Use case ends.
 
 [discrete]
-=== Use case: create an account
+=== Use case: Create an Account
 *MSS*
 
-1.	New user requests help to create an account
-2.	System shows a prompt on account creation
-3.	User enters username and password as prompted
-4.	Login successful, user now have access to enabled features
-
-
-
+1.	New user prompted to create an account
+2.	User enters create account command as prompted
+3.  System displays account creation success message
 
 *Extensions*
 
-* 3a. User tries to use a duplicate username (username already in use)
+* 2a. User enters a duplicate username (username already in use)
 +
 [none]
-** 3a1.System prompts user to choose a different username
+** 2a1.System prompts user to choose a different username
+
 +
-Use case resumes at step 3.
-* 4a. User entered wrong login details
+Use case resumes at step 2
+
+
+[discrete]
+=== Use case: Login to Account
+*MSS*
+
+1.	User attempts to enter command
+2.	System detects that user is not logged in
+3.  System prompts user to either create account or login to existing account
+4.  User enters login command
+5.  System displays login success message
+
+*Extensions*
+
+* 1a. System detects that user is not logged in
 +
 [none]
-** 4a1.System shows an error message.
+** 1a1.System prompts user to login
 +
-** 4a2. User attempts to login again
+Use case resumes at step 2
+
+* 3a. User does not have an account
 +
-Use case resumes at step 4.
+[none]
+** 3a1.User enters create account command [the continuation of this extension can be found on *create an account* use case]
++
+Use case ends prematurely
+
+
+* 3b. User have an account
++
+Use case resumes at step 4
+
+* 4a. User enters wrong credentials (username and password combination does not match)
++
+[none]
+** 4a1.System prompts user on login fail and to try again
++
+Use case resumes at step 4
+
 
 [discrete]
 === Use case: reset password
