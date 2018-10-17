@@ -14,6 +14,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.timetable.Timetable;
 import seedu.address.model.person.timetable.TimetableData;
 
+//@@author Happytreat
 /**
  * Represents a Group in the address book.
  * Guarantees: Field values are validated, immutable.
