@@ -257,6 +257,59 @@ We are using `java.util.logging` package for logging. The `LogsCenter` class is 
 
 Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file (default: `config.json`).
 
+== implementation
+
+=== timetable feature
+==== current implementation
+
+The `timetable` is contained in `person` which is in `model`.
+
+* `add_timetable` -- adds a timetable from the csv file to the person.
+* `delete_timetable` -- delete a timetable from the person and creates a default timetable in person. It will also find the timetable csv file of the person and deletes it.
+* `download_timetable` -- downloads a timetable into a csv file into a stored folder location from the person.
+
+These operations are handled by the `logic` component and uses the `person` in `model` to do the execution.
+
+Given below is an example usage scenario and how the `add_timetable` behaves at each step.
+
+Step 1: The user launches the application for the first time. The NUS Hangs will initialise the person with the timetable with the details which was stored using Storage.
+
+image:: addTimetable-step-1.png[width="300"]
+
+Step 2:  user opens a timetable of first `person` in the stored location and edits it via microsoft excel or with his preferred software.
+
+image:: addTimetable-step-2.png[width="300"]
+
+Step 3: The user executes `add_timetable 1` to add the timetable of first `person` in stored folder to NUS hangs. A new `timetable` will be created containing the data of the `timetable` of first `person` in stored folder. The `timetable` of first `person` will be replaced by this new `timetable`. The `timetable` is then added to storage as a String.
+
+image:: addTimetable-step-3.png[width="300"]
+
+The following sequence diagram shows how `add_timetable` works.
+
+image:: addtimetablediagram.png
+
+==== Design Considerations
+* **Alternative 1 (current choice for v1.2):** adds the timetable via a csv file.
+** Pros: Easier for user to visualise and edit his timetable
+** Cons: Hard to implement. No choice other than to edit his timetable from the stored folder defined.
+* **Alternative 2 :** adds the timetable via a csv file from other locations.
+** Pros: Easier for user to visualise and edit his timetable and allows user a choice on where to edit his timetable.
+** Cons: Hard to implement, and user has to know how to get file location of a file.
+* **Alternative 3:** User knows how to edit via the xml file of the person.
+** Pros: Easier to implement
+** Cons: User must know how to edit via the xml file of the person, and harder for User to visualise.
+
+===== Aspect: Data structure to support the add_timetable commands
+
+* **Alternative 1 (current choice):** Use a String [][] Matrix to store entries of the timetable.
+** Pros: Easy for new Computer Science student undergraduates to understand, who are likely to be the new incoming developers of our project.
+** Cons: Slower Time efficiency because using 2 for loops to fill the Matrix with the data.
+* **Alternative 2:** Use ArrayList<ArrayList<String>>
+** Pros: Faster Time efficiency because using 1 for loops to fill the Matrix with the data.
+** Cons: Harder for new Computer Science student undergraduates to understand, who are likely to be the new incoming developers of our project.
+
+
+
 == Documentation
 
 We use asciidoc for writing documentation.
@@ -718,39 +771,6 @@ Use case resumes at step 2.
 +
 Use case ends
 
-[discrete]
-=== Use case: Find timetable by Name
-*MSS*
-
-1.	User logins to System and requests help to find a timetable
-2.	System shows how to find a timetable
-3.	User inputs accordingly
-4.	System shows timetable details
-
-
-*Extensions*
-
-* 3a. User enters invalid input.
-+
-[none]
-** 3a1.System shows an error message.
-+
-Use case resumes at step 2.
-+
-* 4a. Friend is not in the System.
-+
-[none]
-** 4a1.System shows an error message.
-+
-Use case resumes at step 2.
-
-[discrete]
-=== Use case: List all timetable
-
-*MSS*
-
-1.	User logins to System and requests help to list all timetable
-2.	System shows a list of all timetable
 
 [discrete]
 === Use case: Delete a timetable
