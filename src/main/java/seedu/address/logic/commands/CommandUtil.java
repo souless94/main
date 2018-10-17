@@ -10,6 +10,7 @@ import seedu.address.model.group.Group;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 
+//@@author Happytreat
 /**
  * Contains helper methods for commands.
  */
@@ -18,7 +19,7 @@ public class CommandUtil {
     /**
      * Retrieves the group with index in displayed Group list
      */
-    public static Group retrieveGroupFromIndex (Model model, Name groupName) throws CommandException {
+    public static Group retrieveGroupFromName(Model model, Name groupName) throws CommandException {
         // Make sure that group exists
         List<Group> lastShownList = model.getFilteredGroupList();
         Group groupToBeEdited = new Group(groupName, ""); //do not know description and groupMembers

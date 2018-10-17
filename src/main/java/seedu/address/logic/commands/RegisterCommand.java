@@ -3,7 +3,12 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_GROUPS;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javafx.util.Pair;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -50,17 +55,22 @@ public class RegisterCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
 
-        Group groupToBeEdited = CommandUtil.retrieveGroupFromIndex(model, groupName);
+        Group groupToBeEdited = CommandUtil.retrieveGroupFromName(model, groupName);
 
         Person personToAdd = CommandUtil.retrievePersonFromIndex(model, index);
 
         try {
-            Group editedGroup = addMemberToGroup(groupToBeEdited, personToAdd);
+            Pair pair = addMemberToGroup(groupToBeEdited, personToAdd);
+            Group editedGroup = (Group) pair.getKey();
+            Person updatedPersonToAdd = (Person) pair.getValue();
 
             model.update(groupToBeEdited, editedGroup);
+            model.update(personToAdd, updatedPersonToAdd);
+
             model.updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
+            model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
             model.commitAddressBook();
-            return new CommandResult(String.format(MESSAGE_EDIT_GROUP_SUCCESS, editedGroup));
+            return new CommandResult(String.format(MESSAGE_EDIT_GROUP_SUCCESS, updatedPersonToAdd));
 
         } catch (DuplicateElementException e) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
@@ -70,15 +80,25 @@ public class RegisterCommand extends Command {
 
     /**
      * Creates and returns a {@code group} with a new member {@code personToAdd}
-     * in {@code groupToBeEdited}
+     * in {@code groupToBeEdited}.
+     * Adds {@code groupToBeEdited} into the list of groups inside {@code personToAdd}.
+     * Returns the updated group and updated person.
      */
-    private static Group addMemberToGroup(Group groupToBeEdited, Person personToAdd) throws DuplicateElementException {
+    private static Pair<Group, Person> addMemberToGroup(Group groupToBeEdited, Person personToAdd)
+            throws DuplicateElementException {
         assert groupToBeEdited != null;
+
+        List<Group> groupList = new ArrayList<>();
+        groupList.add(groupToBeEdited);
+        groupList.addAll(personToAdd.getGroups());
+        personToAdd.setGroups(groupList);
 
         UniqueList<Person> newGroupMembers = new UniqueList<>();
         newGroupMembers.setElements(groupToBeEdited.getGroupMembers());
         newGroupMembers.add(personToAdd);
-        return new Group(groupToBeEdited.getName(), groupToBeEdited.getDescription(), newGroupMembers);
+        Group newGroup = new Group(groupToBeEdited.getName(), groupToBeEdited.getDescription(), newGroupMembers);
+
+        return new Pair(newGroup, personToAdd);
     }
 
     @Override

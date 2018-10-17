@@ -373,7 +373,19 @@ Format: `register FRIEND_INDEX n/GROUP_NAME`
 
 Examples:
 
-* `register 1 n/happyfriends ` +
+* `register 1 n/happyfriends `
+
+=== delete a member from group : `delete_member`
+
+Delete a member from a group using member index displayed with `view_group`. +
+Format: `delete_member MEMBER_INDEX n/GROUP_NAME`
+
+Examples:
+
+* `view_group n/happyfriends`
+* `delete_member 1 n/happyfriends`
+
+deletes the 1st person displayed in `view_group` command.
 
 == Find common time slot in group (Nigel)
 
