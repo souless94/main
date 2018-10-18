@@ -438,16 +438,16 @@ Cons:
 
 === Group Feature
 
-The `Group` class extends the `Entity` abstract class just like a `Person` class does. An `Entity` contains an abstract method `isSame` that is necessary for the class to be used in `UniqueList<T extends Entity>`. `Group` class is an immutable class that is contained inside `Model`. 
+The `Group` class extends the `Entity` abstract class just like a `Person` class does. An `Entity` contains an abstract method `isSame` that is necessary for the class to be used in `UniqueList<T extends Entity>`. `Group` class is an immutable class that is contained inside `Model`.
 
-`Group` features make use of `Storage` to load information on groups added by the user before the UI is closed. `XmlAdaptedGroup` class helps the convert groups detail from xml files to the `AddressBook` when `MainApp` starts and similarly convert `Group` objects into xml files.  
+`Group` features make use of `Storage` to load information on groups added by the user before the UI is closed. `XmlAdaptedGroup` class helps the convert groups detail from xml files to the `AddressBook` when `MainApp` starts and similarly convert `Group` objects into xml files.
 
-`Group` features also updates the Group Panel inside the `UI` using a predicate. 
+`Group` features also updates the Group Panel inside the `UI` using a predicate.
 
 [MelodiesTODO: Add diagram showing how Group class interacts with Storage, UI, Model and Logic]
 
 ==== Current Implementation
-The current group commands added are: 
+The current group commands added are:
 
 * `add_group` -- adds a group with an optional description
 * `delete_group` -- deletes a group and all references from its members to it
@@ -455,7 +455,7 @@ The current group commands added are:
 * `find_group` -- search for groups using keywords that must match exactly a word in Group name (TODO v1.4: Edit to find_group keyword matches substring of a word in group name or description)
 * `register` -- register a member into an existing group and include a reference to the group in the member (Person class)
 * `delete_member` -- delete an existing member from an existing group and remove reference to that group in the member
-* `view_group` -- view the existing members in the group and is updated whenever any member is added or deleted. 
+* `view_group` -- view the existing members in the group and is updated whenever any member is added or deleted.
 * `list` -- lists both the updated list of groups and persons
 
 These functions and their parsers are handled in `Logic`, makes use of and updates `Model` and `Storage` and displaying the updated result on the `UI`.
@@ -466,7 +466,7 @@ Step 1: The user launches the application. (Assuming that the user has already a
 
 Step 2:The user enters the index of the person and name of the group he wants to add the person into. `RegisterParser` creates a new `RegisterCommand` object with the Person and Group that is involved which checks whether the person and group already exist (else throwing `CommandException`).
 
-Step 3: `RegisterCommand` adds the person as a member in the group and adds a reference to the group inside the person's `List<Group>`. Since `Group` and `Person` are immutable classes, a new object has to be created in this step. 
+Step 3: `RegisterCommand` adds the person as a member in the group and adds a reference to the group inside the person's `List<Group>`. Since `Group` and `Person` are immutable classes, a new object has to be created in this step.
 
 Step 4: `Model` is updated of the new `Group` and `Person`. `FilteredPersonList` and `FilteredGroupList` is also updated to display the new groups and persons in the `UI`. A successful message is also displayed to the user below the UI's command box.
 [MelodiesTODO: Elaborate on how connection to UI is created.]
@@ -477,31 +477,31 @@ Step 4: `Model` is updated of the new `Group` and `Person`. `FilteredPersonList`
 
 Aspect: How to implement `Group` class
 
-*Alternative 1 (current choice):* `Group` as an immutable class. 
+*Alternative 1 (current choice):* `Group` as an immutable class.
 
 Pros: Immutable objects are good Map keys and Set elements, since these typically do not change once created. Immutability makes it easier to write, use and reason about the code.
 
-Cons: Doing so might restrict the way one can call the class and its methods. It may be slower as you have to create new objects with every command. 
+Cons: Doing so might restrict the way one can call the class and its methods. It may be slower as you have to create new objects with every command.
 
 *Alternative 2:* Setter methods for Groups
 
-Pros: Easier and less code for methods involving groups. Faster as do not have to create new objects each time you change a Group (e.g. edit its description or group members). 
+Pros: Easier and less code for methods involving groups. Faster as do not have to create new objects each time you change a Group (e.g. edit its description or group members).
 
 Cons: Miss out on the advantages of immutable object (above). Good practice to use immutable objects.
 
 Aspect: Interactions between person and groups
 
-Deleting a person from a group will affect the person's reference to that group and vice versa (similar for adding and editing). 
+Deleting a person from a group will affect the person's reference to that group and vice versa (similar for adding and editing).
 
-*Alternative 1 (current choice):* Having a `UniqueList<Groups>` in `Person` and `UniqueList<Person>` in `Group`. 
+*Alternative 1 (current choice):* Having a `UniqueList<Groups>` in `Person` and `UniqueList<Person>` in `Group`.
 
-Pros: Easy to retrieve groups from Person and persons from Group. Existing `UniqueList` class available (since already used in `Model`). 
+Pros: Easy to retrieve groups from Person and persons from Group. Existing `UniqueList` class available (since already used in `Model`).
 
-Cons: Have to update both lists in most group commands (e.g. registering a new member in a group). Issue of enforcing referential integrity - defensive programming. 
+Cons: Have to update both lists in most group commands (e.g. registering a new member in a group). Issue of enforcing referential integrity - defensive programming.
 
 *Alternative 2* Just update the list of groups in `Model` and have person refer to that list of group as to whether it is a member of the group.
 
-Pros: Less issues with enforcing referential integrity (see alternative 1). 
+Pros: Less issues with enforcing referential integrity (see alternative 1).
 
 Cons: Can be more expensive to look for groups for a particular person.
 
@@ -1318,4 +1318,3 @@ _{ more test cases ... }_
    Expected: Similar to previous.
 
 _{ more test cases ... }_
-
