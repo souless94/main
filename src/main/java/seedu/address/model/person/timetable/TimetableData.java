@@ -253,8 +253,7 @@ public class TimetableData {
                 for (int j = 1; j <= rows; j++) {
                     if (timetable[i][j].equals(" ")) {
                         booleanTimetable[i][j] = true;
-                    }
-                    else {
+                    } else {
                         booleanTimetable[i][j] = false;
                     }
                 }
@@ -264,8 +263,7 @@ public class TimetableData {
                 for (int j = 1; j <= columns; j++) {
                     if (timetable[i][j].equals(" ")) {
                         booleanTimetable[j][i] = true;
-                    }
-                    else {
+                    } else {
                         booleanTimetable[j][i] = false;
                     }
                 }

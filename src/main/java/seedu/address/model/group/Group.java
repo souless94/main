@@ -2,16 +2,16 @@ package seedu.address.model.group;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.Comparator;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Objects;
-import java.util.stream.Collectors;
 import java.util.TreeMap;
 import java.util.TreeSet;
+import java.util.stream.Collectors;
 
 import javafx.collections.ObservableList;
 
@@ -136,8 +136,7 @@ public class Group extends Entity {
                     }
                 }
                 isFirstPerson = false;
-            }
-            else {
+            } else {
                 while (slotsItr.hasNext()) {
                     int currTimeslot = slotsItr.next();
                     int row = currTimeslot / 100;
@@ -180,8 +179,7 @@ public class Group extends Entity {
                         if (availableSlots.containsKey(slot)) {
                             int count = availableSlots.get(slot) + 1;
                             availableSlots.put(slot, count);
-                        }
-                        else {
+                        } else {
                             availableSlots.put(slot, 1);
                         }
                     }
@@ -189,8 +187,10 @@ public class Group extends Entity {
             }
         }
         Map<Integer, Integer> sortedSlots = availableSlots.entrySet().stream()
-                                                            .sorted(Collections.reverseOrder(Comparator.comparing(Entry::getValue)))
-                                                            .collect(Collectors.toMap(Entry::getKey, Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
+                                                          .sorted(Collections.reverseOrder
+                                                                  (Comparator.comparing(Entry::getValue)))
+                                                          .collect(Collectors.toMap(Entry::getKey, Entry::getValue, 
+                                                                  (e1, e2) -> e1, LinkedHashMap::new));
         int prev = 0;
         for (Integer key : sortedSlots.keySet()) {
             int currTimeslot = key;
