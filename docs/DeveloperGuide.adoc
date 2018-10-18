@@ -202,6 +202,7 @@ Given below is the Sequence Diagram for interactions within the `Logic` componen
 .Interactions Inside the Logic Component for the `delete 1` Command
 image::DeletePersonSdForLogic.png[width="800"]
 
+
 [[Design-Model]]
 === Model component
 
@@ -256,6 +257,184 @@ We are using `java.util.logging` package for logging. The `LogsCenter` class is 
 === Configuration
 
 Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file (default: `config.json`).
+
+== Implementation
+
+This section describes some noteworthy details on how certain features are implemented.
+
+=== timetable feature
+==== current implementation
+
+The `timetable` is contained in `person` which is in `model`.
+
+* `add_timetable` -- adds a timetable from the csv file to the person.
+* `delete_timetable` -- delete a timetable from the person and creates a default timetable in person. It will also find the timetable csv file of the person and deletes it.
+* `download_timetable` -- downloads a timetable into a csv file into a stored folder location from the person.
+
+These operations are handled by the `logic` component and uses the `person` in `model` to do the execution.
+
+Given below is an example usage scenario and how the `add_timetable` behaves at each step.
+
+Step 1: The user launches the application for the first time. The NUS Hangs will initialise the person with the timetable with the details which was stored using Storage.
+
+image::addTimetable-step-1.png[width="300"]
+
+Step 2:  user opens a timetable of first `person` in the stored location and edits it via microsoft excel or with his preferred software.
+
+image::addTimetable-step-2.png[width="300"]
+
+Step 3: The user executes `add_timetable 1` to add the timetable of first `person` in stored folder to NUS hangs. A new `timetable` will be created containing the data of the `timetable` of first `person` in stored folder. The `timetable` of first `person` will be replaced by this new `timetable`. The `timetable` is then added to storage as a String.
+
+image::addTimetable-step-3.png[width="300"]
+
+The following sequence diagram shows how `add_timetable` works.
+
+image::addtimetablediagram.png[width="500"]
+
+==== Design Considerations
+* **Alternative 1 (current choice for v1.2):** adds the timetable via a csv file.
+** Pros: Easier for user to visualise and edit his timetable
+** Cons: Hard to implement. No choice other than to edit his timetable from the stored folder defined.
+* **Alternative 2 :** adds the timetable via a csv file from other locations.
+** Pros: Easier for user to visualise and edit his timetable and allows user a choice on where to edit his timetable.
+** Cons: Hard to implement, and user has to know how to get file location of a file.
+* **Alternative 3:** User knows how to edit via the xml file of the person.
+** Pros: Easier to implement
+** Cons: User must know how to edit via the xml file of the person, and harder for User to visualise.
+
+===== Aspect: Data structure to support the add_timetable commands
+
+* **Alternative 1 (current choice):** Use a String [][] Matrix to store entries of the timetable.
+** Pros: Easy for new Computer Science student undergraduates to understand, who are likely to be the new incoming developers of our project.
+** Cons: Slower Time efficiency because using 2 for loops to fill the Matrix with the data.
+* **Alternative 2:** Use ArrayList<ArrayList<String>>
+** Pros: Faster Time efficiency because using 1 for loops to fill the Matrix with the data.
+** Cons: Harder for new Computer Science student undergraduates to understand, who are likely to be the new incoming developers of our project.
+
+=== Security Mechanism
+
+The main objectives of the security mechanism includes:
+
+* Preventing unauthorised usage of the application
+* Preventing unauthorised access and editing rights to the data stored within the application
+
+The following activity diagram illustrates how the workflow is restricted through the security mechanism.
+
+.Activity Diagram of Security Mechanism
+image::SecurityMechanismActivityDiagram.png[width="800"]
+
+
+To prevent unauthorised access (read, edit and other commands) of application users are required to login to the application. Each users would only be able to access data created by themselves or data which they have been granted rights to access.
+
+To meet this end, various functions are implemented.
+
+
+==== Current Implementation
+
+
+*Account Creation and Login* [implemented in v1.1, incomplete]
+
+The first step in securing the system is to restrict access to unauthorised users. This is accomplished by setting up `create` and `login` functions.
+
+- `create`: creates an account
+- `login`: login to account
+
+Both functions are handled by the logic component, make use of the model component and is eventually managed through the storage component.
+
+The username is stored as a key in a hashmap while the password is encrypted and stored as the value. By using a hashmap to store the account login credentials, it becomes easy to implement the create and login function.
+
+*To be implemented: *
+
+convert hashmap storage into XML and vice-versa
+
+*Password Encryption* [implemented in v1.2, to be improved]
+
+To prevent unauthorised users from getting the password by looking at the .xml files, the password is encrypted before storage. This is done by implementing Java Cryptography module.
+
+
+*Login Status Check* [to be implemented in v1.3]
+
+Next, there is a need to check if user is logged in before executing any entered commands. This is done by implementing a check function in the AddressBookParser.
+
+
+
+Step 1: A new user launches the application for the first time. The welcome page would prompt the user to create an account and refer to `help` function for more details.
+
+[LeslieTODO: to be updated - add image]
+image::SecurityMechanism-Step01-Diagram.png[width="300"]
+
+Step 2: The user follows the prompt to create an account, supplying a username and password.
+[LeslieTODO: to be updated - add image]
+image::SecurityMechanism-Step02-Diagram.png[width="300"]
+
+Step 2a: The user supplies a duplicate username and is prompted to choose another.
+[LeslieTODO: to be updated - add image]
+image::SecurityMechanism-Step02a-Diagram.png[width="300"]
+
+Step 2b: The user supplies a unique username and the account is successfully created.
+[LeslieTODO: to be updated - add image]
+image::SecurityMechanism-Step02b-Diagram.png[width="300"]
+
+Step 3: The user is prompted to login.
+[LeslieTODO: to be updated - add image]
+image::SecurityMechanism-Step03-Diagram.png[width="300"]
+
+Step 3a: The user supplies the wrong login credentials.
+[LeslieTODO: to be updated - add image]
+image::SecurityMechanism-Step03a-Diagram.png[width="300"]
+
+Step 3b: The user supplies the right login credentials.
+[LeslieTODO: to be updated - add image]
+image::SecurityMechanism-Step03b-Diagram.png[width="300"]
+
+Step 4: The user now have access to most of the commands.
+[LeslieTODO: to be updated - add image]
+image::SecurityMechanism-Step04-Diagram.png[width="300"]
+
+In version 1.1, the implementation is up to step 3b.
+In version 1.2, the user password is encrypted to prevent loss of password.
+In version 1.3, step 4 would be implemented.
+
+In version 2.0, encryption would be extended to other essential data stored within the system.
+
+==== Design Considerations
+
+Aspect: Create and Login
+
+*Alternative 1 (current choice):* create stores data in a hashmap.
+
+Pros:
+
+- hashmap does not allows duplicate keys, making it easy to implement
+
+Cons:
+
+- [LeslieTODO: to be updated]
+
+*Alternative 2:*
+
+Pros:
+
+- [LeslieTODO: to be updated]
+
+Cons:
+
+- [LeslieTODO: to be updated]
+
+
+[LeslieTODO: to be updated: ]
+
+Aspect: How encryption executes
+
+*Alternative 1 (current choice):* a function call to encryption before storing password data into hashmap. when logging in, a function call encrypts the user entered password before comparing to stored password in hashmap
+
+Pros:
+
+- hashmap does not allows duplicate keys, making it easy to implement
+
+Cons:
+
+- [LeslieTODO: to be updated]
 
 == Documentation
 
@@ -718,39 +897,6 @@ Use case resumes at step 2.
 +
 Use case ends
 
-[discrete]
-=== Use case: Find timetable by Name
-*MSS*
-
-1.	User logins to System and requests help to find a timetable
-2.	System shows how to find a timetable
-3.	User inputs accordingly
-4.	System shows timetable details
-
-
-*Extensions*
-
-* 3a. User enters invalid input.
-+
-[none]
-** 3a1.System shows an error message.
-+
-Use case resumes at step 2.
-+
-* 4a. Friend is not in the System.
-+
-[none]
-** 4a1.System shows an error message.
-+
-Use case resumes at step 2.
-
-[discrete]
-=== Use case: List all timetable
-
-*MSS*
-
-1.	User logins to System and requests help to list all timetable
-2.	System shows a list of all timetable
 
 [discrete]
 === Use case: Delete a timetable
@@ -961,33 +1107,62 @@ Use case ends.
 Use case ends.
 
 [discrete]
-=== Use case: create an account
+=== Use case: Create an Account
 *MSS*
 
-1.	New user requests help to create an account
-2.	System shows a prompt on account creation
-3.	User enters username and password as prompted
-4.	Login successful, user now have access to enabled features
-
-
-
+1.	New user prompted to create an account
+2.	User enters create account command as prompted
+3.  System displays account creation success message
 
 *Extensions*
 
-* 3a. User tries to use a duplicate username (username already in use)
+* 2a. User enters a duplicate username (username already in use)
 +
 [none]
-** 3a1.System prompts user to choose a different username
+** 2a1.System prompts user to choose a different username
+
 +
-Use case resumes at step 3.
-* 4a. User entered wrong login details
+Use case resumes at step 2
+
+
+[discrete]
+=== Use case: Login to Account
+*MSS*
+
+1.	User attempts to enter command
+2.	System detects that user is not logged in
+3.  System prompts user to either create account or login to existing account
+4.  User enters login command
+5.  System displays login success message
+
+*Extensions*
+
+* 1a. System detects that user is not logged in
 +
 [none]
-** 4a1.System shows an error message.
+** 1a1.System prompts user to login
 +
-** 4a2. User attempts to login again
+Use case resumes at step 2
+
+* 3a. User does not have an account
 +
-Use case resumes at step 4.
+[none]
+** 3a1.User enters create account command [the continuation of this extension can be found on *create an account* use case]
++
+Use case ends prematurely
+
+
+* 3b. User have an account
++
+Use case resumes at step 4
+
+* 4a. User enters wrong credentials (username and password combination does not match)
++
+[none]
+** 4a1.System prompts user on login fail and to try again
++
+Use case resumes at step 4
+
 
 [discrete]
 === Use case: reset password
