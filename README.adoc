@@ -1,4 +1,6 @@
 = Nus Hangs
+
+image:https://api.codacy.com/project/badge/Grade/ad9658a1eccc44ffb117fb932e9be66b[link="https://app.codacy.com/app/Happytreat/main?utm_source=github.com&utm_medium=referral&utm_content=CS2103-AY1819S1-F11-4/main&utm_campaign=Badge_Grade_Dashboard"]
 ifdef::env-github,env-browser[:relfileprefix: docs/]
 
 https://travis-ci.org/CS2103-AY1819S1-F11-4/main[image:https://travis-ci.org/CS2103-AY1819S1-F11-4/main.svg?branch=master[Build Status]]
