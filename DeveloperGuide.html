@@ -29,31 +29,38 @@
 <li><a href="#Implementation-Configuration">2.8. Configuration</a></li>
 </ul>
 </li>
-<li><a href="#documentation">3. Documentation</a>
+<li><a href="#implementation">3. Implementation</a>
 <ul class="sectlevel2">
-<li><a href="#editing-documentation">3.1. Editing Documentation</a></li>
-<li><a href="#publishing-documentation">3.2. Publishing Documentation</a></li>
-<li><a href="#converting-documentation-to-pdf-format">3.3. Converting Documentation to PDF format</a></li>
-<li><a href="#Docs-SiteWideDocSettings">3.4. Site-wide Documentation Settings</a></li>
-<li><a href="#Docs-PerFileDocSettings">3.5. Per-file Documentation Settings</a></li>
-<li><a href="#site-template">3.6. Site Template</a></li>
+<li><a href="#timetable-feature">3.1. Timetable Feature</a></li>
+<li><a href="#security-mechanism">3.2. Security Mechanism</a></li>
+<li><a href="#group-feature">3.3. Group Feature</a></li>
 </ul>
 </li>
-<li><a href="#Testing">4. Testing</a>
+<li><a href="#documentation">4. Documentation</a>
 <ul class="sectlevel2">
-<li><a href="#running-tests">4.1. Running Tests</a></li>
-<li><a href="#types-of-tests">4.2. Types of tests</a></li>
-<li><a href="#troubleshooting-testing">4.3. Troubleshooting Testing</a></li>
+<li><a href="#editing-documentation">4.1. Editing Documentation</a></li>
+<li><a href="#publishing-documentation">4.2. Publishing Documentation</a></li>
+<li><a href="#converting-documentation-to-pdf-format">4.3. Converting Documentation to PDF format</a></li>
+<li><a href="#Docs-SiteWideDocSettings">4.4. Site-wide Documentation Settings</a></li>
+<li><a href="#Docs-PerFileDocSettings">4.5. Per-file Documentation Settings</a></li>
+<li><a href="#site-template">4.6. Site Template</a></li>
 </ul>
 </li>
-<li><a href="#dev-ops">5. Dev Ops</a>
+<li><a href="#Testing">5. Testing</a>
 <ul class="sectlevel2">
-<li><a href="#build-automation">5.1. Build Automation</a></li>
-<li><a href="#continuous-integration">5.2. Continuous Integration</a></li>
-<li><a href="#coverage-reporting">5.3. Coverage Reporting</a></li>
-<li><a href="#documentation-previews">5.4. Documentation Previews</a></li>
-<li><a href="#making-a-release">5.5. Making a Release</a></li>
-<li><a href="#managing-dependencies">5.6. Managing Dependencies</a></li>
+<li><a href="#running-tests">5.1. Running Tests</a></li>
+<li><a href="#types-of-tests">5.2. Types of tests</a></li>
+<li><a href="#troubleshooting-testing">5.3. Troubleshooting Testing</a></li>
+</ul>
+</li>
+<li><a href="#dev-ops">6. Dev Ops</a>
+<ul class="sectlevel2">
+<li><a href="#build-automation">6.1. Build Automation</a></li>
+<li><a href="#continuous-integration">6.2. Continuous Integration</a></li>
+<li><a href="#coverage-reporting">6.3. Coverage Reporting</a></li>
+<li><a href="#documentation-previews">6.4. Documentation Previews</a></li>
+<li><a href="#making-a-release">6.5. Making a Release</a></li>
+<li><a href="#managing-dependencies">6.6. Managing Dependencies</a></li>
 </ul>
 </li>
 <li><a href="#product-scope">Appendix A: Product Scope</a></li>
@@ -612,7 +619,490 @@ Note how the event is propagated through the <code>EventsCenter</code> to the <c
 </div>
 </div>
 <div class="sect1">
-<h2 id="documentation"><a class="link" href="#documentation">3. Documentation</a></h2>
+<h2 id="implementation"><a class="link" href="#implementation">3. Implementation</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This section describes some noteworthy details on how certain features are implemented.</p>
+</div>
+<div class="sect2">
+<h3 id="timetable-feature"><a class="link" href="#timetable-feature">3.1. Timetable Feature</a></h3>
+<div class="sect3">
+<h4 id="current-implementation"><a class="link" href="#current-implementation">3.1.1. Current Implementation</a></h4>
+<div class="paragraph">
+<p>The <code>timetable</code> is contained in <code>person</code> which is in <code>model</code>.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>add_timetable</code>&#8201;&#8212;&#8201;adds a timetable from the csv file to the person.</p>
+</li>
+<li>
+<p><code>delete_timetable</code>&#8201;&#8212;&#8201;delete a timetable from the person and creates a default timetable in person. It will also find the timetable csv file of the person and deletes it.</p>
+</li>
+<li>
+<p><code>download_timetable</code>&#8201;&#8212;&#8201;downloads a timetable into a csv file into a stored folder location from the person.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>These operations are handled by the <code>logic</code> component and uses the <code>person</code> in <code>model</code> to do the execution.</p>
+</div>
+<div class="paragraph">
+<p>Given below is an example usage scenario and how the <code>add_timetable</code> behaves at each step.</p>
+</div>
+<div class="paragraph">
+<p>Step 1: The user launches the application for the first time. The NUS Hangs will initialise the person with the timetable with the details which was stored using Storage.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/addTimetable-step-1.png" alt="addTimetable step 1" width="300">
+</div>
+</div>
+<div class="paragraph">
+<p>Step 2:  user opens a timetable of first <code>person</code> in the stored location and edits it via microsoft excel or with his preferred software.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/addTimetable-step-2.png" alt="addTimetable step 2" width="300">
+</div>
+</div>
+<div class="paragraph">
+<p>Step 3: The user executes <code>add_timetable 1</code> to add the timetable of first <code>person</code> in stored folder to NUS hangs. A new <code>timetable</code> will be created containing the data of the <code>timetable</code> of first <code>person</code> in stored folder. The <code>timetable</code> of first <code>person</code> will be replaced by this new <code>timetable</code>. The <code>timetable</code> is then added to storage as a String.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/addTimetable-step-3.png" alt="addTimetable step 3" width="300">
+</div>
+</div>
+<div class="paragraph">
+<p>The following sequence diagram shows how <code>add_timetable</code> works.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/addtimetablediagram.png" alt="addtimetablediagram" width="500">
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations"><a class="link" href="#design-considerations">3.1.2. Design Considerations</a></h4>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice for v1.2):</strong> adds the timetable via a csv file.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easier for user to visualise and edit his timetable</p>
+</li>
+<li>
+<p>Cons: Hard to implement. No choice other than to edit his timetable from the stored folder defined.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2 :</strong> adds the timetable via a csv file from other locations.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easier for user to visualise and edit his timetable and allows user a choice on where to edit his timetable.</p>
+</li>
+<li>
+<p>Cons: Hard to implement, and user has to know how to get file location of a file.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 3:</strong> User knows how to edit via the xml file of the person.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easier to implement</p>
+</li>
+<li>
+<p>Cons: User must know how to edit via the xml file of the person, and harder for User to visualise.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="sect4">
+<h5 id="aspect-data-structure-to-support-the-add_timetable-commands"><a class="link" href="#aspect-data-structure-to-support-the-add_timetable-commands">Aspect: Data structure to support the add_timetable commands</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Use a String [][] Matrix to store entries of the timetable.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easy for new Computer Science student undergraduates to understand, who are likely to be the new incoming developers of our project.</p>
+</li>
+<li>
+<p>Cons: Slower Time efficiency because using 2 for loops to fill the Matrix with the data.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Use ArrayList&lt;ArrayList&lt;String&gt;&gt;</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Faster Time efficiency because using 1 for loops to fill the Matrix with the data.</p>
+</li>
+<li>
+<p>Cons: Harder for new Computer Science student undergraduates to understand, who are likely to be the new incoming developers of our project.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="security-mechanism"><a class="link" href="#security-mechanism">3.2. Security Mechanism</a></h3>
+<div class="paragraph">
+<p>The main objectives of the security mechanism includes:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Preventing unauthorised usage of the application</p>
+</li>
+<li>
+<p>Preventing unauthorised access and editing rights to the data stored within the application</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The following activity diagram illustrates how the workflow is restricted through the security mechanism.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/SecurityMechanismActivityDiagram.png" alt="SecurityMechanismActivityDiagram" width="800">
+</div>
+<div class="title">Figure 10. Activity Diagram of Security Mechanism</div>
+</div>
+<div class="paragraph">
+<p>To prevent unauthorised access (read, edit and other commands) of application users are required to login to the application. Each users would only be able to access data created by themselves or data which they have been granted rights to access.</p>
+</div>
+<div class="paragraph">
+<p>To meet this end, various functions are implemented.</p>
+</div>
+<div class="sect3">
+<h4 id="current-implementation-2"><a class="link" href="#current-implementation-2">3.2.1. Current Implementation</a></h4>
+<div class="paragraph">
+<p><strong>Account Creation and Login</strong> [implemented in v1.1, incomplete]</p>
+</div>
+<div class="paragraph">
+<p>The first step in securing the system is to restrict access to unauthorised users. This is accomplished by setting up <code>create</code> and <code>login</code> functions.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>create</code>: creates an account</p>
+</li>
+<li>
+<p><code>login</code>: login to account</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Both functions are handled by the logic component, make use of the model component and is eventually managed through the storage component.</p>
+</div>
+<div class="paragraph">
+<p>The username is stored as a key in a hashmap while the password is encrypted and stored as the value. By using a hashmap to store the account login credentials, it becomes easy to implement the create and login function.</p>
+</div>
+<div class="paragraph">
+<p>*To be implemented: *</p>
+</div>
+<div class="paragraph">
+<p>convert hashmap storage into XML and vice-versa</p>
+</div>
+<div class="paragraph">
+<p><strong>Password Encryption</strong> [implemented in v1.2, to be improved]</p>
+</div>
+<div class="paragraph">
+<p>To prevent unauthorised users from getting the password by looking at the .xml files, the password is encrypted before storage. This is done by implementing Java Cryptography module.</p>
+</div>
+<div class="paragraph">
+<p><strong>Login Status Check</strong> [to be implemented in v1.3]</p>
+</div>
+<div class="paragraph">
+<p>Next, there is a need to check if user is logged in before executing any entered commands. This is done by implementing a check function in the AddressBookParser.</p>
+</div>
+<div class="paragraph">
+<p>Step 1: A new user launches the application for the first time. The welcome page would prompt the user to create an account and refer to <code>help</code> function for more details.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/SecurityMechanism-Step01-Diagram.png" alt="LeslieTODO: to be updated - add image" width="300">
+</div>
+</div>
+<div class="paragraph">
+<p>Step 2: The user follows the prompt to create an account, supplying a username and password.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/SecurityMechanism-Step02-Diagram.png" alt="LeslieTODO: to be updated - add image" width="300">
+</div>
+</div>
+<div class="paragraph">
+<p>Step 2a: The user supplies a duplicate username and is prompted to choose another.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/SecurityMechanism-Step02a-Diagram.png" alt="LeslieTODO: to be updated - add image" width="300">
+</div>
+</div>
+<div class="paragraph">
+<p>Step 2b: The user supplies a unique username and the account is successfully created.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/SecurityMechanism-Step02b-Diagram.png" alt="LeslieTODO: to be updated - add image" width="300">
+</div>
+</div>
+<div class="paragraph">
+<p>Step 3: The user is prompted to login.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/SecurityMechanism-Step03-Diagram.png" alt="LeslieTODO: to be updated - add image" width="300">
+</div>
+</div>
+<div class="paragraph">
+<p>Step 3a: The user supplies the wrong login credentials.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/SecurityMechanism-Step03a-Diagram.png" alt="LeslieTODO: to be updated - add image" width="300">
+</div>
+</div>
+<div class="paragraph">
+<p>Step 3b: The user supplies the right login credentials.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/SecurityMechanism-Step03b-Diagram.png" alt="LeslieTODO: to be updated - add image" width="300">
+</div>
+</div>
+<div class="paragraph">
+<p>Step 4: The user now have access to most of the commands.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/SecurityMechanism-Step04-Diagram.png" alt="LeslieTODO: to be updated - add image" width="300">
+</div>
+</div>
+<div class="paragraph">
+<p>In version 1.1, the implementation is up to step 3b.
+In version 1.2, the user password is encrypted to prevent loss of password.
+In version 1.3, step 4 would be implemented.</p>
+</div>
+<div class="paragraph">
+<p>In version 2.0, encryption would be extended to other essential data stored within the system.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">3.2.2. Design Considerations</a></h4>
+<div class="paragraph">
+<p>Aspect: Create and Login</p>
+</div>
+<div class="paragraph">
+<p><strong>Alternative 1 (current choice):</strong> create stores data in a hashmap.</p>
+</div>
+<div class="paragraph">
+<p>Pros:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>hashmap does not allows duplicate keys, making it easy to implement</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Cons:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>[LeslieTODO: to be updated]</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Alternative 2:</strong></p>
+</div>
+<div class="paragraph">
+<p>Pros:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>[LeslieTODO: to be updated]</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Cons:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>[LeslieTODO: to be updated]</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Aspect: How encryption executes</p>
+</div>
+<div class="paragraph">
+<p><strong>Alternative 1 (current choice):</strong> a function call to encryption before storing password data into hashmap. when logging in, a function call encrypts the user entered password before comparing to stored password in hashmap</p>
+</div>
+<div class="paragraph">
+<p>Pros:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>hashmap does not allows duplicate keys, making it easy to implement</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Cons:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>[LeslieTODO: to be updated]</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="group-feature"><a class="link" href="#group-feature">3.3. Group Feature</a></h3>
+<div class="paragraph">
+<p>The <code>Group</code> class extends the <code>Entity</code> abstract class just like a <code>Person</code> class does. An <code>Entity</code> contains an abstract method <code>isSame</code> that is necessary for the class to be used in <code>UniqueList&lt;T extends Entity&gt;</code>. <code>Group</code> class is an immutable class that is contained inside <code>Model</code>.</p>
+</div>
+<div class="paragraph">
+<p><code>Group</code> features make use of <code>Storage</code> to load information on groups added by the user before the UI is closed. <code>XmlAdaptedGroup</code> class helps the convert groups detail from xml files to the <code>AddressBook</code> when <code>MainApp</code> starts and similarly convert <code>Group</code> objects into xml files.</p>
+</div>
+<div class="paragraph">
+<p><code>Group</code> features also updates the Group Panel inside the <code>UI</code> using a predicate.</p>
+</div>
+<div class="sect3">
+<h4 id="current-implementation-3"><a class="link" href="#current-implementation-3">Current Implementation</a></h4>
+<div class="paragraph">
+<p>The current group commands added are:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>add_group</code>&#8201;&#8212;&#8201;adds a group with an optional description</p>
+</li>
+<li>
+<p><code>delete_group</code>&#8201;&#8212;&#8201;deletes a group and all references from its members to it</p>
+</li>
+<li>
+<p><code>edit_group</code>&#8201;&#8212;&#8201;edit name/description of a group, maintaining uniqueness in group names</p>
+</li>
+<li>
+<p><code>find_group</code>&#8201;&#8212;&#8201;search for groups using keywords that must match exactly a word in Group name (TODO v1.4: Edit to find_group keyword matches substring of a word in group name or description)</p>
+</li>
+<li>
+<p><code>register</code>&#8201;&#8212;&#8201;register a member into an existing group and include a reference to the group in the member (Person class)</p>
+</li>
+<li>
+<p><code>delete_member</code>&#8201;&#8212;&#8201;delete an existing member from an existing group and remove reference to that group in the member</p>
+</li>
+<li>
+<p><code>view_group</code>&#8201;&#8212;&#8201;view the existing members in the group and is updated whenever any member is added or deleted.</p>
+</li>
+<li>
+<p><code>list</code>&#8201;&#8212;&#8201;lists both the updated list of groups and persons</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>These functions and their parsers are handled in <code>Logic</code>, makes use of and updates <code>Model</code> and <code>Storage</code> and displaying the updated result on the <code>UI</code>.</p>
+</div>
+<div class="paragraph">
+<p>Given below is an example usage scenario and how <code>register</code> behaves at each stop.</p>
+</div>
+<div class="paragraph">
+<p>Step 1: The user launches the application. (Assuming that the user has already added a group and person.) <code>VersionedAddressBook</code> will be loaded with the final addressbook state before the application is closed. Lists of groups and persons added previously will be loaded from storage xml file into <code>Model</code> using <code>XmlAdaptedPerson</code> and <code>XmlAdaptedGroup</code> classes. The updated lists will be displayed in the <code>UI</code>.</p>
+</div>
+<div class="paragraph">
+<p>Step 2:The user enters the index of the person and name of the group he wants to add the person into. <code>RegisterParser</code> creates a new <code>RegisterCommand</code> object with the Person and Group that is involved which checks whether the person and group already exist (else throwing <code>CommandException</code>).</p>
+</div>
+<div class="paragraph">
+<p>Step 3: <code>RegisterCommand</code> adds the person as a member in the group and adds a reference to the group inside the person&#8217;s <code>List&lt;Group&gt;</code>. Since <code>Group</code> and <code>Person</code> are immutable classes, a new object has to be created in this step.</p>
+</div>
+<div class="paragraph">
+<p>Step 4: <code>Model</code> is updated of the new <code>Group</code> and <code>Person</code>. <code>FilteredPersonList</code> and <code>FilteredGroupList</code> is also updated to display the new groups and persons in the <code>UI</code>. A successful message is also displayed to the user below the UI&#8217;s command box.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">Design Considerations</a></h4>
+<div class="paragraph">
+<p>Aspect: How to implement <code>Group</code> class</p>
+</div>
+<div class="paragraph">
+<p><strong>Alternative 1 (current choice):</strong> <code>Group</code> as an immutable class.</p>
+</div>
+<div class="paragraph">
+<p>Pros: Immutable objects are good Map keys and Set elements, since these typically do not change once created. Immutability makes it easier to write, use and reason about the code.</p>
+</div>
+<div class="paragraph">
+<p>Cons: Doing so might restrict the way one can call the class and its methods. It may be slower as you have to create new objects with every command.</p>
+</div>
+<div class="paragraph">
+<p><strong>Alternative 2:</strong> Setter methods for Groups</p>
+</div>
+<div class="paragraph">
+<p>Pros: Easier and less code for methods involving groups. Faster as do not have to create new objects each time you change a Group (e.g. edit its description or group members).</p>
+</div>
+<div class="paragraph">
+<p>Cons: Miss out on the advantages of immutable object (above). Good practice to use immutable objects.</p>
+</div>
+<div class="paragraph">
+<p>Aspect: Interactions between person and groups</p>
+</div>
+<div class="paragraph">
+<p>Deleting a person from a group will affect the person&#8217;s reference to that group and vice versa (similar for adding and editing).</p>
+</div>
+<div class="paragraph">
+<p><strong>Alternative 1 (current choice):</strong> Having a <code>UniqueList&lt;Groups&gt;</code> in <code>Person</code> and <code>UniqueList&lt;Person&gt;</code> in <code>Group</code>.</p>
+</div>
+<div class="paragraph">
+<p>Pros: Easy to retrieve groups from Person and persons from Group. Existing <code>UniqueList</code> class available (since already used in <code>Model</code>).</p>
+</div>
+<div class="paragraph">
+<p>Cons: Have to update both lists in most group commands (e.g. registering a new member in a group). Issue of enforcing referential integrity - defensive programming.</p>
+</div>
+<div class="paragraph">
+<p><strong>Alternative 2</strong> Just update the list of groups in <code>Model</code> and have person refer to that list of group as to whether it is a member of the group.</p>
+</div>
+<div class="paragraph">
+<p>Pros: Less issues with enforcing referential integrity (see alternative 1).</p>
+</div>
+<div class="paragraph">
+<p>Cons: Can be more expensive to look for groups for a particular person.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="documentation"><a class="link" href="#documentation">4. Documentation</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>We use asciidoc for writing documentation.</p>
@@ -630,20 +1120,20 @@ We chose asciidoc over Markdown because asciidoc, although a bit more complex th
 </table>
 </div>
 <div class="sect2">
-<h3 id="editing-documentation"><a class="link" href="#editing-documentation">3.1. Editing Documentation</a></h3>
+<h3 id="editing-documentation"><a class="link" href="#editing-documentation">4.1. Editing Documentation</a></h3>
 <div class="paragraph">
 <p>See <a href="UsingGradle.html#rendering-asciidoc-files">UsingGradle.adoc</a> to learn how to render <code>.adoc</code> files locally to preview the end result of your edits.
 Alternatively, you can download the AsciiDoc plugin for IntelliJ, which allows you to preview the changes you have made to your <code>.adoc</code> files in real-time.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="publishing-documentation"><a class="link" href="#publishing-documentation">3.2. Publishing Documentation</a></h3>
+<h3 id="publishing-documentation"><a class="link" href="#publishing-documentation">4.2. Publishing Documentation</a></h3>
 <div class="paragraph">
 <p>See <a href="UsingTravis.html#deploying-github-pages">UsingTravis.adoc</a> to learn how to deploy GitHub Pages using Travis.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="converting-documentation-to-pdf-format"><a class="link" href="#converting-documentation-to-pdf-format">3.3. Converting Documentation to PDF format</a></h3>
+<h3 id="converting-documentation-to-pdf-format"><a class="link" href="#converting-documentation-to-pdf-format">4.3. Converting Documentation to PDF format</a></h3>
 <div class="paragraph">
 <p>We use <a href="https://www.google.com/chrome/browser/desktop/">Google Chrome</a> for converting documentation to PDF format, as Chrome&#8217;s PDF engine preserves hyperlinks used in webpages.</p>
 </div>
@@ -670,11 +1160,11 @@ Alternatively, you can download the AsciiDoc plugin for IntelliJ, which allows y
 <div class="content">
 <img src="images/chrome_save_as_pdf.png" alt="chrome save as pdf" width="300">
 </div>
-<div class="title">Figure 10. Saving documentation as PDF files in Chrome</div>
+<div class="title">Figure 11. Saving documentation as PDF files in Chrome</div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="Docs-SiteWideDocSettings"><a class="link" href="#Docs-SiteWideDocSettings">3.4. Site-wide Documentation Settings</a></h3>
+<h3 id="Docs-SiteWideDocSettings"><a class="link" href="#Docs-SiteWideDocSettings">4.4. Site-wide Documentation Settings</a></h3>
 <div class="paragraph">
 <p>The <a href="https://github.com/CS2103-AY1819S1-F11-4/main/build.gradle"><code>build.gradle</code></a> file specifies some project-specific <a href="https://asciidoctor.org/docs/user-manual/#attributes">asciidoc attributes</a> which affects how all documentation files within this project are rendered.</p>
 </div>
@@ -733,7 +1223,7 @@ This will render the SE-EDU navigation bar at the top of the page, and add some 
 </table>
 </div>
 <div class="sect2">
-<h3 id="Docs-PerFileDocSettings"><a class="link" href="#Docs-PerFileDocSettings">3.5. Per-file Documentation Settings</a></h3>
+<h3 id="Docs-PerFileDocSettings"><a class="link" href="#Docs-PerFileDocSettings">4.5. Per-file Documentation Settings</a></h3>
 <div class="paragraph">
 <p>Each <code>.adoc</code> file may also specify some file-specific <a href="https://asciidoctor.org/docs/user-manual/#attributes">asciidoc attributes</a> which affects how the file is rendered.</p>
 </div>
@@ -790,7 +1280,7 @@ One of: <code>UserGuide</code>, <code>DeveloperGuide</code>, <code>LearningOutco
 </table>
 </div>
 <div class="sect2">
-<h3 id="site-template"><a class="link" href="#site-template">3.6. Site Template</a></h3>
+<h3 id="site-template"><a class="link" href="#site-template">4.6. Site Template</a></h3>
 <div class="paragraph">
 <p>The files in <a href="https://github.com/CS2103-AY1819S1-F11-4/main/docs/stylesheets"><code>docs/stylesheets</code></a> are the <a href="https://developer.mozilla.org/en-US/docs/Web/CSS">CSS stylesheets</a> of the site.
 You can modify them to change some properties of the site&#8217;s design.</p>
@@ -819,10 +1309,10 @@ The SE-EDU team does not provide support for modified template files.</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="Testing"><a class="link" href="#Testing">4. Testing</a></h2>
+<h2 id="Testing"><a class="link" href="#Testing">5. Testing</a></h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="running-tests"><a class="link" href="#running-tests">4.1. Running Tests</a></h3>
+<h3 id="running-tests"><a class="link" href="#running-tests">5.1. Running Tests</a></h3>
 <div class="paragraph">
 <p>There are three ways to run tests.</p>
 </div>
@@ -884,7 +1374,7 @@ See <a href="UsingGradle.html">UsingGradle.adoc</a> for more info on how to run 
 </div>
 </div>
 <div class="sect2">
-<h3 id="types-of-tests"><a class="link" href="#types-of-tests">4.2. Types of tests</a></h3>
+<h3 id="types-of-tests"><a class="link" href="#types-of-tests">5.2. Types of tests</a></h3>
 <div class="paragraph">
 <p>We have two types of tests:</p>
 </div>
@@ -926,7 +1416,7 @@ e.g. <code>seedu.address.logic.LogicManagerTest</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="troubleshooting-testing"><a class="link" href="#troubleshooting-testing">4.3. Troubleshooting Testing</a></h3>
+<h3 id="troubleshooting-testing"><a class="link" href="#troubleshooting-testing">5.3. Troubleshooting Testing</a></h3>
 <div class="paragraph">
 <p><strong>Problem: <code>HelpWindowTest</code> fails with a <code>NullPointerException</code>.</strong></p>
 </div>
@@ -944,34 +1434,34 @@ e.g. <code>seedu.address.logic.LogicManagerTest</code></p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="dev-ops"><a class="link" href="#dev-ops">5. Dev Ops</a></h2>
+<h2 id="dev-ops"><a class="link" href="#dev-ops">6. Dev Ops</a></h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="build-automation"><a class="link" href="#build-automation">5.1. Build Automation</a></h3>
+<h3 id="build-automation"><a class="link" href="#build-automation">6.1. Build Automation</a></h3>
 <div class="paragraph">
 <p>See <a href="UsingGradle.html">UsingGradle.adoc</a> to learn how to use Gradle for build automation.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="continuous-integration"><a class="link" href="#continuous-integration">5.2. Continuous Integration</a></h3>
+<h3 id="continuous-integration"><a class="link" href="#continuous-integration">6.2. Continuous Integration</a></h3>
 <div class="paragraph">
 <p>We use <a href="https://travis-ci.org/">Travis CI</a> and <a href="https://www.appveyor.com/">AppVeyor</a> to perform <em>Continuous Integration</em> on our projects. See <a href="UsingTravis.html">UsingTravis.adoc</a> and <a href="UsingAppVeyor.html">UsingAppVeyor.adoc</a> for more details.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="coverage-reporting"><a class="link" href="#coverage-reporting">5.3. Coverage Reporting</a></h3>
+<h3 id="coverage-reporting"><a class="link" href="#coverage-reporting">6.3. Coverage Reporting</a></h3>
 <div class="paragraph">
 <p>We use <a href="https://coveralls.io/">Coveralls</a> to track the code coverage of our projects. See <a href="UsingCoveralls.html">UsingCoveralls.adoc</a> for more details.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="documentation-previews"><a class="link" href="#documentation-previews">5.4. Documentation Previews</a></h3>
+<h3 id="documentation-previews"><a class="link" href="#documentation-previews">6.4. Documentation Previews</a></h3>
 <div class="paragraph">
 <p>When a pull request has changes to asciidoc files, you can use <a href="https://www.netlify.com/">Netlify</a> to see a preview of how the HTML version of those asciidoc files will look like when the pull request is merged. See <a href="UsingNetlify.html">UsingNetlify.adoc</a> for more details.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="making-a-release"><a class="link" href="#making-a-release">5.5. Making a Release</a></h3>
+<h3 id="making-a-release"><a class="link" href="#making-a-release">6.5. Making a Release</a></h3>
 <div class="paragraph">
 <p>Here are the steps to create a new release.</p>
 </div>
@@ -993,7 +1483,7 @@ e.g. <code>seedu.address.logic.LogicManagerTest</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="managing-dependencies"><a class="link" href="#managing-dependencies">5.6. Managing Dependencies</a></h3>
+<h3 id="managing-dependencies"><a class="link" href="#managing-dependencies">6.6. Managing Dependencies</a></h3>
 <div class="paragraph">
 <p>A project often depends on third-party libraries. For example, Address Book depends on the <a href="http://wiki.fasterxml.com/JacksonHome">Jackson library</a> for XML parsing. Managing these <em>dependencies</em> can be automated using Gradle. For example, Gradle can download the dependencies automatically, which is better than these alternatives.<br>
 a. Include those libraries in the repo (this bloats the repo size)<br>
@@ -1571,73 +2061,6 @@ In excel format</p></td>
 </li>
 </ul>
 </div>
-<h3 id="use-case-find-timetable-by-name" class="discrete">Use case: Find timetable by Name</h3>
-<div class="paragraph">
-<p><strong>MSS</strong></p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>User logins to System and requests help to find a timetable</p>
-</li>
-<li>
-<p>System shows how to find a timetable</p>
-</li>
-<li>
-<p>User inputs accordingly</p>
-</li>
-<li>
-<p>System shows timetable details</p>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p><strong>Extensions</strong></p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>3a. User enters invalid input.</p>
-<div class="ulist none">
-<ul class="none">
-<li>
-<p>3a1.System shows an error message.</p>
-<div class="paragraph">
-<p>Use case resumes at step 2.</p>
-</div>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>4a. Friend is not in the System.</p>
-<div class="ulist none">
-<ul class="none">
-<li>
-<p>4a1.System shows an error message.</p>
-<div class="paragraph">
-<p>Use case resumes at step 2.</p>
-</div>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-<h3 id="use-case-list-all-timetable" class="discrete">Use case: List all timetable</h3>
-<div class="paragraph">
-<p><strong>MSS</strong></p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>User logins to System and requests help to list all timetable</p>
-</li>
-<li>
-<p>System shows a list of all timetable</p>
-</li>
-</ol>
-</div>
 <h3 id="use-case-delete-a-timetable" class="discrete">Use case: Delete a timetable</h3>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
@@ -2062,23 +2485,20 @@ In excel format</p></td>
 </li>
 </ul>
 </div>
-<h3 id="use-case-create-an-account" class="discrete">Use case: create an account</h3>
+<h3 id="use-case-create-an-account" class="discrete">Use case: Create an Account</h3>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>New user requests help to create an account</p>
+<p>New user prompted to create an account</p>
 </li>
 <li>
-<p>System shows a prompt on account creation</p>
+<p>User enters create account command as prompted</p>
 </li>
 <li>
-<p>User enters username and password as prompted</p>
-</li>
-<li>
-<p>Login successful, user now have access to enabled features</p>
+<p>System displays account creation success message</p>
 </li>
 </ol>
 </div>
@@ -2088,29 +2508,88 @@ In excel format</p></td>
 <div class="ulist">
 <ul>
 <li>
-<p>3a. User tries to use a duplicate username (username already in use)</p>
+<p>2a. User enters a duplicate username (username already in use)</p>
 <div class="ulist none">
 <ul class="none">
 <li>
-<p>3a1.System prompts user to choose a different username</p>
+<p>2a1.System prompts user to choose a different username</p>
+</li>
+</ul>
+</div>
 <div class="paragraph">
-<p>Use case resumes at step 3.</p>
+<p>Use case resumes at step 2</p>
+</div>
+</li>
+</ul>
+</div>
+<h3 id="use-case-login-to-account" class="discrete">Use case: Login to Account</h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User attempts to enter command</p>
+</li>
+<li>
+<p>System detects that user is not logged in</p>
+</li>
+<li>
+<p>System prompts user to either create account or login to existing account</p>
+</li>
+<li>
+<p>User enters login command</p>
+</li>
+<li>
+<p>System displays login success message</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>1a. System detects that user is not logged in</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1a1.System prompts user to login</p>
+<div class="paragraph">
+<p>Use case resumes at step 2</p>
 </div>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p>4a. User entered wrong login details</p>
+<p>3a. User does not have an account</p>
 <div class="ulist none">
 <ul class="none">
 <li>
-<p>4a1.System shows an error message.</p>
+<p>3a1.User enters create account command [the continuation of this extension can be found on <strong>create an account</strong> use case]</p>
+<div class="paragraph">
+<p>Use case ends prematurely</p>
+</div>
+</li>
+</ul>
+</div>
 </li>
 <li>
-<p>4a2. User attempts to login again</p>
+<p>3b. User have an account</p>
 <div class="paragraph">
-<p>Use case resumes at step 4.</p>
+<p>Use case resumes at step 4</p>
+</div>
+</li>
+<li>
+<p>4a. User enters wrong credentials (username and password combination does not match)</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>4a1.System prompts user on login fail and to try again</p>
+<div class="paragraph">
+<p>Use case resumes at step 4</p>
 </div>
 </li>
 </ul>
@@ -2304,4 +2783,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-04 16:53:41 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-18 08:17:23 UTC</div></div></div></body></html>
