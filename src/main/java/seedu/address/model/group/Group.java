@@ -163,7 +163,7 @@ public class Group extends Entity {
         return builder.toString();
     }
     /**
-     * Returns the time slots among the group as a String in descending order with respect to number of 
+     * Returns the time slots among the group as a String in descending order with respect to number of
      * people available and then ascending order in terms of timing
      */
     public String listRankedAvailableTimeslots () {
