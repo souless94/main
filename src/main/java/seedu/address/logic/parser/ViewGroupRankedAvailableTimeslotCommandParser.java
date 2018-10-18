@@ -30,7 +30,7 @@ public class ViewGroupRankedAvailableTimeslotCommandParser implements Parser<Vie
 
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
 
-        return new ViewGroupAvailableTimeslotCommand(name);
+        return new ViewGroupRankedAvailableTimeslotCommand(name);
     }
 
     /**

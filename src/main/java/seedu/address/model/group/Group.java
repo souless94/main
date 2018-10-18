@@ -155,7 +155,7 @@ public class Group extends Entity {
             int day = curr_timeslot_2 / 100;
             int timing = (curr_timeslot_2 % 100 + 7) * 100;
             builder.append("Day: ");
-            builder.append(dayToString(day));            
+            builder.append(dayToString(day));
             builder.append(" ").append("Time: ").append(Integer.toString(timing)).append("\n");
         }
         return builder.toString();
