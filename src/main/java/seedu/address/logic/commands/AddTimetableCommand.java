@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.MESSAGE_TIMETABLE_NOT_FOUND;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.io.File;
@@ -63,7 +64,7 @@ public class AddTimetableCommand extends Command {
             model.commitAddressBook();
             return new CommandResult(String.format(MESSAGE_ADD_TIMETABLE_SUCCESS, updatedPerson));
         } else {
-            throw new CommandException("timetable to be added is not found");
+            throw new CommandException(MESSAGE_TIMETABLE_NOT_FOUND);
         }
     }
 
