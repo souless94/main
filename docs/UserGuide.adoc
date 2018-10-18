@@ -347,13 +347,13 @@ Examples:
 * `delete_group n/happyfriends`
 
 
-=== List all members of a group : `view_group`
+=== List all persons of a group : `view_group`
 
-shows a list of all members in a group +
+shows a list of all persons in a group +
 Format: `view_group n/GROUP_NAME`
 
 ****
-* List all members of a group at the specified `GROUPNAME`.
+* List all persons of a group at the specified `GROUPNAME`.
 ****
 
 
@@ -361,9 +361,9 @@ Examples:
 
 * ` view_group n/happyfriends` +
 
-=== add a friend to group : `register`
+=== Add a person to group : `register`
 
-Adds a friend to a group if the status of the group is open. +
+Adds a person to a group if the status of the group is open. +
 Format: `register FRIEND_INDEX n/GROUP_NAME`
 
 ****
@@ -375,9 +375,9 @@ Examples:
 
 * `register 1 n/happyfriends `
 
-=== delete a member from group : `delete_member`
+=== Delete a person from group : `delete_member`
 
-Delete a member from a group using member index displayed with `view_group`. +
+Delete a person from a group using member index displayed with `view_group`. +
 Format: `delete_member MEMBER_INDEX n/GROUP_NAME`
 
 Examples:
