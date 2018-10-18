@@ -21,8 +21,6 @@ import seedu.address.model.Entity;
 import seedu.address.model.UniqueList;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.timetable.Timetable;
-import seedu.address.model.person.timetable.TimetableData;
 
 //@@author Happytreat
 /**
@@ -87,10 +85,38 @@ public class Group extends Entity {
         return builder.toString();
     }
 
+    private String dayToString(int day) {
+        switch (day) {
+            case 1:
+                return "Monday";
+
+            case 2:
+                return "Tuesday";
+
+            case 3:
+                return "Wednesday";
+
+            case 4:
+                return "Thursday";
+
+            case 5:
+                return "Friday";
+
+            case 6:
+                return "Saturday";
+
+            case 7:
+                return "Sunday";
+
+            default:
+                return "Invalid day";
+        }
+    }
+
     /**
      * Returns all available time slots among the group as a String in ascending order in terms of timing
      */
-    public String ListAvailableTimeslots() {
+    public String listAvailableTimeslots() {
         Iterator<Person> person_itr = groupMembers.iterator();
         StringBuilder builder = new StringBuilder();
         TreeSet<Integer> available_slots = new TreeSet<>();
@@ -129,39 +155,7 @@ public class Group extends Entity {
             int day = curr_timeslot_2 / 100;
             int timing = (curr_timeslot_2 % 100 + 7) * 100;
             builder.append("Day: ");
-            switch (day) {
-            case 1:
-                builder.append("Monday");
-                break;
-
-            case 2:
-                builder.append("Tuesday");
-                break;
-
-            case 3:
-                builder.append("Wednesday");
-                break;
-
-            case 4:
-                builder.append("Thursday");
-                break;
-
-            case 5:
-                builder.append("Friday");
-                break;
-
-            case 6:
-                builder.append("Saturday");
-                break;
-
-            case 7:
-                builder.append("Sunday");
-                break;
-
-            default:
-                builder.append("Invalid day");
-                break; 
-            }
+            builder.append(dayToString(day));            
             builder.append(" ").append("Time: ").append(Integer.toString(timing)).append("\n");
         }
         return builder.toString();
@@ -169,7 +163,7 @@ public class Group extends Entity {
     /**
      * Returns the time slots among the group as a String in descending order with respect to number of people available and then ascending order in terms of timing
      */
-    public String ListRankedAvailableTimeslots () {
+    public String listRankedAvailableTimeslots () {
         Iterator<Person> person_itr = groupMembers.iterator();
         StringBuilder builder = new StringBuilder();
         TreeMap<Integer, Integer> available_slots = new TreeMap<>();
@@ -205,39 +199,7 @@ public class Group extends Entity {
                 prev = available_persons;
             }
             builder.append("Day: ");
-            switch (day) {
-            case 1:
-                builder.append("Monday");
-                break;
-
-            case 2:
-                builder.append("Tuesday");
-                break;
-
-            case 3:
-                builder.append("Wednesday");
-                break;
-
-            case 4:
-                builder.append("Thursday");
-                break;
-
-            case 5:
-                builder.append("Friday");
-                break;
-
-            case 6:
-                builder.append("Saturday");
-                break;
-
-            case 7:
-                builder.append("Sunday");
-                break;
-
-            default:
-                builder.append("Invalid day");
-                break; 
-            }
+            builder.append(dayToString(day));
             builder.append(" ").append("Time: ").append(Integer.toString(timing)).append("\n");
         }
         return builder.toString();

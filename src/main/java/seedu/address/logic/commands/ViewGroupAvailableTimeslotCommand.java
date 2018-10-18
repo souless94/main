@@ -41,7 +41,7 @@ public class ViewGroupAvailableTimeslotCommand extends Command {
         Group group = CommandUtil.retrieveGroupFromName(model, groupName);
 
         model.updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
-        return new CommandResult(MESSAGE_SUCCESS + group.ListAvailableTimeslots());
+        return new CommandResult(MESSAGE_SUCCESS + group.listAvailableTimeslots());
     }
 
 }
