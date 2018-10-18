@@ -9,6 +9,7 @@ import seedu.address.logic.commands.EditGroupCommand;
 import seedu.address.logic.commands.EditGroupCommand.EditGroupDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Name;
+//@@author Happytreat
 /**
  * Parses input arguments and creates a new EditGroupCommand object
  */

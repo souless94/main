@@ -7,8 +7,8 @@ import seedu.address.commons.core.Messages;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.exceptions.NotFoundException;
 import seedu.address.model.group.Group;
-import seedu.address.model.person.exceptions.PersonNotFoundException;
 
 /**
  * Lists all persons in the address book to the user.
@@ -37,10 +37,10 @@ public class DeleteGroupCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
         try {
-            model.deleteGroup(groupToBeDeleted);
+            model.delete(groupToBeDeleted);
             model.commitAddressBook();
             return new CommandResult(String.format(MESSAGE_SUCCESS, groupToBeDeleted));
-        } catch (PersonNotFoundException e) {
+        } catch (NotFoundException e) {
             throw new CommandException(Messages.MESSAGE_NO_MATCH_TO_EXISTING_GROUP);
         }
     }

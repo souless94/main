@@ -42,24 +42,59 @@ public class AddressBook implements ReadOnlyAddressBook {
         resetData(toBeCopied);
     }
 
-    // timetable operations
-
-    ///group operations
-
-    /**
-     * Adds a group to the address book. The group must not already exist in the address book. -
-     * coming v1.2
-     */
-    public void addGroup(Group g) {
-        groups.add(g);
-    }
-
+    //@@author Happytreat
     /**
      * Removes {@code key} from this {@code AddressBook}. {@code key} must exist in the address
      * book.
      */
-    public void removeGroup(Group key) {
-        groups.remove(key);
+    public void remove(Entity key) {
+        if (key instanceof Group) {
+            groups.remove((Group) key);
+        } else if (key instanceof Person) {
+            persons.remove((Person) key);
+        }
+    }
+
+    /**
+     * Adds {@code key} from this {@code AddressBook}. {@code key} must exist in the address
+     * book.
+     */
+    public void add(Entity key) {
+        if (key instanceof Group) {
+            groups.add((Group) key);
+        } else if (key instanceof Person) {
+            persons.add((Person) key);
+        }
+    }
+
+    /**
+     * Returns true if an entity with the same identity as {@code key} exists in the address
+     * book.
+     */
+    public boolean has(Entity key) {
+        requireNonNull(key);
+        if (key instanceof Group) {
+            return groups.contains((Group) key);
+        } else if (key instanceof Person) {
+            return persons.contains((Person) key);
+        }
+
+        return false;
+    }
+
+    /**
+     * Replaces the given entity {@code target} in the list with {@code edited}. {@code
+     * target} must exist in the address book. The identity of {@code edited} must not
+     * be the same as another existing entity in the address book.
+     */
+    public void update(Entity target, Entity edited) {
+        requireNonNull(edited);
+
+        if (target instanceof Group && edited instanceof Group) {
+            groups.setElement((Group) target, (Group) edited);
+        } else if (target instanceof Person && edited instanceof Person) {
+            persons.setElement((Person) target, (Person) edited);
+        }
     }
 
     /**
@@ -68,26 +103,6 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void setGroups(List<Group> groups) {
         this.groups.setElements(groups);
-    }
-
-    /**
-     * Returns true if a group with the same identity as {@code group} exists in the address
-     * book.
-     */
-    public boolean hasGroup(Group group) {
-        requireNonNull(group);
-        return groups.contains(group);
-    }
-
-    /**
-     * Replaces the given group {@code target} in the list with {@code editedGroup}. {@code
-     * target} must exist in the address book. The group identity of {@code editedGroup} must not
-     * be the same as another existing group in the address book.
-     */
-    public void updateGroup(Group target, Group editedGroup) {
-        requireNonNull(editedGroup);
-
-        groups.setElement(target, editedGroup);
     }
 
     //// list overwrite operations
@@ -108,43 +123,6 @@ public class AddressBook implements ReadOnlyAddressBook {
 
         setPersons(newData.getPersonList());
         setGroups(newData.getGroupList());
-    }
-
-    //// person-level operations
-
-    /**
-     * Returns true if a person with the same identity as {@code person} exists in the address
-     * book.
-     */
-    public boolean hasPerson(Person person) {
-        requireNonNull(person);
-        return persons.contains(person);
-    }
-
-    /**
-     * Adds a person to the address book. The person must not already exist in the address book.
-     */
-    public void addPerson(Person p) {
-        persons.add(p);
-    }
-
-    /**
-     * Replaces the given person {@code target} in the list with {@code editedPerson}. {@code
-     * target} must exist in the address book. The person identity of {@code editedPerson} must not
-     * be the same as another existing person in the address book.
-     */
-    public void updatePerson(Person target, Person editedPerson) {
-        requireNonNull(editedPerson);
-
-        persons.setElement(target, editedPerson);
-    }
-
-    /**
-     * Removes {@code key} from this {@code AddressBook}. {@code key} must exist in the address
-     * book.
-     */
-    public void removePerson(Person key) {
-        persons.remove(key);
     }
 
     //// util methods

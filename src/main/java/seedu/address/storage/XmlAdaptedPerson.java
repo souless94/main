@@ -10,12 +10,13 @@ import java.util.stream.Collectors;
 import javax.xml.bind.annotation.XmlElement;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.UniqueList;
+import seedu.address.model.group.Group;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.person.timetable.Timetable;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -35,9 +36,16 @@ public class XmlAdaptedPerson {
     private String address;
     @XmlElement(required = true)
     private String format;
+    @XmlElement(required = true)
+    private String storedLocation;
+    @XmlElement(required = true)
+    private String timetableString;
 
     @XmlElement
     private List<XmlAdaptedTag> tagged = new ArrayList<>();
+
+    @XmlElement
+    private List<XmlAdaptedGroup> groups = new ArrayList<>();
 
     /**
      * Constructs an XmlAdaptedPerson. This is the no-arg constructor that is required by JAXB.
@@ -47,16 +55,41 @@ public class XmlAdaptedPerson {
 
     /**
      * Constructs an {@code XmlAdaptedPerson} with the given person details.
+     * # TODO v1.3: Combine 2 different constructors
      */
-    public XmlAdaptedPerson(String name, String phone, String email, String address, String format,
-        List<XmlAdaptedTag> tagged) {
+    public XmlAdaptedPerson(String name, String phone, String email, String address,
+                            List<XmlAdaptedTag> tagged, String format, String storedLocation, String timetableString) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.format = format;
+        this.storedLocation = storedLocation;
+        this.timetableString = timetableString;
         if (tagged != null) {
             this.tagged = new ArrayList<>(tagged);
+        }
+
+        this.groups = new ArrayList<>();
+    }
+
+    /**
+     * Constructs an {@code XmlAdaptedPerson} with the given person details including {@code groups}.
+     */
+    public XmlAdaptedPerson(String name, String phone, String email, String address, List<XmlAdaptedGroup> groups,
+        List<XmlAdaptedTag> tagged, String format, String storedLocation, String timetableString) {
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.format = format;
+        this.storedLocation = storedLocation;
+        this.timetableString = timetableString;
+        if (tagged != null) {
+            this.tagged = new ArrayList<>(tagged);
+        }
+        if (groups != null) {
+            this.groups = new ArrayList<>(groups);
         }
     }
 
@@ -70,10 +103,15 @@ public class XmlAdaptedPerson {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
-        format = source.getTimetable().getFormat();
+        format = source.getFormat();
+        storedLocation = source.getStoredLocation();
+        timetableString = source.getTimetable().getTimetableDataString();
         tagged = source.getTags().stream()
             .map(XmlAdaptedTag::new)
             .collect(Collectors.toList());
+        groups = source.getGroups().stream()
+                .map(XmlAdaptedGroup::new)
+                .collect(Collectors.toList());
     }
 
     /**
@@ -123,10 +161,18 @@ public class XmlAdaptedPerson {
             throw new IllegalValueException(Address.MESSAGE_ADDRESS_CONSTRAINTS);
         }
         final Address modelAddress = new Address(address);
-        final Timetable modelTimetable = new Timetable(modelName.toString(), format);
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags,
-            modelTimetable);
+
+        final List<Group> groupList = new ArrayList<>();
+        for (XmlAdaptedGroup group : groups) {
+            groupList.add(group.toModelType());
+        }
+
+        final UniqueList<Group> modelGroupList = new UniqueList<>();
+        modelGroupList.setElements(groupList);
+
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelGroupList, format,
+            storedLocation, timetableString);
     }
 
     @Override

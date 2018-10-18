@@ -14,12 +14,19 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CreateCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.DeleteGroupCommand;
+import seedu.address.logic.commands.DeleteMemberCommand;
+import seedu.address.logic.commands.DeleteTimetableCommand;
 import seedu.address.logic.commands.DownloadTimetableCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditGroupCommand;
 import seedu.address.logic.commands.ExitCommand;
+import seedu.address.logic.commands.FindAddressCommand;
 import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.FindEmailCommand;
 import seedu.address.logic.commands.FindGroupCommand;
+import seedu.address.logic.commands.FindNameCommand;
+import seedu.address.logic.commands.FindPhoneCommand;
+import seedu.address.logic.commands.FindTagCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.HistoryCommand;
 import seedu.address.logic.commands.ListCommand;
@@ -60,6 +67,9 @@ public class AddressBookParser {
         case AddTimetableCommand.COMMAND_WORD:
             return new AddTimetableCommandParser().parse(arguments);
 
+        case DeleteTimetableCommand.COMMAND_WORD:
+            return new DeleteTimetableCommandParser().parse(arguments);
+
         case DownloadTimetableCommand.COMMAND_WORD:
             return new DownloadTimetableCommandParser().parse(arguments);
 
@@ -93,11 +103,29 @@ public class AddressBookParser {
         case RegisterCommand.COMMAND_WORD:
             return new RegisterCommandParser().parse(arguments);
 
+        case DeleteMemberCommand.COMMAND_WORD:
+            return new DeleteMemberCommandParser().parse(arguments);
+
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
 
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
+
+        case FindTagCommand.COMMAND_WORD:
+            return new FindTagCommandParser().parse(arguments);
+
+        case FindAddressCommand.COMMAND_WORD:
+            return new FindAddressCommandParser().parse(arguments);
+
+        case FindPhoneCommand.COMMAND_WORD:
+            return new FindPhoneCommandParser().parse(arguments);
+
+        case FindEmailCommand.COMMAND_WORD:
+            return new FindEmailCommandParser().parse(arguments);
+
+        case FindNameCommand.COMMAND_WORD:
+            return new FindNameCommandParser().parse(arguments);
 
         case ListCommand.COMMAND_WORD:
             return new ListCommand();

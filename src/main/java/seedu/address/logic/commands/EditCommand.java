@@ -10,11 +10,9 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Collections;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
-import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.CommandHistory;
@@ -25,7 +23,6 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.person.timetable.Timetable;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -71,20 +68,15 @@ public class EditCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
 
-        if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-        }
-
-        Person personToEdit = lastShownList.get(index.getZeroBased());
+        Person personToEdit = CommandUtil.retrievePersonFromIndex(model, index);
         Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 
-        if (!personToEdit.isSame(editedPerson) && model.hasPerson(editedPerson)) {
+        if (!personToEdit.isSame(editedPerson) && model.has(editedPerson)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
-        model.updatePerson(personToEdit, editedPerson);
+        model.update(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         model.commitAddressBook();
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson));
@@ -94,7 +86,7 @@ public class EditCommand extends Command {
      * Creates and returns a {@code Person} with the details of {@code personToEdit} edited with
      * {@code editPersonDescriptor}.
      */
-    private static Person createEditedPerson(Person personToEdit,
+    public static Person createEditedPerson(Person personToEdit,
         EditPersonDescriptor editPersonDescriptor) {
         assert personToEdit != null;
 
@@ -104,8 +96,12 @@ public class EditCommand extends Command {
         Address updatedAddress = editPersonDescriptor.getAddress()
             .orElse(personToEdit.getAddress());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+        String format = personToEdit.getFormat();
+        String storedLocation = personToEdit.getStoredLocation();
+        String timetableString = personToEdit.getTimetable().getTimetableDataString();
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags,
+            format, storedLocation, timetableString);
     }
 
     @Override
@@ -136,7 +132,8 @@ public class EditCommand extends Command {
         private Phone phone;
         private Email email;
         private Address address;
-        private Timetable timetable;
+        private String format;
+        private String storedLocation;
         private Set<Tag> tags;
 
         public EditPersonDescriptor() {
@@ -150,7 +147,8 @@ public class EditCommand extends Command {
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
             setAddress(toCopy.address);
-            setTimetable(toCopy.timetable);
+            setFormat(toCopy.format);
+            setStoredLocation(toCopy.storedLocation);
             setTags(toCopy.tags);
         }
 
@@ -162,12 +160,20 @@ public class EditCommand extends Command {
             return CollectionUtil.isAnyNonNull(name, phone, email, address, tags);
         }
 
-        public void setTimetable(Timetable timetable) {
-            this.timetable = timetable;
+        public void setStoredLocation(String storedLocation) {
+            this.storedLocation = storedLocation;
         }
 
-        public Optional<Timetable> getTimetable() {
-            return Optional.ofNullable(timetable);
+        public Optional<String> getStoredLocation() {
+            return Optional.ofNullable(storedLocation);
+        }
+
+        public void setFormat(String format) {
+            this.format = format;
+        }
+
+        public Optional<String> getFormat() {
+            return Optional.ofNullable(format);
         }
 
         public void setName(Name name) {

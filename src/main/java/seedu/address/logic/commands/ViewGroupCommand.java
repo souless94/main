@@ -4,14 +4,14 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_GROUPS;
 
-import java.util.List;
+import java.util.function.Predicate;
 
-import seedu.address.commons.core.Messages;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.group.Group;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Person;
 
 /**
  * Lists all members of the group entered to the user.
@@ -40,18 +40,12 @@ public class ViewGroupCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
+        Group group = CommandUtil.retrieveGroupFromName(model, groupName);
 
-        // Make sure that group exists
-        List<Group> lastShownList = model.getFilteredGroupList();
-        Group group = new Group(groupName, ""); //do not know description and groupMembers
-
-        if (!lastShownList.contains(group)) {
-            throw new CommandException(Messages.MESSAGE_NO_MATCH_TO_EXISTING_GROUP);
-        }
-
-        group = lastShownList.get(lastShownList.indexOf(group)); //retrieves original group
+        Predicate<Person> predicateShowAllGroupMembers = person -> group.getGroupMembers().contains(person);
 
         model.updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
-        return new CommandResult(MESSAGE_SUCCESS + group.printMembers());
+        model.updateFilteredPersonList(predicateShowAllGroupMembers);
+        return new CommandResult(MESSAGE_SUCCESS);
     }
 }

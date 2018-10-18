@@ -11,6 +11,7 @@ import seedu.address.model.UniqueList;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 
+//@@author Happytreat
 /**
  * Represents a Group in the address book.
  * Guarantees: Field values are validated, immutable.
@@ -65,15 +66,18 @@ public class Group extends Entity {
     public String printMembers() {
         Iterator<Person> itr = groupMembers.iterator();
         StringBuilder builder = new StringBuilder();
+        int count = 1;
         while (itr.hasNext()) {
-            builder.append(itr.next().getName().fullName).append("\n");
+            builder.append(count).append(". ").append(itr.next().getName().fullName).append("\n");
+            count += 1;
         }
         return builder.toString();
     }
 
     /**
      * Returns true if both groups of the same name.
-     * This defines a weaker notion of equality between two groups.
+     * For group, isSame is the same function as equals
+     * since groups are uniquely identified by their names.
      */
     @Override
     public boolean isSame(Object other) {
@@ -110,7 +114,7 @@ public class Group extends Entity {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, description, groupMembers);
+        return Objects.hash(name, description);
     }
 
     @Override

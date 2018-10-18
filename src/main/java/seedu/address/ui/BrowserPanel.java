@@ -22,7 +22,7 @@ public class BrowserPanel extends UiPart<Region> {
 
     public static final String DEFAULT_PAGE = "default.html";
     public static final String SEARCH_PAGE_URL =
-        "https://se-edu.github.io/addressbook-level4/DummySearchPage.html?name=";
+        "Timetable.html";
 
     private static final String FXML = "BrowserPanel.fxml";
 
@@ -42,7 +42,9 @@ public class BrowserPanel extends UiPart<Region> {
     }
 
     private void loadPersonPage(Person person) {
-        loadPage(SEARCH_PAGE_URL + person.getName().fullName);
+        URL defaultPage = MainApp.class.getResource(FXML_FILE_FOLDER + SEARCH_PAGE_URL);
+        String timetableString = person.getTimetable().getTimetableAsString();
+        loadPage(defaultPage.toExternalForm() + "?name=" + timetableString);
     }
 
     public void loadPage(String url) {
