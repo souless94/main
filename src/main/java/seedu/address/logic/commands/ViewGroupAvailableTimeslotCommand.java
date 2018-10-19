@@ -15,7 +15,7 @@ import seedu.address.model.person.Name;
  */
 public class ViewGroupAvailableTimeslotCommand extends Command {
 
-    public static final String COMMAND_WORD = "view_group_slots";
+    public static final String COMMAND_WORD = "view_group_slots_available";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": View the available timeslots of a group"
             + "[" + PREFIX_NAME + " GROUP NAME]\n"

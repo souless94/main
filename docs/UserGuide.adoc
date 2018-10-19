@@ -387,20 +387,33 @@ Examples:
 
 deletes the 1st person displayed in `view_group` command.
 
-== Find common time slot in group (Nigel)
+== List available time slots in group (Nigel)
 
-=== Find kth best common time slot in group: `find_time`
+=== List all available time slots : `view_group_slots_available`
 
-Find the kth best available time slot of all the people in the group you are in +
-Format: `find k/KTH_BEST g/GROUPINDEX `
+List all of the available time slots in a group +
+Format: `view_group_available n/GROUP_NAME `
 
 ****
-* Edits the group at the specified `INDEX_OF_GROUP`. The index refers to the index number shown in the displayed group list. The index *must be a positive integer* 1, 2, 3, ...
+* List all of the available time slots in a group at the specified `GROUPNAME`
 ****
 
 Examples:
 
-* `find k/1 g/1` +
+* ``view_group_available n/happyfriends ``
+
+=== List all time slots of a group in descending order of availability: `view_group_slots_ranked`
+
+List all time slots of a group in descending order of availability: +
+Format: `view_group_ranked n/GROUP_NAME `
+
+****
+* List all time slots of a group in descending order of availability at the specified `GROUPNAME`
+****
+
+Examples:
+
+* ``view_group_ranked n/happyfriends `` +
 
 == Security (Leslie)
 === Create an account: `create`

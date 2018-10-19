@@ -17,12 +17,13 @@ public class ViewGroupRankedAvailableTimeslotCommand extends Command {
 
     public static final String COMMAND_WORD = "view_group_slots_ranked";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": View the available timeslots of a group"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": View the timeslots of a group in descending order "
+            + "in terms of availability"
             + "[" + PREFIX_NAME + " GROUP NAME]\n"
             + "Example: " + COMMAND_WORD
             + PREFIX_NAME + "Family ";
 
-    public static final String MESSAGE_SUCCESS = "Listed all available timeslots:\n";
+    public static final String MESSAGE_SUCCESS = "Listed all timeslots in descending order of availability:\n";
 
     private final Name groupName;
 
