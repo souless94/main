@@ -189,8 +189,8 @@ public class Group extends Entity {
         Map<Integer, Integer> sortedSlots = availableSlots.entrySet().stream()
                                                           .sorted(Collections.reverseOrder
                                                                   (Comparator.comparing(Entry::getValue)))
-                                                          .collect(Collectors.toMap(Entry::getKey, Entry::getValue,
-                                                                  (e1, e2) -> e1, LinkedHashMap::new));
+                                                          .collect(Collectors.toMap(Entry::getKey, Entry::getValue, (
+                                                                  e1, e2) -> e1, LinkedHashMap::new));
         int prev = 0;
         for (Integer key : sortedSlots.keySet()) {
             int currTimeslot = key;
