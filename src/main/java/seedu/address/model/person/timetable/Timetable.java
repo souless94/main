@@ -89,7 +89,7 @@ public class Timetable extends Entity {
      * download timetable to the given location
      */
     public void downloadTimetable() {
-        String filepath = this.filePath + " timetable";
+        String filepath = this.filePath;
         this.matrix.downloadTimetableData(filepath);
     }
 

@@ -5,9 +5,11 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import java.util.Base64;
+
 import com.opencsv.CSVReader;
 import com.opencsv.CSVWriter;
-import java.util.Base64;
+
 
 /**
  * timetable data which will process the inputs and create a timetable
@@ -65,6 +67,7 @@ public class TimetableData {
                     byte[] decodedString = Base64.getDecoder().decode(decodedRows[j]);
                     decodedRows[j] = new String(decodedString);
                 }
+                timetableMatrix[i] = decodedRows;
             }
             return timetableMatrix;
         }
@@ -197,7 +200,7 @@ public class TimetableData {
         // @@author souless94 -reused
         //Solution below adapted from grokonez
         // from https://grokonez.com/java/java-read-write-csv-file-opencsv-example
-        String filePath = locationTo + ".csv";
+        String filePath = locationTo;
         try {
             File toWrite = new File(filePath);
             if (!toWrite.exists()) {

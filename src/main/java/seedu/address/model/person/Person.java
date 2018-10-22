@@ -57,17 +57,17 @@ public class Person extends Entity {
             this.format = format;
         }
         if (storedLocation.equals("default")) {
-            this.storedLocation = new File("").getAbsolutePath().replace("\\", "/")
+            String location = new File("").getAbsolutePath().replace("\\", "/")
                 + "/data/timetable";
-            File directory = new File(this.storedLocation);
+            File directory = new File(location);
             if (!directory.exists()) {
                 directory.mkdirs();
             }
+            this.storedLocation = location + "/" + String.valueOf(hashCode()) + " timetable.csv";
         } else {
             this.storedLocation = storedLocation.replace("\\", "/");
         }
-        this.timetable = new Timetable(this.storedLocation + "/"
-            + this.hashCode(),
+        this.timetable = new Timetable(this.storedLocation,
             this.format,
             timetableString, 1);
     }

@@ -56,9 +56,7 @@ public class AddTimetableCommand extends Command {
         Person personToEdit = CommandUtil.retrievePersonFromIndex(model, index);
         String filePath;
         if (newFilePath == null) {
-            filePath = personToEdit.getStoredLocation()
-                + "/" + String.valueOf(personToEdit.hashCode())
-                + " timetable.csv";
+            filePath = personToEdit.getStoredLocation();
         } else {
             filePath = newFilePath.replace("\\", "/");
         }
@@ -66,7 +64,7 @@ public class AddTimetableCommand extends Command {
         if (toRead.exists()) {
             Timetable timetable = new Timetable(filePath, personToEdit.getFormat(),
                 personToEdit.getTimetable().getTimetableDataString(), 2);
-            Person updatedPerson = createUpdatedPerson(personToEdit, timetable);
+            Person updatedPerson = createUpdatedPerson(personToEdit, timetable, filePath);
             model.update(personToEdit, updatedPerson);
             model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
             model.commitAddressBook();
@@ -80,7 +78,8 @@ public class AddTimetableCommand extends Command {
      * it updates the timetableData of the person. Creates and returns a {@code Person} with the
      * details of {@code personToEdit}
      */
-    private static Person createUpdatedPerson(Person personToEdit, Timetable timetable) {
+    private static Person createUpdatedPerson(Person personToEdit, Timetable timetable,
+        String filePath) {
         assert personToEdit != null;
 
         Name updatedName = personToEdit.getName();
@@ -89,7 +88,7 @@ public class AddTimetableCommand extends Command {
         Address updatedAddress = personToEdit.getAddress();
         Set<Tag> updatedTags = personToEdit.getTags();
         String format = personToEdit.getFormat();
-        String storedLocation = personToEdit.getStoredLocation();
+        String storedLocation = filePath;
         String timetableString = timetable.getTimetableDataString();
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags,
