@@ -505,6 +505,28 @@ Pros: Less issues with enforcing referential integrity (see alternative 1).
 
 Cons: Can be more expensive to look for groups for a particular person.
 
+=== Person Feature
+
+The 'Person' class extends the `Entity` abstract class and it is contained within 'Model'.
+
+'Person' feature make use of 'Timetable' and 'Group' class to assign respective information to each instance of a person.
+
+==== Current Implementation
+
+The current person implementation are:
+
+* 'add' -- add any person with the choice of adding address, phone, email and tags
+* 'find' -- find all functions that search all details of any person, except for email
+* 'find_address' -- find address in any person and returns any matching keywords
+* 'find_email' -- find email in any person and returns any matching keywords
+* 'find_phone' -- find phone in any person and returns any matching keywords
+* 'find_name' -- find name in any person and returns any matching keywords
+* 'find_tag' -- find tag in any person and returns any matching keywords
+
+==== Design Considerations
+
+To be continued :)
+
 == Documentation
 
 We use asciidoc for writing documentation.
