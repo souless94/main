@@ -60,16 +60,11 @@ public class TimetableData {
         } else {
             String[] rows = timetableString.split("\n");
             for (int i = 0; i < getRows(); i++) {
-                // @@author souless94 -reused
-                // regex expression gotten from Achintya Jha in
-                // https://stackoverflow.com/questions/15738918/
-                // splitting-a-csv-file-with-quotes-as-text-delimiter-using-string-split
                 String[] decodedRows = rows[i].split(",");
                 for (int j = 0; j < getColumns(); j++) {
                     byte[] decodedString = Base64.getDecoder().decode(decodedRows[j]);
                     decodedRows[j] = new String(decodedString);
                 }
-                // @@author
             }
             return timetableMatrix;
         }

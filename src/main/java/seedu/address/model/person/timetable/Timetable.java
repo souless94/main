@@ -1,6 +1,8 @@
 package seedu.address.model.person.timetable;
 
+import java.math.BigInteger;
 import java.util.Base64;
+
 import seedu.address.model.Entity;
 
 /**
@@ -37,10 +39,17 @@ public class Timetable extends Entity {
         String[][] timetableMatrix = this.matrix.getTimetable();
         for (int i = 0; i < matrix.getRows(); i++) {
             for (int j = 0; j < matrix.getColumns(); j++) {
+                //@@author souless94 -reused
+                // Solution on converting string to hex string below gotten from Laurence Gonsalves
+                // from https://stackoverflow.com/questions/923863/converting-a-string-to-hexadecimal-in-java
+
+                byte[] bytes = timetableMatrix[i][j].getBytes();
+                String data = new BigInteger(bytes).toString(16);
+                //@@author
                 if (i == matrix.getRows() - 1 && j == matrix.getColumns() - 1) {
-                    timetableString += timetableMatrix[i][j];
+                    timetableString += data;
                 } else {
-                    timetableString += timetableMatrix[i][j] + ",";
+                    timetableString += data + ",";
                 }
             }
         }
@@ -80,7 +89,7 @@ public class Timetable extends Entity {
      * download timetable to the given location
      */
     public void downloadTimetable() {
-        String filepath = this.filePath;
+        String filepath = this.filePath + " timetable";
         this.matrix.downloadTimetableData(filepath);
     }
 
