@@ -7,6 +7,7 @@ import java.io.IOException;
 
 import com.opencsv.CSVReader;
 import com.opencsv.CSVWriter;
+import java.util.Base64;
 
 /**
  * timetable data which will process the inputs and create a timetable
@@ -63,7 +64,11 @@ public class TimetableData {
                 // regex expression gotten from Achintya Jha in
                 // https://stackoverflow.com/questions/15738918/
                 // splitting-a-csv-file-with-quotes-as-text-delimiter-using-string-split
-                timetableMatrix[i] = rows[i].split("|");
+                String[] decodedRows = rows[i].split(",");
+                for (int j = 0; j < getColumns(); j++) {
+                    byte[] decodedString = Base64.getDecoder().decode(decodedRows[j]);
+                    decodedRows[j] = new String(decodedString);
+                }
                 // @@author
             }
             return timetableMatrix;

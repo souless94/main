@@ -1,5 +1,6 @@
 package seedu.address.model.person.timetable;
 
+import java.util.Base64;
 import seedu.address.model.Entity;
 
 /**
@@ -52,8 +53,16 @@ public class Timetable extends Entity {
     public String getTimetableDataString() {
         String timetableDataString = "";
         String[][] timetableMatrix = this.matrix.getTimetable();
-
         for (int i = 0; i < matrix.getRows(); i++) {
+            for (int j = 0; j < matrix.getColumns(); j++) {
+                if (j == matrix.getColumns() - 1) {
+                    timetableDataString += Base64.getEncoder()
+                        .encodeToString(timetableMatrix[i][j].getBytes());
+                } else {
+                    timetableDataString += Base64.getEncoder()
+                        .encodeToString(timetableMatrix[i][j].getBytes()) + ",";
+                }
+            }
             timetableDataString += "\n";
         }
         return timetableDataString;
