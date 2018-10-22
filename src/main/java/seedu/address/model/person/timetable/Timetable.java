@@ -8,7 +8,7 @@ import seedu.address.model.Entity;
 public class Timetable extends Entity {
 
     // Identity fields
-    private final String fileName;
+    private final String filePath;
     private final String format;
     private final String timetableString;
 
@@ -17,26 +17,14 @@ public class Timetable extends Entity {
 
 
     /**
-     * Construct a timetable using the timetableString
+     * Construct a timetable using the timetableString if option is 1 Construct a timetable using
+     * the timetable csv file if option is 2
      */
-    public Timetable(String fileName, String format,
-        String timetableString) {
-        this.fileName = fileName + " timetable";
+    public Timetable(String filePath, String format,
+        String timetableString, int option) {
+        this.filePath = filePath;
         this.format = format;
-        this.matrix = new TimetableData(format, timetableString);
-        this.timetableString = getTimetableDataString();
-    }
-
-    /**
-     *   construct a timetable using a csv timetable file
-     * @param fileName
-     * @param format
-     * @param index
-     */
-    public Timetable(String fileName, String format, int index) {
-        this.fileName = fileName;
-        this.format = format;
-        this.matrix = new TimetableData(format, fileName, index);
+        this.matrix = new TimetableData(format, this.filePath, timetableString, option);
         this.timetableString = getTimetableDataString();
     }
 
@@ -64,14 +52,8 @@ public class Timetable extends Entity {
     public String getTimetableDataString() {
         String timetableDataString = "";
         String[][] timetableMatrix = this.matrix.getTimetable();
+
         for (int i = 0; i < matrix.getRows(); i++) {
-            for (int j = 0; j < matrix.getColumns(); j++) {
-                if (j == matrix.getColumns() - 1) {
-                    timetableDataString += timetableMatrix[i][j];
-                } else {
-                    timetableDataString += timetableMatrix[i][j] + ",";
-                }
-            }
             timetableDataString += "\n";
         }
         return timetableDataString;
@@ -89,7 +71,7 @@ public class Timetable extends Entity {
      * download timetable to the given location
      */
     public void downloadTimetable() {
-        String filepath = this.fileName;
+        String filepath = this.filePath;
         this.matrix.downloadTimetableData(filepath);
     }
 

@@ -18,8 +18,8 @@ import seedu.address.model.tag.Tag;
 
 /**
  * Represents a Person in the address book. Guarantees: details are present and not null, field
- * values are validated, immutable.
- * #TODO: Remove setGroups method and combine 2 constructors into 1 (by v1.3)
+ * values are validated, immutable. #TODO: Remove setGroups method and combine 2 constructors into 1
+ * (by v1.3)
  */
 public class Person extends Entity {
 
@@ -37,8 +37,8 @@ public class Person extends Entity {
     private UniqueList<Group> groups;
 
     /**
-     * Every field must be present and not null. creates a person with timetable
-     * Initialises groups as empty list.
+     * Every field must be present and not null. creates a person with timetable Initialises groups
+     * as empty list.
      */
     public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags,
         String format, String storedLocation, String timetableString) {
@@ -69,15 +69,16 @@ public class Person extends Entity {
         this.timetable = new Timetable(this.storedLocation + "/"
             + this.hashCode(),
             this.format,
-            timetableString);
+            timetableString, 1);
     }
 
     /**
-     * Every field must be present and not null. creates a person with timetable
-     * Initialises groups as empty list.
+     * Every field must be present and not null. creates a person with timetable Initialises groups
+     * as empty list.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, UniqueList<Group> groups,
-                  String format, String storedLocation, String timetableString) {
+    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags,
+        UniqueList<Group> groups,
+        String format, String storedLocation, String timetableString) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
@@ -95,7 +96,7 @@ public class Person extends Entity {
         }
         if (storedLocation.equals("default")) {
             this.storedLocation = new File("").getAbsolutePath().replace("\\", "/")
-                    + "/data/timetable";
+                + "/data/timetable";
             File directory = new File(this.storedLocation);
             if (!directory.exists()) {
                 directory.mkdirs();
@@ -104,9 +105,9 @@ public class Person extends Entity {
             this.storedLocation = storedLocation.replace("\\", "/");
         }
         this.timetable = new Timetable(this.storedLocation + "/"
-                + String.valueOf(this.hashCode()),
-                this.format,
-                timetableString);
+            + String.valueOf(this.hashCode()),
+            this.format,
+            timetableString, 1);
     }
 
     public Name getName() {

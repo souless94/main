@@ -2,10 +2,12 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.io.File;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
+import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -152,6 +154,10 @@ public class ParserUtil {
      */
     public static String parseLocation(String location) throws ParseException {
         requireNonNull(location);
+        boolean doesFileExists = new File(location).exists();
+        if (!doesFileExists) {
+            throw new ParseException(Messages.MESSAGE_TIMETABLE_NOT_FOUND);
+        }
         return location;
     }
 
@@ -168,9 +174,8 @@ public class ParserUtil {
     }
 
     /**
-     *
-     * Parses a {@code String mode} into an {@code String mode}. Leading and trailing
-     * whitespaces will be trimmed.
+     * Parses a {@code String mode} into an {@code String mode}. Leading and trailing whitespaces
+     * will be trimmed.
      *
      * @throws ParseException if the given {@code mode} is invalid.
      */
@@ -184,8 +189,8 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String format} into an {@code String format}. Leading and trailing whitespaces
-     * will be trimmed.
+     * Parses a {@code String format} into an {@code String format}. Leading and trailing
+     * whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code format} is invalid.
      */

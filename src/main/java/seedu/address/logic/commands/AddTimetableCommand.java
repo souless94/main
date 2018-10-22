@@ -26,23 +26,26 @@ public class AddTimetableCommand extends Command {
 
     public static final String COMMAND_WORD = "add_timetable";
     public static final String MESSAGE_USAGE =
-            COMMAND_WORD + ": adds timetable to the person identified "
-                    + "by the index number used in the displayed person list."
-                    + " \n"
-                    + "Parameters : INDEX (must be a positive integer) "
-                    + "Example: " + COMMAND_WORD + " 1 ";
+        COMMAND_WORD + ": adds timetable to the person identified "
+            + "by the index number used in the displayed person list."
+            + " \n"
+            + "Parameters : INDEX (must be a positive integer) "
+            + "Example: " + COMMAND_WORD + " 1 ";
 
     public static final String MESSAGE_ADD_TIMETABLE_SUCCESS = "timetable added successfully";
 
 
     private final Index index;
+    private final String newFilePath;
 
     /**
      * @param index of the person in the filtered person list to edit
      */
-    public AddTimetableCommand(Index index) {
+    public AddTimetableCommand(Index index, String newFilePath) {
         requireNonNull(index);
         this.index = index;
+        this.newFilePath = newFilePath;
+
     }
 
 
@@ -51,13 +54,18 @@ public class AddTimetableCommand extends Command {
         requireNonNull(model);
 
         Person personToEdit = CommandUtil.retrievePersonFromIndex(model, index);
-
-        String filePath = personToEdit.getStoredLocation()
+        String filePath;
+        if (newFilePath == null) {
+            filePath = personToEdit.getStoredLocation()
                 + "/" + String.valueOf(personToEdit.hashCode())
-                + " timetable";
-        File toRead = new File(filePath + ".csv");
+                + " timetable.csv";
+        } else {
+            filePath = newFilePath.replace("\\", "/");
+        }
+        File toRead = new File(filePath);
         if (toRead.exists()) {
-            Timetable timetable = new Timetable(filePath, personToEdit.getFormat(), index.getZeroBased());
+            Timetable timetable = new Timetable(filePath, personToEdit.getFormat(),
+                personToEdit.getTimetable().getTimetableDataString(), 2);
             Person updatedPerson = createUpdatedPerson(personToEdit, timetable);
             model.update(personToEdit, updatedPerson);
             model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
@@ -85,7 +93,7 @@ public class AddTimetableCommand extends Command {
         String timetableString = timetable.getTimetableDataString();
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags,
-                format, storedLocation, timetableString);
+            format, storedLocation, timetableString);
     }
 }
 

@@ -1,13 +1,12 @@
 package seedu.address.model.person.timetable;
 
-import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+
+import com.opencsv.CSVReader;
+import com.opencsv.CSVWriter;
 
 /**
  * timetable data which will process the inputs and create a timetable
@@ -29,7 +28,7 @@ public class TimetableData {
     /**
      * uses format and timetableString to create a
      */
-    public TimetableData(String format, String timetableString) {
+    public TimetableData(String format, String filePath, String timetableString, int option) {
         this.format = format;
         int noOfRows = 0;
         int noOfColumns = 0;
@@ -42,25 +41,12 @@ public class TimetableData {
         }
         this.rows = noOfRows;
         this.columns = noOfColumns;
-        this.timetable = getTimetableFromString(timetableString);
-    }
-
-    public TimetableData(String format, String fileName, int index) {
-
-        this.format = format;
-        int noOfRows = 0;
-        int noOfColumns = 0;
-        if (format.equals("vertical")) {
-            noOfRows = noOfTimings;
-            noOfColumns = noOfDays;
-        } else if (format.equals("horizontal")) {
-            noOfRows = noOfDays;
-            noOfColumns = noOfTimings;
+        if (option == 1) {
+            this.timetable = getTimetableFromString(timetableString);
+        } else {
+            String locationFrom = filePath;
+            this.timetable = getTimetableData(locationFrom);
         }
-        this.rows = noOfRows;
-        this.columns = noOfColumns;
-        String locationFrom = fileName + ".csv";
-        this.timetable = getTimetableData(locationFrom);
     }
 
     /**
@@ -77,7 +63,7 @@ public class TimetableData {
                 // regex expression gotten from Achintya Jha in
                 // https://stackoverflow.com/questions/15738918/
                 // splitting-a-csv-file-with-quotes-as-text-delimiter-using-string-split
-                timetableMatrix[i] = rows[i].split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1);
+                timetableMatrix[i] = rows[i].split("|");
                 // @@author
             }
             return timetableMatrix;
@@ -115,21 +101,19 @@ public class TimetableData {
 
     private String[][] readTimetableData(String storedLocation, String[][] timetableMatrix) {
         // @@author souless94 -reused
-        //Solution below gotten from Javin Paul
-        // from http://www.java67.com/2015/08/how-to-load-data-from-csv-file-in-java.html
-        Path pathToFile = Paths.get(storedLocation);
+        //Solution below gotten from grokonez
+        // from https://grokonez.com/java/java-read-write-csv-file-opencsv-example
         int i = 0;
-        try (BufferedReader br = Files.newBufferedReader(pathToFile, StandardCharsets.US_ASCII)) {
-            String line = br.readLine();
-            while (line != null) {
-                // regex expression gotten from Achintya Jha in
-                // https://stackoverflow.com/questions/15738918/
-                // splitting-a-csv-file-with-quotes-as-text-delimiter-using-string-split
-                String[] attributes = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1);
-                timetableMatrix[i] = attributes;
+        try {
+            FileReader fileReader = new FileReader(storedLocation);
+            CSVReader csvReader = new CSVReader(fileReader);
+            String[] timetableRow;
+            while ((timetableRow = csvReader.readNext()) != null) {
+                timetableMatrix[i] = timetableRow;
                 i++;
-                line = br.readLine();
             }
+            csvReader.close();
+
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -203,33 +187,35 @@ public class TimetableData {
     }
 
     /**
-     * download timetable data as csv unable to download if same filename exists
+     * download timetable data as csv
+     *
+     * unable to download if same filename exists
      *
      * @param locationTo location of where to save the file
      */
     public void downloadTimetableData(String locationTo) {
-        // Solution below adapted from bit-question
-        // from https://stackoverflow.com/questions/6271796/issues-of-saving-a-matrix-to-a-csv-file
+        // @@author souless94 -reused
+        //Solution below adapted from grokonez
+        // from https://grokonez.com/java/java-read-write-csv-file-opencsv-example
         String filePath = locationTo + ".csv";
         try {
             File toWrite = new File(filePath);
             if (!toWrite.exists()) {
                 toWrite.createNewFile();
-                FileWriter writer = new FileWriter(toWrite, true);
-                for (int i = 0; i < this.getRows(); i++) {
-                    for (int j = 0; j < this.getColumns(); j++) {
-                        writer.append(this.timetable[i][j]);
-                        writer.flush();
-                        writer.append(',');
-                        writer.flush();
-                    }
-                    writer.append("\n");
-                    writer.flush();
+                FileWriter writer = new FileWriter(toWrite);
+                CSVWriter csvWriter = new CSVWriter(writer,
+                    CSVWriter.DEFAULT_SEPARATOR,
+                    CSVWriter.NO_QUOTE_CHARACTER,
+                    CSVWriter.DEFAULT_ESCAPE_CHARACTER,
+                    CSVWriter.DEFAULT_LINE_END);
+                for (int i = 0; i < getRows(); i++) {
+                    csvWriter.writeNext(timetable[i]);
                 }
-                writer.close();
+                csvWriter.close();
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
+        // @@author
     }
 }
