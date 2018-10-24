@@ -224,7 +224,7 @@ public class TimetableData {
      *
      * @param locationTo location of where to save the file
      */
-    public void downloadTimetableData(String locationTo) {
+    public void downloadTimetableDataAsCsv(String locationTo) {
         // @@author souless94 -reused
         //Solution below adapted from grokonez
         // from https://grokonez.com/java/java-read-write-csv-file-opencsv-example

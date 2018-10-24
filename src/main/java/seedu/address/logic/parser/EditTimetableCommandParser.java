@@ -28,8 +28,6 @@ public class EditTimetableCommandParser implements Parser<EditTimetableCommand> 
             ArgumentTokenizer
                 .tokenize(args, PREFIX_DAY, PREFIX_TIMING, PREFIX_DETAILS);
         Index index;
-        int dayInputs = argMultimap.getAllValues(PREFIX_DAY).size();
-        int timingInputs = argMultimap.getAllValues(PREFIX_TIMING).size();
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {

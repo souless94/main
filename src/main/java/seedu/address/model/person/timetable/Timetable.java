@@ -89,9 +89,9 @@ public class Timetable extends Entity {
     /**
      * download timetable to the given location
      */
-    public void downloadTimetable() {
+    public void downloadTimetableAsCsv() {
         String filepath = this.filePath;
-        this.matrix.downloadTimetableData(filepath);
+        this.matrix.downloadTimetableDataAsCsv(filepath);
     }
 
     @Override
@@ -106,4 +106,5 @@ public class Timetable extends Entity {
         Timetable otherTimetable = (Timetable) other;
         return otherTimetable.equals(other);
     }
+
 }
