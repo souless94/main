@@ -48,7 +48,6 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `n/NAME_OF_FRIEND`, `NAME_OF_FRIEND` is a parameter which can be used as `add n/John Doe`.
 * Items in square brackets are optional e.g `n/NAME [i/INDEX_OF_TIMETABLE]` can be used as `n/John Doe i/1` or as `n/John Doe`.
-* Items in square brackets /\ square brackets means have to choose either left choice or right choice e.g `add_timetable [f/FILENAME l/FILE_LOCATION ] /\ [o/LINK]` can be used as `add_timetable f/mytimetable.png l/C://Users/abc/mysecretstash` or `add_timetable o/http://modsn.us/wJsFc` but not `add_timetable f/mytimetable.png l/C://Users/abc/mysecretstash o/http://modsn.us/wJsFc`
 * Parameters can be in any order e.g. if the command specifies `n/NAME_OF_FRIEND i/INDEX_OF_TIMETABLE`, `i/INDEX_OF_TIMETABLE n/NAME_OF_FRIEND` is also acceptable.
 ====
 
@@ -243,8 +242,8 @@ Format: `grouplist`
 
 == Timetable(Wen Kai)
 === Adding a timetable: `add_timetable`
-add a timetable from the stored folder in NUS Hangs +
-Format: `add_timetable INDEX `
+add a timetable from the stored folder in NUS Hangs or a file location +
+Format: `add_timetable INDEX [fl/FILE_LOCATION]  `
 
 ****
 * Add the timetable at the specified `INDEX`.
@@ -256,10 +255,30 @@ Examples:
 
 * `add_timetable 1`
 
+* `add_timetable 1 fl/C:\Users\timetable\timetable.csv `
+
+=== editing a timetable: `edit_timetable`
+edit a timetable timeslot from the person from index specified +
+Format: `add_timetable INDEX day/DAY timing/TIMING [m/DETAILS]  `
+
+****
+* Add the timetable at the specified `INDEX`.
+* The index refers to the index number shown in the displayed person list.
+* The index *must be a positive integer* 1, 2, 3, ...
+day refers to days of a week and day is in *full name(case insensitive)* monday,tuesday,TUesday ...
+timing is in 24h format and is from 0800 to 2300
+****
+
+Examples:
+
+* `edit_timetable 1 day/wednesday timing/0900 m/do cs2103`
+
+
+
 === Download timetable : `download_timetable`
 
-Download a timetable in the System as a png file or csv file in the format of the person.+
-Format: `download_timetable INDEX p/PASSWORD `
+Download a timetable in the System as a csv file in the format of the person.+
+Format: `download_timetable INDEX `
 
 ****
 * Download the timetable at the specified `INDEX`.
@@ -269,7 +288,7 @@ Format: `download_timetable INDEX p/PASSWORD `
 
 Examples:
 
-* `download_timetable 1 p/password` +
+* `download_timetable 1 ` +
 
 === Deleting a timetable : `delete_timetable`
 
@@ -494,8 +513,10 @@ e.g. `find_friend James Jake`
 e.g. `delete_friend 3`
 * *clear_friend* : `clear_friend`
 * *grouplist* : `listgroup`
-* *add_timetable* `add_timetable INDEX ` +
+* *add_timetable* `add_timetable INDEX [fl/FILE_LOCATION]` +
 e.g. `add_timetable 1`
+* *edit_timetable* `edit_timetable INDEX day/DAY timing/TIMING [m/DETAILS]` +
+e.g. `edit_timetable 1 day/wednesday timing/1800 m/do cs2103`
 * *download_timetable* : `download_timetable INDEX` +
 e.g. `download_timetable 1 l/C://Users/abc/mysecretstash`
 * *delete_timetable* : `delete INDEX p/password` +
