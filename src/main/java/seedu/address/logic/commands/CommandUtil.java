@@ -6,6 +6,7 @@ import java.util.List;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.Entity;
 import seedu.address.model.Model;
 import seedu.address.model.group.Group;
 import seedu.address.model.person.Name;
@@ -55,6 +56,22 @@ public class CommandUtil {
         Person newPerson = personToUpdate;
         newPerson.setGroups(editedGroupList);
         model.update(personToUpdate, newPerson);
+    }
+
+    /**
+     * Adds {@code target} to model if there it has not been added before.
+     */
+    public static void addTargetToModelIfNoDuplicates (Model model, Entity target) throws CommandException {
+        if (model.has(target)) {
+            if (target instanceof Person) {
+                throw new CommandException(AddCommand.MESSAGE_DUPLICATE_PERSON);
+            }
+            if (target instanceof Group) {
+                throw new CommandException(AddGroupCommand.MESSAGE_DUPLICATE_GROUP);
+            }
+        }
+        model.add(target);
+        model.commitAddressBook();
     }
 }
 
