@@ -60,12 +60,12 @@ public class TimetableData {
             timetable = getTimetableFromString(timetableString);
             int rowToChange;
             int columnToChange;
-            if (format.equals("horizontal")) {
-                rowToChange = ArrayUtils.indexOf(getDaysInLowerCase(), day) + 1;
+            if ("horizontal".equals(format)) {
+                rowToChange = ArrayUtils.indexOf(getDaysInLowerCase(), day.toLowerCase()) + 1;
                 columnToChange = ArrayUtils.indexOf(timings, timing) + 1;
             } else {
                 rowToChange = ArrayUtils.indexOf(timings, timing) + 1;
-                columnToChange = ArrayUtils.indexOf(days, day) + 1;
+                columnToChange = ArrayUtils.indexOf(getDaysInLowerCase(), day.toLowerCase()) + 1;
             }
             timetable[rowToChange][columnToChange] = message;
         }

@@ -1,17 +1,19 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.Messages.MESSAGE_NOT_UNIQUE_PREFIX_INPUT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DAY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DETAILS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIMING;
 
 import java.util.stream.Stream;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditTimetableCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
- *  Parses input arguments and creates a new EditTimetableCommand object
+ * Parses input arguments and creates a new EditTimetableCommand object
  */
 public class EditTimetableCommandParser implements Parser<EditTimetableCommand> {
 
@@ -26,6 +28,8 @@ public class EditTimetableCommandParser implements Parser<EditTimetableCommand> 
             ArgumentTokenizer
                 .tokenize(args, PREFIX_DAY, PREFIX_TIMING, PREFIX_DETAILS);
         Index index;
+        int dayInputs = argMultimap.getAllValues(PREFIX_DAY).size();
+        int timingInputs = argMultimap.getAllValues(PREFIX_TIMING).size();
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
@@ -33,13 +37,22 @@ public class EditTimetableCommandParser implements Parser<EditTimetableCommand> 
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditTimetableCommand.MESSAGE_USAGE),
                 pe);
         }
-        if (!arePrefixesPresent(argMultimap, PREFIX_DAY, PREFIX_TIMING, PREFIX_DETAILS)) {
+        if (!arePrefixesPresent(argMultimap, PREFIX_DAY, PREFIX_TIMING)) {
             throw new ParseException(
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditTimetableCommand.MESSAGE_USAGE));
         }
+        if (!argMultimap.isOnlyOnePrefix(PREFIX_DAY) || !argMultimap
+            .isOnlyOnePrefix(PREFIX_TIMING)) {
+            throw new ParseException(String.format(MESSAGE_NOT_UNIQUE_PREFIX_INPUT));
+        }
+
         String day = ParserUtil.parseDay(argMultimap.getValue(PREFIX_DAY).get());
         String timing = ParserUtil.parseTiming(argMultimap.getValue(PREFIX_TIMING).get());
-        String details = ParserUtil.parseDetails(argMultimap.getValue(PREFIX_DETAILS).get());
+        String details = " ";
+        if (argMultimap.getValue(PREFIX_DETAILS).isPresent() && argMultimap
+            .isOnlyOnePrefix(PREFIX_DETAILS)) {
+            details = ParserUtil.parseDetails(argMultimap.getValue(PREFIX_DETAILS).get());
+        }
         return new EditTimetableCommand(index, day, timing, details);
     }
 
