@@ -3,6 +3,9 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_GROUPS;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+
+import java.util.function.Predicate;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
@@ -56,7 +59,8 @@ public class DeleteMemberCommand extends Command {
             Group editedGroup = deleteMemberFromGroup(groupToBeEdited, index);
 
             model.update(groupToBeEdited, editedGroup);
-            model.updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
+            Predicate<Person> PREDICATE_SHOW_ALL_MEMBERS = member -> editedGroup.getGroupMembers().contains(member);
+            model.updateFilteredPersonList(PREDICATE_SHOW_ALL_MEMBERS);
             model.commitAddressBook();
             return new CommandResult(String.format(MESSAGE_EDIT_GROUP_SUCCESS, editedGroup));
 
