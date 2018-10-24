@@ -22,9 +22,10 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.group.Group;
 import seedu.address.model.person.Person;
+import seedu.address.testutil.GroupBuilder;
 import seedu.address.testutil.PersonBuilder;
 
-public class AddCommandTest {
+public class AddGroupCommandTest {
 
     private static final CommandHistory EMPTY_COMMAND_HISTORY = new CommandHistory();
 
@@ -34,58 +35,58 @@ public class AddCommandTest {
     private CommandHistory commandHistory = new CommandHistory();
 
     @Test
-    public void constructor_nullPerson_throwsNullPointerException() {
+    public void constructor_nullGroup_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
-        new AddCommand(null);
+        new AddGroupCommand(null);
     }
 
     @Test
-    public void execute_personAcceptedByModel_addSuccessful() throws Exception {
-        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
-        Person validPerson = new PersonBuilder().build();
+    public void execute_groupAcceptedByModel_addSuccessful() throws Exception {
+        ModelStubAcceptingGroupAdded modelStub = new ModelStubAcceptingGroupAdded();
+        Group validGroup = new GroupBuilder().build();
 
-        CommandResult commandResult = new AddCommand(validPerson)
+        CommandResult commandResult = new AddGroupCommand(validGroup)
             .execute(modelStub, commandHistory);
 
-        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, validPerson),
+        assertEquals(String.format(AddGroupCommand.MESSAGE_SUCCESS, validGroup),
             commandResult.feedbackToUser);
-        assertEquals(Arrays.asList(validPerson), modelStub.personsAdded);
+        assertEquals(Arrays.asList(validGroup), modelStub.groupsAdded);
         assertEquals(EMPTY_COMMAND_HISTORY, commandHistory);
     }
 
     @Test
-    public void execute_duplicatePerson_throwsCommandException() throws Exception {
-        Person validPerson = new PersonBuilder().build();
-        AddCommand addCommand = new AddCommand(validPerson);
-        ModelStub modelStub = new ModelStubWithPerson(validPerson);
+    public void execute_duplicateGroup_throwsCommandException() throws Exception {
+        Group validGroup = new GroupBuilder().build();
+        AddGroupCommand addGroupCommand = new AddGroupCommand(validGroup);
+        ModelStub modelStub = new ModelStubWithGroup(validGroup);
 
         thrown.expect(CommandException.class);
-        thrown.expectMessage(AddCommand.MESSAGE_DUPLICATE_PERSON);
-        addCommand.execute(modelStub, commandHistory);
+        thrown.expectMessage(AddGroupCommand.MESSAGE_DUPLICATE_GROUP);
+        addGroupCommand.execute(modelStub, commandHistory);
     }
 
     @Test
     public void equals() {
-        Person alice = new PersonBuilder().withName("Alice").build();
-        Person bob = new PersonBuilder().withName("Bob").build();
-        AddCommand addAliceCommand = new AddCommand(alice);
-        AddCommand addBobCommand = new AddCommand(bob);
+        Group family = new GroupBuilder().withName("Family").build();
+        Group friends = new GroupBuilder().withName("Friends").build();
+        AddGroupCommand addFamilyCommand = new AddGroupCommand(family);
+        AddGroupCommand addFriendsCommand = new AddGroupCommand(friends);
 
         // same object -> returns true
-        assertTrue(addAliceCommand.equals(addAliceCommand));
+        assertTrue(addFamilyCommand.equals(addFamilyCommand));
 
         // same values -> returns true
-        AddCommand addAliceCommandCopy = new AddCommand(alice);
-        assertTrue(addAliceCommand.equals(addAliceCommandCopy));
+        AddGroupCommand addFamilyCommandCopy = new AddGroupCommand(family);
+        assertTrue(addFamilyCommand.equals(addFamilyCommandCopy));
 
         // different types -> returns false
-        assertFalse(addAliceCommand.equals(1));
+        assertFalse(addFamilyCommand.equals(1));
 
         // null -> returns false
-        assertFalse(addAliceCommand.equals(null));
+        assertFalse(addFamilyCommand.equals(null));
 
         // different person -> returns false
-        assertFalse(addAliceCommand.equals(addBobCommand));
+        assertFalse(addFamilyCommand.equals(addFriendsCommand));
     }
 
     /**
@@ -170,39 +171,39 @@ public class AddCommandTest {
     }
 
     /**
-     * A Model stub that contains a single person.
+     * A Model stub that contains a single group.
      */
-    private class ModelStubWithPerson extends ModelStub {
+    private class ModelStubWithGroup extends ModelStub {
 
-        private final Person person;
+        private final Group group;
 
-        ModelStubWithPerson(Person person) {
-            requireNonNull(person);
-            this.person = person;
+        ModelStubWithGroup(Group group) {
+            requireNonNull(group);
+            this.group = group;
         }
 
         @Override
         public boolean has(Entity target) {
             requireNonNull(target);
-            if (target instanceof Person) {
-                return this.person.isSame(target);
+            if (target instanceof Group) {
+                return this.group.isSame(target);
             }
             return false;
         }
     }
 
     /**
-     * A Model stub that always accept the person being added.
+     * A Model stub that always accept the group being added.
      */
-    private class ModelStubAcceptingPersonAdded extends ModelStub {
+    private class ModelStubAcceptingGroupAdded extends ModelStub {
 
-        final ArrayList<Person> personsAdded = new ArrayList<>();
+        final ArrayList<Group> groupsAdded = new ArrayList<>();
 
         @Override
         public boolean has(Entity target) {
             requireNonNull(target);
-            if (target instanceof Person) {
-                return personsAdded.stream().anyMatch(target::isSame);
+            if (target instanceof Group) {
+                return groupsAdded.stream().anyMatch(target::isSame);
             }
             return false;
         }
@@ -210,14 +211,14 @@ public class AddCommandTest {
         @Override
         public void add(Entity target) {
             requireNonNull(target);
-            if (target instanceof Person) {
-                personsAdded.add((Person) target);
+            if (target instanceof Group) {
+                groupsAdded.add((Group) target);
             }
         }
 
         @Override
         public void commitAddressBook() {
-            // called by {@code AddCommand#execute()}
+            // called by {@code AddGroupCommand#execute()}
         }
 
         @Override
