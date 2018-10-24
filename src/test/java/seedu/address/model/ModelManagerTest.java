@@ -2,9 +2,11 @@ package seedu.address.model;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_GROUPS;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
+import static seedu.address.testutil.TypicalGroups.FAMILY;
 
 import java.nio.file.Paths;
 import java.util.Arrays;
@@ -23,14 +25,15 @@ public class ModelManagerTest {
     private ModelManager modelManager = new ModelManager();
 
     @Test
-    public void has_nullPerson_throwsNullPointerException() {
+    public void has_null_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
         modelManager.has(null);
     }
 
     @Test
-    public void has_personNotInAddressBook_returnsFalse() {
+    public void has_personOrGroupNotInAddressBook_returnsFalse() {
         assertFalse(modelManager.has(ALICE));
+        assertFalse(modelManager.has(FAMILY));
     }
 
     @Test
@@ -40,14 +43,26 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void has_groupInAddressBook_returnsTrue() {
+        modelManager.add(FAMILY);
+        assertTrue(modelManager.has(FAMILY));
+    }
+
+    @Test
     public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
         thrown.expect(UnsupportedOperationException.class);
         modelManager.getFilteredPersonList().remove(0);
     }
 
     @Test
+    public void getFilteredGroupList_modifyList_throwsUnsupportedOperationException() {
+        thrown.expect(UnsupportedOperationException.class);
+        modelManager.getFilteredGroupList().remove(0);
+    }
+
+    @Test
     public void equals() {
-        AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
+        AddressBook addressBook = new AddressBookBuilder().with(ALICE).with(BENSON).with(FAMILY).build();
         AddressBook differentAddressBook = new AddressBook();
         UserPrefs userPrefs = new UserPrefs();
 
@@ -75,6 +90,7 @@ public class ModelManagerTest {
 
         // resets modelManager to initial state for upcoming tests
         modelManager.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        modelManager.updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
 
         // different userPrefs -> returns true
         UserPrefs differentUserPrefs = new UserPrefs();
