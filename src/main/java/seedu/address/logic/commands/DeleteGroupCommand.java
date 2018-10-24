@@ -47,11 +47,11 @@ public class DeleteGroupCommand extends Command {
         try {
             Group groupDeleted = CommandUtil.retrieveGroupFromName(model, groupToBeDeleted.getName());
             model.delete(groupDeleted);
-            String isSuccess = deleteGroupFromMembers(model, groupDeleted);
+            deleteGroupFromMembers(model, groupDeleted);
             model.commitAddressBook();
             model.updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
             model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-            return new CommandResult(String.format(MESSAGE_SUCCESS, isSuccess));
+            return new CommandResult(String.format(MESSAGE_SUCCESS, groupDeleted.getName()));
         } catch (NotFoundException e) {
             throw new CommandException(Messages.MESSAGE_NO_MATCH_TO_EXISTING_GROUP);
         }
@@ -61,20 +61,13 @@ public class DeleteGroupCommand extends Command {
      * Update model with a new {@code Person} with {@code groupDeleted} deleted from list of groups
      * for every member in {@code groupDeleted}
      */
-    private static String deleteGroupFromMembers(Model model, Group groupDeleted) {
+    private static void deleteGroupFromMembers(Model model, Group groupDeleted) {
         assert groupDeleted != null;
-        String success = "NOT IN";
         List<Person> membersToEdit = new ArrayList<>(groupDeleted.getGroupMembers());
 
         for (Person member : membersToEdit) {
-            List<Group> editedGroupList = new ArrayList<>(member.getGroups());
-            editedGroupList.remove(groupDeleted);
-            Person newMember = member;
-            newMember.setGroups(editedGroupList);
-            model.update(member, newMember);
-            success = "SUCCESS IN";
+            CommandUtil.updatePersonDeleteGroupFromGroupList(model, groupDeleted, member);
         }
-        return success;
     }
 
     @Override

@@ -7,6 +7,7 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.function.Predicate;
 
+import javafx.util.Pair;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -56,10 +57,15 @@ public class DeleteMemberCommand extends Command {
         Group groupToBeEdited = CommandUtil.retrieveGroupFromName(model, groupName);
 
         try {
-            Group editedGroup = deleteMemberFromGroup(groupToBeEdited, index);
-
+            Pair<Group, Person> pair = deleteMemberFromGroup(groupToBeEdited, index);
+            Group editedGroup = pair.getKey();
             model.update(groupToBeEdited, editedGroup);
-            Predicate<Person> PREDICATE_SHOW_ALL_MEMBERS = member -> editedGroup.getGroupMembers().contains(member);
+
+            //Update person to have group removed from Person's grouplist
+            Person member = pair.getValue();
+            CommandUtil.updatePersonDeleteGroupFromGroupList(model, editedGroup, member);
+
+            Predicate<Person> PREDICATE_SHOW_ALL_MEMBERS = person -> editedGroup.getGroupMembers().contains(person);
             model.updateFilteredPersonList(PREDICATE_SHOW_ALL_MEMBERS);
             model.commitAddressBook();
             return new CommandResult(String.format(MESSAGE_EDIT_GROUP_SUCCESS, editedGroup));
@@ -74,14 +80,15 @@ public class DeleteMemberCommand extends Command {
      * Creates and returns a {@code group} with a member deleted {@code indexToDelete}
      * in {@code groupToBeEdited}
      */
-    private static Group deleteMemberFromGroup(Group groupToBeEdited, Index index) throws IndexOutOfBoundsException {
+    private static Pair<Group, Person> deleteMemberFromGroup(Group groupToBeEdited, Index index) throws IndexOutOfBoundsException {
         assert groupToBeEdited != null;
 
         UniqueList<Person> newGroupMembers = new UniqueList<>();
         newGroupMembers.setElements(groupToBeEdited.getGroupMembers());
         Person personToDelete = groupToBeEdited.getGroupMembers().get(index.getZeroBased());
         newGroupMembers.remove(personToDelete);
-        return new Group(groupToBeEdited.getName(), groupToBeEdited.getDescription(), newGroupMembers);
+        return new Pair<>(new Group(groupToBeEdited.getName(), groupToBeEdited.getDescription(), newGroupMembers),
+                personToDelete);
     }
 
     @Override

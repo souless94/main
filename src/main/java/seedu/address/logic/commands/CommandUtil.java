@@ -1,5 +1,6 @@
 package seedu.address.logic.commands;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import seedu.address.commons.core.Messages;
@@ -42,6 +43,14 @@ public class CommandUtil {
         }
 
         return lastShownList.get(targetIndex.getZeroBased());
+    }
+
+    public static void updatePersonDeleteGroupFromGroupList (Model model, Group groupToDelete, Person personToUpdate) {
+        List<Group> editedGroupList = new ArrayList<>(personToUpdate.getGroups());
+        editedGroupList.remove(groupToDelete);
+        Person newPerson = personToUpdate;
+        newPerson.setGroups(editedGroupList);
+        model.update(personToUpdate, newPerson);
     }
 }
 
