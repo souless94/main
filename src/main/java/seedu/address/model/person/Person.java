@@ -84,7 +84,7 @@ public class Person extends Entity {
         this.email = temp.getEmail();
         this.address = temp.getAddress();
         this.tags.addAll(temp.getTags());
-        this.format=temp.getFormat();
+        this.format = temp.getFormat();
         this.storedLocation = temp.getStoredLocation();
         this.timetable = temp.getTimetable();
 

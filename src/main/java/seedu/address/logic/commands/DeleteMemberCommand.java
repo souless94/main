@@ -2,8 +2,6 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_GROUPS;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.function.Predicate;
 
@@ -65,8 +63,8 @@ public class DeleteMemberCommand extends Command {
             Person member = pair.getValue();
             CommandUtil.updatePersonDeleteGroupFromGroupList(model, editedGroup, member);
 
-            Predicate<Person> PREDICATE_SHOW_ALL_MEMBERS = person -> editedGroup.getGroupMembers().contains(person);
-            model.updateFilteredPersonList(PREDICATE_SHOW_ALL_MEMBERS);
+            Predicate<Person> predicateShowAllMembers = person -> editedGroup.getGroupMembers().contains(person);
+            model.updateFilteredPersonList(predicateShowAllMembers);
             model.commitAddressBook();
             return new CommandResult(String.format(MESSAGE_EDIT_GROUP_SUCCESS, editedGroup));
 
@@ -80,7 +78,8 @@ public class DeleteMemberCommand extends Command {
      * Creates and returns a {@code group} with a member deleted {@code indexToDelete}
      * in {@code groupToBeEdited}
      */
-    private static Pair<Group, Person> deleteMemberFromGroup(Group groupToBeEdited, Index index) throws IndexOutOfBoundsException {
+    private static Pair<Group, Person> deleteMemberFromGroup(Group groupToBeEdited, Index index)
+            throws IndexOutOfBoundsException {
         assert groupToBeEdited != null;
 
         UniqueList<Person> newGroupMembers = new UniqueList<>();

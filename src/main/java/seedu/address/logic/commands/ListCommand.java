@@ -45,10 +45,10 @@ public class ListCommand extends Command {
         }
         try {
             Person personListed = model.getFilteredPersonList().get(index.getZeroBased());
-            Predicate<Person> PREDICATE_SHOW_PERSONS = person -> person == personListed;
-            Predicate<Group> PREDICATE_SHOW_GROUPS = group -> personListed.getGroups().contains(group);
-            model.updateFilteredPersonList(PREDICATE_SHOW_PERSONS);
-            model.updateFilteredGroupList(PREDICATE_SHOW_GROUPS);
+            Predicate<Person> predicateShowPerson = person -> person == personListed;
+            Predicate<Group> predicateShowGroups = group -> personListed.getGroups().contains(group);
+            model.updateFilteredPersonList(predicateShowPerson);
+            model.updateFilteredGroupList(predicateShowGroups);
             return new CommandResult(MESSAGE_SUCCESS_LIST_GROUPS);
 
         } catch (IndexOutOfBoundsException e) {

@@ -45,6 +45,10 @@ public class CommandUtil {
         return lastShownList.get(targetIndex.getZeroBased());
     }
 
+    /**
+     * Delete {@code groupToDelete} from {@code personToUpdate} group list and updates model of new
+     * {@code personToUpdate}
+     */
     public static void updatePersonDeleteGroupFromGroupList (Model model, Group groupToDelete, Person personToUpdate) {
         List<Group> editedGroupList = new ArrayList<>(personToUpdate.getGroups());
         editedGroupList.remove(groupToDelete);
