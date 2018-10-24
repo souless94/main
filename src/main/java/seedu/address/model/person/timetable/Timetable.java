@@ -24,10 +24,11 @@ public class Timetable extends Entity {
      * the timetable csv file if option is 2
      */
     public Timetable(String filePath, String format,
-        String timetableString, int option) {
+        String timetableString, int option, String day, String timing, String message) {
         this.filePath = filePath;
         this.format = format;
-        this.matrix = new TimetableData(format, this.filePath, timetableString, option);
+        this.matrix = new TimetableData(format, this.filePath, timetableString,
+            option, day, timing, message);
         this.timetableString = getTimetableDataString();
     }
 

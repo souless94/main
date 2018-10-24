@@ -69,7 +69,7 @@ public class Person extends Entity {
         }
         this.timetable = new Timetable(this.storedLocation,
             this.format,
-            timetableString, 1);
+            timetableString, 1, null, null, null);
     }
 
     /**
@@ -107,7 +107,7 @@ public class Person extends Entity {
         this.timetable = new Timetable(this.storedLocation + "/"
             + String.valueOf(this.hashCode()),
             this.format,
-            timetableString, 1);
+            timetableString, 1, null, null, null);
     }
 
     public Name getName() {

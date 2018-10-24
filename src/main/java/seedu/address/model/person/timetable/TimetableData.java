@@ -7,6 +7,8 @@ import java.io.IOException;
 
 import java.util.Base64;
 
+import org.apache.commons.lang3.ArrayUtils;
+
 import com.opencsv.CSVReader;
 import com.opencsv.CSVWriter;
 
@@ -21,17 +23,21 @@ public class TimetableData {
         "1400", "1500", "1600", "1700", "1800", "1900", "2000", "2100", "2200", "2300"};
     private String[] days = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday",
         "Saturday", "Sunday"};
+    private String[] daysInLowerCase = {"monday", "tuesday", "wednesday", "thursday", "friday",
+        "saturday", "sunday"};
     private final int noOfTimings = timings.length;
     private final int noOfDays = days.length;
-    private final int rows;
-    private final int columns;
+    private final int noOfRows;
+    private final int noOfColumns;
     private final String format;
 
 
     /**
-     * uses format and timetableString to create a
+     * uses format and timetableString to create a matrix uses the day and time to find the cell of
+     * the matrix to input the message
      */
-    public TimetableData(String format, String filePath, String timetableString, int option) {
+    public TimetableData(String format, String filePath, String timetableString, int option,
+        String day, String timing, String message) {
         this.format = format;
         int noOfRows = 0;
         int noOfColumns = 0;
@@ -42,14 +48,28 @@ public class TimetableData {
             noOfRows = noOfDays;
             noOfColumns = noOfTimings;
         }
-        this.rows = noOfRows;
-        this.columns = noOfColumns;
+        this.noOfRows = noOfRows;
+        this.noOfColumns = noOfColumns;
+        String[][] timetable;
         if (option == 1) {
-            this.timetable = getTimetableFromString(timetableString);
-        } else {
+            timetable = getTimetableFromString(timetableString);
+        } else if (option == 2) {
             String locationFrom = filePath;
-            this.timetable = getTimetableData(locationFrom);
+            timetable = getTimetableData(locationFrom);
+        } else {
+            timetable = getTimetableFromString(timetableString);
+            int rowToChange;
+            int columnToChange;
+            if (format.equals("horizontal")) {
+                rowToChange = ArrayUtils.indexOf(getDaysInLowerCase(), day) + 1;
+                columnToChange = ArrayUtils.indexOf(timings, timing) + 1;
+            } else {
+                rowToChange = ArrayUtils.indexOf(timings, timing) + 1;
+                columnToChange = ArrayUtils.indexOf(days, day) + 1;
+            }
+            timetable[rowToChange][columnToChange] = message;
         }
+        this.timetable = timetable;
     }
 
     /**
@@ -73,12 +93,20 @@ public class TimetableData {
         }
     }
 
+    public String[] getTimings() {
+        return timings;
+    }
+
+    public String[] getDaysInLowerCase() {
+        return daysInLowerCase;
+    }
+
     public int getRows() {
-        return this.rows + 1;
+        return this.noOfRows + 1;
     }
 
     public int getColumns() {
-        return this.columns + 1;
+        return this.noOfColumns + 1;
     }
 
     /**
