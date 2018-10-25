@@ -525,7 +525,19 @@ The current person implementation are:
 
 ==== Design Considerations
 
-To be continued :)
+Aspect: How should each specific 'find' feature work
+
+*Alternative 1 (Current Choice) :* Create a class for each information (e.g. find_address)
+
+Pros: Easy to implement, with specific search focus
+
+Cons: Repetitive code base with less flexibility
+
+*Alternative 2 :* Use prefixes for specific search (e.g. find a/gardens)
+
+Pros: Higher flexibility
+
+Cons: Harder to implement. May allow greater control for larger search range
 
 == Documentation
 
