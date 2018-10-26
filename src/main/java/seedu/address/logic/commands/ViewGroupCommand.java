@@ -43,8 +43,9 @@ public class ViewGroupCommand extends Command {
         Group group = CommandUtil.retrieveGroupFromName(model, groupName);
 
         Predicate<Person> predicateShowAllGroupMembers = person -> group.getGroupMembers().contains(person);
+        Predicate<Group> predicateShowGroupOnly = g -> group.equals(g);
 
-        model.updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
+        model.updateFilteredGroupList(predicateShowGroupOnly);
         model.updateFilteredPersonList(predicateShowAllGroupMembers);
         return new CommandResult(MESSAGE_SUCCESS);
     }
