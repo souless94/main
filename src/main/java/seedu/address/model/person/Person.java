@@ -71,7 +71,7 @@ public class Person extends Entity {
             this.format,
             timetableString, 1, null, null, null);
     }
-    
+
     /**
      * Every field must be present and not null. creates a person with timetable.
      */
