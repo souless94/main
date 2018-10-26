@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.Messages.MESSAGE_NOT_UNIQUE_PREFIX_INPUT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FILE_LOCATION;
 
 import seedu.address.commons.core.index.Index;
@@ -34,8 +35,12 @@ public class AddTimetableCommandParser implements Parser<AddTimetableCommand> {
         }
 
         if (argMultimap.getValue(PREFIX_FILE_LOCATION).isPresent()) {
-            newFilePath = ParserUtil
-                .parseLocation(argMultimap.getValue(PREFIX_FILE_LOCATION).get());
+            if (argMultimap.isOnlyOnePrefix(PREFIX_FILE_LOCATION)) {
+                newFilePath = ParserUtil
+                    .parseLocation(argMultimap.getValue(PREFIX_FILE_LOCATION).get());
+            } else {
+                throw new ParseException(MESSAGE_NOT_UNIQUE_PREFIX_INPUT);
+            }
         }
         return new AddTimetableCommand(index, newFilePath);
     }
