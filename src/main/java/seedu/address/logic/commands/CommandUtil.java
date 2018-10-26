@@ -1,5 +1,7 @@
 package seedu.address.logic.commands;
 
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_GROUPS;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,6 +25,7 @@ public class CommandUtil {
      */
     public static Group retrieveGroupFromName(Model model, Name groupName) throws CommandException {
         // Make sure that group exists
+        model.updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
         List<Group> lastShownList = model.getFilteredGroupList();
         Group groupToBeEdited = new Group(groupName, ""); //do not know description and groupMembers
 
