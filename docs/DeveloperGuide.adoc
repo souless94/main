@@ -417,7 +417,7 @@ In version 2.0, encryption would be extended to other essential data stored with
 
 ==== Design Considerations
 
-Aspect: Create and Login
+===== Aspect: Create and Login
 
 *Alternative 1 (current choice):* create stores data in a hashmap.
 
@@ -442,7 +442,7 @@ Cons:
 
 [LeslieTODO: to be updated: ]
 
-Aspect: How encryption executes
+===== Aspect: How encryption executes
 
 *Alternative 1 (current choice):* a function call to encryption before storing password data into hashmap. when logging in, a function call encrypts the user entered password before comparing to stored password in hashmap
 
@@ -474,7 +474,7 @@ The current group commands added are:
 * `register` -- register a member into an existing group and include a reference to the group in the member (Person class)
 * `delete_member` -- delete an existing member from an existing group and remove reference to that group in the member
 * `view_group` -- view the existing members in the group and is updated whenever any member is added or deleted.
-* `list` -- lists both the updated list of groups and persons
+* `list [index]` -- lists all the groups the person at [index] is currently in.
 
 These functions and their parsers are handled in `Logic`, makes use of and updates `Model` and `Storage` and displaying the updated result on the `UI`.
 
@@ -489,11 +489,16 @@ Step 3: `RegisterCommand` adds the person as a member in the group and adds a re
 Step 4: `Model` is updated of the new `Group` and `Person`. `FilteredPersonList` and `FilteredGroupList` is also updated to display the new groups and persons in the `UI`. A successful message is also displayed to the user below the UI's command box.
 [MelodiesTODO: Elaborate on how connection to UI is created.]
 
-[Include sequence diagram here]
+.Sequence Diagram of RegisterCommand (Logic component)
+image::RegisterCommandLogicSequenceDiagram.png[width="750"]
+
+
+.Sequence Diagram of RegisterCommand (Model component)
+image::RegisterCommandModelSequenceDiagram.png[width="750"]
 
 ==== Design Considerations
 
-Aspect: How to implement `Group` class
+===== Aspect: How to implement `Group` class
 
 *Alternative 1 (current choice):* `Group` as an immutable class.
 
@@ -507,7 +512,7 @@ Pros: Easier and less code for methods involving groups. Faster as do not have t
 
 Cons: Miss out on the advantages of immutable object (above). Good practice to use immutable objects.
 
-Aspect: Interactions between person and groups
+===== Aspect: Interactions between person and groups
 
 Deleting a person from a group will affect the person's reference to that group and vice versa (similar for adding and editing).
 
@@ -547,7 +552,7 @@ image::FindFeature1.png[width="300"]
 
 ==== Design Considerations
 
-Aspect: How should each specific 'find' feature work
+===== Aspect: How should each specific 'find' feature work
 
 *Alternative 1 (Current Choice) :* Create a class for each information (e.g. find_address)
 
