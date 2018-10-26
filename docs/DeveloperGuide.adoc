@@ -471,8 +471,11 @@ Step 3: `RegisterCommand` adds the person as a member in the group and adds a re
 Step 4: `Model` is updated of the new `Group` and `Person`. `FilteredPersonList` and `FilteredGroupList` is also updated to display the new groups and persons in the `UI`. A successful message is also displayed to the user below the UI's command box.
 [MelodiesTODO: Elaborate on how connection to UI is created.]
 
-.Sequence Diagram of RegisterCommand (Logic to Model components)
-image::RegisterCommandSequenceDiagram.png[width="800"]
+.Sequence Diagram of RegisterCommand (Logic component)
+image::RegisterCommandLogicSequenceDiagram.png[width="800"]
+
+.Sequence Diagram of RegisterCommand (Model component)
+image::RegisterCommandModelSequenceDiagram.png[width="800"]
 
 ==== Design Considerations
 
