@@ -456,7 +456,7 @@ The current group commands added are:
 * `register` -- register a member into an existing group and include a reference to the group in the member (Person class)
 * `delete_member` -- delete an existing member from an existing group and remove reference to that group in the member
 * `view_group` -- view the existing members in the group and is updated whenever any member is added or deleted.
-* `list` -- lists both the updated list of groups and persons
+* `list [index]` -- lists all the groups the person at [index] is currently in.
 
 These functions and their parsers are handled in `Logic`, makes use of and updates `Model` and `Storage` and displaying the updated result on the `UI`.
 
@@ -472,10 +472,11 @@ Step 4: `Model` is updated of the new `Group` and `Person`. `FilteredPersonList`
 [MelodiesTODO: Elaborate on how connection to UI is created.]
 
 .Sequence Diagram of RegisterCommand (Logic component)
-image::RegisterCommandLogicSequenceDiagram.png[width="800"]
+image::RegisterCommandLogicSequenceDiagram.png[width="750"]
+
 
 .Sequence Diagram of RegisterCommand (Model component)
-image::RegisterCommandModelSequenceDiagram.png[width="800"]
+image::RegisterCommandModelSequenceDiagram.png[width="750"]
 
 ==== Design Considerations
 
