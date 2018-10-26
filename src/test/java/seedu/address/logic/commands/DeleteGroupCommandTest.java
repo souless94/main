@@ -32,7 +32,7 @@ public class DeleteGroupCommandTest {
         Group groupToDelete = model.getFilteredGroupList().get(INDEX_FIRST.getZeroBased());
         DeleteGroupCommand deleteGroupCommand = new DeleteGroupCommand(groupToDelete);
 
-        String expectedMessage = String.format(DeleteGroupCommand.MESSAGE_SUCCESS, groupToDelete);
+        String expectedMessage = String.format(DeleteGroupCommand.MESSAGE_SUCCESS, groupToDelete.getName());
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.delete(groupToDelete);

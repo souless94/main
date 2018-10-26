@@ -71,42 +71,27 @@ public class Person extends Entity {
             this.format,
             timetableString, 1, null, null, null);
     }
-
+    
     /**
-     * Every field must be present and not null. creates a person with timetable Initialises groups
-     * as empty list.
+     * Every field must be present and not null. creates a person with timetable.
      */
     public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags,
         UniqueList<Group> groups,
         String format, String storedLocation, String timetableString) {
-        requireAllNonNull(name, phone, email, address, tags);
-        this.name = name;
-        this.phone = phone;
-        this.email = email;
-        this.address = address;
+        Person temp = new Person(name, phone, email, address, tags, format, storedLocation,
+            timetableString);
+
+        this.name = temp.getName();
+        this.phone = temp.getPhone();
+        this.email = temp.getEmail();
+        this.address = temp.getAddress();
+        this.tags.addAll(temp.getTags());
+        this.format = temp.getFormat();
+        this.storedLocation = temp.getStoredLocation();
+        this.timetable = temp.getTimetable();
 
         this.groups = new UniqueList<>();
         this.groups.setElements(groups.asUnmodifiableObservableList());
-
-        this.tags.addAll(tags);
-        if (format.equals("default")) {
-            this.format = "horizontal";
-        } else {
-            this.format = format;
-        }
-        if (storedLocation.equals("default")) {
-            this.storedLocation = new File("").getAbsolutePath().replace("\\", "/")
-                + "/data/timetable";
-            File directory = new File(this.storedLocation);
-            if (!directory.exists()) {
-                directory.mkdirs();
-            }
-        } else {
-            this.storedLocation = storedLocation.replace("\\", "/");
-        }
-        this.timetable = new Timetable(this.storedLocation ,
-            this.format,
-            timetableString, 1, null, null, null);
     }
 
     public Name getName() {
