@@ -1,5 +1,14 @@
 package seedu.address.testutil;
 
+import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalPersons.BENSON;
+import static seedu.address.testutil.TypicalPersons.CARL;
+import static seedu.address.testutil.TypicalPersons.DANIEL;
+import static seedu.address.testutil.TypicalPersons.ELLE;
+import static seedu.address.testutil.TypicalPersons.FIONA;
+import static seedu.address.testutil.TypicalPersons.GEORGE;
+
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -54,10 +63,12 @@ public class GroupBuilder {
     }
 
     /**
-     * Sets the {@code groupMembers} of the {@code Group} that we are building to list of sample Persons.
+     * Sets the {@code groupMembers} of the {@code Group} that we are building to list of typical Persons
+     * and sample Persons.
      */
     public GroupBuilder withSampleMembers() {
-        List<Person> tmp = Arrays.asList(SampleDataUtil.getSamplePersons());
+        List<Person> tmp = new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
+        tmp.addAll(Arrays.asList(SampleDataUtil.getSamplePersons()));
         this.groupMembers = new UniqueList<>();
         this.groupMembers.setElements(tmp);
         return this;

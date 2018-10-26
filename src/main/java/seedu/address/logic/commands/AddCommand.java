@@ -50,13 +50,7 @@ public class AddCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
-
-        if (model.has(toAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
-        }
-
-        model.add(toAdd);
-        model.commitAddressBook();
+        CommandUtil.addTargetToModelIfNoDuplicates(model, toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
 

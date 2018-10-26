@@ -11,6 +11,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.Predicate;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
@@ -131,6 +132,24 @@ public class CommandTestUtil {
         model.updateFilteredPersonList(new NameContainsKeywordsPredicate<>(Arrays.asList(splitName[0])));
 
         assertEquals(1, model.getFilteredPersonList().size());
+    }
+
+    /**
+     * Updates {@code model}'s filtered list to show all the persons at every given {@code indexes} in the
+     * {@code model}'s address book.
+     */
+    public static void showPersonAtIndexes(Model model, List<Integer> indexes) {
+        List<Person> persons = new ArrayList<>();
+
+        for (int index : indexes) {
+            assertTrue(index < model.getFilteredPersonList().size());
+            Person personAtIndex = model.getFilteredPersonList().get(index);
+            persons.add(personAtIndex);
+        }
+        Predicate<Person> predicatePersonAtIndexes = person -> persons.contains(person);
+        model.updateFilteredPersonList(predicatePersonAtIndexes);
+
+        assertEquals(indexes.size(), model.getFilteredPersonList().size());
     }
 
     /**

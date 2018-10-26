@@ -72,7 +72,8 @@ There is no need to save manually.
 === Adding a person: `add`
 
 Adds a person to the address book +
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...`
+Format: `add n/NAME [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
+* Inputs in square brackets are optional
 
 [TIP]
 A person can have any number of tags (including 0)
@@ -81,6 +82,8 @@ Examples:
 
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `add n/Nancy t/friend`
+* `add n/James  t/friend e/betsycrowe@example.com t/criminal`
 
 === Listing all persons : `list`
 
@@ -110,7 +113,29 @@ Edits the name of the 2nd person to be `Betsy Crower` and clears all existing ta
 * `edit 1 f/vertical sl/C:\Users\admin\Downloads\cs2103\tiredAndSadness` +
 Edits the format and stored location of the 1st person to be `vertical` and `C:/Users/admin/Downloads/cs2103/tiredAndSadness/` respectively.
 
-=== Locating persons by name: `find`
+=== Locating persons with search all (except email): `find`
+
+Finds persons whose names, address, phone and tags contain any of the given keywords. +
+Format: `find KEYWORD [MORE_KEYWORDS]`
+
+****
+* The search is case insensitive. e.g `hans` will match `Hans`
+* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* All information of a person will be searched, except for email address
+* Only full words will be matched e.g. `Han` will not match `Hans`
+* Persons matching at least one keyword will be returned (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+****
+
+Examples:
+
+* `find John` +
+Returns `john` in name and `John Doe` in name
+* `find Betsy Tim John` +
+Returns any person having names `Betsy`, `Tim`, or `John`
+* `find star` +
+Returns any person having `star` in tag or `star` in address
+
+=== Locating persons by name: `find_name`
 
 Finds persons whose names contain any of the given keywords. +
 Format: `find KEYWORD [MORE_KEYWORDS]`
@@ -129,6 +154,80 @@ Examples:
 Returns `john` and `John Doe`
 * `find Betsy Tim John` +
 Returns any person having names `Betsy`, `Tim`, or `John`
+
+=== Locating persons by address: `find_address`
+
+Finds persons whose address contain any of the given keywords. +
+Format: `find KEYWORD [MORE_KEYWORDS]`
+
+****
+* The search is case insensitive. e.g `blk` will match `BLK`
+* The order of the keywords does not matter. e.g. `Serangoon Street` will match `Street Serangoon`
+* Only the address is searched.
+* Only full words will be matched e.g. `Han` will not match `Hans`
+* Postal code or Unit number can be used to search e.g. '#17-123' or 'S345951'
+* Address matching at least one keyword will be returned (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+****
+
+Examples:
+
+* `find Serangoon` +
+Returns `John` with 'serangoon gardens' and `John Doe` with 'Serangoon Street'
+* `find #12-123` +
+Returns any person having names address '#12-123'
+
+=== Locating persons by phone: `find_phone`
+
+Finds persons whose phone contain any of the given keywords. +
+Format: `find KEYWORD [MORE_KEYWORDS]`
+
+****
+* The search is number only.
+* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* Only phone numbers is searched.
+* Only full phone number will be matched e.g. `911` will not match `91124335`
+****
+
+Examples:
+
+* `find 91234567` +
+Returns `john` with phone number `91234567`
+
+=== Locating persons by name: `find_email`
+
+Finds persons whose email contain any of the given keywords. +
+Format: `find KEYWORD [MORE_KEYWORDS]`
+
+****
+* The search is case insensitive. e.g `AbcD@example.com` will match `abcd@example.com`
+* Only the email is searched.
+* Only full words will be matched e.g. `AbcD` will not match `AbcD@example.com`
+****
+
+Examples:
+
+* `find ABC@example.com` +
+Returns `john` with 'abc@example.com' in email
+
+=== Locating persons by name: `find_tag`
+
+Finds persons whose tag contain any of the given keywords. +
+Format: `find KEYWORD [MORE_KEYWORDS]`
+
+****
+* The search is case insensitive. e.g `friends` will match `Friends`
+* The order of the keywords does not matter. e.g. `best friend` will match `friend best`
+* Only the tag is searched.
+* Only full words will be matched e.g. `friend` will not match `friends`
+* Tags matching at least one keyword will be returned (i.e. `OR` search). e.g. `friend` will return `best friend`, `boy friend`
+****
+
+Examples:
+
+* `find friends` +
+Returns `john` and `friends` in tag
+* `find friends family BFF` +
+Returns any person having tag `friends`, `family`, or `BFF`
 
 === Deleting a person : `delete`
 
@@ -347,13 +446,13 @@ Examples:
 * `delete_group n/happyfriends`
 
 
-=== List all members of a group : `view_group`
+=== List all persons of a group : `view_group`
 
-shows a list of all members in a group +
+shows a list of all persons in a group +
 Format: `view_group n/GROUP_NAME`
 
 ****
-* List all members of a group at the specified `GROUPNAME`.
+* List all persons of a group at the specified `GROUPNAME`.
 ****
 
 
@@ -361,9 +460,9 @@ Examples:
 
 * ` view_group n/happyfriends` +
 
-=== add a friend to group : `register`
+=== Add a person to group : `register`
 
-Adds a friend to a group if the status of the group is open. +
+Adds a person to a group if the status of the group is open. +
 Format: `register FRIEND_INDEX n/GROUP_NAME`
 
 ****
@@ -375,9 +474,9 @@ Examples:
 
 * `register 1 n/happyfriends `
 
-=== delete a member from group : `delete_member`
+=== Delete a person from group : `delete_member`
 
-Delete a member from a group using member index displayed with `view_group`. +
+Delete a person from a group using member index displayed with `view_group`. +
 Format: `delete_member MEMBER_INDEX n/GROUP_NAME`
 
 Examples:
