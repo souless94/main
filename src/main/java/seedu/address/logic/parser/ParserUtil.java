@@ -184,7 +184,7 @@ public class ParserUtil {
      */
     public static String parseFormat(String format) throws ParseException {
         requireNonNull(format);
-        if (format.equals("horizontal") || format.equals("vertical")) {
+        if ("horizontal".equals(format) || "vertical".equals(format)) {
             return format;
         } else {
             throw new ParseException(Messages.INVALID_TIMETABLE_FORMAT);
