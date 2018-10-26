@@ -5,6 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
 import seedu.address.logic.CommandHistory;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.group.Group;
 
@@ -21,6 +22,7 @@ public class AddGroupCommand extends Command {
             + PREFIX_DESCRIPTION + "OPTIONAL DESCRIPTION";
 
     public static final String MESSAGE_SUCCESS = "Added group successfully.";
+    public static final String MESSAGE_DUPLICATE_GROUP = "This group already exists in the address book";
 
     private final Group newGroup;
 
@@ -33,10 +35,9 @@ public class AddGroupCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model, CommandHistory history) {
+    public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
-        model.add(newGroup);
-        model.commitAddressBook();
+        CommandUtil.addTargetToModelIfNoDuplicates(model, newGroup);
         return new CommandResult(String.format(MESSAGE_SUCCESS, newGroup));
     }
 
