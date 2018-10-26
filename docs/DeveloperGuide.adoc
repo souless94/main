@@ -293,7 +293,7 @@ Step 2:  user finds a timetable of first `person` in the stored location which i
 
 image::addTimetable-step-2.png[width="500"]
 
-Step 3: The user executes `add_timetable 1` to add the timetable of first `person` in stored folder to NUS hangs. A new `timetable` will be created containing the data of the `timetable` of first `person` in stored folder. The `timetable` of first `person` will be replaced by this new `timetable`. 
+Step 3: The user executes `add_timetable 1` to add the timetable of first `person` in stored folder to NUS hangs. A new `timetable` will be created containing the data of the `timetable` of first `person` in stored folder. The `timetable` of first `person` will be replaced by this new `timetable`.
 
 The `timetable` is then added to storage as a String which contains all of the data. This is to allow the app to save time in storage.
 
