@@ -399,7 +399,7 @@ In version 2.0, encryption would be extended to other essential data stored with
 
 ==== Design Considerations
 
-Aspect: Create and Login
+===== Aspect: Create and Login
 
 *Alternative 1 (current choice):* create stores data in a hashmap.
 
@@ -424,7 +424,7 @@ Cons:
 
 [LeslieTODO: to be updated: ]
 
-Aspect: How encryption executes
+===== Aspect: How encryption executes
 
 *Alternative 1 (current choice):* a function call to encryption before storing password data into hashmap. when logging in, a function call encrypts the user entered password before comparing to stored password in hashmap
 
@@ -480,7 +480,7 @@ image::RegisterCommandModelSequenceDiagram.png[width="750"]
 
 ==== Design Considerations
 
-Aspect: How to implement `Group` class
+===== Aspect: How to implement `Group` class
 
 *Alternative 1 (current choice):* `Group` as an immutable class.
 
@@ -494,7 +494,7 @@ Pros: Easier and less code for methods involving groups. Faster as do not have t
 
 Cons: Miss out on the advantages of immutable object (above). Good practice to use immutable objects.
 
-Aspect: Interactions between person and groups
+===== Aspect: Interactions between person and groups
 
 Deleting a person from a group will affect the person's reference to that group and vice versa (similar for adding and editing).
 
@@ -534,7 +534,7 @@ image::FindFeature1.png[width="300"]
 
 ==== Design Considerations
 
-Aspect: How should each specific 'find' feature work
+===== Aspect: How should each specific 'find' feature work
 
 *Alternative 1 (Current Choice) :* Create a class for each information (e.g. find_address)
 
