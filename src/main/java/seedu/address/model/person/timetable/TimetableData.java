@@ -19,11 +19,11 @@ import com.opencsv.CSVWriter;
 public class TimetableData {
 
     private final String[][] timetable;
-    private String[] timings = {"0800", "0900", "1000", "1100", "1200", "1300",
+    private final String[] timings = {"0800", "0900", "1000", "1100", "1200", "1300",
         "1400", "1500", "1600", "1700", "1800", "1900", "2000", "2100", "2200", "2300"};
-    private String[] days = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday",
+    private final String[] days = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday",
         "Saturday", "Sunday"};
-    private String[] daysInLowerCase = {"monday", "tuesday", "wednesday", "thursday", "friday",
+    private final String[] daysInLowerCase = {"monday", "tuesday", "wednesday", "thursday", "friday",
         "saturday", "sunday"};
     private final int noOfTimings = timings.length;
     private final int noOfDays = days.length;

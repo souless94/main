@@ -18,6 +18,7 @@ class AddTimetableCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     private CommandHistory commandHistory = new CommandHistory();
 
+
     @Test
     void execute_timetableAcceptedByModel_addSuccess() {
         Person personToAddTimetable = model.getFilteredPersonList()
@@ -34,5 +35,24 @@ class AddTimetableCommandTest {
         assertCommandSuccess(addTimetableCommand, model, commandHistory, expectedMessage,
             expectedModel);
     }
+
+    @Test
+    void execute_timetableAcceptedByModel_addByFileLocationSuccess() {
+        Person personToAddTimetable = model.getFilteredPersonList()
+            .get(INDEX_FIRST.getZeroBased());
+        personToAddTimetable.getTimetable().downloadTimetableAsCsv();
+        AddTimetableCommand addTimetableCommand = new AddTimetableCommand(INDEX_FIRST,
+            personToAddTimetable.getStoredLocation());
+        String expectedMessage = String
+            .format(AddTimetableCommand.MESSAGE_ADD_TIMETABLE_SUCCESS, personToAddTimetable);
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
+            new UserPrefs());
+
+        expectedModel.update(model.getFilteredPersonList().get(0), personToAddTimetable);
+        expectedModel.commitAddressBook();
+        assertCommandSuccess(addTimetableCommand, model, commandHistory, expectedMessage,
+            expectedModel);
+    }
+
 
 }

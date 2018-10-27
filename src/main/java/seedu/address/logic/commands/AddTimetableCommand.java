@@ -1,11 +1,8 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.core.Messages.MESSAGE_TIMETABLE_NOT_FOUND;
 import static seedu.address.logic.commands.EditTimetableCommand.createUpdatedPerson;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
-
-import java.io.File;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
@@ -27,8 +24,8 @@ public class AddTimetableCommand extends Command {
             + "Parameters : INDEX (must be a positive integer) "
             + "Example: " + COMMAND_WORD + " 1 ";
 
-    public static final String MESSAGE_ADD_TIMETABLE_SUCCESS = "timetable added successfully";
-
+    public static final String MESSAGE_ADD_TIMETABLE_SUCCESS = "timetable added successfully: %1$s";
+    public static final String MESSAGE_TIMETABLE_NOT_FOUND = "timetable to be added is not found";
 
     private final Index index;
     private final String newFilePath;
@@ -55,18 +52,14 @@ public class AddTimetableCommand extends Command {
         } else {
             filePath = newFilePath.replace("\\", "/");
         }
-        File toRead = new File(filePath);
-        if (toRead.exists()) {
-            Timetable timetable = new Timetable(filePath, personToEdit.getFormat(),
-                personToEdit.getTimetable().getTimetableDataString(), 2, null, null, null);
-            Person updatedPerson = createUpdatedPerson(personToEdit, timetable, filePath);
-            model.update(personToEdit, updatedPerson);
-            model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-            model.commitAddressBook();
-            return new CommandResult(String.format(MESSAGE_ADD_TIMETABLE_SUCCESS, updatedPerson));
-        } else {
-            throw new CommandException(MESSAGE_TIMETABLE_NOT_FOUND);
-        }
+        Timetable timetable = new Timetable(filePath, personToEdit.getFormat(),
+            personToEdit.getTimetable().getTimetableDataString(), 2, null, null, null);
+        Person updatedPerson = createUpdatedPerson(personToEdit, timetable, filePath);
+        model.update(personToEdit, updatedPerson);
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        model.commitAddressBook();
+        return new CommandResult(
+            String.format(MESSAGE_ADD_TIMETABLE_SUCCESS, updatedPerson.getStoredLocation()));
     }
 }
 

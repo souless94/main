@@ -1,7 +1,6 @@
 package seedu.address.testutil;
 
-import java.io.File;
-
+import java.nio.file.Paths;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -27,9 +26,8 @@ public class PersonBuilder {
     public static final String DEFAULT_EMAIL = "alice@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_FORMAT = "horizontal";
-    public static final String DEFAULT_STORED_LOCATION =
-        new File("").getAbsolutePath().replace("\\", "/")
-            + "/data/timetable";
+    public static final String DEFAULT_STORED_LOCATION = Paths
+        .get("src", "test", "data", "timetable").toString() + "/";
     public static final String DEFAULT_TIMETABLE_STRING = "default";
     private Name name;
     private Phone phone;
@@ -90,7 +88,8 @@ public class PersonBuilder {
      * Sets the {@code storedLocation} of the {@code Person} that we are building.
      */
     public PersonBuilder withStoredLocation(String storedLocation) {
-        this.storedLocation = storedLocation;
+        this.storedLocation = storedLocation
+            + String.valueOf(this.hashCode()) + " timetable.csv";
         return this;
     }
 
