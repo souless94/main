@@ -42,8 +42,9 @@
 <li><a href="#timetable-wen-kai">6. Timetable(Wen Kai)</a>
 <ul class="sectlevel2">
 <li><a href="#adding-a-timetable-code-add_timetable-code">6.1. Adding a timetable: <code>add_timetable</code></a></li>
-<li><a href="#download-timetable-code-download_timetable-code">6.2. Download timetable : <code>download_timetable</code></a></li>
-<li><a href="#deleting-a-timetable-code-delete_timetable-code">6.3. Deleting a timetable : <code>delete_timetable</code></a></li>
+<li><a href="#editing-a-timetable-code-edit_timetable-code">6.2. editing a timetable: <code>edit_timetable</code></a></li>
+<li><a href="#download-timetable-code-download_timetable-code">6.3. Download timetable : <code>download_timetable</code></a></li>
+<li><a href="#deleting-a-timetable-code-delete_timetable-code">6.4. Deleting a timetable : <code>delete_timetable</code></a></li>
 </ul>
 </li>
 <li><a href="#groups-melodies">7. Groups (Melodies)</a>
@@ -155,9 +156,6 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 </li>
 <li>
 <p>Items in square brackets are optional e.g <code>n/NAME [i/INDEX_OF_TIMETABLE]</code> can be used as <code>n/John Doe i/1</code> or as <code>n/John Doe</code>.</p>
-</li>
-<li>
-<p>Items in square brackets /\ square brackets means have to choose either left choice or right choice e.g <code>add_timetable [f/FILENAME l/FILE_LOCATION ] /\ [o/LINK]</code> can be used as <code>add_timetable f/mytimetable.png l/C://Users/abc/mysecretstash</code> or <code>add_timetable o/http://modsn.us/wJsFc</code> but not <code>add_timetable f/mytimetable.png l/C://Users/abc/mysecretstash o/http://modsn.us/wJsFc</code></p>
 </li>
 <li>
 <p>Parameters can be in any order e.g. if the command specifies <code>n/NAME_OF_FRIEND i/INDEX_OF_TIMETABLE</code>, <code>i/INDEX_OF_TIMETABLE n/NAME_OF_FRIEND</code> is also acceptable.</p>
@@ -754,8 +752,8 @@ Format: <code>grouplist</code></p>
 <div class="sect2">
 <h3 id="adding-a-timetable-code-add_timetable-code"><a class="link" href="#adding-a-timetable-code-add_timetable-code">6.1. Adding a timetable: <code>add_timetable</code></a></h3>
 <div class="paragraph">
-<p>add a timetable from the stored folder in NUS Hangs<br>
-Format: `add_timetable INDEX `</p>
+<p>add a timetable from the stored folder in NUS Hangs or a file location<br>
+Format: `add_timetable INDEX [fl/FILE_LOCATION]  `</p>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -782,14 +780,53 @@ Format: `add_timetable INDEX `</p>
 <li>
 <p><code>add_timetable 1</code></p>
 </li>
+<li>
+<p>`add_timetable 1 fl/C:\Users\timetable\timetable.csv `</p>
+</li>
 </ul>
 </div>
 </div>
 <div class="sect2">
-<h3 id="download-timetable-code-download_timetable-code"><a class="link" href="#download-timetable-code-download_timetable-code">6.2. Download timetable : <code>download_timetable</code></a></h3>
+<h3 id="editing-a-timetable-code-edit_timetable-code"><a class="link" href="#editing-a-timetable-code-edit_timetable-code">6.2. editing a timetable: <code>edit_timetable</code></a></h3>
 <div class="paragraph">
-<p>Download a timetable in the System as a png file or csv file in the format of the person.+
-Format: `download_timetable INDEX p/PASSWORD `</p>
+<p>edit a timetable timeslot from the person from index specified<br>
+Format: `add_timetable INDEX day/DAY timing/TIMING [m/DETAILS]  `</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Add the timetable at the specified <code>INDEX</code>.</p>
+</li>
+<li>
+<p>The index refers to the index number shown in the displayed person list.</p>
+</li>
+<li>
+<p>The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;
+day refers to days of a week and day is in <strong>full name(case insensitive)</strong> monday,tuesday,TUesday &#8230;&#8203;
+timing is in 24h format and is from 0800 to 2300</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>edit_timetable 1 day/wednesday timing/0900 m/do cs2103</code></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="download-timetable-code-download_timetable-code"><a class="link" href="#download-timetable-code-download_timetable-code">6.3. Download timetable : <code>download_timetable</code></a></h3>
+<div class="paragraph">
+<p>Download a timetable in the System as a csv file in the format of the person.+
+Format: `download_timetable INDEX `</p>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -814,13 +851,13 @@ Format: `download_timetable INDEX p/PASSWORD `</p>
 <div class="ulist">
 <ul>
 <li>
-<p><code>download_timetable 1 p/password</code><br></p>
+<p>`download_timetable 1 `<br></p>
 </li>
 </ul>
 </div>
 </div>
 <div class="sect2">
-<h3 id="deleting-a-timetable-code-delete_timetable-code"><a class="link" href="#deleting-a-timetable-code-delete_timetable-code">6.3. Deleting a timetable : <code>delete_timetable</code></a></h3>
+<h3 id="deleting-a-timetable-code-delete_timetable-code"><a class="link" href="#deleting-a-timetable-code-delete_timetable-code">6.4. Deleting a timetable : <code>delete_timetable</code></a></h3>
 <div class="paragraph">
 <p>Delete a timetable in the system by index<br>
 Format: <code>delete_timetable INDEX p/password</code></p>
@@ -1285,8 +1322,12 @@ e.g. <code>delete_friend 3</code></p>
 <p><strong>grouplist</strong> : <code>listgroup</code></p>
 </li>
 <li>
-<p><strong>add_timetable</strong> <code>add_timetable INDEX `<br>
-e.g. `add_timetable 1</code></p>
+<p><strong>add_timetable</strong> <code>add_timetable INDEX [fl/FILE_LOCATION]</code><br>
+e.g. <code>add_timetable 1</code></p>
+</li>
+<li>
+<p><strong>edit_timetable</strong> <code>edit_timetable INDEX day/DAY timing/TIMING [m/DETAILS]</code><br>
+e.g. <code>edit_timetable 1 day/wednesday timing/1800 m/do cs2103</code></p>
 </li>
 <li>
 <p><strong>download_timetable</strong> : <code>download_timetable INDEX</code><br>
@@ -1364,4 +1405,4 @@ e.g. <code>update_pw c/password n/why me? a/because it is cs2103</code></p>
 </ul>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-22 04:30:16 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-27 10:20:52 UTC</div></div></div></body></html>

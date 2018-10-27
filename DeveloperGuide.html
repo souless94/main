@@ -628,9 +628,21 @@ Note how the event is propagated through the <code>EventsCenter</code> to the <c
 <div class="sect2">
 <h3 id="timetable-feature"><a class="link" href="#timetable-feature">3.1. Timetable Feature</a></h3>
 <div class="sect3">
-<h4 id="current-implementation"><a class="link" href="#current-implementation">3.1.1. Current Implementation</a></h4>
+<h4 id="reason-for-implementation"><a class="link" href="#reason-for-implementation">3.1.1. Reason for implementation</a></h4>
 <div class="paragraph">
-<p>The <code>timetable</code> is contained in <code>person</code> which is in <code>model</code>.</p>
+<p>The objective of the <code>add_timetable</code> feature is to to add data entries of a timetable into NUS Hangs. But it is hard to visualise the adding of the entries so we allowed user to add directly all the entries from a csv file. For <code>edit_timetable</code> , it is for User who just want to edit entries without going to find the timetable. For <code>download_timetable</code>, it is to allow the user to share their timetable to their friends.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="how-to-implement"><a class="link" href="#how-to-implement">3.1.2. How to implement</a></h4>
+<div class="paragraph">
+<p>For <code>add_timetable</code> , we create a <code>timetable</code> class in <code>person</code> first,we store the <code>format</code> of the timetable , then we create a <code>timetableData</code> class with method to create a String [][] Matrix from the data from the csv file. Then we create a timetableString to which contains information on the entries about the <code>timetable</code> and store it in the xml file of the person in the addressbook.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="current-implementation"><a class="link" href="#current-implementation">3.1.3. Current Implementation</a></h4>
+<div class="paragraph">
+<p>The current <code>timetable</code> commands are:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -641,6 +653,9 @@ Note how the event is propagated through the <code>EventsCenter</code> to the <c
 <p><code>delete_timetable</code>&#8201;&#8212;&#8201;delete a timetable from the person and creates a default timetable in person. It will also find the timetable csv file of the person and deletes it.</p>
 </li>
 <li>
+<p><code>edit_timetable</code>&#8201;&#8212;&#8201;edit a timetable timeslot in the person</p>
+</li>
+<li>
 <p><code>download_timetable</code>&#8201;&#8212;&#8201;downloads a timetable into a csv file into a stored folder location from the person.</p>
 </li>
 </ul>
@@ -649,31 +664,32 @@ Note how the event is propagated through the <code>EventsCenter</code> to the <c
 <p>These operations are handled by the <code>logic</code> component and uses the <code>person</code> in <code>model</code> to do the execution.</p>
 </div>
 <div class="paragraph">
+<p>Given below is an activity diagram.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/timetableworkflow.png" alt="timetableworkflow" width="500">
+</div>
+</div>
+<div class="paragraph">
 <p>Given below is an example usage scenario and how the <code>add_timetable</code> behaves at each step.</p>
 </div>
 <div class="paragraph">
 <p>Step 1: The user launches the application for the first time. The NUS Hangs will initialise the person with the timetable with the details which was stored using Storage.</p>
 </div>
+<div class="paragraph">
+<p>Step 2:  user finds a timetable of first <code>person</code> in the stored location which is called 495011161 timetable.csv. Using this command, User does not need to find the timetable. As shown in the diagram below its easy to see what event the person has.</p>
+</div>
 <div class="imageblock">
 <div class="content">
-<img src="images/addTimetable-step-1.png" alt="addTimetable step 1" width="300">
+<img src="images/addTimetable-step-2.png" alt="addTimetable step 2" width="500">
 </div>
 </div>
 <div class="paragraph">
-<p>Step 2:  user opens a timetable of first <code>person</code> in the stored location and edits it via microsoft excel or with his preferred software.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/addTimetable-step-2.png" alt="addTimetable step 2" width="300">
-</div>
+<p>Step 3: The user executes <code>add_timetable 1</code> to add the timetable of first <code>person</code> in stored folder to NUS hangs. A new <code>timetable</code> will be created containing the data of the <code>timetable</code> of first <code>person</code> in stored folder. The <code>timetable</code> of first <code>person</code> will be replaced by this new <code>timetable</code>.</p>
 </div>
 <div class="paragraph">
-<p>Step 3: The user executes <code>add_timetable 1</code> to add the timetable of first <code>person</code> in stored folder to NUS hangs. A new <code>timetable</code> will be created containing the data of the <code>timetable</code> of first <code>person</code> in stored folder. The <code>timetable</code> of first <code>person</code> will be replaced by this new <code>timetable</code>. The <code>timetable</code> is then added to storage as a String.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/addTimetable-step-3.png" alt="addTimetable step 3" width="300">
-</div>
+<p>The <code>timetable</code> is then added to storage as a String which contains all of the data. This is to allow the app to save time in storage.</p>
 </div>
 <div class="paragraph">
 <p>The following sequence diagram shows how <code>add_timetable</code> works.</p>
@@ -685,11 +701,11 @@ Note how the event is propagated through the <code>EventsCenter</code> to the <c
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations"><a class="link" href="#design-considerations">3.1.2. Design Considerations</a></h4>
+<h4 id="design-considerations"><a class="link" href="#design-considerations">3.1.4. Design Considerations</a></h4>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Alternative 1 (current choice for v1.2):</strong> adds the timetable via a csv file.</p>
+<p><strong>Alternative 1 :</strong> adds the timetable via a csv file.</p>
 <div class="ulist">
 <ul>
 <li>
@@ -702,7 +718,7 @@ Note how the event is propagated through the <code>EventsCenter</code> to the <c
 </div>
 </li>
 <li>
-<p><strong>Alternative 2 :</strong> adds the timetable via a csv file from other locations.</p>
+<p><strong>Alternative 2 (current choice) :</strong> adds the timetable via a csv file from other locations.</p>
 <div class="ulist">
 <ul>
 <li>
@@ -738,10 +754,10 @@ Note how the event is propagated through the <code>EventsCenter</code> to the <c
 <div class="ulist">
 <ul>
 <li>
-<p>Pros: Easy for new Computer Science student undergraduates to understand, who are likely to be the new incoming developers of our project.</p>
+<p>Pros: Easy for new Computer Science student undergraduates to understand, who are likely to be the new incoming developers of our project. Better intuition to access entries of the matrix (matrix[i][j]) Which makes <code>edit_timetable</code> easier to implement.</p>
 </li>
 <li>
-<p>Cons: Slower Time efficiency because using 2 for loops to fill the Matrix with the data.</p>
+<p>Cons: Slower Time efficiency because using 2 for loops to fill the Matrix with the data. Unable to use functions in ArrayList.</p>
 </li>
 </ul>
 </div>
@@ -751,10 +767,10 @@ Note how the event is propagated through the <code>EventsCenter</code> to the <c
 <div class="ulist">
 <ul>
 <li>
-<p>Pros: Faster Time efficiency because using 1 for loops to fill the Matrix with the data.</p>
+<p>Pros: Faster Time efficiency because using 1 for loops to fill the Matrix with the data. Able to use functions in ArrayList</p>
 </li>
 <li>
-<p>Cons: Harder for new Computer Science student undergraduates to understand, who are likely to be the new incoming developers of our project.</p>
+<p>Cons: Harder for new Computer Science student undergraduates to understand, who are likely to be the new incoming developers of our project. Less intuition to access entries of the matrix (matrix.get(i).get(j)).</p>
 </li>
 </ul>
 </div>
@@ -817,6 +833,18 @@ Note how the event is propagated through the <code>EventsCenter</code> to the <c
 </div>
 <div class="paragraph">
 <p>The username is stored as a key in a hashmap while the password is encrypted and stored as the value. By using a hashmap to store the account login credentials, it becomes easy to implement the create and login function.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/CreateCommandSequenceDiagram.png" alt="CreateCommandSequenceDiagram" width="800">
+</div>
+<div class="title">Figure 11. Sequence Diagram of Create Command</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/LoginCommandSequenceDiagram.png" alt="LoginCommandSequenceDiagram" width="800">
+</div>
+<div class="title">Figure 12. Sequence Diagram of Login Command</div>
 </div>
 <div class="paragraph">
 <p>*To be implemented: *</p>
@@ -911,9 +939,8 @@ In version 1.3, step 4 would be implemented.</p>
 </div>
 <div class="sect3">
 <h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">3.2.2. Design Considerations</a></h4>
-<div class="paragraph">
-<p>Aspect: Create and Login</p>
-</div>
+<div class="sect4">
+<h5 id="aspect-create-and-login"><a class="link" href="#aspect-create-and-login">Aspect: Create and Login</a></h5>
 <div class="paragraph">
 <p><strong>Alternative 1 (current choice):</strong> create stores data in a hashmap.</p>
 </div>
@@ -960,9 +987,9 @@ In version 1.3, step 4 would be implemented.</p>
 </li>
 </ul>
 </div>
-<div class="paragraph">
-<p>Aspect: How encryption executes</p>
 </div>
+<div class="sect4">
+<h5 id="aspect-how-encryption-executes"><a class="link" href="#aspect-how-encryption-executes">Aspect: How encryption executes</a></h5>
 <div class="paragraph">
 <p><strong>Alternative 1 (current choice):</strong> a function call to encryption before storing password data into hashmap. when logging in, a function call encrypts the user entered password before comparing to stored password in hashmap</p>
 </div>
@@ -985,6 +1012,7 @@ In version 1.3, step 4 would be implemented.</p>
 <p>[LeslieTODO: to be updated]</p>
 </li>
 </ul>
+</div>
 </div>
 </div>
 </div>
@@ -1028,7 +1056,7 @@ In version 1.3, step 4 would be implemented.</p>
 <p><code>view_group</code>&#8201;&#8212;&#8201;view the existing members in the group and is updated whenever any member is added or deleted.</p>
 </li>
 <li>
-<p><code>list</code>&#8201;&#8212;&#8201;lists both the updated list of groups and persons</p>
+<p><code>list [index]</code>&#8201;&#8212;&#8201;lists all the groups the person at [index] is currently in.</p>
 </li>
 </ul>
 </div>
@@ -1050,12 +1078,23 @@ In version 1.3, step 4 would be implemented.</p>
 <div class="paragraph">
 <p>Step 4: <code>Model</code> is updated of the new <code>Group</code> and <code>Person</code>. <code>FilteredPersonList</code> and <code>FilteredGroupList</code> is also updated to display the new groups and persons in the <code>UI</code>. A successful message is also displayed to the user below the UI&#8217;s command box.</p>
 </div>
+<div class="imageblock">
+<div class="content">
+<img src="images/RegisterCommandLogicSequenceDiagram.png" alt="MelodiesTODO: Elaborate on how connection to UI is created." width="750">
+</div>
+<div class="title">Figure 13. Sequence Diagram of RegisterCommand (Logic component)</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/RegisterCommandModelSequenceDiagram.png" alt="RegisterCommandModelSequenceDiagram" width="750">
+</div>
+<div class="title">Figure 14. Sequence Diagram of RegisterCommand (Model component)</div>
+</div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">Design Considerations</a></h4>
-<div class="paragraph">
-<p>Aspect: How to implement <code>Group</code> class</p>
-</div>
+<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">3.3.1. Design Considerations</a></h4>
+<div class="sect4">
+<h5 id="aspect-how-to-implement-code-group-code-class"><a class="link" href="#aspect-how-to-implement-code-group-code-class">Aspect: How to implement <code>Group</code> class</a></h5>
 <div class="paragraph">
 <p><strong>Alternative 1 (current choice):</strong> <code>Group</code> as an immutable class.</p>
 </div>
@@ -1074,9 +1113,9 @@ In version 1.3, step 4 would be implemented.</p>
 <div class="paragraph">
 <p>Cons: Miss out on the advantages of immutable object (above). Good practice to use immutable objects.</p>
 </div>
-<div class="paragraph">
-<p>Aspect: Interactions between person and groups</p>
 </div>
+<div class="sect4">
+<h5 id="aspect-interactions-between-person-and-groups"><a class="link" href="#aspect-interactions-between-person-and-groups">Aspect: Interactions between person and groups</a></h5>
 <div class="paragraph">
 <p>Deleting a person from a group will affect the person&#8217;s reference to that group and vice versa (similar for adding and editing).</p>
 </div>
@@ -1097,6 +1136,7 @@ In version 1.3, step 4 would be implemented.</p>
 </div>
 <div class="paragraph">
 <p>Cons: Can be more expensive to look for groups for a particular person.</p>
+</div>
 </div>
 </div>
 </div>
@@ -1138,11 +1178,37 @@ In version 1.3, step 4 would be implemented.</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p>The following activity diagram shows how 'find' feature works:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/FindFeature1.png" alt="FindFeature1" width="300">
+</div>
+</div>
 </div>
 <div class="sect3">
 <h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">3.4.2. Design Considerations</a></h4>
+<div class="sect4">
+<h5 id="aspect-how-should-each-specific-find-feature-work"><a class="link" href="#aspect-how-should-each-specific-find-feature-work">Aspect: How should each specific 'find' feature work</a></h5>
 <div class="paragraph">
-<p>To be continued :)</p>
+<p><strong>Alternative 1 (Current Choice) :</strong> Create a class for each information (e.g. find_address)</p>
+</div>
+<div class="paragraph">
+<p>Pros: Easy to implement, with specific search focus</p>
+</div>
+<div class="paragraph">
+<p>Cons: Repetitive code base with less flexibility</p>
+</div>
+<div class="paragraph">
+<p><strong>Alternative 2 :</strong> Use prefixes for specific search (e.g. find a/gardens)</p>
+</div>
+<div class="paragraph">
+<p>Pros: Higher flexibility</p>
+</div>
+<div class="paragraph">
+<p>Cons: Harder to implement. May allow greater control for larger search range</p>
+</div>
 </div>
 </div>
 </div>
@@ -1207,7 +1273,7 @@ Alternatively, you can download the AsciiDoc plugin for IntelliJ, which allows y
 <div class="content">
 <img src="images/chrome_save_as_pdf.png" alt="chrome save as pdf" width="300">
 </div>
-<div class="title">Figure 11. Saving documentation as PDF files in Chrome</div>
+<div class="title">Figure 15. Saving documentation as PDF files in Chrome</div>
 </div>
 </div>
 <div class="sect2">
@@ -2056,7 +2122,7 @@ In excel format</p></td>
 <p>System shows how to add a timetable</p>
 </li>
 <li>
-<p>User adds inputs accordingly</p>
+<p>User enters inputs accordingly</p>
 </li>
 <li>
 <p>System shows his timetable and ask user for confirmation.</p>
@@ -2102,6 +2168,110 @@ In excel format</p></td>
 </li>
 <li>
 <p>4a.User does not confirm the addition of the timetable into the System.</p>
+<div class="paragraph">
+<p>Use case ends</p>
+</div>
+</li>
+</ul>
+</div>
+<h3 id="use-case-edit-a-timetable" class="discrete">Use case: edit a timetable</h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User logins to System and requests help to edit a timetable</p>
+</li>
+<li>
+<p>System shows how to edit a timetable</p>
+</li>
+<li>
+<p>User enters inputs accordingly</p>
+</li>
+<li>
+<p>System shows his timetable and ask user for confirmation.</p>
+</li>
+<li>
+<p>User confirms the edit of his timetable into the System.</p>
+</li>
+<li>
+<p>System shows his timetable is edit successfully.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>3a. User enters invalid input.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>3a1.System shows an error message.</p>
+<div class="paragraph">
+<p>Use case resumes at step 2.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>4a.User does not confirm the addition of the timetable into the System.</p>
+<div class="paragraph">
+<p>Use case ends</p>
+</div>
+</li>
+</ul>
+</div>
+<h3 id="use-case-download-a-timetable" class="discrete">Use case: download a timetable</h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User logins to System and requests help to download a timetable</p>
+</li>
+<li>
+<p>System shows how to download a timetable</p>
+</li>
+<li>
+<p>User enters inputs accordingly</p>
+</li>
+<li>
+<p>System shows his timetable and ask user for confirmation.</p>
+</li>
+<li>
+<p>User confirms the edit of his timetable into the System.</p>
+</li>
+<li>
+<p>System shows his timetable is edit successfully.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>3a. User enters invalid input.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>3a1.System shows an error message.</p>
+<div class="paragraph">
+<p>Use case resumes at step 2.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>4a.User does not confirm the download of the timetable</p>
 <div class="paragraph">
 <p>Use case ends</p>
 </div>
@@ -2727,7 +2897,8 @@ In excel format</p></td>
 <dl>
 <dt class="hdlist1"><a id="mainstream-os"></a> Mainstream OS</dt>
 <dd>
-<p>Windows, Linux, Unix, OS-X</p>
+<p>Windows, Linux, Unix, OS-X
+s</p>
 </dd>
 <dt class="hdlist1"><a id="vertical_mode"></a> vertical mode</dt>
 <dd>
@@ -2830,4 +3001,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-22 04:30:16 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-27 10:20:52 UTC</div></div></div></body></html>
