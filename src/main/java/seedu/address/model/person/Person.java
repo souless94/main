@@ -18,8 +18,8 @@ import seedu.address.model.tag.Tag;
 
 /**
  * Represents a Person in the address book. Guarantees: details are present and not null, field
- * values are validated, immutable.
- * #TODO: Remove setGroups method and combine 2 constructors into 1 (by v1.3)
+ * values are validated, immutable. #TODO: Remove setGroups method and combine 2 constructors into 1
+ * (by v1.3)
  */
 public class Person extends Entity {
 
@@ -37,8 +37,8 @@ public class Person extends Entity {
     private UniqueList<Group> groups;
 
     /**
-     * Every field must be present and not null. creates a person with timetable
-     * Initialises groups as empty list.
+     * Every field must be present and not null. creates a person with timetable Initialises groups
+     * as empty list.
      */
     public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags,
         String format, String storedLocation, String timetableString) {
@@ -57,56 +57,41 @@ public class Person extends Entity {
             this.format = format;
         }
         if (storedLocation.equals("default")) {
-            this.storedLocation = new File("").getAbsolutePath().replace("\\", "/")
+            String location = new File("").getAbsolutePath().replace("\\", "/")
                 + "/data/timetable";
-            File directory = new File(this.storedLocation);
+            File directory = new File(location);
             if (!directory.exists()) {
                 directory.mkdirs();
             }
+            this.storedLocation = location + "/" + String.valueOf(hashCode()) + " timetable.csv";
         } else {
             this.storedLocation = storedLocation.replace("\\", "/");
         }
-        this.timetable = new Timetable(this.storedLocation + "/"
-            + this.hashCode(),
+        this.timetable = new Timetable(this.storedLocation,
             this.format,
-            timetableString);
+            timetableString, 1, null, null, null);
     }
 
     /**
-     * Every field must be present and not null. creates a person with timetable
-     * Initialises groups as empty list.
+     * Every field must be present and not null. creates a person with timetable.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, UniqueList<Group> groups,
-                  String format, String storedLocation, String timetableString) {
-        requireAllNonNull(name, phone, email, address, tags);
-        this.name = name;
-        this.phone = phone;
-        this.email = email;
-        this.address = address;
+    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags,
+        UniqueList<Group> groups,
+        String format, String storedLocation, String timetableString) {
+        Person temp = new Person(name, phone, email, address, tags, format, storedLocation,
+            timetableString);
+
+        this.name = temp.getName();
+        this.phone = temp.getPhone();
+        this.email = temp.getEmail();
+        this.address = temp.getAddress();
+        this.tags.addAll(temp.getTags());
+        this.format = temp.getFormat();
+        this.storedLocation = temp.getStoredLocation();
+        this.timetable = temp.getTimetable();
 
         this.groups = new UniqueList<>();
         this.groups.setElements(groups.asUnmodifiableObservableList());
-
-        this.tags.addAll(tags);
-        if (format.equals("default")) {
-            this.format = "horizontal";
-        } else {
-            this.format = format;
-        }
-        if (storedLocation.equals("default")) {
-            this.storedLocation = new File("").getAbsolutePath().replace("\\", "/")
-                    + "/data/timetable";
-            File directory = new File(this.storedLocation);
-            if (!directory.exists()) {
-                directory.mkdirs();
-            }
-        } else {
-            this.storedLocation = storedLocation.replace("\\", "/");
-        }
-        this.timetable = new Timetable(this.storedLocation + "/"
-                + String.valueOf(this.hashCode()),
-                this.format,
-                timetableString);
     }
 
     public Name getName() {
