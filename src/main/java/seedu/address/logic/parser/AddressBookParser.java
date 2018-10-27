@@ -150,6 +150,9 @@ public class AddressBookParser {
                 case UndoCommand.COMMAND_WORD:
                     return new UndoCommand();
 
+                case ListCommand.COMMAND_WORD:
+                    return new ListCommandParser().parse(arguments);
+
                 case RedoCommand.COMMAND_WORD:
                     return new RedoCommand();
 
@@ -192,7 +195,7 @@ public class AddressBookParser {
 
     }
 
-    public void updateLoggedOnStatus ( boolean status){
+    public void updateLoggedOnStatus(boolean status) {
         this.userIsLoggedOn = status;
     }
 }
