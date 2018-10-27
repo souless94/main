@@ -158,8 +158,9 @@ public class ParserUtil {
      */
     public static String parseLocation(String location) throws ParseException {
         requireNonNull(location);
-        boolean doesFileExists = new File(location).exists();
-        if (!doesFileExists) {
+        File timetable = new File(location);
+        boolean doesFileExists = timetable.exists();
+        if (!doesFileExists || timetable.isDirectory()) {
             throw new ParseException(Messages.MESSAGE_TIMETABLE_NOT_FOUND);
         }
         return location;
