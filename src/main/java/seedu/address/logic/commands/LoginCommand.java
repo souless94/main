@@ -10,6 +10,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Accounts;
 import seedu.address.storage.UserAccountStorage;
+import seedu.address.logic.parser.AddressBookParser;
 
 //@@author aspiringdevslog
 /**
@@ -18,6 +19,8 @@ import seedu.address.storage.UserAccountStorage;
 public class LoginCommand extends Command {
 
     public static final String COMMAND_WORD = "login";
+    private final AddressBookParser addressBookParser;
+
     private static boolean loginIsSuccessful = false;
 
     //TODO: update MESSAGE_USAGE
@@ -38,7 +41,10 @@ public class LoginCommand extends Command {
      * Login
      */
     public LoginCommand(Accounts account) {
+        addressBookParser = new AddressBookParser();
+
         if (UserAccountStorage.checkPasswordMatch(account.getUsername(), account.getPassword())) {
+            // TODO: find some way to update the Addressbook parser login status
             loginIsSuccessful = true;
         } else {
             loginIsSuccessful = false;
