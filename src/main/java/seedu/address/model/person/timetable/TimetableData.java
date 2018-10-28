@@ -265,8 +265,8 @@ public class TimetableData {
     public boolean[][] booleanTimetableData(String format, String[][] timetable) {
         boolean[][] booleanTimetable = new boolean[noOfTimings + 1][noOfTimings + 1];
         if (format.equals("vertical")) {
-            for (int i = 1; i <= columns; i++) {
-                for (int j = 1; j <= rows; j++) {
+            for (int i = 1; i <= this.noOfColumns; i++) {
+                for (int j = 1; j <= this.noOfRows; j++) {
                     if (timetable[i][j].equals(" ")) {
                         booleanTimetable[i][j] = true;
                     } else {
@@ -275,8 +275,8 @@ public class TimetableData {
                 }
             }
         } else if (format.equals("horizontal")) {
-            for (int i = 1; i <= rows; i++) {
-                for (int j = 1; j <= columns; j++) {
+            for (int i = 1; i <= this.noOfRows; i++) {
+                for (int j = 1; j <= this.noOfColumns; j++) {
                     if (timetable[i][j].equals(" ")) {
                         booleanTimetable[j][i] = true;
                     } else {
