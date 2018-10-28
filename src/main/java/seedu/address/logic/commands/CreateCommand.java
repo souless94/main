@@ -21,11 +21,10 @@ public class CreateCommand extends Command {
     private static boolean createIsSuccessful = false;
 
     //TODO: update MESSAGE_USAGE
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the address book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Creates an account in NUS Hangs. "
             + "Parameters: "
             + PREFIX_USERNAME + "USERNAME "
             + PREFIX_PASSWORD + "PASSWORD "
-            + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_USERNAME + "username "
             + PREFIX_PASSWORD + "password ";
