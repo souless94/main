@@ -12,7 +12,6 @@ import java.util.Base64;
 public class Encrypt {
 
     public static String encryptString(String plainString) {
-        
         return Base64.getEncoder().encodeToString(plainString.getBytes(StandardCharsets.UTF_8));
     }
 

@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.AddressBookParser.*;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PASSWORD;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_USERNAME;
@@ -19,7 +20,6 @@ import seedu.address.logic.parser.AddressBookParser;
 public class LoginCommand extends Command {
 
     public static final String COMMAND_WORD = "login";
-    private final AddressBookParser addressBookParser;
 
     private static boolean loginIsSuccessful = false;
 
@@ -41,10 +41,8 @@ public class LoginCommand extends Command {
      * Login
      */
     public LoginCommand(Accounts account) {
-        addressBookParser = new AddressBookParser();
-
         if (UserAccountStorage.checkPasswordMatch(account.getUsername(), account.getPassword())) {
-            // TODO: find some way to update the Addressbook parser login status
+            AddressBookParser.updateLoggedOnStatus(true);
             loginIsSuccessful = true;
         } else {
             loginIsSuccessful = false;
