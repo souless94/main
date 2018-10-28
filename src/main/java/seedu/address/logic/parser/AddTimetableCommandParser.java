@@ -25,7 +25,7 @@ public class AddTimetableCommandParser implements Parser<AddTimetableCommand> {
             ArgumentTokenizer
                 .tokenize(args, PREFIX_FILE_LOCATION);
         Index index;
-        String newFilePath = null;
+        String newFilePath = "default";
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {

@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.commands.EditTimetableCommand.createUpdatedPerson;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
+import java.io.File;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -47,19 +48,24 @@ public class AddTimetableCommand extends Command {
 
         Person personToEdit = CommandUtil.retrievePersonFromIndex(model, index);
         String filePath;
-        if (newFilePath == null) {
+        if ("default".equals(newFilePath)) {
             filePath = personToEdit.getStoredLocation();
         } else {
             filePath = newFilePath.replace("\\", "/");
         }
-        Timetable timetable = new Timetable(filePath, personToEdit.getFormat(),
-            personToEdit.getTimetable().getTimetableDataString(), 2, null, null, null);
-        Person updatedPerson = createUpdatedPerson(personToEdit, timetable, filePath);
-        model.update(personToEdit, updatedPerson);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        model.commitAddressBook();
-        return new CommandResult(
-            String.format(MESSAGE_ADD_TIMETABLE_SUCCESS, updatedPerson.getStoredLocation()));
+        boolean doesFileExists = new File(filePath).exists();
+        if (doesFileExists) {
+            Timetable timetable = new Timetable(filePath, personToEdit.getFormat(),
+                personToEdit.getTimetable().getTimetableDataString(), 2, null, null, null);
+            Person updatedPerson = createUpdatedPerson(personToEdit, timetable, filePath);
+            model.update(personToEdit, updatedPerson);
+            model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+            model.commitAddressBook();
+            return new CommandResult(
+                String.format(MESSAGE_ADD_TIMETABLE_SUCCESS, updatedPerson.getStoredLocation()));
+        } else {
+            throw new CommandException(MESSAGE_TIMETABLE_NOT_FOUND);
+        }
     }
 }
 
