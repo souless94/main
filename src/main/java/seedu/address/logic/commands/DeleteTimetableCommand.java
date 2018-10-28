@@ -25,7 +25,7 @@ public class DeleteTimetableCommand extends Command {
 
     public static final String COMMAND_WORD = "delete_timetable";
     public static final String MESSAGE_USAGE =
-        COMMAND_WORD + ": delete timetable and adds a default timetable to the person identified"
+        COMMAND_WORD + ": delete timetable from stored location and adds a default timetable to the person identified"
             + "by the index number used in the displayed person list."
             + " \n"
             + "Parameters : INDEX (must be a positive integer) "
@@ -76,5 +76,12 @@ public class DeleteTimetableCommand extends Command {
         Set<Tag> updatedTags = personToEdit.getTags();
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags,
             "default", "default", "default");
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+            || (other instanceof DeleteTimetableCommand // instanceof handles nulls
+            && index.equals(((DeleteTimetableCommand) other).index));
     }
 }

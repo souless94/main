@@ -94,6 +94,19 @@ public class Timetable extends Entity {
         this.matrix.downloadTimetableDataAsCsv(filepath);
     }
 
+    public boolean isValid() {
+        return isCorrectSize() && hasCorrectRowsAndColumns();
+    }
+
+    public boolean isCorrectSize() {
+        return this.matrix.isCorrectSize();
+    }
+
+    public boolean hasCorrectRowsAndColumns() {
+        return this.matrix.hasCorrectRowsAndColumns();
+    }
+
+
     @Override
     public boolean isSame(Object other) {
         if (other == this) {

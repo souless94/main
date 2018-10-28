@@ -10,6 +10,8 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
+import java.io.File;
+
 import org.junit.Test;
 
 import seedu.address.commons.core.Messages;
@@ -21,8 +23,8 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
 
 /**
- * Contains integration tests (interaction with the Model, UndoCommand and RedoCommand) and unit tests for
- * {@code DeleteCommand}.
+ * Contains integration tests (interaction with the Model, UndoCommand and RedoCommand) and unit
+ * tests for {@code DeleteCommand}.
  */
 public class DeleteCommandTest {
 
@@ -30,11 +32,34 @@ public class DeleteCommandTest {
     private CommandHistory commandHistory = new CommandHistory();
 
     @Test
+    public void execute_deletePersonWithTimetable_success() {
+        showPersonAtIndex(model, INDEX_FIRST);
+
+        Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST.getZeroBased());
+        personToDelete.getTimetable().downloadTimetableAsCsv();
+        File timetable = new File(personToDelete.getStoredLocation());
+        assertTrue(timetable.exists());
+        DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST);
+
+        String expectedMessage = String
+            .format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS, personToDelete);
+
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        expectedModel.delete(personToDelete);
+        expectedModel.commitAddressBook();
+        showNoPerson(expectedModel);
+
+        assertCommandSuccess(deleteCommand, model, commandHistory, expectedMessage, expectedModel);
+        assertFalse(timetable.exists());
+    }
+
+    @Test
     public void execute_validIndexUnfilteredList_success() {
         Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST.getZeroBased());
         DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST);
 
-        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS, personToDelete);
+        String expectedMessage = String
+            .format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS, personToDelete);
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.delete(personToDelete);
@@ -48,7 +73,8 @@ public class DeleteCommandTest {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
         DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
 
-        assertCommandFailure(deleteCommand, model, commandHistory, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(deleteCommand, model, commandHistory,
+            Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
     @Test
@@ -58,7 +84,8 @@ public class DeleteCommandTest {
         Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST.getZeroBased());
         DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST);
 
-        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS, personToDelete);
+        String expectedMessage = String
+            .format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS, personToDelete);
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.delete(personToDelete);
@@ -78,7 +105,8 @@ public class DeleteCommandTest {
 
         DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
 
-        assertCommandFailure(deleteCommand, model, commandHistory, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(deleteCommand, model, commandHistory,
+            Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
     @Test
@@ -94,11 +122,13 @@ public class DeleteCommandTest {
 
         // undo -> reverts addressbook back to previous state and filtered person list to show all persons
         expectedModel.undoAddressBook();
-        assertCommandSuccess(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_SUCCESS,
+            expectedModel);
 
         // redo -> same first person deleted again
         expectedModel.redoAddressBook();
-        assertCommandSuccess(new RedoCommand(), model, commandHistory, RedoCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new RedoCommand(), model, commandHistory, RedoCommand.MESSAGE_SUCCESS,
+            expectedModel);
     }
 
     @Test
@@ -107,7 +137,8 @@ public class DeleteCommandTest {
         DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
 
         // execution failed -> address book state not added into model
-        assertCommandFailure(deleteCommand, model, commandHistory, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(deleteCommand, model, commandHistory,
+            Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
 
         // single address book state in model -> undoCommand and redoCommand fail
         assertCommandFailure(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_FAILURE);
@@ -115,11 +146,10 @@ public class DeleteCommandTest {
     }
 
     /**
-     * 1. Deletes a {@code Person} from a filtered list.
-     * 2. Undo the deletion.
-     * 3. The unfiltered list should be shown now. Verify that the index of the previously deleted person in the
-     * unfiltered list is different from the index at the filtered list.
-     * 4. Redo the deletion. This ensures {@code RedoCommand} deletes the person object regardless of indexing.
+     * 1. Deletes a {@code Person} from a filtered list. 2. Undo the deletion. 3. The unfiltered
+     * list should be shown now. Verify that the index of the previously deleted person in the
+     * unfiltered list is different from the index at the filtered list. 4. Redo the deletion. This
+     * ensures {@code RedoCommand} deletes the person object regardless of indexing.
      */
     @Test
     public void executeUndoRedo_validIndexFilteredList_samePersonDeleted() throws Exception {
@@ -136,12 +166,15 @@ public class DeleteCommandTest {
 
         // undo -> reverts addressbook back to previous state and filtered person list to show all persons
         expectedModel.undoAddressBook();
-        assertCommandSuccess(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_SUCCESS,
+            expectedModel);
 
-        assertNotEquals(personToDelete, model.getFilteredPersonList().get(INDEX_FIRST.getZeroBased()));
+        assertNotEquals(personToDelete,
+            model.getFilteredPersonList().get(INDEX_FIRST.getZeroBased()));
         // redo -> deletes same second person in unfiltered person list
         expectedModel.redoAddressBook();
-        assertCommandSuccess(new RedoCommand(), model, commandHistory, RedoCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new RedoCommand(), model, commandHistory, RedoCommand.MESSAGE_SUCCESS,
+            expectedModel);
     }
 
     @Test
@@ -174,4 +207,6 @@ public class DeleteCommandTest {
 
         assertTrue(model.getFilteredPersonList().isEmpty());
     }
+
+
 }

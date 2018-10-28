@@ -54,4 +54,10 @@ public class DownloadTimetableCommand extends Command {
         model.commitAddressBook();
         return new CommandResult(String.format(MESSAGE_DOWNLOAD_TIMETABLE_SUCCESS));
     }
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+            || (other instanceof DownloadTimetableCommand // instanceof handles nulls
+            && index.equals(((DownloadTimetableCommand) other).index));
+    }
 }

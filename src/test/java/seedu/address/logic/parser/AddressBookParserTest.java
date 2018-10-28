@@ -4,8 +4,10 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.testutil.PersonBuilder.DEFAULT_STORED_LOCATION;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 
+import java.io.File;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -18,6 +20,8 @@ import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.AddTimetableCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.DeleteTimetableCommand;
+import seedu.address.logic.commands.DownloadTimetableCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.EditTimetableCommand;
@@ -51,10 +55,27 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_addTimetable() throws Exception {
+    public void parseCommand_addTimetable_fromStoredLocation() throws Exception {
         AddTimetableCommand command = (AddTimetableCommand) parser
             .parseCommand(AddTimetableCommand.COMMAND_WORD + " " + INDEX_FIRST.getOneBased());
         AddTimetableCommand expectedCommand = new AddTimetableCommand(INDEX_FIRST, "default");
+        assertEquals(command, expectedCommand);
+    }
+
+    @Test
+    public void parseCommand_addTimetable_fromOtherLocation() throws Exception {
+        Person person = new PersonBuilder().withStoredLocation(DEFAULT_STORED_LOCATION).build();
+        person.getTimetable().downloadTimetableAsCsv();
+        String location = person.getStoredLocation();
+        AddTimetableCommand command = (AddTimetableCommand) parser
+            .parseCommand(
+                AddTimetableCommand.COMMAND_WORD + " " + INDEX_FIRST.getOneBased() + " fl/"
+                    + location);
+        AddTimetableCommand expectedCommand = new AddTimetableCommand(INDEX_FIRST, location);
+        File timetableToDelete = new File(location);
+        if (timetableToDelete.exists()) {
+            timetableToDelete.delete();
+        }
         assertEquals(command, expectedCommand);
     }
 
@@ -69,6 +90,22 @@ public class AddressBookParserTest {
         DeleteCommand command = (DeleteCommand) parser.parseCommand(
             DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST.getOneBased());
         assertEquals(new DeleteCommand(INDEX_FIRST), command);
+    }
+
+    @Test
+    public void parseCommand_deleteTimetable() throws Exception {
+        DeleteTimetableCommand command = (DeleteTimetableCommand) parser
+            .parseCommand(DeleteTimetableCommand.COMMAND_WORD + " " + INDEX_FIRST.getOneBased());
+        DeleteTimetableCommand expectedCommand = new DeleteTimetableCommand(INDEX_FIRST);
+        assertEquals(command, expectedCommand);
+    }
+
+    @Test
+    public void parseCommand_downloadTimetable() throws Exception {
+        DownloadTimetableCommand command = (DownloadTimetableCommand) parser
+            .parseCommand(DownloadTimetableCommand.COMMAND_WORD + " " + INDEX_FIRST.getOneBased());
+        DownloadTimetableCommand expectedCommand = new DownloadTimetableCommand(INDEX_FIRST);
+        assertEquals(command, expectedCommand);
     }
 
     @Test

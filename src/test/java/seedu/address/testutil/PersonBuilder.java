@@ -1,5 +1,6 @@
 package seedu.address.testutil;
 
+import java.io.File;
 import java.nio.file.Paths;
 import java.util.HashSet;
 import java.util.List;
@@ -27,7 +28,9 @@ public class PersonBuilder {
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_FORMAT = "horizontal";
     public static final String DEFAULT_STORED_LOCATION = Paths
-        .get("src", "test", "data", "timetable").toString() + "/";
+        .get("src", "test", "data", "timetable").toString();
+    public static final String DEFAULT_STORED_INVALID_TIMETABLE_LOCATION = Paths
+        .get("src", "test", "data", "wrongTimetable").toString();
     public static final String DEFAULT_TIMETABLE_STRING = "default";
     private Name name;
     private Phone phone;
@@ -48,6 +51,14 @@ public class PersonBuilder {
         groups = new UniqueList<>();
         format = DEFAULT_FORMAT;
         storedLocation = DEFAULT_STORED_LOCATION;
+        File testDirectory = new File(DEFAULT_STORED_LOCATION);
+        if (!testDirectory.exists()) {
+            testDirectory.mkdirs();
+        }
+        File wrongTimetableDirectory = new File(DEFAULT_STORED_INVALID_TIMETABLE_LOCATION);
+        if (!wrongTimetableDirectory.exists()) {
+            wrongTimetableDirectory.mkdirs();
+        }
         timetableString = DEFAULT_TIMETABLE_STRING;
         tags = new HashSet<>();
     }
@@ -88,7 +99,7 @@ public class PersonBuilder {
      * Sets the {@code storedLocation} of the {@code Person} that we are building.
      */
     public PersonBuilder withStoredLocation(String storedLocation) {
-        this.storedLocation = storedLocation
+        this.storedLocation = storedLocation + "/"
             + String.valueOf(this.hashCode()) + " timetable.csv";
         return this;
     }

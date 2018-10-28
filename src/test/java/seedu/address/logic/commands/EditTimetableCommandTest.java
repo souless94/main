@@ -1,5 +1,8 @@
 package seedu.address.logic.commands;
 
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DAY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DETAILS;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TIMING;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
@@ -22,12 +25,31 @@ public class EditTimetableCommandTest {
     private CommandHistory commandHistory = new CommandHistory();
 
     @Test
-    public void execute_timetableAcceptedByModel_editSuccess() {
+    public void execute_editTimetableSuccess() {
         Person personToEditTimetable = model.getFilteredPersonList()
             .get(INDEX_FIRST.getZeroBased());
-        String day = "wednesday";
-        String timing = "0800";
-        String details = "test,magic try/.../";
+        String day = VALID_DAY;
+        String timing = VALID_TIMING;
+        String details = VALID_DETAILS;
+        EditTimetableCommand editTimetableCommand = new EditTimetableCommand(INDEX_FIRST, day,
+            timing, details);
+        String expectedMessage = String
+            .format(EditTimetableCommand.MESSAGE_EDIT_TIMETABLE_SUCCESS, personToEditTimetable);
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
+            new UserPrefs());
+        expectedModel.update(model.getFilteredPersonList().get(0), personToEditTimetable);
+        expectedModel.commitAddressBook();
+        assertCommandSuccess(editTimetableCommand, model, commandHistory, expectedMessage,
+            expectedModel);
+    }
+
+    @Test
+    public void execute_editTimetableSuccessWithCapitalLetterDay() {
+        Person personToEditTimetable = model.getFilteredPersonList()
+            .get(INDEX_FIRST.getZeroBased());
+        String day = "WednEsday";
+        String timing = VALID_TIMING;
+        String details = VALID_DETAILS;
         EditTimetableCommand editTimetableCommand = new EditTimetableCommand(INDEX_FIRST, day,
             timing, details);
         String expectedMessage = String
@@ -43,9 +65,9 @@ public class EditTimetableCommandTest {
     @Test
     public void execute_invalidPersonIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
-        String day = "wednesday";
-        String timing = "0800";
-        String details = "test,magic try/.../";
+        String day = VALID_DAY;
+        String timing = VALID_TIMING;
+        String details = VALID_DETAILS;
         EditTimetableCommand editTimetableCommand = new EditTimetableCommand(outOfBoundIndex, day,
             timing, details);
 

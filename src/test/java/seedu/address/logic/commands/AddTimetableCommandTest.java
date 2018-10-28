@@ -75,7 +75,6 @@ public class AddTimetableCommandTest {
     public void execute_timetableNotFound_addFailure() {
         Person personToAddTimetable = model.getFilteredPersonList()
             .get(INDEX_FIRST.getZeroBased());
-        personToAddTimetable.getTimetable().downloadTimetableAsCsv();
         File timetable = new File(personToAddTimetable.getStoredLocation());
         if (timetable.exists()) {
             timetable.delete();
@@ -84,4 +83,16 @@ public class AddTimetableCommandTest {
         assertCommandFailure(addTimetableCommand, model, commandHistory,
             Messages.MESSAGE_TIMETABLE_NOT_FOUND);
     }
+    /** TODO test for addTimetableWith WrongSize
+    @Test
+    public void execute_timetableAddWrongSize_addFailure() {
+        Person personToAddTimetable = model.getFilteredPersonList()
+            .get(INDEX_FIRST.getZeroBased());
+        personToAddTimetable.getTimetable().downloadTimetableAsCsv();
+        File timetable = new File(personToAddTimetable.getStoredLocation());
+        AddTimetableCommand addTimetableCommand = new AddTimetableCommand(INDEX_FIRST, "default");
+        assertCommandFailure(addTimetableCommand, model, commandHistory,
+            Messages.MESSAGE_TIMETABLE_NOT_FOUND);
+    }
+    */
 }

@@ -19,18 +19,21 @@ import com.opencsv.CSVWriter;
 public class TimetableData {
 
     private final String[][] timetable;
-    private final String[] timings = {"0800", "0900", "1000", "1100", "1200", "1300",
+    private final String[] timings = {"0800", "0900", "1000",
+        "1100", "1200", "1300",
         "1400", "1500", "1600", "1700", "1800", "1900", "2000", "2100", "2200", "2300"};
     private final String[] days = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday",
         "Saturday", "Sunday"};
-    private final String[] daysInLowerCase = {"monday", "tuesday", "wednesday", "thursday", "friday",
+    private final String[] daysInLowerCase = {"monday", "tuesday", "wednesday", "thursday",
+        "friday",
         "saturday", "sunday"};
     private final int noOfTimings = timings.length;
     private final int noOfDays = days.length;
     private final int noOfRows;
     private final int noOfColumns;
     private final String format;
-
+    private boolean isCorrectSize;
+    private boolean hasCorrectRowsAndColumns;
 
     /**
      * uses format and timetableString to create a matrix uses the day and time to find the cell of
@@ -41,10 +44,12 @@ public class TimetableData {
         this.format = format;
         int noOfRows = 0;
         int noOfColumns = 0;
-        if (format.equals("vertical")) {
+        isCorrectSize = true;
+        hasCorrectRowsAndColumns = true;
+        if ("vertical".equals(format)) {
             noOfRows = noOfTimings;
             noOfColumns = noOfDays;
-        } else if (format.equals("horizontal")) {
+        } else if ("horizontal".equals(format)) {
             noOfRows = noOfDays;
             noOfColumns = noOfTimings;
         }
@@ -63,13 +68,16 @@ public class TimetableData {
             if ("horizontal".equals(format)) {
                 rowToChange = ArrayUtils.indexOf(getDaysInLowerCase(), day.toLowerCase()) + 1;
                 columnToChange = ArrayUtils.indexOf(timings, timing) + 1;
-            } else {
+                timetable[rowToChange][columnToChange] = message;
+            } else if ("vertical".equals(format)) {
                 rowToChange = ArrayUtils.indexOf(timings, timing) + 1;
                 columnToChange = ArrayUtils.indexOf(getDaysInLowerCase(), day.toLowerCase()) + 1;
+                timetable[rowToChange][columnToChange] = message;
             }
-            timetable[rowToChange][columnToChange] = message;
+
         }
         this.timetable = timetable;
+        checkTimetableForCorrectRowsAndColumns(this.format);
     }
 
     /**
@@ -77,12 +85,18 @@ public class TimetableData {
      */
     private String[][] getTimetableFromString(String timetableString) {
         String[][] timetableMatrix = createNewTimetable();
-        if (timetableString.equals("default")) {
+        if ("default".equals(timetableString)) {
             return timetableMatrix;
         } else {
             String[] rows = timetableString.split("\n");
+            if (rows.length > getRows()) {
+                this.isCorrectSize = false;
+            }
             for (int i = 0; i < getRows(); i++) {
                 String[] decodedRows = rows[i].split(",");
+                if (decodedRows.length > getColumns()) {
+                    this.isCorrectSize = false;
+                }
                 for (int j = 0; j < getColumns(); j++) {
                     byte[] decodedString = Base64.getDecoder().decode(decodedRows[j]);
                     decodedRows[j] = new String(decodedString);
@@ -140,11 +154,18 @@ public class TimetableData {
             CSVReader csvReader = new CSVReader(fileReader);
             String[] timetableRow;
             while ((timetableRow = csvReader.readNext()) != null) {
+                if (timetableRow.length > getColumns()) {
+                    this.isCorrectSize = false;
+                    break;
+                }
+                if (i >= getRows()) {
+                    this.isCorrectSize = false;
+                    break;
+                }
                 timetableMatrix[i] = timetableRow;
                 i++;
             }
             csvReader.close();
-
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -174,9 +195,9 @@ public class TimetableData {
         String[][] timetable = createNewMatrix();
 
         timetable[0][0] = this.format;
-        if (this.format.equals("horizontal")) {
+        if ("horizontal".equals(this.format)) {
             fillHorizontalTimetableData(timetable);
-        } else if (this.format.equals("vertical")) {
+        } else if ("vertical".equals(this.format)) {
             fillVerticalTimetableData(timetable);
         }
         return timetable;
@@ -211,6 +232,71 @@ public class TimetableData {
     }
 
     /**
+     * checks if timetable has correct rows and columns
+     */
+    private void checkTimetableForCorrectRowsAndColumns(String format) {
+        assert isCorrectSize = true;
+        if ("vertical".equals(format)) {
+            checkVerticalTimetableForCorrectRowsAndColumns();
+        } else if ("horizontal".equals(format)) {
+            checkHorizontalTimetableForCorrectRowsAndColumns();
+        }
+    }
+
+    /**
+     * to check verticalTimetable for correct first row and column
+     */
+    private void checkVerticalTimetableForCorrectRowsAndColumns() {
+        String[] firstRow = this.timetable[0];
+        for (int i = 1; i < getColumns(); i++) {
+            String firstRowEntry = firstRow[i];
+            if (!firstRowEntry.equals(days[i - 1])) {
+                this.hasCorrectRowsAndColumns = false;
+            }
+        }
+        for (int j = 1; j < getRows(); j++) {
+            String firstColumnEntry = this.timetable[j][0];
+            if (!firstColumnEntry.equals(timings[j - 1])) {
+                this.hasCorrectRowsAndColumns = false;
+            }
+        }
+
+    }
+
+    /**
+     * to check HorizontalTimetable for correct first row and column
+     */
+    private void checkHorizontalTimetableForCorrectRowsAndColumns() {
+        String[] firstRow = this.timetable[0];
+        for (int i = 1; i < getColumns(); i++) {
+            String firstRowEntry = firstRow[i];
+            if (!firstRowEntry.equals(timings[i - 1])) {
+                this.hasCorrectRowsAndColumns = false;
+            }
+        }
+        for (int j = 1; j < getRows(); j++) {
+            String firstColumnEntry = this.timetable[j][0];
+            if (!firstColumnEntry.equals(days[j - 1])) {
+                this.hasCorrectRowsAndColumns = false;
+            }
+        }
+    }
+
+    /**
+     * @return true if timetable has correct number of rows and columns
+     */
+    public boolean isCorrectSize() {
+        return isCorrectSize;
+    }
+
+    /**
+     * @return true if timetable has correct days and correct timing
+     */
+    public boolean hasCorrectRowsAndColumns() {
+        return hasCorrectRowsAndColumns;
+    }
+
+    /**
      * @return a string matrix of a timetable
      */
     public String[][] getTimetable() {
@@ -240,7 +326,7 @@ public class TimetableData {
                     CSVWriter.DEFAULT_ESCAPE_CHARACTER,
                     CSVWriter.DEFAULT_LINE_END);
                 for (int i = 0; i < getRows(); i++) {
-                    csvWriter.writeNext(timetable[i]);
+                    csvWriter.writeNext(this.timetable[i]);
                 }
                 csvWriter.close();
             }

@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.commands.EditTimetableCommand.createUpdatedPerson;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_FILE_LOCATION;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.io.File;
@@ -18,16 +19,36 @@ import seedu.address.model.person.timetable.Timetable;
  */
 public class AddTimetableCommand extends Command {
 
+
     public static final String COMMAND_WORD = "add_timetable";
     public static final String MESSAGE_USAGE =
         COMMAND_WORD + ": adds timetable to the person identified "
             + "by the index number used in the displayed person list."
-            + " \n"
-            + "Parameters : INDEX (must be a positive integer) "
-            + "Example: " + COMMAND_WORD + " 1 ";
+            + "Existing values will be overwritten by the input values.\n"
+            + "Parameters: INDEX (must be a positive integer) "
+            + "[" + PREFIX_FILE_LOCATION + "FILE_LOCATION] "
+            + "Example: " + COMMAND_WORD + " 1 "
+            + PREFIX_FILE_LOCATION
+            + "C:/Users/wen kai/Downloads/y4s1/cs2103/project2/data/timetable/495011161 timetable";
 
     public static final String MESSAGE_ADD_TIMETABLE_SUCCESS = "timetable added successfully: %1$s";
     public static final String MESSAGE_TIMETABLE_NOT_FOUND = "timetable to be added is not found";
+    public static final String MESSAGE_INVALID_TIMETABLE_SIZE =
+        "timetable to be added is wrong: \n"
+            + "if format is horizontal,timetable should have in total rows: 8 , columns : 17 \n"
+            + "if format is vertical,timetable should have in total rows: 17 , columns : 8 \n";
+
+    private static final String timings = "correctTimings : \n"
+        + "0800,0900,1000,1100 \n"
+        + "1200,1300,1400,1500,1600 \n"
+        + "1700,1800,1900,2000,2100,2200,2300 \n";
+    private static final String days = "correctDays: {Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday";
+
+    public static final String MESSAGE_INVALID_TIMETABLE = "timetable to be added is wrong: \n"
+        + "does not have correct timings or/and days present in first column or/and first row in the csv file \n"
+        + timings + "\n"
+        + days + "\n";
+
 
     private final Index index;
     private final String newFilePath;
@@ -58,6 +79,14 @@ public class AddTimetableCommand extends Command {
         if (doesFileExists) {
             Timetable timetable = new Timetable(filePath, personToEdit.getFormat(),
                 personToEdit.getTimetable().getTimetableDataString(), 2, null, null, null);
+            if (!timetable.isValid()) {
+                if (!timetable.isCorrectSize()) {
+                    throw new CommandException(MESSAGE_INVALID_TIMETABLE_SIZE);
+                }
+                if (!timetable.hasCorrectRowsAndColumns()) {
+                    throw new CommandException(MESSAGE_INVALID_TIMETABLE);
+                }
+            }
             Person updatedPerson = createUpdatedPerson(personToEdit, timetable, filePath);
             model.update(personToEdit, updatedPerson);
             model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
