@@ -52,7 +52,7 @@ public class LoginCommandTest {
         Accounts wrongAccount = new Accounts(wrongUsername, rightPassword);
 
         assertThrows(NullPointerException.class,
-                ( ) -> {
+                () -> {
                     LoginCommand login = new LoginCommand(wrongAccount);
                 });
     }

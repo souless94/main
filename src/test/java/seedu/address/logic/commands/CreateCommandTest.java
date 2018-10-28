@@ -4,7 +4,9 @@ import static java.util.Objects.requireNonNull;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+
 import seedu.address.logic.commands.CreateCommand;
+
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.Rule;
@@ -27,18 +29,17 @@ public class CreateCommandTest {
     private Accounts account = new Accounts(TEST_USERNAME, TEST_PASSWORD);
 
     @Test
-    public void execute_create_success(){
+    public void execute_create_success() {
         CreateCommand create = new CreateCommand(account);
         assertTrue(create.getCreateIsSuccessful());
     }
-    
+
     @Test
-    public void execute_create_failure(){
+    public void execute_create_failure() {
         CreateCommand create = new CreateCommand(account);
         CreateCommand createDuplicate = new CreateCommand(account);
         assertFalse(createDuplicate.getCreateIsSuccessful());
     }
-
 
 
 }
