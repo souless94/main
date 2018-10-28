@@ -5,6 +5,7 @@ import static seedu.address.logic.commands.EditTimetableCommand.createUpdatedPer
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.io.File;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
