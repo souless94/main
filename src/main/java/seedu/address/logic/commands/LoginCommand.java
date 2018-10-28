@@ -21,6 +21,10 @@ public class LoginCommand extends Command {
 
     private static boolean loginIsSuccessful = false;
 
+    public boolean getLoginIsSuccessful(){
+        return loginIsSuccessful;
+    }
+
     //TODO: update MESSAGE_USAGE
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Login to NUS Hangs to access various features. "
             + "Parameters: "

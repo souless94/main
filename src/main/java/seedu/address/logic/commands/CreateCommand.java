@@ -13,8 +13,10 @@ import seedu.address.storage.UserAccountStorage;
 //@@author aspiringdevslog
 /**
  * Creates a user for address book.
+ *
  */
 public class CreateCommand extends Command {
+
 
     public static final String COMMAND_WORD = "create";
     private static boolean createIsSuccessful = false;
@@ -28,10 +30,15 @@ public class CreateCommand extends Command {
             + PREFIX_USERNAME + "username "
             + PREFIX_PASSWORD + "password ";
 
-    private static final String MESSAGE_SUCCESS = "New user added successfully!";
-    private static final String MESSAGE_FAILURE = "Username already exist.";
+    public static final String MESSAGE_SUCCESS = "New user added successfully!";
+    public static final String MESSAGE_FAILURE = "Username already exist.";
 
     private final Accounts newAccount;
+
+    public boolean getCreateIsSuccessful(){
+        return createIsSuccessful;
+    }
+
 
     /**
      * Creates an CreateCommand to add the specified {@code Person}
@@ -58,4 +65,6 @@ public class CreateCommand extends Command {
             return new CommandResult(String.format(MESSAGE_FAILURE));
         }
     }
+
+
 }

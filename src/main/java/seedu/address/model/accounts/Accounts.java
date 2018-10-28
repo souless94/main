@@ -10,8 +10,8 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 public class Accounts {
 
     // Identity fields
-    private final String username;
-    private final String password;
+    private String username;
+    private String password;
 
 
     /**
@@ -29,5 +29,13 @@ public class Accounts {
 
     public String getPassword() {
         return password;
+    }
+
+    public void setUsername(String inputUsername){
+        this.username = inputUsername;
+    }
+
+    public void setPassword(String inputPassword){
+        this.password = inputPassword;
     }
 }
