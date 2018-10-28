@@ -52,6 +52,13 @@ public class AddressBookParser {
     private static boolean userIsLoggedOn = false;
 
 
+    public AddressBookParser(boolean setLoggedOn){ // for test
+        userIsLoggedOn = setLoggedOn;
+    }
+
+    public AddressBookParser(){ // default constructor
+    }
+
     public static void updateLoggedOnStatus(boolean status) {
         userIsLoggedOn = status;
     }
