@@ -1,0 +1,37 @@
+/**
+     * download timetable as png file.
+     * @param filepath
+     * code done by trial and error.
+     */
+//@@author souless94-resued solution from
+//Andrew Thompson from
+//https://stackoverflow.com/questions/7363491/java-api-or-tool-to-convert-tabular-data-into-png-image-file
+    public void downloadTimetableDataAsPng(String filepath) {
+        JTable table = new JTable(this.timetable, this.timetable[0]);
+        JScrollPane scrollPane = new JScrollPane(table);
+        table.setFillsViewportHeight(true);
+
+        // JTable must have been added to a TLC in order to render
+        // correctly - go figure.
+        final JFrame frame = new JFrame();
+        frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        frame.getContentPane().add(scrollPane, BorderLayout.CENTER);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.pack();
+        BufferedImage tableImage = new BufferedImage(1300, 150,
+            BufferedImage.TYPE_INT_RGB);
+        Graphics g = tableImage.getGraphics();
+        table.paint(g);
+        g.dispose();
+        try {
+            filepath = filepath.substring(0, filepath.length() - 4);
+            File newImage = new File(filepath + ".png");
+            if (newImage.exists()) {
+                newImage.delete();
+            }
+            ImageIO.write(tableImage, "png", newImage);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+//@@author

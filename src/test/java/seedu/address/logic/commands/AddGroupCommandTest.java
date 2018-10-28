@@ -139,9 +139,7 @@ public class AddGroupCommandTest {
         }
 
         @Override
-        public void updateFilteredGroupList(Predicate<Group> predicate) {
-            throw new AssertionError("This method should not be called.");
-        }
+        public void updateFilteredGroupList(Predicate<Group> predicate) {}
 
         @Override
         public boolean canUndoAddressBook() {
