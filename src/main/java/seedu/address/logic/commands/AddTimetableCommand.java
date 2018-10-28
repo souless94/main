@@ -68,5 +68,13 @@ public class AddTimetableCommand extends Command {
             throw new CommandException(MESSAGE_TIMETABLE_NOT_FOUND);
         }
     }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+            || (other instanceof AddTimetableCommand // instanceof handles nulls
+            && index.equals(((AddTimetableCommand) other).index))
+            && newFilePath.equals(((AddTimetableCommand) other).newFilePath);
+    }
 }
 

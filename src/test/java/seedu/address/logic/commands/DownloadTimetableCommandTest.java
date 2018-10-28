@@ -36,7 +36,6 @@ class DownloadTimetableCommandTest {
         expectedModel.commitAddressBook();
         assertCommandSuccess(downloadTimetableCommand, model, commandHistory, expectedMessage,
             expectedModel);
-
         assertTrue(new File(personToDownloadTimetable.getStoredLocation()).exists());
     }
 }
