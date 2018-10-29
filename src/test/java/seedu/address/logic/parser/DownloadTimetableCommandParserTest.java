@@ -15,7 +15,7 @@ public class DownloadTimetableCommandParserTest {
 
 
     @Test
-    public void parse_compulsoryFieldMissing_failure() {
+    public void parseCompulsoryFieldMissingFailure() {
         String expectedMessage = String
             .format(MESSAGE_INVALID_COMMAND_FORMAT, DownloadTimetableCommand.MESSAGE_USAGE);
         //missing index
@@ -25,7 +25,7 @@ public class DownloadTimetableCommandParserTest {
     }
 
     @Test
-    public void parse_downloadTimetable_success() {
+    public void parseDownloadTimetableSuccess() {
         String targetIndex = INDEX_SECOND.getOneBased() + " ";
         String userInput = targetIndex;
         DownloadTimetableCommand downloadTimetableCommand = new DownloadTimetableCommand(

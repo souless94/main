@@ -55,7 +55,7 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_addTimetable_fromStoredLocation() throws Exception {
+    public void parseCommandAddTimetableFromStoredLocation() throws Exception {
         AddTimetableCommand command = (AddTimetableCommand) parser
             .parseCommand(AddTimetableCommand.COMMAND_WORD + " " + INDEX_FIRST.getOneBased());
         AddTimetableCommand expectedCommand = new AddTimetableCommand(INDEX_FIRST, null);
@@ -63,7 +63,7 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_addTimetable_fromOtherLocation() throws Exception {
+    public void parseCommandAddTimetableFromOtherLocation() throws Exception {
         Person person = new PersonBuilder().withStoredLocation(DEFAULT_STORED_LOCATION).build();
         person.getTimetable().downloadTimetableAsCsv();
         String location = person.getStoredLocation();
@@ -93,7 +93,7 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_deleteTimetable() throws Exception {
+    public void parseCommandDeleteTimetable() throws Exception {
         DeleteTimetableCommand command = (DeleteTimetableCommand) parser
             .parseCommand(DeleteTimetableCommand.COMMAND_WORD + " " + INDEX_FIRST.getOneBased());
         DeleteTimetableCommand expectedCommand = new DeleteTimetableCommand(INDEX_FIRST);
@@ -101,7 +101,7 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_downloadTimetable() throws Exception {
+    public void parseCommandDownloadTimetable() throws Exception {
         DownloadTimetableCommand command = (DownloadTimetableCommand) parser
             .parseCommand(DownloadTimetableCommand.COMMAND_WORD + " " + INDEX_FIRST.getOneBased());
         DownloadTimetableCommand expectedCommand = new DownloadTimetableCommand(INDEX_FIRST);
@@ -119,7 +119,7 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_editTimetable() throws Exception {
+    public void parseCommandEditTimetable() throws Exception {
         EditTimetableCommand command = (EditTimetableCommand) parser
             .parseCommand(EditTimetableCommand.COMMAND_WORD
                 + " " + INDEX_FIRST.getOneBased()

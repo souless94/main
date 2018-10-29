@@ -20,7 +20,7 @@ public class DeleteTimetableCommandParserTest {
 
 
     @Test
-    public void parse_compulsoryFieldMissing_failure() {
+    public void parseCompulsoryFieldMissingFailure() {
         String expectedMessage = String
             .format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteTimetableCommand.MESSAGE_USAGE);
         BOB.getTimetable().downloadTimetableAsCsv();
@@ -33,7 +33,7 @@ public class DeleteTimetableCommandParserTest {
     }
 
     @Test
-    public void parse_deleteTimetable_success() {
+    public void parseDeleteTimetableSuccess() {
         String targetIndex = INDEX_SECOND.getOneBased() + " ";
         BOB.getTimetable().downloadTimetableAsCsv();
         File timetable = new File(BOB.getStoredLocation());
@@ -44,7 +44,7 @@ public class DeleteTimetableCommandParserTest {
     }
 
     @Test
-    public void parse_resetTimetable_success() {
+    public void parseResetTimetableSuccess() {
         String targetIndex = INDEX_SECOND.getOneBased() + " ";
         File timetable = new File(BOB.getStoredLocation());
         if (timetable.exists()) {

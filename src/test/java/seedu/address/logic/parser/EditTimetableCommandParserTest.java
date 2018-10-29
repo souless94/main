@@ -32,7 +32,7 @@ public class EditTimetableCommandParserTest {
     private EditTimetableCommandParser parser = new EditTimetableCommandParser();
 
     @Test
-    public void parse_compulsoryFieldMissing_failure() {
+    public void parseCompulsoryFieldMissingFailure() {
         String expectedMessage = String
             .format(MESSAGE_INVALID_COMMAND_FORMAT, EditTimetableCommand.MESSAGE_USAGE);
         String targetIndex = String.valueOf(INDEX_SECOND.getOneBased()) + " ";
@@ -92,7 +92,7 @@ public class EditTimetableCommandParserTest {
     }
 
     @Test
-    public void parse_invalidTiming_failure() {
+    public void parseInvalidTimingFailure() {
         Index targetIndex = INDEX_SECOND;
         String userInput = targetIndex.getOneBased() + INVALID_TIMING_DESC;
         String expectedMessage = String.format(MESSAGE_INVALID_TIMING);
@@ -100,7 +100,7 @@ public class EditTimetableCommandParserTest {
     }
 
     @Test
-    public void parse_invalidDay_failure() {
+    public void parseInvalidDayFailure() {
         Index targetIndex = INDEX_SECOND;
         String userInput = targetIndex.getOneBased() + INVALID_DAY_DESC;
         String expectedMessage = String.format(MESSAGE_INVALID_DAY);
@@ -108,7 +108,7 @@ public class EditTimetableCommandParserTest {
     }
 
     @Test
-    public void parse_invalidTimingAndInvalidDay_failure() {
+    public void parseInvalidTimingAndInvalidDayFailure() {
         Index targetIndex = INDEX_SECOND;
         String userInput = targetIndex.getOneBased() + INVALID_TIMING_AND_DAY_DESC;
         String expectedMessage = String.format(MESSAGE_INVALID_DAY_AND_TIMING);
@@ -116,7 +116,7 @@ public class EditTimetableCommandParserTest {
     }
 
     @Test
-    public void parse_allFieldsSpecified_success() {
+    public void parseAllFieldsSpecifiedSuccess() {
         Index targetIndex = INDEX_SECOND;
         String userInput = targetIndex.getOneBased() + VALID_EDIT_TIMETABLE_COMMAND_WITH_DETAILS;
         EditTimetableCommand expectedCommand = new EditTimetableCommand(targetIndex, VALID_DAY,
@@ -125,7 +125,7 @@ public class EditTimetableCommandParserTest {
     }
 
     @Test
-    public void parse_noDetails_success() {
+    public void parseNoDetailsSuccess() {
         Index targetIndex = INDEX_SECOND;
         String userInput = targetIndex.getOneBased() + VALID_EDIT_TIMETABLE_COMMAND_WITHOUT_DETAILS;
         EditTimetableCommand expectedCommand = new EditTimetableCommand(targetIndex, "friday",
@@ -134,7 +134,7 @@ public class EditTimetableCommandParserTest {
     }
 
     @Test
-    public void parse_editTimetableWithTwoInputs_failure() {
+    public void parseEditTimetableWithTwoInputsFailure() {
         Index targetIndex = INDEX_SECOND;
         String userInput = targetIndex.getOneBased() + VALID_EDIT_TIMETABLE_COMMAND_WITH_DETAILS
             + " " + PREFIX_DAY + VALID_DAY;

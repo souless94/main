@@ -33,7 +33,7 @@ public class AddTimetableCommandTest {
     private CommandHistory commandHistory = new CommandHistory();
 
     @Test
-    public void execute_timetableAcceptedByModel_addSuccess() {
+    public void executeTimetableAcceptedByModelAddSuccess() {
         Person personToAddTimetable = model.getFilteredPersonList()
             .get(INDEX_FIRST.getZeroBased());
         personToAddTimetable.getTimetable().downloadTimetableAsCsv();
@@ -53,7 +53,7 @@ public class AddTimetableCommandTest {
     }
 
     @Test
-    public void execute_timetableAcceptedByModel_addByFileLocationSuccess() {
+    public void executeTimetableAcceptedByModelAddByFileLocationSuccess() {
         Person personToAddTimetable = model.getFilteredPersonList()
             .get(INDEX_FIRST.getZeroBased());
         personToAddTimetable.getTimetable().downloadTimetableAsCsv();
@@ -75,7 +75,7 @@ public class AddTimetableCommandTest {
 
 
     @Test
-    public void execute_invalidPersonIndexUnfilteredList_failure() {
+    public void executeInvalidPersonIndexUnfilteredListFailure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
         AddTimetableCommand addTimetableCommand = new AddTimetableCommand(outOfBoundIndex,
             null);
@@ -85,7 +85,7 @@ public class AddTimetableCommandTest {
     }
 
     @Test
-    public void execute_timetableNotFound_addFailure() {
+    public void executeTimetableNotFoundAddFailure() {
         Person personToAddTimetable = model.getFilteredPersonList()
             .get(INDEX_FIRST.getZeroBased());
         File timetable = new File(personToAddTimetable.getStoredLocation());
@@ -98,7 +98,7 @@ public class AddTimetableCommandTest {
     }
 
     @Test
-    public void execute_horizontalTimetableAddWrongRowSize_addFailure() {
+    public void executeHorizontalTimetableAddWrongRowSizeAddFailure() {
         String wrongTimetableLocation = DEFAULT_STORED_INVALID_TIMETABLE_LOCATION
             + "/" + "1663619914 timetable - wrongrowsize.csv";
         Person personToAddTimetable = model.getFilteredPersonList()
@@ -125,7 +125,7 @@ public class AddTimetableCommandTest {
     }
 
     @Test
-    public void execute_timetableAddWrongColumnSize_addFailure() {
+    public void executeTimetableAddWrongColumnSizeAddFailure() {
         String wrongTimetableLocation = DEFAULT_STORED_INVALID_TIMETABLE_LOCATION
             + "/" + "1663619914 timetable - wrongcolumnsize.csv";
         Person personToAddTimetable = model.getFilteredPersonList()
@@ -157,7 +157,7 @@ public class AddTimetableCommandTest {
     }
 
     @Test
-    public void execute_timetableAddWrongFirstColumn_addFailure() {
+    public void executeTimetableAddWrongFirstColumnAddFailure() {
         String wrongTimetableLocation = DEFAULT_STORED_INVALID_TIMETABLE_LOCATION
             + "/" + "1663619914 timetable - wrongdays.csv";
         Person personToAddTimetable = model.getFilteredPersonList()
@@ -191,7 +191,7 @@ public class AddTimetableCommandTest {
     }
 
     @Test
-    public void execute_timetableAddWrongFirstRow_addFailure() {
+    public void executeTimetableAddWrongFirstRowAddFailure() {
         String wrongTimetableLocation = DEFAULT_STORED_INVALID_TIMETABLE_LOCATION
             + "/" + "1663619914 timetable - wrongtimings.csv";
         Person personToAddTimetable = model.getFilteredPersonList()

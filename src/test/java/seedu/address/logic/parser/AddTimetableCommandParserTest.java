@@ -25,7 +25,7 @@ public class AddTimetableCommandParserTest {
 
 
     @Test
-    public void parse_compulsoryFieldMissing_failure() {
+    public void parseCompulsoryFieldMissingFailure() {
         String expectedMessage = String
             .format(MESSAGE_INVALID_COMMAND_FORMAT, AddTimetableCommand.MESSAGE_USAGE);
         String validFileLocation = BOB.getStoredLocation();
@@ -41,7 +41,7 @@ public class AddTimetableCommandParserTest {
 
 
     @Test
-    public void parse_addTimetableWithoutFileLocation_success() {
+    public void parseAddTimetableWithoutFileLocationSuccess() {
         String targetIndex = INDEX_SECOND.getOneBased() + " ";
         BOB.getTimetable().downloadTimetableAsCsv();
         boolean doesFileExists = new File(BOB.getStoredLocation()).exists();
@@ -52,7 +52,7 @@ public class AddTimetableCommandParserTest {
     }
 
     @Test
-    public void parse_addTimetableWithValidFileLocation_success() {
+    public void parseAddTimetableWithValidFileLocationSuccess() {
         String targetIndex = INDEX_SECOND.getOneBased() + " ";
         String fileLocation = BOB.getStoredLocation();
         BOB.getTimetable().downloadTimetableAsCsv();
@@ -65,7 +65,7 @@ public class AddTimetableCommandParserTest {
     }
 
     @Test
-    public void parse_addTimetableWithInvalidFileLocation_failure() {
+    public void parseAddTimetableWithInvalidFileLocationFailure() {
         String targetIndex = INDEX_SECOND.getOneBased() + " ";
         String fileLocation = BOB.getStoredLocation();
         String expectedMessage = MESSAGE_TIMETABLE_NOT_FOUND;
@@ -96,7 +96,7 @@ public class AddTimetableCommandParserTest {
     }
 
     @Test
-    public void parse_addTimetableWithTwoFileLocation_failure() {
+    public void parseAddTimetableWithTwoFileLocationFailure() {
         String targetIndex = INDEX_SECOND.getOneBased() + " ";
         String fileLocation = BOB.getStoredLocation();
         String expectedMessage = MESSAGE_NOT_UNIQUE_PREFIX_INPUT;

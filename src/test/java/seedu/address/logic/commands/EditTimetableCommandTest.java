@@ -25,7 +25,7 @@ public class EditTimetableCommandTest {
     private CommandHistory commandHistory = new CommandHistory();
 
     @Test
-    public void execute_editTimetableSuccess() {
+    public void executeEditTimetableSuccess() {
         Person personToEditTimetable = model.getFilteredPersonList()
             .get(INDEX_FIRST.getZeroBased());
         String day = VALID_DAY;
@@ -44,7 +44,7 @@ public class EditTimetableCommandTest {
     }
 
     @Test
-    public void execute_editTimetableSuccessWithCapitalLetterDay() {
+    public void executeEditTimetableSuccessWithCapitalLetterDay() {
         Person personToEditTimetable = model.getFilteredPersonList()
             .get(INDEX_FIRST.getZeroBased());
         String day = "WednEsday";
@@ -63,7 +63,7 @@ public class EditTimetableCommandTest {
     }
 
     @Test
-    public void execute_invalidPersonIndexUnfilteredList_failure() {
+    public void executeInvalidPersonIndexUnfilteredListFailure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
         String day = VALID_DAY;
         String timing = VALID_TIMING;
