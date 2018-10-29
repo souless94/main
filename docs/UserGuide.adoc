@@ -350,7 +350,7 @@ Format: `clear`
 
 == Timetable(Wen Kai)
 === Adding a timetable: `add_timetable`
-add a timetable to the person specified by `INDEX` from the stored folder of the person specified by `INDEX` if no file location is present. Adds timetable to the person specified by the `INDEX` from file location if file location is present. Existing values will be overwritten by the input values. +
+add a timetable to the person specified by `INDEX` from the stored folder of the person specified by `INDEX` if no file location is present. Adds timetable to the person specified by the `INDEX` from file location if file location is present.Will not be able to add if timetable is not present in the stored location of person specified by `INDEX` Existing values will be overwritten by the input values. +
 Format: `add_timetable INDEX [fl/FILE_LOCATION]  `
 
 ****
