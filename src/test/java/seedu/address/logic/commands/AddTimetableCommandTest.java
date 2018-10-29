@@ -33,6 +33,8 @@ public class AddTimetableCommandTest {
         Person personToAddTimetable = model.getFilteredPersonList()
             .get(INDEX_FIRST.getZeroBased());
         personToAddTimetable.getTimetable().downloadTimetableAsCsv();
+        File timetable = new File(personToAddTimetable.getStoredLocation());
+        assertTrue(timetable.exists());
         AddTimetableCommand addTimetableCommand = new AddTimetableCommand(INDEX_FIRST, "default");
         String expectedMessage = String
             .format(AddTimetableCommand.MESSAGE_ADD_TIMETABLE_SUCCESS,
@@ -51,6 +53,8 @@ public class AddTimetableCommandTest {
         Person personToAddTimetable = model.getFilteredPersonList()
             .get(INDEX_FIRST.getZeroBased());
         personToAddTimetable.getTimetable().downloadTimetableAsCsv();
+        File timetable = new File(personToAddTimetable.getStoredLocation());
+        assertTrue(timetable.exists());
         AddTimetableCommand addTimetableCommand = new AddTimetableCommand(INDEX_FIRST,
             personToAddTimetable.getStoredLocation());
         String expectedMessage = String
