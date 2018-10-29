@@ -1,6 +1,9 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_FILE;
+import static seedu.address.commons.core.Messages.MESSAGE_IS_FILE_DIRECTORY;
+import static seedu.address.commons.core.Messages.MESSAGE_TIMETABLE_NOT_FOUND;
 
 import java.io.File;
 
@@ -158,11 +161,22 @@ public class ParserUtil {
      */
     public static String parseLocation(String location) throws ParseException {
         requireNonNull(location);
-        boolean doesFileExists = new File(location).exists();
-        if (!doesFileExists) {
-            throw new ParseException(Messages.MESSAGE_TIMETABLE_NOT_FOUND);
+        String trimmedLocation = location.trim();
+        String fileExtension = trimmedLocation.substring(trimmedLocation.length() - 4);
+        if (".csv".equals(fileExtension)) {
+            File timetable = new File(trimmedLocation);
+            boolean doesFileExists = timetable.exists();
+            if (timetable.isDirectory()) {
+                throw new ParseException(MESSAGE_IS_FILE_DIRECTORY);
+            }
+            if (!doesFileExists) {
+                throw new ParseException(MESSAGE_TIMETABLE_NOT_FOUND);
+            }
+        } else {
+            throw new ParseException(MESSAGE_INVALID_FILE);
         }
-        return location;
+
+        return trimmedLocation;
     }
 
     /**
@@ -187,7 +201,7 @@ public class ParserUtil {
         if ("horizontal".equals(format) || "vertical".equals(format)) {
             return format;
         } else {
-            throw new ParseException(Messages.INVALID_TIMETABLE_FORMAT);
+            throw new ParseException(Messages.MESSAGE_INVALID_TIMETABLE_FORMAT);
         }
     }
 
@@ -199,12 +213,13 @@ public class ParserUtil {
      */
     public static String parseDay(String day) throws ParseException {
         requireNonNull(day);
-        String[] validDays = new TimetableData("horizontal", null, "default", 1, null, null, null)
+        String trimmedDay = day.trim();
+        String[] validDays = new TimetableData("horizontal", null, null, 1, null, null, null)
             .getDaysInLowerCase();
-        if (ArrayUtils.contains(validDays, day.toLowerCase())) {
-            return day;
+        if (ArrayUtils.contains(validDays, trimmedDay.toLowerCase())) {
+            return trimmedDay;
         } else {
-            throw new ParseException(Messages.INVALID_DAY);
+            throw new ParseException(Messages.MESSAGE_INVALID_DAY);
         }
     }
 
@@ -216,12 +231,13 @@ public class ParserUtil {
      */
     public static String parseTiming(String timing) throws ParseException {
         requireNonNull(timing);
-        String[] validTiming = new TimetableData("horizontal", null, "default", 1, null, null, null)
+        String trimmedTiming = timing.trim();
+        String[] validTiming = new TimetableData("horizontal", null, null, 1, null, null, null)
             .getTimings();
-        if (ArrayUtils.contains(validTiming, timing)) {
-            return timing;
+        if (ArrayUtils.contains(validTiming, trimmedTiming)) {
+            return trimmedTiming;
         } else {
-            throw new ParseException(Messages.INVALID_TIMING);
+            throw new ParseException(Messages.MESSAGE_INVALID_TIMING);
         }
     }
 
@@ -236,4 +252,24 @@ public class ParserUtil {
         return details;
     }
 
+    /**
+     * Parses {@code String timing,String day} Leading and trailing whitespaces will be trimmed.
+     * checks if timings are in 24h format and is from 0800 to 2300 and checks if day is any of the
+     * days in a week.
+     *
+     * @throws ParseException if the given {@code timing} is invalid.
+     */
+    public static void checkBothDayAndTiming(String day, String timing) throws ParseException {
+
+        String trimmedDay = day.trim();
+        String[] validDays = new TimetableData("horizontal", null, null, 1, null, null, null)
+            .getDaysInLowerCase();
+        String trimmedTiming = timing.trim();
+        String[] validTiming = new TimetableData("horizontal", null, null, 1, null, null, null)
+            .getTimings();
+        if (!ArrayUtils.contains(validDays, trimmedDay.toLowerCase())
+            && !ArrayUtils.contains(validTiming, trimmedTiming)) {
+            throw new ParseException(Messages.MESSAGE_INVALID_DAY_AND_TIMING);
+        }
+    }
 }

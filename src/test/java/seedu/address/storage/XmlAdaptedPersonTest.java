@@ -4,8 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static seedu.address.storage.XmlAdaptedPerson.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.address.testutil.TypicalPersons.BENSON;
 
-import java.io.File;
-
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -35,9 +34,8 @@ public class XmlAdaptedPersonTest {
         .map(XmlAdaptedTag::new)
         .collect(Collectors.toList());
     private static final String VALID_FORMAT = "horizontal";
-    private static final String VALID_STORED_LOCATION =
-        new File("").getAbsolutePath().replace("\\", "/")
-            + "/data/timetable";
+    private static final String VALID_STORED_LOCATION = Paths
+        .get("src", "test", "data").toString() + "/";
     private static final String VALID_TIMETABLE_STRING = "default";
 
     @Test

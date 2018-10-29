@@ -1,5 +1,6 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.isNull;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DAY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DETAILS;
@@ -29,6 +30,8 @@ public class EditTimetableCommand extends Command {
     public static final String MESSAGE_USAGE =
         COMMAND_WORD + ": edit timetable for the person identified "
             + "by the index number used in the displayed person list."
+            + "if no details is entered, make the details blank "
+            + "for the timeslot in the timetable"
             + " \n"
             + "Parameters : INDEX (must be a positive integer) "
             + "[" + PREFIX_DAY + "DAY] "
@@ -37,7 +40,7 @@ public class EditTimetableCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_DAY + "Wednesday "
             + PREFIX_TIMING + "1700 "
-            + PREFIX_DETAILS + "do cs2103";
+            + "[" + PREFIX_DETAILS + "]" + "do cs2103";
 
     public static final String MESSAGE_EDIT_TIMETABLE_SUCCESS = "timetable edited successfully";
 
@@ -92,5 +95,23 @@ public class EditTimetableCommand extends Command {
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags,
             format, storedLocation, timetableString);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (day == null && timing == null) {
+            return other == this // short circuit if same object
+                || (other instanceof EditTimetableCommand // instanceof handles nulls
+                && index.equals(((EditTimetableCommand) other).index))
+                && isNull(((EditTimetableCommand) other).day)
+                && isNull(((EditTimetableCommand) other).timing)
+                && details.equals(((EditTimetableCommand) other).details);
+        }
+        return other == this // short circuit if same object
+            || (other instanceof EditTimetableCommand // instanceof handles nulls
+            && index.equals(((EditTimetableCommand) other).index))
+            && day.equals(((EditTimetableCommand) other).day)
+            && timing.equals(((EditTimetableCommand) other).timing)
+            && details.equals(((EditTimetableCommand) other).details);
     }
 }
