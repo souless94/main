@@ -16,7 +16,12 @@ public class CliSyntax {
     public static final Prefix PREFIX_PASSWORD = new Prefix("pw/");
 
     public static final Prefix PREFIX_STORED_LOCATION = new Prefix("sl/");
+    public static final Prefix PREFIX_FILE_LOCATION = new Prefix("fl/");
     public static final Prefix PREFIX_FORMAT = new Prefix("f/");
     public static final Prefix PREFIX_DESCRIPTION = new Prefix("d/");
+
+    public static final Prefix PREFIX_DAY = new Prefix("day/");
+    public static final Prefix PREFIX_TIMING = new Prefix("timing/");
+    public static final Prefix PREFIX_DETAILS = new Prefix("m/");
 
 }

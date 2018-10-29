@@ -4,8 +4,10 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.testutil.PersonBuilder.DEFAULT_STORED_LOCATION;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 
+import java.io.File;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -15,10 +17,14 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddTimetableCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.DeleteTimetableCommand;
+import seedu.address.logic.commands.DownloadTimetableCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.address.logic.commands.EditTimetableCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
@@ -35,6 +41,7 @@ import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
 
 public class AddressBookParserTest {
+
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
@@ -49,6 +56,31 @@ public class AddressBookParserTest {
     }
 
     @Test
+    public void parseCommandAddTimetableFromStoredLocation() throws Exception {
+        AddTimetableCommand command = (AddTimetableCommand) parser
+            .parseCommand(AddTimetableCommand.COMMAND_WORD + " " + INDEX_FIRST.getOneBased());
+        AddTimetableCommand expectedCommand = new AddTimetableCommand(INDEX_FIRST, null);
+        assertEquals(command, expectedCommand);
+    }
+
+    @Test
+    public void parseCommandAddTimetableFromOtherLocation() throws Exception {
+        Person person = new PersonBuilder().withStoredLocation(DEFAULT_STORED_LOCATION).build();
+        person.getTimetable().downloadTimetableAsCsv();
+        String location = person.getStoredLocation();
+        AddTimetableCommand command = (AddTimetableCommand) parser
+            .parseCommand(
+                AddTimetableCommand.COMMAND_WORD + " " + INDEX_FIRST.getOneBased() + " fl/"
+                    + location);
+        AddTimetableCommand expectedCommand = new AddTimetableCommand(INDEX_FIRST, location);
+        File timetableToDelete = new File(location);
+        if (timetableToDelete.exists()) {
+            timetableToDelete.delete();
+        }
+        assertEquals(command, expectedCommand);
+    }
+
+    @Test
     public void parseCommand_clear() throws Exception {
         assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD) instanceof ClearCommand);
         assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD + " 3") instanceof ClearCommand);
@@ -57,8 +89,24 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_delete() throws Exception {
         DeleteCommand command = (DeleteCommand) parser.parseCommand(
-                DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST.getOneBased());
+            DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST.getOneBased());
         assertEquals(new DeleteCommand(INDEX_FIRST), command);
+    }
+
+    @Test
+    public void parseCommandDeleteTimetable() throws Exception {
+        DeleteTimetableCommand command = (DeleteTimetableCommand) parser
+            .parseCommand(DeleteTimetableCommand.COMMAND_WORD + " " + INDEX_FIRST.getOneBased());
+        DeleteTimetableCommand expectedCommand = new DeleteTimetableCommand(INDEX_FIRST);
+        assertEquals(command, expectedCommand);
+    }
+
+    @Test
+    public void parseCommandDownloadTimetable() throws Exception {
+        DownloadTimetableCommand command = (DownloadTimetableCommand) parser
+            .parseCommand(DownloadTimetableCommand.COMMAND_WORD + " " + INDEX_FIRST.getOneBased());
+        DownloadTimetableCommand expectedCommand = new DownloadTimetableCommand(INDEX_FIRST);
+        assertEquals(command, expectedCommand);
     }
 
     @Test
@@ -66,8 +114,20 @@ public class AddressBookParserTest {
         Person person = new PersonBuilder().build();
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(person).build();
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
-                + INDEX_FIRST.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
+            + INDEX_FIRST.getOneBased() + " " + PersonUtil
+            .getEditPersonDescriptorDetails(descriptor));
         assertEquals(new EditCommand(INDEX_FIRST, descriptor), command);
+    }
+
+    @Test
+    public void parseCommandEditTimetable() throws Exception {
+        EditTimetableCommand command = (EditTimetableCommand) parser
+            .parseCommand(EditTimetableCommand.COMMAND_WORD
+                + " " + INDEX_FIRST.getOneBased()
+                + " day/friday timing/1100 m/cs2103");
+        EditTimetableCommand expectedCommand = new EditTimetableCommand(INDEX_FIRST, "friday",
+            "1100", "cs2103");
+        assertEquals(command, expectedCommand);
     }
 
     @Test
@@ -80,7 +140,7 @@ public class AddressBookParserTest {
     public void parseCommand_find() throws Exception {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
         FindCommand command = (FindCommand) parser.parseCommand(
-                FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
+            FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
         assertEquals(new FindCommand(new NameContainsKeywordsPredicate<Person>(keywords)), command);
     }
 
@@ -93,7 +153,8 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_history() throws Exception {
         assertTrue(parser.parseCommand(HistoryCommand.COMMAND_WORD) instanceof HistoryCommand);
-        assertTrue(parser.parseCommand(HistoryCommand.COMMAND_WORD + " 3") instanceof HistoryCommand);
+        assertTrue(
+            parser.parseCommand(HistoryCommand.COMMAND_WORD + " 3") instanceof HistoryCommand);
 
         try {
             parser.parseCommand("histories");
@@ -112,7 +173,7 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_select() throws Exception {
         SelectCommand command = (SelectCommand) parser.parseCommand(
-                SelectCommand.COMMAND_WORD + " " + INDEX_FIRST.getOneBased());
+            SelectCommand.COMMAND_WORD + " " + INDEX_FIRST.getOneBased());
         assertEquals(new SelectCommand(INDEX_FIRST), command);
     }
 
@@ -131,7 +192,8 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_unrecognisedInput_throwsParseException() throws Exception {
         thrown.expect(ParseException.class);
-        thrown.expectMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
+        thrown.expectMessage(
+            String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
         parser.parseCommand("");
     }
 
