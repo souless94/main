@@ -80,14 +80,18 @@ public class DeleteMemberCommand extends Command {
      */
     private static Pair<Group, Person> deleteMemberFromGroup(Group groupToBeEdited, Index index)
             throws IndexOutOfBoundsException {
-        assert groupToBeEdited != null;
+        try {
+            assert groupToBeEdited != null;
 
-        UniqueList<Person> newGroupMembers = new UniqueList<>();
-        newGroupMembers.setElements(groupToBeEdited.getGroupMembers());
-        Person personToDelete = groupToBeEdited.getGroupMembers().get(index.getZeroBased());
-        newGroupMembers.remove(personToDelete);
-        return new Pair<>(new Group(groupToBeEdited.getName(), groupToBeEdited.getDescription(), newGroupMembers),
-                personToDelete);
+            UniqueList<Person> newGroupMembers = new UniqueList<>();
+            newGroupMembers.setElements(groupToBeEdited.getGroupMembers());
+            Person personToDelete = groupToBeEdited.getGroupMembers().get(index.getZeroBased());
+            newGroupMembers.remove(personToDelete);
+            return new Pair<>(new Group(groupToBeEdited.getName(), groupToBeEdited.getDescription(), newGroupMembers),
+                    personToDelete);
+        } catch (IndexOutOfBoundsException e) {
+            throw new IndexOutOfBoundsException();
+        }
     }
 
     @Override
