@@ -8,8 +8,10 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -18,6 +20,8 @@ import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.UniqueList;
+import seedu.address.model.group.Group;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -76,6 +80,10 @@ public class EditCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
+        for (Group group : editedPerson.getGroups()) {
+            CommandUtil.replacePersonInGroup(model, group, personToEdit, editedPerson);
+        }
+
         model.update(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         model.commitAddressBook();
@@ -100,7 +108,10 @@ public class EditCommand extends Command {
         String storedLocation = personToEdit.getStoredLocation();
         String timetableString = personToEdit.getTimetable().getTimetableDataString();
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags,
+        UniqueList<Group> uniqueGroupList = new UniqueList<>();
+        uniqueGroupList.setElements(personToEdit.getGroups());
+
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, uniqueGroupList,
             format, storedLocation, timetableString);
     }
 
@@ -135,6 +146,7 @@ public class EditCommand extends Command {
         private String format;
         private String storedLocation;
         private Set<Tag> tags;
+        private List<Group> groupList;
 
         public EditPersonDescriptor() {
         }
@@ -150,6 +162,7 @@ public class EditCommand extends Command {
             setFormat(toCopy.format);
             setStoredLocation(toCopy.storedLocation);
             setTags(toCopy.tags);
+            setGroupList(toCopy.groupList);
         }
 
 
@@ -206,6 +219,14 @@ public class EditCommand extends Command {
 
         public Optional<Address> getAddress() {
             return Optional.ofNullable(address);
+        }
+
+        public void setGroupList(List<Group> groupList) {
+            this.groupList = groupList;
+        }
+
+        public Optional<List<Group>> getGroupList() {
+            return Optional.ofNullable(groupList);
         }
 
         /**
