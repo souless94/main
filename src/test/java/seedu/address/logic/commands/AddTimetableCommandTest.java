@@ -10,11 +10,12 @@ import static seedu.address.testutil.PersonBuilder.DEFAULT_STORED_INVALID_TIMETA
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
-import com.opencsv.CSVWriter;
 import java.io.File;
-
 import java.io.FileWriter;
+
 import org.junit.Test;
+
+import com.opencsv.CSVWriter;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
@@ -24,7 +25,8 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.timetable.Timetable;
+
+
 
 public class AddTimetableCommandTest {
 
