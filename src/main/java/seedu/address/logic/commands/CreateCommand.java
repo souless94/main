@@ -17,8 +17,8 @@ import seedu.address.storage.UserAccountStorage;
  */
 public class CreateCommand extends Command {
 
-    private static boolean createIsSuccessful = false;
     private final Accounts newAccount;
+    private static boolean createIsSuccessful = false;
 
     public static final String COMMAND_WORD = "create";
     public static final String MESSAGE_SUCCESS = "New user added successfully!";
