@@ -21,7 +21,6 @@ public class CreateCommand extends Command {
 
     private static boolean createIsSuccessful = false;
     private static Accounts newAccount;
-    
     //TODO: update MESSAGE_USAGE
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Creates an account in NUS Hangs. "
             + "Parameters: "
