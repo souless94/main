@@ -10,9 +10,9 @@ import seedu.address.model.person.Accounts;
 
 public class LoginCommandTest {
 
-    private String TEST_USERNAME = "test-username";
-    private String TEST_PASSWORD = "test-password";
-    private Accounts account = new Accounts(TEST_USERNAME, TEST_PASSWORD);
+    private String testUsername = "test-username";
+    private String testPassword = "test-password";
+    private Accounts account = new Accounts(testUsername, testPassword);
     private CreateCommand create = new CreateCommand(account);
 
     @Test
@@ -37,10 +37,10 @@ public class LoginCommandTest {
         String rightPassword = "test-password";
         Accounts wrongAccount = new Accounts(wrongUsername, rightPassword);
 
-        assertThrows(NullPointerException.class,
-                ( ) -> {
-                    LoginCommand login = new LoginCommand(wrongAccount);
-                });
+        assertThrows(NullPointerException.class, (
+        ) -> {
+            LoginCommand login = new LoginCommand(wrongAccount);
+        });
     }
 
 
