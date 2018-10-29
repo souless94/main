@@ -30,7 +30,7 @@ public class DownloadTimetableCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1 ";
 
     public static final String MESSAGE_DOWNLOAD_TIMETABLE_SUCCESS = "timetable downloaded successfully";
-    private static final String MESSAGE_TIMETABLE_IS_PRESENT =
+    public static final String MESSAGE_TIMETABLE_IS_PRESENT =
         "there is a csv file with same name as your timetable filename";
     private final Index index;
 

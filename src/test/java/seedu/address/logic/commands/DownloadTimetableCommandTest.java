@@ -1,7 +1,9 @@
 package seedu.address.logic.commands;
 
 import static org.junit.Assert.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.DownloadTimetableCommand.MESSAGE_TIMETABLE_IS_PRESENT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
@@ -32,14 +34,28 @@ class DownloadTimetableCommandTest {
         DownloadTimetableCommand downloadTimetableCommand = new DownloadTimetableCommand(
             INDEX_FIRST);
         String expectedMessage = String
-            .format(DownloadTimetableCommand.MESSAGE_DOWNLOAD_TIMETABLE_SUCCESS,
-                personToDownloadTimetable);
+            .format(DownloadTimetableCommand.MESSAGE_DOWNLOAD_TIMETABLE_SUCCESS);
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
             new UserPrefs());
         expectedModel.update(model.getFilteredPersonList().get(0), personToDownloadTimetable);
         expectedModel.commitAddressBook();
         assertCommandSuccess(downloadTimetableCommand, model, commandHistory, expectedMessage,
             expectedModel);
+        assertTrue(new File(personToDownloadTimetable.getStoredLocation()).exists());
+    }
+
+    @Test
+    void downloadTimetableDuplicateFailure() {
+        Person personToDownloadTimetable = model.getFilteredPersonList()
+            .get(INDEX_FIRST.getZeroBased());
+        File timetable = new File(personToDownloadTimetable.getStoredLocation());
+        if (!timetable.exists()) {
+            personToDownloadTimetable.getTimetable().downloadTimetableAsCsv();
+        }
+        DownloadTimetableCommand downloadTimetableCommand = new DownloadTimetableCommand(
+            INDEX_FIRST);
+        assertCommandFailure(downloadTimetableCommand, model, commandHistory,
+            MESSAGE_TIMETABLE_IS_PRESENT);
         assertTrue(new File(personToDownloadTimetable.getStoredLocation()).exists());
     }
 }
