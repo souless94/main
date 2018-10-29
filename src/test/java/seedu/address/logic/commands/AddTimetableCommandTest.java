@@ -22,8 +22,8 @@ class AddTimetableCommandTest {
     void execute_timetableAcceptedByModel_addSuccess() {
         Person personToAddTimetable = model.getFilteredPersonList()
             .get(INDEX_FIRST.getZeroBased());
-        personToAddTimetable.getTimetable().downloadTimetable();
-        AddTimetableCommand addTimetableCommand = new AddTimetableCommand(INDEX_FIRST);
+        personToAddTimetable.getTimetable().downloadTimetableAsCsv();
+        AddTimetableCommand addTimetableCommand = new AddTimetableCommand(INDEX_FIRST, null);
         String expectedMessage = String
             .format(AddTimetableCommand.MESSAGE_ADD_TIMETABLE_SUCCESS, personToAddTimetable);
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),

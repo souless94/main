@@ -32,7 +32,7 @@ public class DownloadTimetableCommand extends Command {
     /**
      * location of the download is gotten from the person
      *
-     * @param index of the person in the filtered person list to edit
+     * @param index of the person to download timetable from
      */
     public DownloadTimetableCommand(Index index) {
         this.index = index;
@@ -49,7 +49,7 @@ public class DownloadTimetableCommand extends Command {
 
         Person personToDownloadTimetable = lastShownList.get(index.getZeroBased());
         Timetable timetable = personToDownloadTimetable.getTimetable();
-        timetable.downloadTimetable();
+        timetable.downloadTimetableAsCsv();
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         model.commitAddressBook();
         return new CommandResult(String.format(MESSAGE_DOWNLOAD_TIMETABLE_SUCCESS));

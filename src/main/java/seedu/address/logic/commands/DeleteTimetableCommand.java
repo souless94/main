@@ -31,8 +31,9 @@ public class DeleteTimetableCommand extends Command {
             + "Parameters : INDEX (must be a positive integer) "
             + "Example: " + COMMAND_WORD + " 1 ";
 
-    public static final String MESSAGE_DELETE_TIMETABLE_SUCCESS = "timetable deleted successfully";
+    public static final String MESSAGE_DELETE_TIMETABLE_SUCCESS = "delete and reset timetable successfully";
 
+    public static final String MESSAGE_RESET_TIMETABLE_SUCCESS = "reset timetable successfully";
 
     private final Index index;
 
@@ -45,19 +46,20 @@ public class DeleteTimetableCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
         Person personToDeleteTimetable = CommandUtil.retrievePersonFromIndex(model, index);
+        File toBeDeleted = new File(personToDeleteTimetable.getStoredLocation());
 
-        File toBeDeleted = new File(
-            personToDeleteTimetable.getStoredLocation()
-                + "/"
-                + personToDeleteTimetable.hashCode() + " timetable.csv");
-        if (toBeDeleted.exists()) {
-            toBeDeleted.delete();
-        }
         Person updatedPerson = createPersonWithNewTimetable(personToDeleteTimetable);
         model.update(personToDeleteTimetable, updatedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         model.commitAddressBook();
-        return new CommandResult(String.format(MESSAGE_DELETE_TIMETABLE_SUCCESS, updatedPerson));
+        if (toBeDeleted.exists()) {
+            toBeDeleted.delete();
+            return new CommandResult(
+                String.format(MESSAGE_DELETE_TIMETABLE_SUCCESS, updatedPerson));
+        } else {
+            return new CommandResult(
+                String.format(MESSAGE_RESET_TIMETABLE_SUCCESS, updatedPerson));
+        }
     }
 
     /**

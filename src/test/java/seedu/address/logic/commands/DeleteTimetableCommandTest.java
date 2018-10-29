@@ -26,9 +26,8 @@ class DeleteTimetableCommandTest {
     void deleteTimetableSuccess() {
         Person personToDeleteTimetable = model.getFilteredPersonList()
             .get(INDEX_FIRST.getZeroBased());
-        personToDeleteTimetable.getTimetable().downloadTimetable();
-        assertTrue(new File(personToDeleteTimetable.getStoredLocation()
-            + "/" + personToDeleteTimetable.hashCode() + " timetable.csv").exists());
+        personToDeleteTimetable.getTimetable().downloadTimetableAsCsv();
+        assertTrue(new File(personToDeleteTimetable.getStoredLocation()).exists());
         DeleteTimetableCommand deleteTimetableCommand = new DeleteTimetableCommand(
             INDEX_FIRST);
         String expectedMessage = String
