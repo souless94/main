@@ -95,15 +95,15 @@ public class Timetable extends Entity {
     }
 
     public boolean isValid() {
-        return isCorrectSize() && hasCorrectRowsAndColumns();
+        return isCorrectSize() && hasCorrectFirstRowsAndColumns();
     }
 
     public boolean isCorrectSize() {
         return this.matrix.isCorrectSize();
     }
 
-    public boolean hasCorrectRowsAndColumns() {
-        return this.matrix.hasCorrectRowsAndColumns();
+    public boolean hasCorrectFirstRowsAndColumns() {
+        return this.matrix.hasCorrectFirstRowsAndColumns();
     }
 
 

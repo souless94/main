@@ -83,7 +83,7 @@ public class AddTimetableCommand extends Command {
                 if (!timetable.isCorrectSize()) {
                     throw new CommandException(MESSAGE_INVALID_TIMETABLE_SIZE);
                 }
-                if (!timetable.hasCorrectRowsAndColumns()) {
+                if (!timetable.hasCorrectFirstRowsAndColumns()) {
                     throw new CommandException(MESSAGE_INVALID_TIMETABLE);
                 } else {
                     throw new CommandException(

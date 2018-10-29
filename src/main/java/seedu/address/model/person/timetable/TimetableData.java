@@ -33,7 +33,7 @@ public class TimetableData {
     private final int noOfColumns;
     private final String format;
     private boolean isCorrectSize;
-    private boolean hasCorrectRowsAndColumns;
+    private boolean hasCorrectFirstRowsAndColumns;
 
     /**
      * uses format and timetableString to create a matrix uses the day and time to find the cell of
@@ -52,7 +52,7 @@ public class TimetableData {
             noOfColumns = noOfTimings;
         }
         this.isCorrectSize = true;
-        this.hasCorrectRowsAndColumns = true;
+        this.hasCorrectFirstRowsAndColumns = true;
         this.noOfRows = noOfRows;
         this.noOfColumns = noOfColumns;
         String[][] timetable;
@@ -94,7 +94,7 @@ public class TimetableData {
             }
             for (int i = 0; i < getRows(); i++) {
                 String[] decodedRows = rows[i].split(",");
-                if (decodedRows.length > getColumns()) {
+                if (decodedRows.length != getColumns()) {
                     this.isCorrectSize = false;
                 }
                 for (int j = 0; j < getColumns(); j++) {
@@ -154,7 +154,7 @@ public class TimetableData {
             CSVReader csvReader = new CSVReader(fileReader);
             String[] timetableRow;
             while ((timetableRow = csvReader.readNext()) != null) {
-                if (timetableRow.length > getColumns()) {
+                if (timetableRow.length != getColumns()) {
                     this.isCorrectSize = false;
                     break;
                 }
@@ -251,22 +251,22 @@ public class TimetableData {
         String[] firstRow = this.timetable[0];
         if (!this.timetable[1][0].equals(timings[0])
             || !this.timetable[1][0].equals("800")) {
-            this.hasCorrectRowsAndColumns = false;
+            this.hasCorrectFirstRowsAndColumns = false;
         }
         if (!this.timetable[2][0].equals(timings[1])
             || !this.timetable[2][0].equals("900")) {
-            this.hasCorrectRowsAndColumns = false;
+            this.hasCorrectFirstRowsAndColumns = false;
         }
         for (int i = 1; i < getColumns(); i++) {
             String firstRowEntry = firstRow[i];
             if (!firstRowEntry.equals(days[i - 1])) {
-                this.hasCorrectRowsAndColumns = false;
+                this.hasCorrectFirstRowsAndColumns = false;
             }
         }
         for (int j = 3; j < getRows(); j++) {
             String firstColumnEntry = this.timetable[j][0];
             if (!firstColumnEntry.equals(timings[j - 1])) {
-                this.hasCorrectRowsAndColumns = false;
+                this.hasCorrectFirstRowsAndColumns = false;
             }
         }
 
@@ -279,22 +279,22 @@ public class TimetableData {
         String[] firstRow = this.timetable[0];
         if (!firstRow[1].equals(timings[0])
             && !firstRow[1].equals("800")) {
-            this.hasCorrectRowsAndColumns = false;
+            this.hasCorrectFirstRowsAndColumns = false;
         }
         if (!firstRow[2].equals(timings[1])
             && !firstRow[2].equals("900")) {
-            this.hasCorrectRowsAndColumns = false;
+            this.hasCorrectFirstRowsAndColumns = false;
         }
         for (int i = 3; i < getColumns(); i++) {
             String firstRowEntry = firstRow[i];
             if (!firstRowEntry.equals(timings[i - 1])) {
-                this.hasCorrectRowsAndColumns = false;
+                this.hasCorrectFirstRowsAndColumns = false;
             }
         }
         for (int j = 1; j < getRows(); j++) {
             String firstColumnEntry = this.timetable[j][0];
             if (!firstColumnEntry.equals(days[j - 1])) {
-                this.hasCorrectRowsAndColumns = false;
+                this.hasCorrectFirstRowsAndColumns = false;
             }
         }
     }
@@ -309,8 +309,8 @@ public class TimetableData {
     /**
      * @return true if timetable has correct days and correct timing
      */
-    public boolean hasCorrectRowsAndColumns() {
-        return this.hasCorrectRowsAndColumns;
+    public boolean hasCorrectFirstRowsAndColumns() {
+        return this.hasCorrectFirstRowsAndColumns;
     }
 
     /**
