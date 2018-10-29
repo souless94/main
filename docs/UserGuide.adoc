@@ -99,7 +99,7 @@ Format: `list PERSON_INDEX`
 * List the groups that the person at the specified `INDEX` is currently in. The index refers to the index number shown in the displayed person list. The index *must be a positive integer* 1, 2, 3, ...
 ****
 
-Example: 
+Example:
 
 * `list 1`
 
@@ -422,11 +422,11 @@ Format: `edit_group OLDGROUPNAME [n/NEWGROUPNAME] [d/NEWGROUPDESCRIPTION]`
 Examples:
 
 * `add_group n/happyfriends d/a group of happy friends`
-* `edit_group happyfriends n/sadfriends d/sad because of cs2103` 
+* `edit_group happyfriends n/sadfriends d/sad because of cs2103`
 
 (Changes the name of group from "happyfriends" to "sadfriends" and description)
 
-* `edit_group sadfriends d/very very miserable` 
+* `edit_group sadfriends d/very very miserable`
 
 (Changes only description.)
 
@@ -477,7 +477,7 @@ Examples:
 
 * `register 1 n/happyfriends `
 
-(Adds the first person in the displayed person panel to the group happyfriends). 
+(Adds the first person in the displayed person panel to the group happyfriends)
 
 === List all persons of a group : `view_group`
 
