@@ -17,13 +17,10 @@ import seedu.address.storage.UserAccountStorage;
  */
 public class CreateCommand extends Command {
 
-    private static boolean createIsSuccessful = false;
     public static final String COMMAND_WORD = "create";
-    public static final String MESSAGE_SUCCESS = "New user added successfully!";
-    public static final String MESSAGE_FAILURE = "Username already exist.";
 
-    private final Accounts newAccount;
-
+    private static boolean createIsSuccessful = false;
+    private static Accounts newAccount;
 
     //TODO: update MESSAGE_USAGE
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Creates an account in NUS Hangs. "
@@ -34,9 +31,8 @@ public class CreateCommand extends Command {
             + PREFIX_USERNAME + "username "
             + PREFIX_PASSWORD + "password ";
 
-    public boolean getCreateIsSuccessful() {
-        return createIsSuccessful;
-    }
+    public static final String MESSAGE_SUCCESS = "New user added successfully!";
+    public static final String MESSAGE_FAILURE = "Username already exist.";
 
     /**
      * Creates an CreateCommand to add the specified {@code Person}
@@ -51,6 +47,10 @@ public class CreateCommand extends Command {
         } else {
             createIsSuccessful = false;
         }
+    }
+
+    public boolean getCreateIsSuccessful() {
+        return createIsSuccessful;
     }
 
     @Override
