@@ -5,6 +5,7 @@ import static org.junit.Assert.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_IS_FILE_DIRECTORY;
 import static seedu.address.commons.core.Messages.MESSAGE_NOT_UNIQUE_PREFIX_INPUT;
+import static seedu.address.commons.core.Messages.MESSAGE_TIMETABLE_NOT_FOUND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FILE_LOCATION;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
@@ -67,7 +68,7 @@ public class AddTimetableCommandParserTest {
     public void parse_addTimetableWithInvalidFileLocation_failure() {
         String targetIndex = INDEX_SECOND.getOneBased() + " ";
         String fileLocation = BOB.getStoredLocation();
-        String expectedMessage = AddTimetableCommand.MESSAGE_TIMETABLE_NOT_FOUND;
+        String expectedMessage = MESSAGE_TIMETABLE_NOT_FOUND;
         File timetable = new File(BOB.getStoredLocation());
         boolean doesFileExists = timetable.exists();
         if (doesFileExists) {

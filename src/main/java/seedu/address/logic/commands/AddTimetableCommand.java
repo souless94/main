@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.MESSAGE_TIMETABLE_NOT_FOUND;
 import static seedu.address.logic.commands.EditTimetableCommand.createUpdatedPerson;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FILE_LOCATION;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
@@ -32,7 +33,6 @@ public class AddTimetableCommand extends Command {
             + "C:/Users/wen kai/Downloads/y4s1/cs2103/project2/data/timetable/495011161 timetable";
 
     public static final String MESSAGE_ADD_TIMETABLE_SUCCESS = "timetable added successfully: %1$s";
-    public static final String MESSAGE_TIMETABLE_NOT_FOUND = "timetable to be added is not found";
     public static final String MESSAGE_INVALID_TIMETABLE_SIZE =
         "timetable to be added is wrong: \n"
             + "if format is horizontal,timetable should have in total rows: 8 , columns : 17 \n"
@@ -85,6 +85,9 @@ public class AddTimetableCommand extends Command {
                 }
                 if (!timetable.hasCorrectRowsAndColumns()) {
                     throw new CommandException(MESSAGE_INVALID_TIMETABLE);
+                } else {
+                    throw new CommandException(
+                        MESSAGE_INVALID_TIMETABLE + MESSAGE_INVALID_TIMETABLE_SIZE);
                 }
             }
             Person updatedPerson = createUpdatedPerson(personToEdit, timetable, filePath);

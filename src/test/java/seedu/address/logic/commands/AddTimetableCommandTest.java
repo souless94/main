@@ -1,7 +1,12 @@
 package seedu.address.logic.commands;
 
+import static org.junit.Assert.assertTrue;
+import static seedu.address.commons.core.Messages.MESSAGE_TIMETABLE_NOT_FOUND;
+import static seedu.address.logic.commands.AddTimetableCommand.MESSAGE_INVALID_TIMETABLE;
+import static seedu.address.logic.commands.AddTimetableCommand.MESSAGE_INVALID_TIMETABLE_SIZE;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.testutil.PersonBuilder.DEFAULT_STORED_INVALID_TIMETABLE_LOCATION;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
@@ -81,18 +86,54 @@ public class AddTimetableCommandTest {
         }
         AddTimetableCommand addTimetableCommand = new AddTimetableCommand(INDEX_FIRST, "default");
         assertCommandFailure(addTimetableCommand, model, commandHistory,
-            Messages.MESSAGE_TIMETABLE_NOT_FOUND);
+            MESSAGE_TIMETABLE_NOT_FOUND);
     }
-    /** TODO test for addTimetableWith WrongSize
+
     @Test
-    public void execute_timetableAddWrongSize_addFailure() {
-        Person personToAddTimetable = model.getFilteredPersonList()
-            .get(INDEX_FIRST.getZeroBased());
-        personToAddTimetable.getTimetable().downloadTimetableAsCsv();
-        File timetable = new File(personToAddTimetable.getStoredLocation());
-        AddTimetableCommand addTimetableCommand = new AddTimetableCommand(INDEX_FIRST, "default");
+    public void execute_timetableAddWrongRowSize_addFailure() {
+        String wrongTimetableLocation = DEFAULT_STORED_INVALID_TIMETABLE_LOCATION
+            + "/" + "1663619914 timetable - wrongrowsize.csv";
+        File timetable = new File(wrongTimetableLocation);
+        assertTrue(timetable.exists());
+        AddTimetableCommand addTimetableCommand = new AddTimetableCommand(INDEX_FIRST,
+            wrongTimetableLocation);
         assertCommandFailure(addTimetableCommand, model, commandHistory,
-            Messages.MESSAGE_TIMETABLE_NOT_FOUND);
+            MESSAGE_INVALID_TIMETABLE_SIZE);
     }
-    */
+
+    @Test
+    public void execute_timetableAddWrongColumnSize_addFailure() {
+        String wrongTimetableLocation = DEFAULT_STORED_INVALID_TIMETABLE_LOCATION
+            + "/" + "1663619914 timetable - wrongcolumnsize.csv";
+        File timetable = new File(wrongTimetableLocation);
+        assertTrue(timetable.exists());
+        AddTimetableCommand addTimetableCommand = new AddTimetableCommand(INDEX_FIRST,
+            wrongTimetableLocation);
+        assertCommandFailure(addTimetableCommand, model, commandHistory,
+            MESSAGE_INVALID_TIMETABLE_SIZE);
+    }
+
+    @Test
+    public void execute_timetableAddWrongRows_addFailure() {
+        String wrongTimetableLocation = DEFAULT_STORED_INVALID_TIMETABLE_LOCATION
+            + "/" + "1663619914 timetable - wrongdays.csv";
+        File timetable = new File(wrongTimetableLocation);
+        assertTrue(timetable.exists());
+        AddTimetableCommand addTimetableCommand = new AddTimetableCommand(INDEX_FIRST,
+            wrongTimetableLocation);
+        assertCommandFailure(addTimetableCommand, model, commandHistory,
+            MESSAGE_INVALID_TIMETABLE);
+    }
+
+    @Test
+    public void execute_timetableAddWrongColumn_addFailure() {
+        String wrongTimetableLocation = DEFAULT_STORED_INVALID_TIMETABLE_LOCATION
+            + "/" + "1663619914 timetable - wrongtimings.csv";
+        File timetable = new File(wrongTimetableLocation);
+        assertTrue(timetable.exists());
+        AddTimetableCommand addTimetableCommand = new AddTimetableCommand(INDEX_FIRST,
+            wrongTimetableLocation);
+        assertCommandFailure(addTimetableCommand, model, commandHistory,
+            MESSAGE_INVALID_TIMETABLE);
+    }
 }

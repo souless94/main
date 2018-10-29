@@ -44,8 +44,6 @@ public class TimetableData {
         this.format = format;
         int noOfRows = 0;
         int noOfColumns = 0;
-        isCorrectSize = true;
-        hasCorrectRowsAndColumns = true;
         if ("vertical".equals(format)) {
             noOfRows = noOfTimings;
             noOfColumns = noOfDays;
@@ -53,6 +51,8 @@ public class TimetableData {
             noOfRows = noOfDays;
             noOfColumns = noOfTimings;
         }
+        this.isCorrectSize = true;
+        this.hasCorrectRowsAndColumns = true;
         this.noOfRows = noOfRows;
         this.noOfColumns = noOfColumns;
         String[][] timetable;
@@ -235,11 +235,12 @@ public class TimetableData {
      * checks if timetable has correct rows and columns
      */
     private void checkTimetableForCorrectRowsAndColumns(String format) {
-        assert isCorrectSize = true;
-        if ("vertical".equals(format)) {
-            checkVerticalTimetableForCorrectRowsAndColumns();
-        } else if ("horizontal".equals(format)) {
-            checkHorizontalTimetableForCorrectRowsAndColumns();
+        if (isCorrectSize) {
+            if ("vertical".equals(format)) {
+                checkVerticalTimetableForCorrectRowsAndColumns();
+            } else if ("horizontal".equals(format)) {
+                checkHorizontalTimetableForCorrectRowsAndColumns();
+            }
         }
     }
 
@@ -248,13 +249,21 @@ public class TimetableData {
      */
     private void checkVerticalTimetableForCorrectRowsAndColumns() {
         String[] firstRow = this.timetable[0];
+        if (!this.timetable[1][0].equals(timings[0])
+            || !this.timetable[1][0].equals("800")) {
+            this.hasCorrectRowsAndColumns = false;
+        }
+        if (!this.timetable[2][0].equals(timings[1])
+            || !this.timetable[2][0].equals("900")) {
+            this.hasCorrectRowsAndColumns = false;
+        }
         for (int i = 1; i < getColumns(); i++) {
             String firstRowEntry = firstRow[i];
             if (!firstRowEntry.equals(days[i - 1])) {
                 this.hasCorrectRowsAndColumns = false;
             }
         }
-        for (int j = 1; j < getRows(); j++) {
+        for (int j = 3; j < getRows(); j++) {
             String firstColumnEntry = this.timetable[j][0];
             if (!firstColumnEntry.equals(timings[j - 1])) {
                 this.hasCorrectRowsAndColumns = false;
@@ -268,7 +277,15 @@ public class TimetableData {
      */
     private void checkHorizontalTimetableForCorrectRowsAndColumns() {
         String[] firstRow = this.timetable[0];
-        for (int i = 1; i < getColumns(); i++) {
+        if (!firstRow[1].equals(timings[0])
+            && !firstRow[1].equals("800")) {
+            this.hasCorrectRowsAndColumns = false;
+        }
+        if (!firstRow[2].equals(timings[1])
+            && !firstRow[2].equals("900")) {
+            this.hasCorrectRowsAndColumns = false;
+        }
+        for (int i = 3; i < getColumns(); i++) {
             String firstRowEntry = firstRow[i];
             if (!firstRowEntry.equals(timings[i - 1])) {
                 this.hasCorrectRowsAndColumns = false;
@@ -286,14 +303,14 @@ public class TimetableData {
      * @return true if timetable has correct number of rows and columns
      */
     public boolean isCorrectSize() {
-        return isCorrectSize;
+        return this.isCorrectSize;
     }
 
     /**
      * @return true if timetable has correct days and correct timing
      */
     public boolean hasCorrectRowsAndColumns() {
-        return hasCorrectRowsAndColumns;
+        return this.hasCorrectRowsAndColumns;
     }
 
     /**
