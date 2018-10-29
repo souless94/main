@@ -1,10 +1,8 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.List;
 
 import seedu.address.commons.core.Messages;
@@ -24,13 +22,15 @@ public class DownloadTimetableCommand extends Command {
     public static final String MESSAGE_USAGE =
         COMMAND_WORD + ": download timetable from the person identified "
             + "by the index number used in the displayed person list. "
-            + "there must not be a file with same filename as the person timetable filename \n"
+            + "there must not be a file with same filename"
+            + "as the person timetable filename "
             + " in the download folder location \n"
             + "Parameters : INDEX (must be a positive integer) "
             + "Example: " + COMMAND_WORD + " 1 ";
 
     public static final String MESSAGE_DOWNLOAD_TIMETABLE_SUCCESS = "timetable downloaded successfully";
-    private static final String MESSAGE_TIMETABLE_IS_PRESENT = "there is a csv file with same name as your timetable filename";
+    private static final String MESSAGE_TIMETABLE_IS_PRESENT =
+        "there is a csv file with same name as your timetable filename";
     private final Index index;
 
     /**

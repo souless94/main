@@ -106,6 +106,10 @@ public class Timetable extends Entity {
         return this.matrix.hasCorrectFirstRowsAndColumns();
     }
 
+    public String[][] getTimetableMatrix() {
+        return this.matrix.getTimetable();
+    }
+
 
     @Override
     public boolean isSame(Object other) {
