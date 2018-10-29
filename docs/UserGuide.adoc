@@ -90,6 +90,21 @@ Examples:
 Shows a list of all persons in the address book. +
 Format: `list`
 
+=== Listing all groups a person is in : `list`
+
+Shows a list of all groups the person specified by his PERSON_INDEX is in. +
+Format: `list PERSON_INDEX`
+
+****
+* List the groups that the person at the specified `INDEX` is currently in. The index refers to the index number shown in the displayed person list. The index *must be a positive integer* 1, 2, 3, ...
+****
+
+Example: 
+
+* `list 1`
+
+(lists all the groups that the person at index 1 is added to previously)
+
 === Editing a person : `edit`
 
 Edits an existing person in the address book. +
@@ -334,12 +349,6 @@ The `redo` command fails as there are no `undo` commands executed previously.
 Clears all entries from the address book. +
 Format: `clear`
 
-
-=== List all groups friend is in : `grouplist`
-
-Shows a list of all groups a friend is in. +
-Format: `grouplist`
-
 == Timetable(Wen Kai)
 === Adding a timetable: `add_timetable`
 add a timetable from the stored folder in NUS Hangs +
@@ -394,27 +403,36 @@ Deletes the 1st timetable in the results of the `find_timetable` command.
 === Adding a group: `add_group`
 
 Add a group to the System +
-Format: add_group n/GROUPNAME d/GROUPDESCRIPTION `
+Format: add_group n/GROUPNAME [d/GROUPDESCRIPTION]`
+
+(`d/GROUPDESCRIPTION` is optional)
 
 Examples:
 
 * `add_group n/happyfriends d/a group of happy friends`
+* `add_group n/Bestfriends
 
 === Editing a group : `edit_group`
 
-Edit a group's details. There must be at least 1 field non-empty. +
+Edit a group's details. OLDGROUPNAME must be entered. There must be at least 1 field non-empty. +
 If field is empty, system assumes that the field remains unedited.
 
 Format: `edit_group OLDGROUPNAME [n/NEWGROUPNAME] [d/NEWGROUPDESCRIPTION]`
 
 Examples:
 
-* `edit_group happyfriends n/sadfriends d/sad because of cs2103` +
-* `edit_group happyfriends d/very sad because of cs2103` +
+* `add_group n/happyfriends d/a group of happy friends`
+* `edit_group happyfriends n/sadfriends d/sad because of cs2103` 
+
+(Changes the name of group from "happyfriends" to "sadfriends" and description)
+
+* `edit_group sadfriends d/very very miserable` 
+
+(Changes only description.)
 
 === Locating group by name: `find_group`
 
-Find a group’s index whose names contain any of the given keywords +
+Find groups whose names contain any of the given keywords +
 Format: `find_group KEYWORD [MORE_KEYWORDS]`
 
 ****
@@ -445,6 +463,21 @@ Examples:
 
 * `delete_group n/happyfriends`
 
+=== Add a person to group : `register`
+
+Adds a person using the person index to a group if group exists +
+Format: `register PERSON_INDEX n/GROUP_NAME`
+
+****
+* Adds the person at the specified `PERSON_INDEX`. The index refers to the index number shown in the displayed person panel. The index *must be a positive integer* 1, 2, 3, ...
+* Adds this person to the group with GROUPNAME.
+****
+
+Examples:
+
+* `register 1 n/happyfriends `
+
+(Adds the first person in the displayed person panel to the group happyfriends). 
 
 === List all persons of a group : `view_group`
 
@@ -455,36 +488,28 @@ Format: `view_group n/GROUP_NAME`
 * List all persons of a group at the specified `GROUPNAME`.
 ****
 
-
 Examples:
 
-* ` view_group n/happyfriends` +
+* ` view_group n/happyfriends`
 
-=== Add a person to group : `register`
-
-Adds a person to a group if the status of the group is open. +
-Format: `register FRIEND_INDEX n/GROUP_NAME`
-
-****
-* Edits the group of unique `GROUPNAME`.
-* Edits the group at the specified `INDEX_OF_FRIEND`. The index refers to the index number shown in the displayed person list. The index *must be a positive integer* 1, 2, 3, ...
-****
-
-Examples:
-
-* `register 1 n/happyfriends `
+(lists the person added to group happyfriends in the displayed person list)
 
 === Delete a person from group : `delete_member`
 
-Delete a person from a group using member index displayed with `view_group`. +
-Format: `delete_member MEMBER_INDEX n/GROUP_NAME`
+Delete a person from a group using person index displayed with `view_group`. +
+Format: `delete_member PERSON_INDEX n/GROUP_NAME`
+
+****
+* `view_group` command should be performed before the `delete_member` command.
+* The PERSON_INDEX is the index of the displayed person list AFTER `view_group` command is performed.
+****
 
 Examples:
 
 * `view_group n/happyfriends`
 * `delete_member 1 n/happyfriends`
 
-deletes the 1st person displayed in `view_group` command.
+(deletes the 1st person displayed in `view_group` command.)
 
 == Find common time slot in group (Nigel)
 
