@@ -1,13 +1,17 @@
 package seedu.address.model.person.timetable;
 
-import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+
+import java.util.Base64;
+
+import org.apache.commons.lang3.ArrayUtils;
+
+import com.opencsv.CSVReader;
+import com.opencsv.CSVWriter;
+
 
 /**
  * timetable data which will process the inputs and create a timetable
@@ -15,21 +19,26 @@ import java.nio.file.Paths;
 public class TimetableData {
 
     private final String[][] timetable;
+    private final boolean[][] booleanTimetable;
     private String[] timings = {"0800", "0900", "1000", "1100", "1200", "1300",
         "1400", "1500", "1600", "1700", "1800", "1900", "2000", "2100", "2200", "2300"};
     private String[] days = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday",
         "Saturday", "Sunday"};
+    private String[] daysInLowerCase = {"monday", "tuesday", "wednesday", "thursday", "friday",
+        "saturday", "sunday"};
     private final int noOfTimings = timings.length;
     private final int noOfDays = days.length;
-    private final int rows;
-    private final int columns;
+    private final int noOfRows;
+    private final int noOfColumns;
     private final String format;
 
 
     /**
-     * uses format and timetableString to create a
+     * uses format and timetableString to create a matrix uses the day and time to find the cell of
+     * the matrix to input the message
      */
-    public TimetableData(String format, String timetableString) {
+    public TimetableData(String format, String filePath, String timetableString, int option,
+        String day, String timing, String message) {
         this.format = format;
         int noOfRows = 0;
         int noOfColumns = 0;
@@ -40,27 +49,29 @@ public class TimetableData {
             noOfRows = noOfDays;
             noOfColumns = noOfTimings;
         }
-        this.rows = noOfRows;
-        this.columns = noOfColumns;
-        this.timetable = getTimetableFromString(timetableString);
-    }
-
-    public TimetableData(String format, String fileName, int index) {
-
-        this.format = format;
-        int noOfRows = 0;
-        int noOfColumns = 0;
-        if (format.equals("vertical")) {
-            noOfRows = noOfTimings;
-            noOfColumns = noOfDays;
-        } else if (format.equals("horizontal")) {
-            noOfRows = noOfDays;
-            noOfColumns = noOfTimings;
+        this.noOfRows = noOfRows;
+        this.noOfColumns = noOfColumns;
+        String[][] timetable;
+        if (option == 1) {
+            timetable = getTimetableFromString(timetableString);
+        } else if (option == 2) {
+            String locationFrom = filePath;
+            timetable = getTimetableData(locationFrom);
+        } else {
+            timetable = getTimetableFromString(timetableString);
+            int rowToChange;
+            int columnToChange;
+            if ("horizontal".equals(format)) {
+                rowToChange = ArrayUtils.indexOf(getDaysInLowerCase(), day.toLowerCase()) + 1;
+                columnToChange = ArrayUtils.indexOf(timings, timing) + 1;
+            } else {
+                rowToChange = ArrayUtils.indexOf(timings, timing) + 1;
+                columnToChange = ArrayUtils.indexOf(getDaysInLowerCase(), day.toLowerCase()) + 1;
+            }
+            timetable[rowToChange][columnToChange] = message;
         }
-        this.rows = noOfRows;
-        this.columns = noOfColumns;
-        String locationFrom = fileName + ".csv";
-        this.timetable = getTimetableData(locationFrom);
+        this.timetable = timetable;
+        this.booleanTimetable = booleanTimetableData(format, this.timetable);
     }
 
     /**
@@ -73,23 +84,31 @@ public class TimetableData {
         } else {
             String[] rows = timetableString.split("\n");
             for (int i = 0; i < getRows(); i++) {
-                // @@author souless94 -reused
-                // regex expression gotten from Achintya Jha in
-                // https://stackoverflow.com/questions/15738918/
-                // splitting-a-csv-file-with-quotes-as-text-delimiter-using-string-split
-                timetableMatrix[i] = rows[i].split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1);
-                // @@author
+                String[] decodedRows = rows[i].split(",");
+                for (int j = 0; j < getColumns(); j++) {
+                    byte[] decodedString = Base64.getDecoder().decode(decodedRows[j]);
+                    decodedRows[j] = new String(decodedString);
+                }
+                timetableMatrix[i] = decodedRows;
             }
             return timetableMatrix;
         }
     }
 
+    public String[] getTimings() {
+        return timings;
+    }
+
+    public String[] getDaysInLowerCase() {
+        return daysInLowerCase;
+    }
+
     public int getRows() {
-        return this.rows + 1;
+        return this.noOfRows + 1;
     }
 
     public int getColumns() {
-        return this.columns + 1;
+        return this.noOfColumns + 1;
     }
 
     /**
@@ -115,21 +134,19 @@ public class TimetableData {
 
     private String[][] readTimetableData(String storedLocation, String[][] timetableMatrix) {
         // @@author souless94 -reused
-        //Solution below gotten from Javin Paul
-        // from http://www.java67.com/2015/08/how-to-load-data-from-csv-file-in-java.html
-        Path pathToFile = Paths.get(storedLocation);
+        //Solution below gotten from grokonez
+        // from https://grokonez.com/java/java-read-write-csv-file-opencsv-example
         int i = 0;
-        try (BufferedReader br = Files.newBufferedReader(pathToFile, StandardCharsets.US_ASCII)) {
-            String line = br.readLine();
-            while (line != null) {
-                // regex expression gotten from Achintya Jha in
-                // https://stackoverflow.com/questions/15738918/
-                // splitting-a-csv-file-with-quotes-as-text-delimiter-using-string-split
-                String[] attributes = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1);
-                timetableMatrix[i] = attributes;
+        try {
+            FileReader fileReader = new FileReader(storedLocation);
+            CSVReader csvReader = new CSVReader(fileReader);
+            String[] timetableRow;
+            while ((timetableRow = csvReader.readNext()) != null) {
+                timetableMatrix[i] = timetableRow;
                 i++;
-                line = br.readLine();
             }
+            csvReader.close();
+
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -203,33 +220,71 @@ public class TimetableData {
     }
 
     /**
-     * download timetable data as csv unable to download if same filename exists
+     * @return a string matrix of a timetable
+     */
+    public boolean[][] getBooleanTimetable() {
+        return booleanTimetable;
+    }
+
+    /**
+     * download timetable data as csv
+     *
+     * unable to download if same filename exists
      *
      * @param locationTo location of where to save the file
      */
-    public void downloadTimetableData(String locationTo) {
-        // Solution below adapted from bit-question
-        // from https://stackoverflow.com/questions/6271796/issues-of-saving-a-matrix-to-a-csv-file
-        String filePath = locationTo + ".csv";
+    public void downloadTimetableDataAsCsv(String locationTo) {
+        // @@author souless94 -reused
+        //Solution below adapted from grokonez
+        // from https://grokonez.com/java/java-read-write-csv-file-opencsv-example
+        String filePath = locationTo;
         try {
             File toWrite = new File(filePath);
             if (!toWrite.exists()) {
                 toWrite.createNewFile();
-                FileWriter writer = new FileWriter(toWrite, true);
-                for (int i = 0; i < this.getRows(); i++) {
-                    for (int j = 0; j < this.getColumns(); j++) {
-                        writer.append(this.timetable[i][j]);
-                        writer.flush();
-                        writer.append(',');
-                        writer.flush();
-                    }
-                    writer.append("\n");
-                    writer.flush();
+                FileWriter writer = new FileWriter(toWrite);
+                CSVWriter csvWriter = new CSVWriter(writer,
+                    CSVWriter.DEFAULT_SEPARATOR,
+                    CSVWriter.NO_QUOTE_CHARACTER,
+                    CSVWriter.DEFAULT_ESCAPE_CHARACTER,
+                    CSVWriter.DEFAULT_LINE_END);
+                for (int i = 0; i < getRows(); i++) {
+                    csvWriter.writeNext(timetable[i]);
                 }
-                writer.close();
+                csvWriter.close();
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
+        // @@author
+    }
+    /**
+     * creates a boolean timetable for quick access
+     * @return a boolean 2D array
+     */
+    public boolean[][] booleanTimetableData(String format, String[][] timetable) {
+        boolean[][] booleanTimetable = new boolean[noOfTimings + 1][noOfTimings + 1];
+        if (format.equals("vertical")) {
+            for (int i = 1; i <= this.noOfColumns; i++) {
+                for (int j = 1; j <= this.noOfRows; j++) {
+                    if (timetable[i][j].equals(" ")) {
+                        booleanTimetable[i][j] = true;
+                    } else {
+                        booleanTimetable[i][j] = false;
+                    }
+                }
+            }
+        } else if (format.equals("horizontal")) {
+            for (int i = 1; i <= this.noOfRows; i++) {
+                for (int j = 1; j <= this.noOfColumns; j++) {
+                    if (timetable[i][j].equals(" ")) {
+                        booleanTimetable[j][i] = true;
+                    } else {
+                        booleanTimetable[j][i] = false;
+                    }
+                }
+            }
+        }
+        return booleanTimetable;
     }
 }
