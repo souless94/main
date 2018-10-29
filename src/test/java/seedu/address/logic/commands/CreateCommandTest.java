@@ -9,9 +9,9 @@ import seedu.address.model.person.Accounts;
 
 public class CreateCommandTest {
 
-    private String TEST_USERNAME = "test-username";
-    private String TEST_PASSWORD = "test-password";
-    private Accounts account = new Accounts(TEST_USERNAME, TEST_PASSWORD);
+    private String testUsername = "test-username";
+    private String testPassword = "test-password";
+    private Accounts account = new Accounts(testUsername, testPassword);
 
     @Test
     public void execute_create_success() {

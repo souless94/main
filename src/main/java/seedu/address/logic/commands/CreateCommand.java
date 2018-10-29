@@ -18,12 +18,12 @@ import seedu.address.storage.UserAccountStorage;
 public class CreateCommand extends Command {
 
     public static final String COMMAND_WORD = "create";
+    public static final String MESSAGE_SUCCESS = "New user added successfully!";
+    public static final String MESSAGE_FAILURE = "Username already exist.";
 
     private static boolean createIsSuccessful = false;
     private static Accounts newAccount;
 
-    public static final String MESSAGE_SUCCESS = "New user added successfully!";
-    public static final String MESSAGE_FAILURE = "Username already exist.";
     //TODO: update MESSAGE_USAGE
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Creates an account in NUS Hangs. "
             + "Parameters: "
@@ -32,7 +32,6 @@ public class CreateCommand extends Command {
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_USERNAME + "username "
             + PREFIX_PASSWORD + "password ";
-
 
 
     /**
