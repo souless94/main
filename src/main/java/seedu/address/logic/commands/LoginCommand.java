@@ -19,6 +19,7 @@ import seedu.address.storage.UserAccountStorage;
 public class LoginCommand extends Command {
 
     public static final String COMMAND_WORD = "login";
+    public static final String MESSAGE_SUCCESS = "Login successful!";
 
     private static boolean loginIsSuccessful = false;
 
@@ -30,8 +31,7 @@ public class LoginCommand extends Command {
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_USERNAME + "username "
             + PREFIX_PASSWORD + "password ";
-
-    public static final String MESSAGE_SUCCESS = "Login successful!";
+    
     private static final String MESSAGE_FAILURE = "Login failed!";
     //TODO: throw exception message
 
