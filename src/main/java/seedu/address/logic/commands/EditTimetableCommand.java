@@ -1,5 +1,6 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.isNull;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DAY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DETAILS;
@@ -98,6 +99,14 @@ public class EditTimetableCommand extends Command {
 
     @Override
     public boolean equals(Object other) {
+        if (day == null && timing == null) {
+            return other == this // short circuit if same object
+                || (other instanceof EditTimetableCommand // instanceof handles nulls
+                && index.equals(((EditTimetableCommand) other).index))
+                && isNull(((EditTimetableCommand) other).day)
+                && isNull(((EditTimetableCommand) other).timing)
+                && details.equals(((EditTimetableCommand) other).details);
+        }
         return other == this // short circuit if same object
             || (other instanceof EditTimetableCommand // instanceof handles nulls
             && index.equals(((EditTimetableCommand) other).index))

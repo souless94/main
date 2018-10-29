@@ -1,5 +1,6 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.isNull;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_TIMETABLE_NOT_FOUND;
 import static seedu.address.logic.commands.EditTimetableCommand.createUpdatedPerson;
@@ -103,6 +104,12 @@ public class AddTimetableCommand extends Command {
 
     @Override
     public boolean equals(Object other) {
+        if (newFilePath == null) {
+            return other == this // short circuit if same object
+                || (other instanceof AddTimetableCommand // instanceof handles nulls
+                && index.equals(((AddTimetableCommand) other).index))
+                && isNull(((AddTimetableCommand) other).newFilePath);
+        }
         return other == this // short circuit if same object
             || (other instanceof AddTimetableCommand // instanceof handles nulls
             && index.equals(((AddTimetableCommand) other).index))

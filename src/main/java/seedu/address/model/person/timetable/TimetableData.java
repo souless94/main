@@ -85,7 +85,7 @@ public class TimetableData {
      */
     private String[][] getTimetableFromString(String timetableString) {
         String[][] timetableMatrix = createNewTimetable();
-        if ("default".equals(timetableString)) {
+        if (timetableString == null) {
             return timetableMatrix;
         } else {
             String[] rows = timetableString.split("\n");

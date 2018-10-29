@@ -31,7 +31,7 @@ public class PersonBuilder {
         .get("src", "test", "data", "timetable").toString();
     public static final String DEFAULT_STORED_INVALID_TIMETABLE_LOCATION = Paths
         .get("src", "test", "data", "wrongTimetable").toString();
-    public static final String DEFAULT_TIMETABLE_STRING = "default";
+    public static final String DEFAULT_TIMETABLE_STRING = null;
     private Name name;
     private Phone phone;
     private Email email;
@@ -50,7 +50,8 @@ public class PersonBuilder {
         address = new Address(DEFAULT_ADDRESS);
         groups = new UniqueList<>();
         format = DEFAULT_FORMAT;
-        storedLocation = DEFAULT_STORED_LOCATION;
+        storedLocation = DEFAULT_STORED_LOCATION + "/"
+            + String.valueOf(this.hashCode()) + " timetable.csv";
         File testDirectory = new File(DEFAULT_STORED_LOCATION);
         if (!testDirectory.exists()) {
             testDirectory.mkdirs();
@@ -59,7 +60,10 @@ public class PersonBuilder {
         if (!wrongTimetableDirectory.exists()) {
             wrongTimetableDirectory.mkdirs();
         }
-        timetableString = DEFAULT_TIMETABLE_STRING;
+        timetable = new Timetable(storedLocation, format, DEFAULT_TIMETABLE_STRING,
+            1, null, null,
+            null);
+        timetableString = timetable.getTimetableDataString();
         tags = new HashSet<>();
     }
 
@@ -75,6 +79,7 @@ public class PersonBuilder {
         groups.setElements(personToCopy.getGroups());
         format = personToCopy.getFormat();
         storedLocation = personToCopy.getStoredLocation();
+        timetable = personToCopy.getTimetable();
         timetableString = personToCopy.getTimetable().getTimetableDataString();
         tags = new HashSet<>(personToCopy.getTags());
     }

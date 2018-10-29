@@ -214,7 +214,7 @@ public class ParserUtil {
     public static String parseDay(String day) throws ParseException {
         requireNonNull(day);
         String trimmedDay = day.trim();
-        String[] validDays = new TimetableData("horizontal", null, "default", 1, null, null, null)
+        String[] validDays = new TimetableData("horizontal", null, null, 1, null, null, null)
             .getDaysInLowerCase();
         if (ArrayUtils.contains(validDays, trimmedDay.toLowerCase())) {
             return trimmedDay;
@@ -232,7 +232,7 @@ public class ParserUtil {
     public static String parseTiming(String timing) throws ParseException {
         requireNonNull(timing);
         String trimmedTiming = timing.trim();
-        String[] validTiming = new TimetableData("horizontal", null, "default", 1, null, null, null)
+        String[] validTiming = new TimetableData("horizontal", null, null, 1, null, null, null)
             .getTimings();
         if (ArrayUtils.contains(validTiming, trimmedTiming)) {
             return trimmedTiming;
@@ -262,10 +262,10 @@ public class ParserUtil {
     public static void checkBothDayAndTiming(String day, String timing) throws ParseException {
 
         String trimmedDay = day.trim();
-        String[] validDays = new TimetableData("horizontal", null, "default", 1, null, null, null)
+        String[] validDays = new TimetableData("horizontal", null, null, 1, null, null, null)
             .getDaysInLowerCase();
         String trimmedTiming = timing.trim();
-        String[] validTiming = new TimetableData("horizontal", null, "default", 1, null, null, null)
+        String[] validTiming = new TimetableData("horizontal", null, null, 1, null, null, null)
             .getTimings();
         if (!ArrayUtils.contains(validDays, trimmedDay.toLowerCase())
             && !ArrayUtils.contains(validTiming, trimmedTiming)) {
