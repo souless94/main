@@ -40,7 +40,10 @@ public class UserAccountStorage {
         + Encrypt.decryptString(userHashMap.get(username)));
          */
 
-        // TODO: add some sort of check, e.g. if userHashMap contains user, throw wrong credentials, else throw user doesn't exisit... but this might divulge information that might lead to security flaw
+        /* TODO: add some sort of check, e.g. if userHashMap contains user,
+        throw wrong credentials, else throw user doesn't exisit...
+        but this might divulge information that might lead to security flaw
+         */
         return userHashMap.get(username).equals(encryptedPassword);
     }
 

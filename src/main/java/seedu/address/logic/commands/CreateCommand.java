@@ -11,15 +11,18 @@ import seedu.address.model.person.Accounts;
 import seedu.address.storage.UserAccountStorage;
 
 //@@author aspiringdevslog
+
 /**
  * Creates a user for address book.
- *
  */
 public class CreateCommand extends Command {
 
+    private static boolean createIsSuccessful = false;
+    private final Accounts newAccount;
 
     public static final String COMMAND_WORD = "create";
-    private static boolean createIsSuccessful = false;
+    public static final String MESSAGE_SUCCESS = "New user added successfully!";
+    public static final String MESSAGE_FAILURE = "Username already exist.";
 
     //TODO: update MESSAGE_USAGE
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Creates an account in NUS Hangs. "
@@ -30,15 +33,9 @@ public class CreateCommand extends Command {
             + PREFIX_USERNAME + "username "
             + PREFIX_PASSWORD + "password ";
 
-    public static final String MESSAGE_SUCCESS = "New user added successfully!";
-    public static final String MESSAGE_FAILURE = "Username already exist.";
-
-    private final Accounts newAccount;
-
-    public boolean getCreateIsSuccessful(){
+    public boolean getCreateIsSuccessful() {
         return createIsSuccessful;
     }
-
 
     /**
      * Creates an CreateCommand to add the specified {@code Person}

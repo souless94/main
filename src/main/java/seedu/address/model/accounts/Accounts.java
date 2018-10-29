@@ -31,11 +31,11 @@ public class Accounts {
         return password;
     }
 
-    public void setUsername(String inputUsername){
+    public void setUsername(String inputUsername) {
         this.username = inputUsername;
     }
 
-    public void setPassword(String inputPassword){
+    public void setPassword(String inputPassword) {
         this.password = inputPassword;
     }
 }

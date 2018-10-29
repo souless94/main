@@ -12,6 +12,7 @@ import seedu.address.model.person.Accounts;
 import seedu.address.storage.UserAccountStorage;
 
 //@@author aspiringdevslog
+
 /**
  * Creates a user for address book.
  */
@@ -57,7 +58,7 @@ public class LoginCommand extends Command {
         }
     }
 
-    public boolean getLoginIsSuccessful(){
+    public boolean getLoginIsSuccessful() {
         return loginIsSuccessful;
     }
 
