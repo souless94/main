@@ -25,6 +25,10 @@ class DownloadTimetableCommandTest {
     void downloadTimetableSuccess() {
         Person personToDownloadTimetable = model.getFilteredPersonList()
             .get(INDEX_FIRST.getZeroBased());
+        File timetable = new File(personToDownloadTimetable.getStoredLocation());
+        if (timetable.exists()) {
+            timetable.delete();
+        }
         DownloadTimetableCommand downloadTimetableCommand = new DownloadTimetableCommand(
             INDEX_FIRST);
         String expectedMessage = String
