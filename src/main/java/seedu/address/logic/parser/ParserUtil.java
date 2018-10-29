@@ -2,10 +2,15 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.io.File;
+
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.apache.commons.lang3.ArrayUtils;
+
+import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -13,6 +18,7 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.timetable.TimetableData;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -152,6 +158,10 @@ public class ParserUtil {
      */
     public static String parseLocation(String location) throws ParseException {
         requireNonNull(location);
+        boolean doesFileExists = new File(location).exists();
+        if (!doesFileExists) {
+            throw new ParseException(Messages.MESSAGE_TIMETABLE_NOT_FOUND);
+        }
         return location;
     }
 
@@ -163,38 +173,67 @@ public class ParserUtil {
      */
     public static String parseFilename(String fileName) throws ParseException {
         requireNonNull(fileName);
-
         return fileName;
     }
 
     /**
-     *
-     * Parses a {@code String mode} into an {@code String mode}. Leading and trailing
+     * Parses a {@code String format} into an {@code String format}. Leading and trailing
      * whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code mode} is invalid.
-     */
-    public static String parseMode(String mode) throws ParseException {
-        requireNonNull(mode);
-        if (mode.equals("new") || mode.equals("existing")) {
-            return mode;
-        } else {
-            throw new ParseException("mode can only be new or exist");
-        }
-    }
-
-    /**
-     * Parses a {@code String format} into an {@code String format}. Leading and trailing whitespaces
-     * will be trimmed.
      *
      * @throws ParseException if the given {@code format} is invalid.
      */
     public static String parseFormat(String format) throws ParseException {
         requireNonNull(format);
-        if (format.equals("horizontal") || format.equals("vertical")) {
+        if ("horizontal".equals(format) || "vertical".equals(format)) {
             return format;
         } else {
-            throw new ParseException("format can only be horizontal or vertical");
+            throw new ParseException(Messages.INVALID_TIMETABLE_FORMAT);
         }
     }
+
+    /**
+     * Parses a {@code String day} into an {@code String day}. Leading and trailing whitespaces will
+     * be trimmed. checks if day is any of the days in a week.
+     *
+     * @throws ParseException if the given {@code day} is invalid.
+     */
+    public static String parseDay(String day) throws ParseException {
+        requireNonNull(day);
+        String[] validDays = new TimetableData("horizontal", null, "default", 1, null, null, null)
+            .getDaysInLowerCase();
+        if (ArrayUtils.contains(validDays, day.toLowerCase())) {
+            return day;
+        } else {
+            throw new ParseException(Messages.INVALID_DAY);
+        }
+    }
+
+    /**
+     * Parses a {@code String timing} into an {@code String timing}. Leading and trailing
+     * whitespaces will be trimmed. checks if timings are in 24h format and is from 0800 to 2300.
+     *
+     * @throws ParseException if the given {@code timing} is invalid.
+     */
+    public static String parseTiming(String timing) throws ParseException {
+        requireNonNull(timing);
+        String[] validTiming = new TimetableData("horizontal", null, "default", 1, null, null, null)
+            .getTimings();
+        if (ArrayUtils.contains(validTiming, timing)) {
+            return timing;
+        } else {
+            throw new ParseException(Messages.INVALID_TIMING);
+        }
+    }
+
+    /**
+     * Parses a {@code String details} into an {@code String details}. Leading and trailing
+     * whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code details} is invalid.
+     */
+    public static String parseDetails(String details) {
+        requireNonNull(details);
+        return details;
+    }
+
 }
