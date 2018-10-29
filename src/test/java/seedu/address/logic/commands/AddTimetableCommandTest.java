@@ -27,7 +27,6 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
 
 
-
 public class AddTimetableCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
@@ -40,7 +39,7 @@ public class AddTimetableCommandTest {
         personToAddTimetable.getTimetable().downloadTimetableAsCsv();
         File timetable = new File(personToAddTimetable.getStoredLocation());
         assertTrue(timetable.exists());
-        AddTimetableCommand addTimetableCommand = new AddTimetableCommand(INDEX_FIRST, "default");
+        AddTimetableCommand addTimetableCommand = new AddTimetableCommand(INDEX_FIRST, null);
         String expectedMessage = String
             .format(AddTimetableCommand.MESSAGE_ADD_TIMETABLE_SUCCESS,
                 personToAddTimetable.getStoredLocation());
@@ -79,7 +78,7 @@ public class AddTimetableCommandTest {
     public void execute_invalidPersonIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
         AddTimetableCommand addTimetableCommand = new AddTimetableCommand(outOfBoundIndex,
-            "default");
+            null);
 
         assertCommandFailure(addTimetableCommand, model, commandHistory,
             Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
@@ -93,7 +92,7 @@ public class AddTimetableCommandTest {
         if (timetable.exists()) {
             timetable.delete();
         }
-        AddTimetableCommand addTimetableCommand = new AddTimetableCommand(INDEX_FIRST, "default");
+        AddTimetableCommand addTimetableCommand = new AddTimetableCommand(INDEX_FIRST, null);
         assertCommandFailure(addTimetableCommand, model, commandHistory,
             MESSAGE_TIMETABLE_NOT_FOUND);
     }

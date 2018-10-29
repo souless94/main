@@ -52,12 +52,12 @@ public class Person extends Entity {
         this.groups = new UniqueList<>();
 
         this.tags.addAll(tags);
-        if ("default".equals(format)) {
+        if (format == null) {
             this.format = "horizontal";
         } else {
             this.format = format;
         }
-        if ("default".equals(storedLocation)) {
+        if (storedLocation == null) {
             String location = Paths.get("data", "timetable").toString();
             File directory = new File(location);
             if (!directory.exists()) {

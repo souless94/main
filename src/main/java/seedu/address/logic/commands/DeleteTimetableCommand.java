@@ -25,7 +25,8 @@ public class DeleteTimetableCommand extends Command {
 
     public static final String COMMAND_WORD = "delete_timetable";
     public static final String MESSAGE_USAGE =
-        COMMAND_WORD + ": delete timetable from stored location and adds a default timetable to the person identified"
+        COMMAND_WORD
+            + ": delete timetable from stored location and adds a default timetable to the person identified"
             + "by the index number used in the displayed person list. \n"
             + "resets the timetable of the person if there is no timetable in the stored location"
             + " \n"
@@ -76,7 +77,7 @@ public class DeleteTimetableCommand extends Command {
         Address updatedAddress = personToEdit.getAddress();
         Set<Tag> updatedTags = personToEdit.getTags();
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags,
-            "default", "default", "default");
+            "default", null, "default");
     }
 
     @Override

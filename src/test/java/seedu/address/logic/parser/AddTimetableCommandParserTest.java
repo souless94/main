@@ -47,7 +47,7 @@ public class AddTimetableCommandParserTest {
         boolean doesFileExists = new File(BOB.getStoredLocation()).exists();
         String userInput = targetIndex;
         assertTrue(doesFileExists);
-        AddTimetableCommand addTimetableCommand = new AddTimetableCommand(INDEX_SECOND, "default");
+        AddTimetableCommand addTimetableCommand = new AddTimetableCommand(INDEX_SECOND, null);
         assertParseSuccess(parser, userInput, addTimetableCommand);
     }
 

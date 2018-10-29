@@ -70,7 +70,7 @@ public class AddTimetableCommand extends Command {
 
         Person personToEdit = CommandUtil.retrievePersonFromIndex(model, index);
         String filePath;
-        if ("default".equals(newFilePath)) {
+        if (newFilePath == null) {
             filePath = personToEdit.getStoredLocation();
         } else {
             filePath = newFilePath.replace("\\", "/");

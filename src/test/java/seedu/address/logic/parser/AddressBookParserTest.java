@@ -58,7 +58,7 @@ public class AddressBookParserTest {
     public void parseCommand_addTimetable_fromStoredLocation() throws Exception {
         AddTimetableCommand command = (AddTimetableCommand) parser
             .parseCommand(AddTimetableCommand.COMMAND_WORD + " " + INDEX_FIRST.getOneBased());
-        AddTimetableCommand expectedCommand = new AddTimetableCommand(INDEX_FIRST, "default");
+        AddTimetableCommand expectedCommand = new AddTimetableCommand(INDEX_FIRST, null);
         assertEquals(command, expectedCommand);
     }
 
