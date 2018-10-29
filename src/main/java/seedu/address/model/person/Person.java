@@ -4,6 +4,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.io.File;
 
+import java.nio.file.Paths;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -51,14 +52,13 @@ public class Person extends Entity {
         this.groups = new UniqueList<>();
 
         this.tags.addAll(tags);
-        if (format.equals("default")) {
+        if (format == null) {
             this.format = "horizontal";
         } else {
             this.format = format;
         }
-        if (storedLocation.equals("default")) {
-            String location = new File("").getAbsolutePath().replace("\\", "/")
-                + "/data/timetable";
+        if (storedLocation == null) {
+            String location = Paths.get("data", "timetable").toString();
             File directory = new File(location);
             if (!directory.exists()) {
                 directory.mkdirs();

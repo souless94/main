@@ -16,8 +16,8 @@ import seedu.address.model.group.Group;
 import seedu.address.model.person.Person;
 
 /**
- * Deletes a person identified using it's displayed index from the address book
- * and delete it as member from all groups that it is in.
+ * Deletes a person identified using it's displayed index from the address book and delete it as
+ * member from all groups that it is in.
  */
 public class DeleteCommand extends Command {
 
@@ -43,10 +43,7 @@ public class DeleteCommand extends Command {
 
         Person personToDelete = CommandUtil.retrievePersonFromIndex(model, targetIndex);
 
-        File timetableToBeDeleted = new File(
-            personToDelete.getStoredLocation()
-                + "/"
-                + personToDelete.getName().toString() + " timetable" + ".csv");
+        File timetableToBeDeleted = new File(personToDelete.getStoredLocation());
         if (timetableToBeDeleted.exists()) {
             timetableToBeDeleted.delete();
         }
@@ -65,20 +62,18 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     *
-     * @param groupToBeEdited
-     * @param personToDelete
      * @return updated group that has {@code personToDelete} deleted from its member list
-     * @throws CommandException
      */
-    public Group deleteMemberFromGroup(Group groupToBeEdited, Person personToDelete) throws CommandException {
+    public Group deleteMemberFromGroup(Group groupToBeEdited, Person personToDelete)
+        throws CommandException {
         try {
             UniqueList<Person> newGroupMembers = new UniqueList<>();
             newGroupMembers.setElements(groupToBeEdited.getGroupMembers());
 
             newGroupMembers.remove(personToDelete);
 
-            return new Group(groupToBeEdited.getName(), groupToBeEdited.getDescription(), newGroupMembers);
+            return new Group(groupToBeEdited.getName(), groupToBeEdited.getDescription(),
+                newGroupMembers);
         } catch (NotFoundException e) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }

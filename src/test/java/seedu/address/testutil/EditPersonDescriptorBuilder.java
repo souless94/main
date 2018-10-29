@@ -50,7 +50,7 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code Timetable} of the {@code EditPersonDescriptor} that we are building.
+     * Sets the {@code format} of the {@code EditPersonDescriptor} that we are building.
      */
     public EditPersonDescriptorBuilder withFormat(String format) {
         descriptor.setFormat(format);
@@ -88,6 +88,16 @@ public class EditPersonDescriptorBuilder {
     public EditPersonDescriptorBuilder withTags(String... tags) {
         Set<Tag> tagSet = Stream.of(tags).map(Tag::new).collect(Collectors.toSet());
         descriptor.setTags(tagSet);
+        return this;
+    }
+
+    /**
+     * Sets the {@code storedLocation} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withStoredLocation(String storedLocation) {
+        String newStoredLocation =
+            storedLocation + String.valueOf(this.hashCode()) + " timetable.csv";
+        descriptor.setStoredLocation(newStoredLocation);
         return this;
     }
 
