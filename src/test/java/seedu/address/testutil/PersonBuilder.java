@@ -30,7 +30,7 @@ public class PersonBuilder {
     public static final String DEFAULT_STORED_LOCATION = Paths
         .get("src", "test", "data", "timetable").toString();
     public static final String DEFAULT_STORED_INVALID_TIMETABLE_LOCATION = Paths
-        .get("src", "test", "data", "wrongTimetable").toString();
+        .get("src", "test", "resources", "view", "wrongTimetable").toString();
     public static final String DEFAULT_TIMETABLE_STRING = "default";
     private Name name;
     private Phone phone;
@@ -54,10 +54,6 @@ public class PersonBuilder {
         File testDirectory = new File(DEFAULT_STORED_LOCATION);
         if (!testDirectory.exists()) {
             testDirectory.mkdirs();
-        }
-        File wrongTimetableDirectory = new File(DEFAULT_STORED_INVALID_TIMETABLE_LOCATION);
-        if (!wrongTimetableDirectory.exists()) {
-            wrongTimetableDirectory.mkdirs();
         }
         timetableString = DEFAULT_TIMETABLE_STRING;
         tags = new HashSet<>();
