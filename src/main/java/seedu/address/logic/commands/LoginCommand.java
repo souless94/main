@@ -24,14 +24,15 @@ public class LoginCommand extends Command {
     private static boolean loginIsSuccessful = false;
 
     //TODO: update MESSAGE_USAGE
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Login to NUS Hangs to access various features. "
+    public static final String MESSAGE_USAGE =
+        COMMAND_WORD + ": Login to NUS Hangs to access various features. "
             + "Parameters: "
             + PREFIX_USERNAME + "USERNAME "
             + PREFIX_PASSWORD + "PASSWORD "
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_USERNAME + "username "
             + PREFIX_PASSWORD + "password ";
-    
+
     private static final String MESSAGE_FAILURE = "Login failed!";
     //TODO: throw exception message
 
