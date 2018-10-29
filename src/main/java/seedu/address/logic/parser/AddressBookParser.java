@@ -16,6 +16,7 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CreateCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.DeleteGroupCommand;
+import seedu.address.logic.commands.DeleteMemberCommand;
 import seedu.address.logic.commands.DeleteTimetableCommand;
 import seedu.address.logic.commands.DownloadTimetableCommand;
 import seedu.address.logic.commands.EditCommand;
@@ -40,7 +41,6 @@ import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.ViewGroupAvailableTimeslotCommand;
 import seedu.address.logic.commands.ViewGroupCommand;
 import seedu.address.logic.commands.ViewGroupRankedAvailableTimeslotCommand;
-import seedu.address.logic.commands.DeleteMemberCommand;
 
 import seedu.address.logic.parser.exceptions.ParseException;
 
