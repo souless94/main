@@ -2,7 +2,6 @@ package seedu.address.commons.util;
 
 import static org.junit.Assert.assertEquals;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -48,8 +47,7 @@ public class XmlUtilTest {
         .singletonList(new XmlAdaptedTag("friends"));
     private static final String VALID_FORMAT = "horizontal";
     private static final String VALID_STORED_LOCATION =
-        new File("").getAbsolutePath().replace("\\", "/")
-            + "/data/timetable";
+        Paths.get("src", "test", "data", "timetable").toString() + "/";
     private static final String VALID_TIMETABLE_STRING = "default";
 
     @Rule

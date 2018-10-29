@@ -40,7 +40,6 @@ class DeleteTimetableCommandTest {
         assertCommandSuccess(deleteTimetableCommand, model, commandHistory, expectedMessage,
             expectedModel);
 
-        assertFalse(new File(personToDeleteTimetable.getStoredLocation()
-            + "/" + personToDeleteTimetable.hashCode() + " timetable.csv").exists());
+        assertFalse(new File(personToDeleteTimetable.getStoredLocation()).exists());
     }
 }

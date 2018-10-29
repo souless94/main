@@ -54,11 +54,11 @@ public class XmlAdaptedPerson {
     }
 
     /**
-     * Constructs an {@code XmlAdaptedPerson} with the given person details.
-     * # TODO v1.3: Combine 2 different constructors
+     * Constructs an {@code XmlAdaptedPerson} with the given person details. # TODO v1.3: Combine 2
+     * different constructors
      */
     public XmlAdaptedPerson(String name, String phone, String email, String address,
-                            List<XmlAdaptedTag> tagged, String format, String storedLocation, String timetableString) {
+        List<XmlAdaptedTag> tagged, String format, String storedLocation, String timetableString) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -74,9 +74,11 @@ public class XmlAdaptedPerson {
     }
 
     /**
-     * Constructs an {@code XmlAdaptedPerson} with the given person details including {@code groups}.
+     * Constructs an {@code XmlAdaptedPerson} with the given person details including {@code
+     * groups}.
      */
-    public XmlAdaptedPerson(String name, String phone, String email, String address, List<XmlAdaptedGroup> groups,
+    public XmlAdaptedPerson(String name, String phone, String email, String address,
+        List<XmlAdaptedGroup> groups,
         List<XmlAdaptedTag> tagged, String format, String storedLocation, String timetableString) {
         this.name = name;
         this.phone = phone;
@@ -110,8 +112,8 @@ public class XmlAdaptedPerson {
             .map(XmlAdaptedTag::new)
             .collect(Collectors.toList());
         groups = source.getGroups().stream()
-                .map(XmlAdaptedGroup::new)
-                .collect(Collectors.toList());
+            .map(XmlAdaptedGroup::new)
+            .collect(Collectors.toList());
     }
 
     /**
@@ -171,7 +173,8 @@ public class XmlAdaptedPerson {
         final UniqueList<Group> modelGroupList = new UniqueList<>();
         modelGroupList.setElements(groupList);
 
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelGroupList, format,
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags,
+            modelGroupList, format,
             storedLocation, timetableString);
     }
 
