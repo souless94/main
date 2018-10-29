@@ -21,9 +21,7 @@ public class CreateCommand extends Command {
 
     private static boolean createIsSuccessful = false;
     private static Accounts newAccount;
-
-    public static final String MESSAGE_SUCCESS = "New user added successfully!";
-    public static final String MESSAGE_FAILURE = "Username already exist.";
+    
     //TODO: update MESSAGE_USAGE
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Creates an account in NUS Hangs. "
             + "Parameters: "
@@ -33,7 +31,8 @@ public class CreateCommand extends Command {
             + PREFIX_USERNAME + "username "
             + PREFIX_PASSWORD + "password ";
 
-
+    public static final String MESSAGE_SUCCESS = "New user added successfully!";
+    public static final String MESSAGE_FAILURE = "Username already exist.";
 
     /**
      * Creates an CreateCommand to add the specified {@code Person}
