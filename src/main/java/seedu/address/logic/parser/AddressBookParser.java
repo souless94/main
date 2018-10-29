@@ -93,13 +93,8 @@ public class AddressBookParser {
 
             case DownloadTimetableCommand.COMMAND_WORD:
                 return new DownloadTimetableCommandParser().parse(arguments);
-                
             case EditTimetableCommand.COMMAND_WORD:
                 return new EditTimetableCommandParser().parse(arguments);
-
-            case DeleteTimetableCommand.COMMAND_WORD:
-                return new DeleteTimetableCommandParser().parse(arguments);
-            
             case AddCommand.COMMAND_WORD:
                 return new AddCommandParser().parse(arguments);
 
@@ -135,12 +130,6 @@ public class AddressBookParser {
 
             case ViewGroupRankedAvailableTimeslotCommand.COMMAND_WORD:
                 return new ViewGroupRankedAvailableTimeslotCommandParser().parse(arguments);
-
-            case ViewGroupCommand.COMMAND_WORD:
-                return new ViewGroupCommandParser().parse(arguments);
-                
-            case DeleteMemberCommand.COMMAND_WORD:
-                return new DeleteMemberCommandParser().parse(arguments);
 
             case ClearCommand.COMMAND_WORD:
                 return new ClearCommand();
