@@ -100,7 +100,7 @@ public class AddressBookParser {
             case DeleteTimetableCommand.COMMAND_WORD:
                 return new DeleteTimetableCommandParser().parse(arguments);
             
-              case AddCommand.COMMAND_WORD:
+            case AddCommand.COMMAND_WORD:
                 return new AddCommandParser().parse(arguments);
 
             case EditCommand.COMMAND_WORD:
