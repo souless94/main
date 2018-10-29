@@ -1,6 +1,7 @@
 package seedu.address.model.person.timetable;
 
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.testutil.TypicalPersons.ALICE;
@@ -30,7 +31,7 @@ public class TimetableDataTest {
         assertTrue(timetableData.equals(timetableData));
 
         // null -> returns false
-        assertFalse(timetableData.equals(null));
+        assertNotEquals(timetableData, null);
 
         // different type -> returns false
         assertFalse(timetableData.equals(5));
