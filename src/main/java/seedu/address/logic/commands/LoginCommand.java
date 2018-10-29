@@ -31,7 +31,7 @@ public class LoginCommand extends Command {
             + PREFIX_USERNAME + "username "
             + PREFIX_PASSWORD + "password ";
 
-    private static final String MESSAGE_SUCCESS = "Login successful!";
+    public static final String MESSAGE_SUCCESS = "Login successful!";
     private static final String MESSAGE_FAILURE = "Login failed!";
     //TODO: throw exception message
 

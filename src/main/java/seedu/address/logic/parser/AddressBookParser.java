@@ -55,7 +55,7 @@ public class AddressBookParser {
 
 
     public AddressBookParser(boolean setLoggedOn) { // for test
-        userIsLoggedOn = setLoggedOn;
+        this.userIsLoggedOn = setLoggedOn;
     }
 
     public AddressBookParser() { // default constructor
