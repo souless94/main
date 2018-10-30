@@ -349,11 +349,20 @@ Clears all entries from the address book. +
 Format: `clear`
 
 == Timetable(Wen Kai)
+
 === Adding a timetable: `add_timetable`
-add a timetable to the person specified by `INDEX` from the stored folder of the person specified by `INDEX` if no file location is present. Adds timetable to the person specified by the `INDEX` from file location if file location is present.Will not be able to add if timetable is not present in the stored location of person specified by `INDEX` Existing values will be overwritten by the input values. +
-Format: `add_timetable INDEX [fl/FILE_LOCATION]  `
+user to download timetable template first using download_timetable INDEX and changing csv at the location +
+add details of a timetable csv file to the person specified by `INDEX` from the stored folder of the person specified by `INDEX` if no file location is present. +
+Adds details of a timetable csv file to the person specified by the `INDEX` from file location if file location is present. + 
+Will not be able to add if timetable is not present in the stored location of person specified by `INDEX`. +
+Existing values will be overwritten by the input values. +
+Reload page by clicking on another person and then click again +
+Or right click and select the reload page option.
+
+Format: `add_timetable INDEX [fl/FILE_LOCATION]`
 
 ****
+* Excel will delete leading zeros of timetable csv file by default.
 * Add the timetable at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list.
 * The index *must be a positive integer* 1, 2, 3, ...
