@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Dummy Search Page</title>
+  <script type="text/javascript">
+    function getJsonFromUrl() {
+      var query = location.search.substr(1);
+      var result = {};
+      query.split("&").forEach(function(part) {
+        var item = part.split("=");
+        result[item[0]] = decodeURIComponent(item[1]);
+      });
+      return result;
+    }
+      var matrixAsString =getJsonFromUrl().name;
+      var matrixArray = matrixAsString.split(",");
+      var rows = 8;
+      var columns = 17;
+      if (matrixArray[0] == "vertical"){
+          //means vertical
+          rows=17;
+          columns=8;
+      }
+      var counter =0;
+      //@@author souless94 -reused
+      // used code from marchen in https://stackoverflow.com/questions/39242313/how-to-create-nxn-matrix-array-in-javascript
+      function matrix(m, n) {
+          var result = [];
+          for(var i = 0; i < m; i++) {
+              result.push(new Array(n).fill(0));
+          }
+          return result;
+      }
+      //@@ author
+      var m= matrix(rows,columns);
+      //@@author souless94 -reused from w3resources
+      // https://www.w3resource.com/javascript-exercises/javascript-string-exercise-28.php
+      function hex_to_ascii(str1){
+          var hex  = str1.toString();
+          var str = '';
+          for (var n = 0; n < hex.length; n += 2) {
+              str += String.fromCharCode(parseInt(hex.substr(n, 2), 16));
+          }
+          return str;
+      }
+      //@@author
+      for (var i =0;i <rows; i++){
+          for(var j=0 ; j < columns ;j++){
+              m[i][j] = hex_to_ascii(matrixArray[counter]);
+              counter+=1;
+          }
+      }
+  </script>
+</head>
+<body>
+<table id="myTable" border=1>
+</table>
+    <script>
+        //@@author souless94 -resued
+        // used code from 1BestCsharp blog in http://1bestcsharp.blogspot.com/2017/03/javascript-populate-html-table-from-array.html
+
+        table = document.getElementById("myTable");
+        for(var i = 0; i < m.length; i++)
+           {
+               // create a new row
+               var newRow = table.insertRow(table.length);
+               for(var j = 0; j < m[i].length; j++)
+               {
+                   // create a new cell
+                   var cell = newRow.insertCell(j);
+
+                   // add value to the cell
+                   cell.innerHTML = m[i][j];
+               }
+           }
+        //@@ author
+
+    </script>
+</body>
+</html>
