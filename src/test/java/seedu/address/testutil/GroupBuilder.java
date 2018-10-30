@@ -23,8 +23,8 @@ import seedu.address.model.util.SampleDataUtil;
  */
 public class GroupBuilder {
 
-    private static final String DEFAULT_NAME = "Developer Team";
-    private static final String DEFAULT_DESCRIPTION = "Developers for NUS Hang";
+    public static final String DEFAULT_NAME = "Developer Team";
+    public static final String DEFAULT_DESCRIPTION = "Developers for NUS Hang";
 
     private Name name;
     private String description;
@@ -32,7 +32,7 @@ public class GroupBuilder {
 
     public GroupBuilder() {
         name = new Name(DEFAULT_NAME);
-        description = DEFAULT_DESCRIPTION;
+        description = "";
         groupMembers = new UniqueList<>();
     }
 
