@@ -13,9 +13,7 @@ public class LoginCommandTest {
     private String testUsername = "test-username";
     private String testPassword = "test-password";
     private Accounts account = new Accounts(testUsername, testPassword);
-    new
-
-    CreateCommand(account);
+    private CreateCommand create = new CreateCommand(account);
 
     @Test
     public void executeLoginSuccessful() {
@@ -41,7 +39,7 @@ public class LoginCommandTest {
 
         assertThrows(NullPointerException.class, (
         ) -> {
-            new LoginCommand(wrongAccount);
+            LoginCommand login = new LoginCommand(wrongAccount);
         });
     }
 

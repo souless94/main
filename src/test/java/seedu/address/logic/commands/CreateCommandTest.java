@@ -21,9 +21,11 @@ public class CreateCommandTest {
 
     @Test
     public void executeCreateFailure() {
-        new CreateCommand(account);
+        CreateCommand create = new CreateCommand(account);
         CreateCommand createDuplicate = new CreateCommand(account);
         assertFalse(createDuplicate.getCreateIsSuccessful());
     }
+
+
 }
 
