@@ -14,18 +14,16 @@ public class CreateCommandTest {
     private Accounts account = new Accounts(testUsername, testPassword);
 
     @Test
-    public void execute_create_success() {
+    public void executeCreateSuccess() {
         CreateCommand create = new CreateCommand(account);
         assertTrue(create.getCreateIsSuccessful());
     }
 
     @Test
-    public void execute_create_failure() {
-        CreateCommand create = new CreateCommand(account);
+    public void executeCreateFailure() {
+        new CreateCommand(account);
         CreateCommand createDuplicate = new CreateCommand(account);
         assertFalse(createDuplicate.getCreateIsSuccessful());
     }
-
-
 }
 

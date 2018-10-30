@@ -22,7 +22,6 @@ public class CreateCommand extends Command {
     public static final String MESSAGE_FAILURE = "Username already exist.";
 
     private static boolean createIsSuccessful = false;
-    private static Accounts newAccount;
 
     //TODO: update MESSAGE_USAGE
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Creates an account in NUS Hangs. "
@@ -38,7 +37,7 @@ public class CreateCommand extends Command {
      */
     public CreateCommand(Accounts account) {
 
-        newAccount = account;
+        Accounts newAccount = account;
 
         if (!UserAccountStorage.checkDuplicateUser(account.getUsername())) {
             UserAccountStorage.addNewAccount(account.getUsername(), account.getPassword());
