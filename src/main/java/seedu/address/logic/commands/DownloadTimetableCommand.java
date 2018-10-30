@@ -29,7 +29,7 @@ public class DownloadTimetableCommand extends Command {
             + "Parameters : INDEX (must be a positive integer) "
             + "Example: " + COMMAND_WORD + " 1 ";
 
-    public static final String MESSAGE_DOWNLOAD_TIMETABLE_SUCCESS = "timetable downloaded successfully";
+    public static final String MESSAGE_DOWNLOAD_TIMETABLE_SUCCESS = "timetable downloaded successfully to : ";
     public static final String MESSAGE_TIMETABLE_IS_PRESENT =
         "there is a csv file with same name as your timetable filename";
     private final Index index;
@@ -61,7 +61,9 @@ public class DownloadTimetableCommand extends Command {
         timetable.downloadTimetableAsCsv();
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         model.commitAddressBook();
-        return new CommandResult(String.format(MESSAGE_DOWNLOAD_TIMETABLE_SUCCESS));
+        return new CommandResult(
+            String.format(MESSAGE_DOWNLOAD_TIMETABLE_SUCCESS)
+                + personToDownloadTimetable.getStoredLocation());
     }
 
     @Override

@@ -349,11 +349,20 @@ Clears all entries from the address book. +
 Format: `clear`
 
 == Timetable(Wen Kai)
+
 === Adding a timetable: `add_timetable`
-add a timetable from the stored folder in NUS Hangs or a file location +
-Format: `add_timetable INDEX [fl/FILE_LOCATION]  `
+user to download timetable template first using download_timetable INDEX and changing csv at the location +
+add details of a timetable csv file to the person specified by `INDEX` from the stored folder of the person specified by `INDEX` if no file location is present. +
+Adds details of a timetable csv file to the person specified by the `INDEX` from file location if file location is present. +
+Will not be able to add if timetable is not present in the stored location of person specified by `INDEX`. +
+Existing values will be overwritten by the input values. +
+Reload page by clicking on another person and then click again +
+Or right click and select the reload page option.
+
+Format: `add_timetable INDEX [fl/FILE_LOCATION]`
 
 ****
+* Excel will delete leading zeros of timetable csv file by default.
 * Add the timetable at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list.
 * The index *must be a positive integer* 1, 2, 3, ...
@@ -366,7 +375,8 @@ Examples:
 * `add_timetable 1 fl/C:\Users\timetable\timetable.csv `
 
 === editing a timetable: `edit_timetable`
-edit a timetable timeslot from the person from index specified +
+Edits a timetable timeslot of the timetable from the person specified by the `INDEX`. +
+days are days of a week. And timings are in 24h format from 0800 to 2300. Existing values will be overwritten by the input details.
 Format: `add_timetable INDEX day/DAY timing/TIMING [m/DETAILS]  `
 
 ****
@@ -385,7 +395,7 @@ Examples:
 
 === Download timetable : `download_timetable`
 
-Download a timetable in the System as a csv file in the format of the person.+
+Download a timetable from the person specified by the `INDEX` to the stored folder from the person specified by the `INDEX` as a csv file. Will not download if there is a file with same filename as the filename of the timetable from the person specified by the `INDEX`. +
 Format: `download_timetable INDEX `
 
 ****
@@ -396,12 +406,12 @@ Format: `download_timetable INDEX `
 
 Examples:
 
-* `download_timetable 1 ` +
+* `download_timetable 1` +
 
 === Deleting a timetable : `delete_timetable`
 
-Delete a timetable in the system by index +
-Format: `delete_timetable INDEX p/password`
+delete csv file of the timetable from stored location from the person specified by the `INDEX` and adds a default timetable to the person specified by the `INDEX`.Resets the timetable of the person if there is no timetable in the stored location from the person specified by the `INDEX`. +
+Format: `delete_timetable INDEX`
 
 ****
 * Deletes the timetable at the specified `INDEX`.
@@ -412,10 +422,10 @@ Format: `delete_timetable INDEX p/password`
 Examples:
 
 * `list_timetable` +
-`delete_timetable 2 p/password` +
+`delete_timetable 2` +
 Deletes the 2nd timetable in the address book.
 * `find_timetable Betsy` +
-`delete_timetable 1 p/password` +
+`delete_timetable 1` +
 Deletes the 1st timetable in the results of the `find_timetable` command.
 
 == Groups (Melodies)
