@@ -30,16 +30,16 @@ public class AddGroupCommandParserTest {
                 .withDescription(VALID_GROUP_DESCRIPTION_BOO).build();
 
         // whitespace only preamble
-        assertParseSuccess(parser, PREAMBLE_WHITESPACE + GROUPNAME_DESC_BOO + DESCRIPTION_DESC_BOO
-                , new AddGroupCommand(expectedGroup));
+        assertParseSuccess(parser, PREAMBLE_WHITESPACE + GROUPNAME_DESC_BOO + DESCRIPTION_DESC_BOO,
+                new AddGroupCommand(expectedGroup));
 
         // multiple group names - last name accepted
         assertParseSuccess(parser, GROUPNAME_DESC_FRIENDS + GROUPNAME_DESC_BOO + DESCRIPTION_DESC_BOO,
                 new AddGroupCommand(expectedGroup));
 
         // multiple description - last description accepted
-        assertParseSuccess(parser, GROUPNAME_DESC_BOO + DESCRIPTION_DESC_FRIENDS + DESCRIPTION_DESC_BOO
-                , new AddGroupCommand(expectedGroup));
+        assertParseSuccess(parser, GROUPNAME_DESC_BOO + DESCRIPTION_DESC_FRIENDS + DESCRIPTION_DESC_BOO,
+                new AddGroupCommand(expectedGroup));
     }
 
     @Test
