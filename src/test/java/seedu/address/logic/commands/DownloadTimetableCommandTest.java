@@ -34,7 +34,8 @@ class DownloadTimetableCommandTest {
         DownloadTimetableCommand downloadTimetableCommand = new DownloadTimetableCommand(
             INDEX_FIRST);
         String expectedMessage = String
-            .format(DownloadTimetableCommand.MESSAGE_DOWNLOAD_TIMETABLE_SUCCESS);
+            .format(DownloadTimetableCommand.MESSAGE_DOWNLOAD_TIMETABLE_SUCCESS
+                + personToDownloadTimetable.getStoredLocation());
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
             new UserPrefs());
         expectedModel.update(model.getFilteredPersonList().get(0), personToDownloadTimetable);

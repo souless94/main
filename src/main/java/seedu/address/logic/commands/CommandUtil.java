@@ -10,6 +10,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Entity;
 import seedu.address.model.Model;
+import seedu.address.model.UniqueList;
 import seedu.address.model.group.Group;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -62,6 +63,19 @@ public class CommandUtil {
         Person newPerson = personToUpdate;
         newPerson.setGroups(editedGroupList);
         model.update(personToUpdate, newPerson);
+    }
+
+    /**
+     * Remove {@code oldPerson} from {@code group} and instead adds {@code newPerson}
+     */
+    public static void replacePersonInGroup (Model model, Group group, Person oldPerson, Person newPerson)
+            throws CommandException {
+        UniqueList<Person> groupMembers = new UniqueList<>();
+        Group groupToEdit = retrieveGroupFromName(model, group.getName());
+        groupMembers.setElements(groupToEdit.getGroupMembers());
+        groupMembers.setElement(oldPerson, newPerson);
+        Group editedGroup = new Group(groupToEdit.getName(), groupToEdit.getDescription(), groupMembers);
+        model.update(groupToEdit, editedGroup);
     }
 
     /**

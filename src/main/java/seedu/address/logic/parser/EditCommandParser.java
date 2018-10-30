@@ -67,11 +67,12 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
         if (argMultimap.getValue(PREFIX_FORMAT).isPresent()) {
             editPersonDescriptor
-                .setFormat(argMultimap.getValue(PREFIX_FORMAT).get());
+                .setFormat(ParserUtil.parseFormat(argMultimap.getValue(PREFIX_FORMAT).get()));
         }
         if (argMultimap.getValue(PREFIX_STORED_LOCATION).isPresent()) {
             editPersonDescriptor
-                .setStoredLocation(argMultimap.getValue(PREFIX_STORED_LOCATION).get());
+                .setStoredLocation(
+                    ParserUtil.parseLocation(argMultimap.getValue(PREFIX_STORED_LOCATION).get()));
         }
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG))
             .ifPresent(editPersonDescriptor::setTags);

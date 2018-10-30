@@ -48,4 +48,21 @@ public class ViewGroupCommand extends Command {
         model.updateFilteredPersonList(predicateShowAllGroupMembers);
         return new CommandResult(MESSAGE_SUCCESS);
     }
+
+    @Override
+    public boolean equals(Object other) {
+        // short circuit if same object
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof ViewGroupCommand)) {
+            return false;
+        }
+
+        // state check
+        ViewGroupCommand e = (ViewGroupCommand) other;
+        return groupName.equals(e.groupName);
+    }
 }

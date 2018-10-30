@@ -63,7 +63,10 @@ public class Person extends Entity {
             if (!directory.exists()) {
                 directory.mkdirs();
             }
-            this.storedLocation = location + "/" + String.valueOf(hashCode()) + " timetable.csv";
+            this.storedLocation =
+                location.replace("\\", "/")
+                    + "/" + String.valueOf(hashCode())
+                    + " timetable.csv";
         } else {
             this.storedLocation = storedLocation.replace("\\", "/");
         }
