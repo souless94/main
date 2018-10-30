@@ -32,7 +32,7 @@ public class GroupBuilder {
 
     public GroupBuilder() {
         name = new Name(DEFAULT_NAME);
-        description = DEFAULT_DESCRIPTION;
+        description = "";
         groupMembers = new UniqueList<>();
     }
 
