@@ -2,7 +2,6 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PASSWORD;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_USERNAME;
 
 import seedu.address.logic.CommandHistory;
@@ -12,35 +11,33 @@ import seedu.address.model.person.Accounts;
 import seedu.address.storage.UserAccountStorage;
 
 //@@author aspiringdevslog
+
 /**
  * Creates a user for address book.
  */
 public class CreateCommand extends Command {
 
     public static final String COMMAND_WORD = "create";
+    public static final String MESSAGE_SUCCESS = "New user added successfully!";
+    public static final String MESSAGE_FAILURE = "Username already exist.";
+
     private static boolean createIsSuccessful = false;
 
     //TODO: update MESSAGE_USAGE
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the address book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Creates an account in NUS Hangs. "
             + "Parameters: "
             + PREFIX_USERNAME + "USERNAME "
             + PREFIX_PASSWORD + "PASSWORD "
-            + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_USERNAME + "username "
             + PREFIX_PASSWORD + "password ";
-
-    private static final String MESSAGE_SUCCESS = "New user added successfully!";
-    private static final String MESSAGE_FAILURE = "Username already exist.";
-
-    private final Accounts newAccount;
 
     /**
      * Creates an CreateCommand to add the specified {@code Person}
      */
     public CreateCommand(Accounts account) {
 
-        newAccount = account;
+        Accounts newAccount = account;
 
         if (!UserAccountStorage.checkDuplicateUser(account.getUsername())) {
             UserAccountStorage.addNewAccount(account.getUsername(), account.getPassword());
@@ -48,6 +45,10 @@ public class CreateCommand extends Command {
         } else {
             createIsSuccessful = false;
         }
+    }
+
+    public boolean getCreateIsSuccessful() {
+        return createIsSuccessful;
     }
 
     @Override
@@ -60,4 +61,6 @@ public class CreateCommand extends Command {
             return new CommandResult(String.format(MESSAGE_FAILURE));
         }
     }
+
+
 }

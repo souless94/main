@@ -43,7 +43,8 @@ public class EditTimetableCommandParser implements Parser<EditTimetableCommand> 
             .isOnlyOnePrefix(PREFIX_TIMING)) {
             throw new ParseException(String.format(MESSAGE_NOT_UNIQUE_PREFIX_INPUT));
         }
-
+        ParserUtil.checkBothDayAndTiming(argMultimap.getValue(PREFIX_DAY).get(),
+            argMultimap.getValue(PREFIX_TIMING).get());
         String day = ParserUtil.parseDay(argMultimap.getValue(PREFIX_DAY).get());
         String timing = ParserUtil.parseTiming(argMultimap.getValue(PREFIX_TIMING).get());
         String details = " ";

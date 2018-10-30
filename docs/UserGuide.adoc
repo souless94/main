@@ -89,6 +89,21 @@ Examples:
 Shows a list of all persons in the address book. +
 Format: `list`
 
+=== Listing all groups a person is in : `list`
+
+Shows a list of all groups the person specified by his PERSON_INDEX is in. +
+Format: `list PERSON_INDEX`
+
+****
+* List the groups that the person at the specified `INDEX` is currently in. The index refers to the index number shown in the displayed person list. The index *must be a positive integer* 1, 2, 3, ...
+****
+
+Example:
+
+* `list 1`
+
+(lists all the groups that the person at index 1 is added to previously)
+
 === Editing a person : `edit`
 
 Edits an existing person in the address book. +
@@ -333,12 +348,6 @@ The `redo` command fails as there are no `undo` commands executed previously.
 Clears all entries from the address book. +
 Format: `clear`
 
-
-=== List all groups friend is in : `grouplist`
-
-Shows a list of all groups a friend is in. +
-Format: `grouplist`
-
 == Timetable(Wen Kai)
 === Adding a timetable: `add_timetable`
 add a timetable from the stored folder in NUS Hangs or a file location +
@@ -413,27 +422,36 @@ Deletes the 1st timetable in the results of the `find_timetable` command.
 === Adding a group: `add_group`
 
 Add a group to the System +
-Format: add_group n/GROUPNAME d/GROUPDESCRIPTION `
+Format: add_group n/GROUPNAME [d/GROUPDESCRIPTION]`
+
+(`d/GROUPDESCRIPTION` is optional)
 
 Examples:
 
 * `add_group n/happyfriends d/a group of happy friends`
+* `add_group n/Bestfriends
 
 === Editing a group : `edit_group`
 
-Edit a group's details. There must be at least 1 field non-empty. +
+Edit a group's details. OLDGROUPNAME must be entered. There must be at least 1 field non-empty. +
 If field is empty, system assumes that the field remains unedited.
 
 Format: `edit_group OLDGROUPNAME [n/NEWGROUPNAME] [d/NEWGROUPDESCRIPTION]`
 
 Examples:
 
-* `edit_group happyfriends n/sadfriends d/sad because of cs2103` +
-* `edit_group happyfriends d/very sad because of cs2103` +
+* `add_group n/happyfriends d/a group of happy friends`
+* `edit_group happyfriends n/sadfriends d/sad because of cs2103`
+
+(Changes the name of group from "happyfriends" to "sadfriends" and description)
+
+* `edit_group sadfriends d/very very miserable`
+
+(Changes only description.)
 
 === Locating group by name: `find_group`
 
-Find a group’s index whose names contain any of the given keywords +
+Find groups whose names contain any of the given keywords +
 Format: `find_group KEYWORD [MORE_KEYWORDS]`
 
 ****
@@ -464,6 +482,21 @@ Examples:
 
 * `delete_group n/happyfriends`
 
+=== Add a person to group : `register`
+
+Adds a person using the person index to a group if group exists +
+Format: `register PERSON_INDEX n/GROUP_NAME`
+
+****
+* Adds the person at the specified `PERSON_INDEX`. The index refers to the index number shown in the displayed person panel. The index *must be a positive integer* 1, 2, 3, ...
+* Adds this person to the group with GROUPNAME.
+****
+
+Examples:
+
+* `register 1 n/happyfriends `
+
+(Adds the first person in the displayed person panel to the group happyfriends)
 
 === List all persons of a group : `view_group`
 
@@ -474,51 +507,56 @@ Format: `view_group n/GROUP_NAME`
 * List all persons of a group at the specified `GROUPNAME`.
 ****
 
-
 Examples:
 
-* ` view_group n/happyfriends` +
+* ` view_group n/happyfriends`
 
-=== Add a person to group : `register`
-
-Adds a person to a group if the status of the group is open. +
-Format: `register FRIEND_INDEX n/GROUP_NAME`
-
-****
-* Edits the group of unique `GROUPNAME`.
-* Edits the group at the specified `INDEX_OF_FRIEND`. The index refers to the index number shown in the displayed person list. The index *must be a positive integer* 1, 2, 3, ...
-****
-
-Examples:
-
-* `register 1 n/happyfriends `
+(lists the person added to group happyfriends in the displayed person list)
 
 === Delete a person from group : `delete_member`
 
-Delete a person from a group using member index displayed with `view_group`. +
-Format: `delete_member MEMBER_INDEX n/GROUP_NAME`
+Delete a person from a group using person index displayed with `view_group`. +
+Format: `delete_member PERSON_INDEX n/GROUP_NAME`
+
+****
+* `view_group` command should be performed before the `delete_member` command.
+* The PERSON_INDEX is the index of the displayed person list AFTER `view_group` command is performed.
+****
 
 Examples:
 
 * `view_group n/happyfriends`
 * `delete_member 1 n/happyfriends`
 
-deletes the 1st person displayed in `view_group` command.
+(deletes the 1st person displayed in `view_group` command.)
 
-== Find common time slot in group (Nigel)
+== List available time slots in group (Nigel)
 
-=== Find kth best common time slot in group: `find_time`
+=== List all available time slots : `view_group_slots_available`
 
-Find the kth best available time slot of all the people in the group you are in +
-Format: `find k/KTH_BEST g/GROUPINDEX `
+List all of the available time slots in a group +
+Format: `view_group_available n/GROUP_NAME `
 
 ****
-* Edits the group at the specified `INDEX_OF_GROUP`. The index refers to the index number shown in the displayed group list. The index *must be a positive integer* 1, 2, 3, ...
+* List all of the available time slots in a group at the specified `GROUPNAME`
 ****
 
 Examples:
 
-* `find k/1 g/1` +
+* ``view_group_available n/happyfriends ``
+
+=== List all time slots of a group in descending order of availability: `view_group_slots_ranked`
+
+List all time slots of a group in descending order of availability: +
+Format: `view_group_ranked n/GROUP_NAME `
+
+****
+* List all time slots of a group in descending order of availability at the specified `GROUPNAME`
+****
+
+Examples:
+
+* ``view_group_ranked n/happyfriends `` +
 
 == Security (Leslie)
 === Create an account: `create`
@@ -532,12 +570,19 @@ Examples:
 
 === login to an account : `login`
 Login into the system. +
+Users are required to login to execute most commands of the NUS Hangs
+
 Format: `login u/USERNAME pw/PASSWORD`
 Examples:
 
 * `login u/username pw/dontUseWeakPassword`
 
-=== Changing password: `update_pw `
+===	Encrypt timetable data
+
+Encrypts password so that it will not be stored as plain text.
+This function runs when dealing with user's password.
+
+=== Changing password: `update_pw `  `[coming in v2.0]`
 
 Change the user password, requires user to be logged in first. +
 Format: `update_pw c/CURRENT_PASSWORD n/NEW_PASSWORD`
@@ -546,29 +591,12 @@ Examples:
 
 * `update_pw c/password n/newpass`
 
-===	Encrypt timetable data : `encrypt `
 
-Encrypt a timetable, requires user to be logged in first. +
-Format: `encrypt t/TIMETABLE_INDEX`
-
-Examples:
-
-* `encrypt t/1`
-
-===	Decrypt timetable data  : `decrypt `
-
-Decrypt a timetable, requires user to be logged in first. +
-Format: `decrypt t/TIMETABLE_INDEX`
-
-Examples:
-
-* `decrypt t/1`
-
-=== get Security question password : `get`
+=== get Security question password : `get` `[coming in v2.0]`
 Shows the security question . +
 Format: `get`
 
-===	Reset password  : `reset`
+===	Reset password  : `reset` `[coming in v2.0]`
 
 Resets a password by answering the security question correctly. +
 Format: `reset a/SECURITY_ANSWER n/NEW_PASSWORD`
@@ -577,7 +605,7 @@ Examples:
 
 * `reset a/Near the moon`
 
-===	Changing security question and answer : `update_sq`
+===	Changing security question and answer : `update_sq` `[coming in v2.0]`
 
 Change the user security question and answer, requires user to be logged in first. +
 Format: `update_sq c/CURRENT_PASSWORD [n/NEWSECURITY_QUESTION]  [a/SECURITY_ANSWER]`
@@ -633,19 +661,15 @@ e.g. `delete_group 3`
 * *viewgroup* : `view_group i/GROUP_INDEX`+
 e.g. `viewgroup 3`
 * *register* `register f/FRIEND_INDEX g/GROUP_INDEX` +
-e.g. `register f/1 g/1`
+e.g. `register f/1 g/1`cr
 * *find_time* : `find k/KTH_BEST g/GROUPINDEX` +
 e.g. `find k/1 g/1`
-* *create* : `create u/USERNAME p/PASSWORD e/EMAIL q/SECURITY_QUESTION a/SECURITY_ANSWER` +
-e.g. `create u/iamgod p/kamisama e/enel@skypiea.com q/Where is fairy vearth? a/Near the moon`
-* *login* : `login u/USERNAME p/PASSWORD` +
-e.g. `login u/James Jake p/gg`
+* *create* : `create u/USERNAME pw/PASSWORD` +
+e.g. `create u/user pw/strongpass`
+* *login* : `login u/USERNAME pw/PASSWORD` +
+e.g. `login u/user pw/strongpass`
 * *update_pw* : `update_pw c/CURRENT_PASSWORD n/NEW_PASSWORD` +
 e.g. `update_pw c/password n/newpass`
-* *encrypt* : `encrypt t/TIMETABLE_INDEX` +
-e.g. `encrypt t/1`
-* *decrypt* : `decrypt t/TIMETABLE_INDEX` +
-e.g. `decrypt t/1`
 * *get* : `get`
 * *reset* : `reset a/SECURITY_ANSWER n/NEW_PASSWORD` +
 e.g. `reset a/SECURITY_ANSWER n/NEW_PASSWORD`
