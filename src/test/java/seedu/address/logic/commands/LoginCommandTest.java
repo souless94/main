@@ -36,7 +36,7 @@ public class LoginCommandTest {
         String wrongUsername = "wrong-username";
         String rightPassword = "test-password";
         Accounts wrongAccount = new Accounts(wrongUsername, rightPassword);
-
+        
         assertThrows(NullPointerException.class, (
         ) -> {
             LoginCommand login = new LoginCommand(wrongAccount);
