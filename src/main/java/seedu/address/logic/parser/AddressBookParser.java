@@ -113,8 +113,8 @@ public class AddressBookParser {
             case AddGroupCommand.COMMAND_WORD:
                 return new AddGroupCommandParser().parse(arguments);
 
-          case DeleteMemberCommand.COMMAND_WORD:
-              return new DeleteMemberCommandParser().parse(arguments);
+            case DeleteMemberCommand.COMMAND_WORD:
+                return new DeleteMemberCommandParser().parse(arguments);
 
             case DeleteGroupCommand.COMMAND_WORD:
                 return new DeleteGroupCommandParser().parse(arguments);
