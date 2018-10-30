@@ -577,7 +577,7 @@ Examples:
 
 * `login u/username pw/dontUseWeakPassword`
 
-===	Encrypt timetable data : `encrypt `
+===	Encrypt timetable data
 
 Encrypts password so that it will not be stored as plain text.
 This function runs when dealing with user's password.
