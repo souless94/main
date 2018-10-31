@@ -47,7 +47,11 @@ class DeleteTimetableCommandTest {
     void resetTimetableSuccess() {
         Person personToDeleteTimetable = model.getFilteredPersonList()
             .get(INDEX_FIRST.getZeroBased());
-        assertFalse(new File(personToDeleteTimetable.getStoredLocation()).exists());
+        File timetable = new File(personToDeleteTimetable.getStoredLocation());
+        if (timetable.exists()) {
+            timetable.delete();
+        }
+        assertFalse(timetable.exists());
         DeleteTimetableCommand deleteTimetableCommand = new DeleteTimetableCommand(
             INDEX_FIRST);
         String expectedMessage = String
