@@ -107,7 +107,7 @@ Example:
 === Editing a person : `edit`
 
 Edits an existing person in the address book. +
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [f/FORMAT]
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS]
 [fl/STORED_LOCATION] [t/TAG]...`
 
 ****
@@ -125,7 +125,7 @@ Examples:
 Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 * `edit 2 n/Betsy Crower t/` +
 Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
-* `edit 1 f/vertical sl/C:\Users\admin\Downloads\cs2103\tiredAndSadness` +
+* `edit 1 sl/C:\Users\admin\Downloads\cs2103\tiredAndSadness` +
 Edits the stored location of the 1st person to be `C:/Users/admin/Downloads/cs2103/tiredAndSadness/` respectively.
 
 === Locating persons with search all (except email): `find`
