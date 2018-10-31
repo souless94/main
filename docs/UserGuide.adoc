@@ -381,7 +381,7 @@ Format: `add_timetable INDEX day/DAY timing/TIMING [m/DETAILS]  `
 ****
 * timings are in 24h format from 0800 to 2300. 
 * Existing values will be overwritten by the input details.
-* days are days of a week *full name(case insensitive)* from Monday to Friday.
+* days are days of a week in *full name(case insensitive)* from Monday to Friday.
 * edit the timetable at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list.
 * The index *must be a positive integer* 1, 2, 3, ...

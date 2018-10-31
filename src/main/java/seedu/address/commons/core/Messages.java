@@ -8,7 +8,7 @@ public class Messages {
     public static final String MESSAGE_UNKNOWN_COMMAND = "Unknown command";
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
     public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "The person index provided is invalid";
-    public static final String MESSAGE_INVALID_DAY = "Days are in full name, there is no such day in a week";
+    public static final String MESSAGE_INVALID_DAY = "Days are in full name, from Monday to Friday";
     public static final String MESSAGE_INVALID_TIMING = "timings are in 24h format and is from 0800 to 2300";
     public static final String MESSAGE_INVALID_DAY_AND_TIMING =
         MESSAGE_INVALID_DAY + "\n" + MESSAGE_INVALID_TIMING;
