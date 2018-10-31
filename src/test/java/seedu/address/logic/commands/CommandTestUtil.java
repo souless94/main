@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DAY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DETAILS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -55,7 +56,11 @@ public class CommandTestUtil {
             + " " + PREFIX_DETAILS + VALID_DETAILS;
 
     public static final String VALID_GROUP_NAME_BOO = "Boo Streets";
-    public static final String VALID_GROUP_DESCRIPTION = "Best friends forever";
+    public static final String VALID_GROUP_NAME_FRIENDS = "Friends";
+    public static final String INVALID_GROUP_NAME = "Friend&"; //'&' not allowed in names
+    public static final String VALID_GROUP_DESCRIPTION = "Family Group";
+    public static final String VALID_GROUP_DESCRIPTION_BOO = "Halloween Surprise!";
+    public static final String VALID_GROUP_DESCRIPTION_FRIENDS = "Best friends forever";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -67,6 +72,12 @@ public class CommandTestUtil {
     public static final String ADDRESS_DESC_BOB = " " + PREFIX_ADDRESS + VALID_ADDRESS_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
+
+    public static final String GROUPNAME_DESC_BOO = " " + PREFIX_NAME + VALID_GROUP_NAME_BOO;
+    public static final String GROUPNAME_DESC_FRIENDS = " " + PREFIX_NAME + VALID_GROUP_NAME_FRIENDS;
+    public static final String INVALID_GROUPNAME_DESC = " " + PREFIX_NAME + INVALID_GROUP_NAME;
+    public static final String DESCRIPTION_DESC_FRIENDS = " " + PREFIX_DESCRIPTION + VALID_GROUP_DESCRIPTION_FRIENDS;
+    public static final String DESCRIPTION_DESC_BOO = " " + PREFIX_DESCRIPTION + VALID_GROUP_DESCRIPTION_BOO;
 
     public static final String INVALID_NAME_DESC =
         " " + PREFIX_NAME + "James&"; // '&' not allowed in names
