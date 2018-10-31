@@ -89,7 +89,8 @@ public class BrowserPanel extends UiPart<Region> {
             conn.getInputStream().close();
             return true;
         } catch (MalformedURLException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
+            return false;
         } catch (IOException e) {
             return false;
         }
@@ -104,7 +105,6 @@ public class BrowserPanel extends UiPart<Region> {
     private void loadPersonPage(Person person) {
         if (isInternetAvailable()) {
             String timetableString = person.getTimetable().getTimetableAsString();
-            URL defaultPage = MainApp.class.getResource(ONLINE_PAGE_URL);
             loadPage(ONLINE_PAGE_URL + timetableString);
         } else {
             loadOfflinePersonPage(person);
