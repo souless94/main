@@ -287,7 +287,7 @@ public class TimetableData {
      * @return a boolean 2D array
      */
     public boolean[][] booleanTimetableData(String[][] timetable) {
-        boolean[][] booleanTimetable = new boolean[noOfTimings + 1][noOfTimings + 1];
+        boolean[][] booleanTimetable = new boolean[this.noOfRows][this.noOfColumns];
         for (int i = 1; i < this.noOfRows; i++) {
             for (int j = 1; j < this.noOfColumns; j++) {
                 if (timetable[i][j].equals(" ")) {

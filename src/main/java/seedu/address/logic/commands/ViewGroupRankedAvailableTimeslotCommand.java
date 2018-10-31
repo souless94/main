@@ -11,19 +11,19 @@ import seedu.address.model.group.Group;
 import seedu.address.model.person.Name;
 
 /**
- * Lists all available timeslots with no conflicts
+ * Lists all time slots in descending order in terms of availablility
  */
 public class ViewGroupRankedAvailableTimeslotCommand extends Command {
 
-    public static final String COMMAND_WORD = "view_group_slots_ranked";
+    public static final String COMMAND_WORD = "view_slots_ranked";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": View the timeslots of a group in descending order "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": View the time slots of a group in descending order "
             + "in terms of availability"
             + "[" + PREFIX_NAME + " GROUP NAME]\n"
             + "Example: " + COMMAND_WORD
             + PREFIX_NAME + "Family ";
 
-    public static final String MESSAGE_SUCCESS = "Listed all timeslots in descending order of availability:\n";
+    public static final String MESSAGE_SUCCESS = "Listed all time slots in descending order of availability:\n";
 
     private final Name groupName;
 
