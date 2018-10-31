@@ -11,16 +11,16 @@ import org.junit.Test;
 public class TimetableDataTest {
 
     private String timetableString = BOB.getTimetable().getTimetableDataString();
-    private TimetableData timetableData = new TimetableData("horizontal", BOB.getStoredLocation(),
+    private TimetableData timetableData = new TimetableData(BOB.getStoredLocation(),
         timetableString, 1, null, null, null);
 
-    private TimetableData timetableDataWrongSize = new TimetableData("horizontal",
+    private TimetableData timetableDataWrongSize = new TimetableData(
         BOB.getStoredLocation(),
         "0700,800,900,1000," + timetableString, 1, null, null, null);
 
     private String wrongTimetableString =
-        "aG9yaXpvbnRhbA==,aG9yaXpvbnRhbA==," + timetableString.substring(26);
-    private TimetableData timetableDataWrongFirstRow = new TimetableData("horizontal",
+        "aG9yaXpvbnRhbA==,aG9yaXpvbnRhbA==," + timetableString.substring(5);
+    private TimetableData timetableDataWrongFirstRow = new TimetableData(
         BOB.getStoredLocation(), wrongTimetableString, 1, null, null,
         null);
 

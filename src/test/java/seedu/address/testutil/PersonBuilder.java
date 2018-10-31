@@ -26,7 +26,6 @@ public class PersonBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "alice@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
-    public static final String DEFAULT_FORMAT = "horizontal";
     public static final String DEFAULT_STORED_LOCATION = Paths
         .get("src", "test", "data", "timetable").toString();
     public static final String DEFAULT_STORED_INVALID_TIMETABLE_LOCATION = Paths
@@ -49,7 +48,6 @@ public class PersonBuilder {
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
         groups = new UniqueList<>();
-        format = DEFAULT_FORMAT;
         storedLocation = DEFAULT_STORED_LOCATION + "/"
             + String.valueOf(this.hashCode()) + " timetable.csv";
         File testDirectory = new File(DEFAULT_STORED_LOCATION);
@@ -60,7 +58,7 @@ public class PersonBuilder {
         if (!wrongTimetableDirectory.exists()) {
             wrongTimetableDirectory.mkdirs();
         }
-        timetable = new Timetable(storedLocation, format, DEFAULT_TIMETABLE_STRING,
+        timetable = new Timetable(storedLocation, DEFAULT_TIMETABLE_STRING,
             1, null, null,
             null);
         timetableString = timetable.getTimetableDataString();
@@ -77,7 +75,6 @@ public class PersonBuilder {
         address = personToCopy.getAddress();
         groups = new UniqueList<>();
         groups.setElements(personToCopy.getGroups());
-        format = personToCopy.getFormat();
         storedLocation = personToCopy.getStoredLocation();
         timetable = personToCopy.getTimetable();
         timetableString = personToCopy.getTimetable().getTimetableDataString();
@@ -155,7 +152,7 @@ public class PersonBuilder {
      * @return a person
      */
     public Person build() {
-        return new Person(name, phone, email, address, tags, format, storedLocation,
+        return new Person(name, phone, email, address, tags, storedLocation,
             timetableString);
     }
 
