@@ -1,9 +1,9 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_FILE;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_FILE_EXTENSION;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_FILE_PATH;
 import static seedu.address.commons.core.Messages.MESSAGE_IS_FILE_DIRECTORY;
-import static seedu.address.commons.core.Messages.MESSAGE_TIMETABLE_NOT_FOUND;
 
 import java.io.File;
 
@@ -11,6 +11,7 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.ArrayUtils;
 
 import seedu.address.commons.core.Messages;
@@ -162,21 +163,24 @@ public class ParserUtil {
     public static String parseLocation(String location) throws ParseException {
         requireNonNull(location);
         String trimmedLocation = location.trim();
-        String fileExtension = trimmedLocation.substring(trimmedLocation.length() - 4);
-        if (".csv".equals(fileExtension)) {
+        String fileExtension = FilenameUtils.getExtension(trimmedLocation);
+        if ("csv".equals(fileExtension)) {
             File timetable = new File(trimmedLocation);
-            boolean doesFileExists = timetable.exists();
+            if (timetable.getParent() == null) {
+                throw new ParseException(MESSAGE_INVALID_FILE_PATH);
+            }
+            File timetableParent = new File(timetable.getParent());
+            if (!timetableParent.exists()) {
+                throw new ParseException(MESSAGE_INVALID_FILE_PATH);
+            }
             if (timetable.isDirectory()) {
                 throw new ParseException(MESSAGE_IS_FILE_DIRECTORY);
             }
-            if (!doesFileExists) {
-                throw new ParseException(MESSAGE_TIMETABLE_NOT_FOUND);
-            }
         } else {
-            throw new ParseException(MESSAGE_INVALID_FILE);
+            throw new ParseException(MESSAGE_INVALID_FILE_EXTENSION);
         }
-
-        return trimmedLocation;
+        File timetable = new File(trimmedLocation);
+        return timetable.getAbsolutePath();
     }
 
     /**
