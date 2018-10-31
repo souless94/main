@@ -37,7 +37,6 @@ public class EditPersonDescriptorBuilder {
         descriptor.setEmail(person.getEmail());
         descriptor.setAddress(person.getAddress());
         descriptor.setTags(person.getTags());
-        descriptor.setFormat(person.getFormat());
         descriptor.setStoredLocation(person.getStoredLocation());
     }
 
@@ -46,14 +45,6 @@ public class EditPersonDescriptorBuilder {
      */
     public EditPersonDescriptorBuilder withName(String name) {
         descriptor.setName(new Name(name));
-        return this;
-    }
-
-    /**
-     * Sets the {@code format} of the {@code EditPersonDescriptor} that we are building.
-     */
-    public EditPersonDescriptorBuilder withFormat(String format) {
-        descriptor.setFormat(format);
         return this;
     }
 

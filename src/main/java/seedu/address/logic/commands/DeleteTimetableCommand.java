@@ -77,7 +77,7 @@ public class DeleteTimetableCommand extends Command {
         Address updatedAddress = personToEdit.getAddress();
         Set<Tag> updatedTags = personToEdit.getTags();
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags,
-            null, null, null);
+            null, null);
     }
 
     @Override

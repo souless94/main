@@ -12,7 +12,6 @@ public class Timetable extends Entity {
 
     // Identity fields
     private final String filePath;
-    private final String format;
     private final String timetableString;
 
     // create timetable data
@@ -23,13 +22,12 @@ public class Timetable extends Entity {
      * Construct a timetable using the timetableString if option is 1 Construct a timetable using
      * the timetable csv file if option is 2
      */
-    public Timetable(String filePath, String format,
+    public Timetable(String filePath,
         String timetableString, int option, String day, String timing, String message) {
         this.filePath = filePath;
-        this.format = format;
-        this.matrix = new TimetableData(format, this.filePath, timetableString,
+        this.matrix = new TimetableData(this.filePath, timetableString,
             option, day, timing, message);
-        this.timetableString = getTimetableDataString();
+        this.timetableString = generateTimetableDataString();
     }
 
     /**
@@ -57,10 +55,18 @@ public class Timetable extends Entity {
         return timetableString;
     }
 
+
     /**
      * @return a timetable string for the xml storage
      */
     public String getTimetableDataString() {
+        return this.timetableString;
+    }
+
+    /**
+     * generate a timetable string for the xml storage
+     */
+    private String generateTimetableDataString() {
         String timetableDataString = "";
         String[][] timetableMatrix = this.matrix.getTimetable();
         for (int i = 0; i < matrix.getRows(); i++) {
@@ -76,10 +82,6 @@ public class Timetable extends Entity {
             timetableDataString += "\n";
         }
         return timetableDataString;
-    }
-
-    public String getFormat() {
-        return this.format;
     }
 
     public TimetableData getTimetable() {
