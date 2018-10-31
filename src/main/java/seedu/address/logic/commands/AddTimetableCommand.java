@@ -36,9 +36,7 @@ public class AddTimetableCommand extends Command {
     public static final String MESSAGE_ADD_TIMETABLE_SUCCESS = "timetable added successfully: %1$s";
     public static final String MESSAGE_INVALID_TIMETABLE_SIZE =
         "timetable to be added is wrong: \n"
-            + "if format is horizontal,timetable should have in total rows: 8 , columns : 17 \n"
-            + "if format is vertical,timetable should have in total rows: 17 , columns : 8 \n";
-
+            + "timetable should have in total rows: 8 , columns : 17 \n";
     private static final String timings = "correctTimings : \n"
         + "0800,0900,1000,1100 \n"
         + "1200,1300,1400,1500,1600 \n"
@@ -46,7 +44,7 @@ public class AddTimetableCommand extends Command {
     private static final String days = "correctDays: {Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday";
 
     public static final String MESSAGE_INVALID_TIMETABLE = "timetable to be added is wrong: \n"
-        + "does not have correct timings or/and days present in first column or/and first row in the csv file \n"
+        + "does not have correct timings in first row and correct days in first column in the csv file \n"
         + timings + "\n"
         + days + "\n";
 
@@ -78,7 +76,7 @@ public class AddTimetableCommand extends Command {
         }
         boolean doesFileExists = new File(filePath).exists();
         if (doesFileExists) {
-            Timetable timetable = new Timetable(filePath, personToEdit.getFormat(),
+            Timetable timetable = new Timetable(filePath,
                 personToEdit.getTimetable().getTimetableDataString(), 2, null, null, null);
             if (!timetable.isValid()) {
                 if (!timetable.isCorrectSize()) {

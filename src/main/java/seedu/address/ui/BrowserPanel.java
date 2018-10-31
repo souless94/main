@@ -10,6 +10,7 @@ import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.layout.Region;
 import javafx.scene.web.WebView;
+
 import seedu.address.MainApp;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.ui.PersonPanelSelectionChangedEvent;
@@ -41,6 +42,34 @@ public class BrowserPanel extends UiPart<Region> {
         registerAsAnEventHandler(this);
     }
 
+
+    /*
+    import java.io.IOException;
+    import java.net.URL;
+    import java.util.logging.Logger;
+
+    import org.jsoup.Jsoup;
+    import org.jsoup.nodes.Document;
+    import org.jsoup.nodes.Element;
+
+    import com.google.common.base.Charsets;
+    import com.google.common.eventbus.Subscribe;
+    import com.google.common.io.Resources;
+    Loads the Timetable.html file with the timetable of the person selected for jar
+    private void loadPersonPage(Person person) {
+       URL timetablePage = MainApp.class.getResource(FXML_FILE_FOLDER + SEARCH_PAGE_URL);
+       try {
+           String location = Resources.toString(timetablePage, Charsets.UTF_8);
+           Document document = Jsoup.parse(location, "UTF-8");
+           Element element = document.getElementById("timetable");
+           element.attr("value", person.getTimetable().getTimetableAsString());
+           Platform.runLater(() -> browser.getEngine().loadContent(document.toString()));
+       } catch (IOException e) {
+           loadPage(timetablePage.toExternalForm());
+           e.printStackTrace();
+       }
+   }
+    */
     private void loadPersonPage(Person person) {
         URL defaultPage = MainApp.class.getResource(FXML_FILE_FOLDER + SEARCH_PAGE_URL);
         String timetableString = person.getTimetable().getTimetableAsString();

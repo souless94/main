@@ -67,7 +67,7 @@ public class EditTimetableCommand extends Command {
         requireNonNull(model);
         Person personToEdit = CommandUtil.retrievePersonFromIndex(model, index);
         String filePath = personToEdit.getStoredLocation();
-        Timetable timetable = new Timetable(filePath, personToEdit.getFormat(),
+        Timetable timetable = new Timetable(filePath,
             personToEdit.getTimetable().getTimetableDataString(), 3, day, timing, details);
         Person updatedPerson = createUpdatedPerson(personToEdit, timetable, filePath);
         model.update(personToEdit, updatedPerson);
@@ -89,12 +89,11 @@ public class EditTimetableCommand extends Command {
         Email updatedEmail = personToEdit.getEmail();
         Address updatedAddress = personToEdit.getAddress();
         Set<Tag> updatedTags = personToEdit.getTags();
-        String format = personToEdit.getFormat();
         String storedLocation = filePath;
         String timetableString = timetable.getTimetableDataString();
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags,
-            format, storedLocation, timetableString);
+            storedLocation, timetableString);
     }
 
     @Override

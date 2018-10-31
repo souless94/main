@@ -104,10 +104,9 @@ public class PersonListPanelTest extends GuiUnitTest {
             builder.append("<phone>000</phone>\n");
             builder.append("<email>a@aa</email>\n");
             builder.append("<address>a</address>\n");
-            builder.append("<format>horizontal</format>\n");
             builder.append("<storedLocation>default</storedLocation>\n");
             builder.append(
-                "<timetableString>aG9yaXpvbnRhbA==,MDgwMA==,MDkwMA==,MTAwMA==,MTEwMA==,MTIwMA==,MTMwMA==,"
+                "<timetableString>IA==,MDgwMA==,MDkwMA==,MTAwMA==,MTEwMA==,MTIwMA==,MTMwMA==,"
                     + "MTQwMA==,MTUwMA==,MTYwMA==,MTcwMA==,MTgwMA==,MTkwMA==,MjAwMA==,MjEwMA==,MjIwMA==,MjMwMA==\n"
                     + "TW9uZGF5,IA==,IA==,IA==,IA==,IA==,IA==,IA==,IA==,IA==,IA==,IA==,IA==,IA==,IA==,IA==,IA==\n"
                     + "VHVlc2RheQ==,IA==,IA==,IA==,IA==,IA==,IA==,IA==,IA==,IA==,IA==,IA==,IA==,IA==,IA==,IA==,IA==\n"

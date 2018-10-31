@@ -3,17 +3,17 @@
 <head>
   <meta charset="utf-8">
   <title>Dummy Search Page</title>
+
+</head>
+<body>
+    <input type="hidden" id="timetable" value="">
+    <p id="check"></p>
   <script type="text/javascript">
-    function getJsonFromUrl() {
-      var query = location.search.substr(1);
-      var result = {};
-      query.split("&").forEach(function(part) {
-        var item = part.split("=");
-        result[item[0]] = decodeURIComponent(item[1]);
-      });
-      return result;
-    }
-      var matrixAsString =getJsonFromUrl().name;
+      var matrixAsString =document.getElementById("timetable").value;
+      if (matrixAsString == ""){
+          document.getElementById("check").innerHTML= "there seems to be an issue";
+          var m = null;
+      } else{
       var matrixArray = matrixAsString.split(",");
       var rows = 8;
       var columns = 17;
@@ -51,29 +51,30 @@
               counter+=1;
           }
       }
+      }
   </script>
-</head>
-<body>
 <table id="myTable" border=1>
 </table>
     <script>
         //@@author souless94 -resued
         // used code from 1BestCsharp blog in http://1bestcsharp.blogspot.com/2017/03/javascript-populate-html-table-from-array.html
-
-        table = document.getElementById("myTable");
-        for(var i = 0; i < m.length; i++)
-           {
+        
+        if (m != null){
+            table = document.getElementById("myTable");
+            for(var i = 0; i < m.length; i++)
+            {
                // create a new row
-               var newRow = table.insertRow(table.length);
-               for(var j = 0; j < m[i].length; j++)
-               {
+                var newRow = table.insertRow(table.length);
+                for(var j = 0; j < m[i].length; j++)
+                {
                    // create a new cell
-                   var cell = newRow.insertCell(j);
+                    var cell = newRow.insertCell(j);
 
-                   // add value to the cell
+                    // add value to the cell
                    cell.innerHTML = m[i][j];
-               }
-           }
+                }    
+            }
+        }
         //@@ author
 
     </script>

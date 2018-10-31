@@ -67,6 +67,7 @@ dependencies {
     implementation group: 'com.sun.xml.bind', name: 'jaxb-core', version: '2.3.0'
     implementation group: 'javax.activation', name: 'activation', version: '1.1.1'
 	implementation group: 'com.opencsv', name: 'opencsv' ,version: '4.3.2'
+	implementation group: 'org.jsoup', name: 'jsoup' ,version: '1.11.3'
 
     testImplementation group: 'junit', name: 'junit', version: '4.12'
     testImplementation group: 'org.testfx', name: 'testfx-core', version: testFxVersion, {
@@ -83,7 +84,7 @@ dependencies {
 }
 
 shadowJar {
-    archiveName = 'addressbook.jar'
+    archiveName = 'nus Hangs.jar'
 
     destinationDir = file("${buildDir}/jar/")
 }
@@ -238,7 +239,7 @@ task deployOfflineDocs(type: Copy) {
 }
 
 task copyTimetablePage(type: Copy) {
-    from 'docs/Timetable.html'
+    from 'src/main/resources/view/Timetable.html'
     into "${buildDir}/docs/html5"
 }
 

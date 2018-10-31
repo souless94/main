@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FILE_LOCATION;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -46,7 +45,6 @@ public class EditCommand extends Command {
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
-            + "[" + PREFIX_FORMAT + "ADDRESS] "
             + "[" + PREFIX_FILE_LOCATION + "ADDRESS] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
@@ -107,7 +105,6 @@ public class EditCommand extends Command {
         Address updatedAddress = editPersonDescriptor.getAddress()
             .orElse(personToEdit.getAddress());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
-        String format = editPersonDescriptor.getFormat().orElse(personToEdit.getFormat());
         String storedLocation = editPersonDescriptor.getStoredLocation()
             .orElse(personToEdit.getStoredLocation());
         String timetableString = personToEdit.getTimetable().getTimetableDataString();
@@ -115,8 +112,8 @@ public class EditCommand extends Command {
         UniqueList<Group> uniqueGroupList = new UniqueList<>();
         uniqueGroupList.setElements(personToEdit.getGroups());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, uniqueGroupList,
-            format, storedLocation, timetableString);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags,
+            uniqueGroupList, storedLocation, timetableString);
     }
 
     @Override
@@ -147,7 +144,6 @@ public class EditCommand extends Command {
         private Phone phone;
         private Email email;
         private Address address;
-        private String format;
         private String storedLocation;
         private Set<Tag> tags;
         private List<Group> groupList;
@@ -163,7 +159,6 @@ public class EditCommand extends Command {
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
             setAddress(toCopy.address);
-            setFormat(toCopy.format);
             setStoredLocation(toCopy.storedLocation);
             setTags(toCopy.tags);
             setGroupList(toCopy.groupList);
@@ -175,7 +170,7 @@ public class EditCommand extends Command {
          */
         public boolean isAnyFieldEdited() {
             return CollectionUtil
-                .isAnyNonNull(name, phone, email, address, tags, format, storedLocation);
+                .isAnyNonNull(name, phone, email, address, tags, storedLocation);
         }
 
         public void setStoredLocation(String storedLocation) {
@@ -184,14 +179,6 @@ public class EditCommand extends Command {
 
         public Optional<String> getStoredLocation() {
             return Optional.ofNullable(storedLocation);
-        }
-
-        public void setFormat(String format) {
-            this.format = format;
-        }
-
-        public Optional<String> getFormat() {
-            return Optional.ofNullable(format);
         }
 
         public void setName(Name name) {

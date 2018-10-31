@@ -15,6 +15,7 @@ import seedu.address.MainApp;
 import seedu.address.commons.events.ui.PersonPanelSelectionChangedEvent;
 
 public class BrowserPanelTest extends GuiUnitTest {
+
     private PersonPanelSelectionChangedEvent selectionChangedEventStub;
 
     private BrowserPanel browserPanel;
@@ -40,7 +41,8 @@ public class BrowserPanelTest extends GuiUnitTest {
         /*
         // associated web page of a person
         postNow(selectionChangedEventStub);
-        URL expectedPersonUrl = new URL(BrowserPanel.SEARCH_PAGE_URL);
+        URL expectedPersonUrl = MainApp.class.getResource(BrowserPanel.SEARCH_PAGE_URL);
+
 
         waitUntilBrowserLoaded(browserPanelHandle);
         assertEquals(expectedPersonUrl, browserPanelHandle.getLoadedUrl());

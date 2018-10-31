@@ -17,6 +17,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.timetable.Timetable;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -35,12 +36,9 @@ public class XmlAdaptedPerson {
     @XmlElement(required = true)
     private String address;
     @XmlElement(required = true)
-    private String format;
-    @XmlElement(required = true)
     private String storedLocation;
     @XmlElement(required = true)
     private String timetableString;
-
     @XmlElement
     private List<XmlAdaptedTag> tagged = new ArrayList<>();
 
@@ -58,12 +56,11 @@ public class XmlAdaptedPerson {
      * different constructors
      */
     public XmlAdaptedPerson(String name, String phone, String email, String address,
-        List<XmlAdaptedTag> tagged, String format, String storedLocation, String timetableString) {
+        List<XmlAdaptedTag> tagged, String storedLocation, String timetableString) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
-        this.format = format;
         this.storedLocation = storedLocation;
         this.timetableString = timetableString;
         if (tagged != null) {
@@ -79,12 +76,11 @@ public class XmlAdaptedPerson {
      */
     public XmlAdaptedPerson(String name, String phone, String email, String address,
         List<XmlAdaptedGroup> groups,
-        List<XmlAdaptedTag> tagged, String format, String storedLocation, String timetableString) {
+        List<XmlAdaptedTag> tagged, String storedLocation, String timetableString) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
-        this.format = format;
         this.storedLocation = storedLocation;
         this.timetableString = timetableString;
         if (tagged != null) {
@@ -105,7 +101,6 @@ public class XmlAdaptedPerson {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
-        format = source.getFormat();
         storedLocation = source.getStoredLocation();
         timetableString = source.getTimetable().getTimetableDataString();
         tagged = source.getTags().stream()
@@ -172,9 +167,12 @@ public class XmlAdaptedPerson {
 
         final UniqueList<Group> modelGroupList = new UniqueList<>();
         modelGroupList.setElements(groupList);
-
+        if (timetableString == null) {
+            throw new IllegalValueException(
+                String.format(MISSING_FIELD_MESSAGE_FORMAT, Timetable.class.getSimpleName()));
+        }
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags,
-            modelGroupList, format,
+            modelGroupList,
             storedLocation, timetableString);
     }
 
