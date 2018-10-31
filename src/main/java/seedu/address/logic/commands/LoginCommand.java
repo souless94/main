@@ -41,12 +41,16 @@ public class LoginCommand extends Command {
      */
     public LoginCommand(Accounts account) {
         if (UserAccountStorage.checkPasswordMatch(account.getUsername(), account.getPassword())) {
-            AddressBookParser.updateLoggedOnStatus(true);
             loginIsSuccessful = true;
+            AddressBookParser.updateLoggedOnStatus(true);
         } else {
             loginIsSuccessful = false;
         }
     }
+
+
+
+
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {

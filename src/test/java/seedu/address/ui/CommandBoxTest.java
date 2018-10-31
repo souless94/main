@@ -97,6 +97,7 @@ public class CommandBoxTest extends GuiUnitTest {
         assertInputHistory(KeyCode.UP, COMMAND_THAT_FAILS);
         assertInputHistory(KeyCode.UP, COMMAND_THAT_SUCCEEDS);
         assertInputHistory(KeyCode.DOWN, COMMAND_THAT_FAILS);
+        
         assertInputHistory(KeyCode.DOWN, thirdCommand);
         assertInputHistory(KeyCode.DOWN, "");
     }
