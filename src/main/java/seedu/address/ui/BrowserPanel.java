@@ -1,9 +1,18 @@
 package seedu.address.ui;
 
+import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLConnection;
 import java.util.logging.Logger;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+
+import com.google.common.base.Charsets;
 import com.google.common.eventbus.Subscribe;
+import com.google.common.io.Resources;
 
 import javafx.application.Platform;
 import javafx.event.Event;
@@ -22,7 +31,10 @@ import seedu.address.model.person.Person;
 public class BrowserPanel extends UiPart<Region> {
 
     public static final String DEFAULT_PAGE = "default.html";
-    public static final String SEARCH_PAGE_URL =
+    public static final String ONLINE_PAGE_URL =
+        "https://se-edu.github.io/addressbook-level4/DummySearchPage.html?name=";
+
+    public static final String OFFLINE_PAGE_URL =
         "Timetable.html";
 
     private static final String FXML = "BrowserPanel.fxml";
@@ -43,37 +55,61 @@ public class BrowserPanel extends UiPart<Region> {
     }
 
 
-    /*
-    import java.io.IOException;
-    import java.net.URL;
-    import java.util.logging.Logger;
+    /**
+     * Loads the Timetable.html file with the timetable of the person selected.
+     *
+     * Does not require a internet connection.
+     */
+    private void loadOfflinePersonPage(Person person) {
+        URL timetablePage = MainApp.class.getResource(FXML_FILE_FOLDER + OFFLINE_PAGE_URL);
+        try {
+            String location = Resources.toString(timetablePage, Charsets.UTF_8);
+            Document document = Jsoup.parse(location, "UTF-8");
+            Element element = document.getElementById("timetable");
+            element.attr("value", person.getTimetable().getTimetableAsString());
+            Platform.runLater(() -> browser.getEngine().loadContent(document.toString()));
+        } catch (IOException e) {
+            loadPage(timetablePage.toExternalForm());
+            e.printStackTrace();
+        }
+    }
 
-    import org.jsoup.Jsoup;
-    import org.jsoup.nodes.Document;
-    import org.jsoup.nodes.Element;
+    /**
+     * checks if internet connection is available
+     */
+    //@@author souless94 -reused
+    //Solution below gotten from Marcus Junius Brutus
+    // from https://stackoverflow.com/questions/1402005/how-
+    // to-check-if-internet-connection-is-present-in-java
+    private static boolean isInternetAvailable() {
+        try {
+            final URL url = new URL(ONLINE_PAGE_URL);
+            final URLConnection conn = url.openConnection();
+            conn.connect();
+            conn.getInputStream().close();
+            return true;
+        } catch (MalformedURLException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            return false;
+        }
+    }
+    //@@ author
 
-    import com.google.common.base.Charsets;
-    import com.google.common.eventbus.Subscribe;
-    import com.google.common.io.Resources;
-    Loads the Timetable.html file with the timetable of the person selected for jar
+    /**
+     * Loads the Timetable.html file with the timetable of the person selected.
+     *
+     * Loads from online first, then if there is no internet connect, load from offline
+     */
     private void loadPersonPage(Person person) {
-       URL timetablePage = MainApp.class.getResource(FXML_FILE_FOLDER + SEARCH_PAGE_URL);
-       try {
-           String location = Resources.toString(timetablePage, Charsets.UTF_8);
-           Document document = Jsoup.parse(location, "UTF-8");
-           Element element = document.getElementById("timetable");
-           element.attr("value", person.getTimetable().getTimetableAsString());
-           Platform.runLater(() -> browser.getEngine().loadContent(document.toString()));
-       } catch (IOException e) {
-           loadPage(timetablePage.toExternalForm());
-           e.printStackTrace();
-       }
-   }
-    */
-    private void loadPersonPage(Person person) {
-        URL defaultPage = MainApp.class.getResource(FXML_FILE_FOLDER + SEARCH_PAGE_URL);
-        String timetableString = person.getTimetable().getTimetableAsString();
-        loadPage(defaultPage.toExternalForm() + "?name=" + timetableString);
+        if (isInternetAvailable()) {
+            String timetableString = person.getTimetable().getTimetableAsString();
+            URL defaultPage = MainApp.class.getResource(ONLINE_PAGE_URL);
+            loadPage(ONLINE_PAGE_URL + timetableString);
+        } else {
+            loadOfflinePersonPage(person);
+        }
+
     }
 
     public void loadPage(String url) {
