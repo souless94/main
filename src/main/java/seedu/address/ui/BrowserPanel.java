@@ -32,7 +32,7 @@ public class BrowserPanel extends UiPart<Region> {
 
     public static final String DEFAULT_PAGE = "default.html";
     public static final String ONLINE_PAGE_URL =
-        "https://se-edu.github.io/addressbook-level4/DummySearchPage.html?name=";
+        "https://cs2103-ay1819s1-f11-4.github.io/main/onlineTimetable.html?name=";
 
     public static final String OFFLINE_PAGE_URL =
         "Timetable.html";
