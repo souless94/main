@@ -27,9 +27,9 @@ public class PersonBuilder {
     public static final String DEFAULT_EMAIL = "alice@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_STORED_LOCATION = Paths
-        .get("src", "test", "data", "timetable").toString();
+        .get("src", "test", "data", "timetable").toAbsolutePath().toString();
     public static final String DEFAULT_STORED_INVALID_TIMETABLE_LOCATION = Paths
-        .get("src", "test", "data", "wrongTimetable").toString();
+        .get("src", "test", "data", "wrongTimetable").toAbsolutePath().toString();
     public static final String DEFAULT_TIMETABLE_STRING = null;
     private Name name;
     private Phone phone;

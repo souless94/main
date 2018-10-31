@@ -180,7 +180,7 @@ public class ParserUtil {
             throw new ParseException(MESSAGE_INVALID_FILE_EXTENSION);
         }
         File timetable = new File(trimmedLocation);
-        return timetable.getAbsolutePath();
+        return timetable.getAbsolutePath().replace("\\", "/");
     }
 
     /**

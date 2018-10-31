@@ -52,7 +52,7 @@ public class Person extends Entity {
 
         this.tags.addAll(tags);
         if (storedLocation == null) {
-            String location = Paths.get("data", "timetable").toString();
+            String location = Paths.get("data", "timetable").toAbsolutePath().toString();
             File directory = new File(location);
             if (!directory.exists()) {
                 directory.mkdirs();
