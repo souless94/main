@@ -42,7 +42,8 @@ public class NameContainsKeywordsPredicate<T extends Entity> implements Predicat
         this.tagKeywords = new ArrayList<>();
     }
 
-    public NameContainsKeywordsPredicate(List<String> nameList, List<String> addressList, List<String> phoneList, List<String> emailList, List<String> tagList, String mode) {
+    public NameContainsKeywordsPredicate(List<String> nameList, List<String> addressList, List<String> phoneList,
+                                         List<String> emailList, List<String> tagList, String mode) {
         this.keywords = new ArrayList<>();
         this.nameKeywords = nameList;
         this.addressKeywords = addressList;

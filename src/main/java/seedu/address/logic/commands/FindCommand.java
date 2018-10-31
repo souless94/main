@@ -15,18 +15,18 @@ import seedu.address.model.person.NameContainsKeywordsPredicate;
  */
 public class FindCommand extends Command {
 
-    public final List<String> nameKeywords;
-    public final List<String> phoneKeywords;
-    public final List<String> addressKeywords;
-    public final List<String> emailKeywords;
-    public final List<String> tagKeywords;
-
     public static final String COMMAND_WORD = "find";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons with any parameters contain any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
             + "Example: " + COMMAND_WORD + " alex friends gardens";
+
+    public final List<String> nameKeywords;
+    public final List<String> phoneKeywords;
+    public final List<String> addressKeywords;
+    public final List<String> emailKeywords;
+    public final List<String> tagKeywords;
 
     public FindCommand(List<String> nameKeywords, List<String> phoneKeywords, List<String> addressKeywords,
                        List<String> emailKeywords, List<String> tagKeywords) {
