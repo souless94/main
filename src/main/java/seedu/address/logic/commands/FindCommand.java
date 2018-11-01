@@ -22,8 +22,8 @@ public class FindCommand extends Command {
 
     public static final String COMMAND_WORD = "find";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all person in the address book " +
-            "(Prefix Search/ Case-Insensitive) and displays them as a list.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all person in the address book "
+            + "(Prefix Search/ Case-Insensitive) and displays them as a list.\n"
             + "Parameters:\n"
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
