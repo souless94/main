@@ -56,7 +56,7 @@ class DownloadTimetableCommandTest {
         DownloadTimetableCommand downloadTimetableCommand = new DownloadTimetableCommand(
             INDEX_FIRST);
         assertCommandFailure(downloadTimetableCommand, model, commandHistory,
-            MESSAGE_TIMETABLE_IS_PRESENT);
+            MESSAGE_TIMETABLE_IS_PRESENT + personToDownloadTimetable.getStoredLocation());
         assertTrue(new File(personToDownloadTimetable.getStoredLocation()).exists());
     }
 }
