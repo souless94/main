@@ -51,31 +51,31 @@ public class FindCommandParser implements Parser<FindCommand> {
         String[] emailKeywords;
         String[] tagKeywords;
 
-        if (!name.equals("")) {
+        if (!"".equals(name)) {
             nameKeywords = name.split("\\s+");
         } else {
             nameKeywords = new String[0];
         }
 
-        if (!phone.equals("")) {
+        if (!"".equals(phone)) {
             phoneKeywords = phone.split("\\s+");
         } else {
             phoneKeywords = new String[0];
         }
 
-        if (!address.equals("")) {
+        if (!"".equals(address)) {
             addressKeywords = address.split("\\s+");
         } else {
             addressKeywords = new String[0];
         }
 
-        if (!email.equals("")) {
+        if (!"".equals(email)) {
             emailKeywords = email.split("\\s+");
         } else {
             emailKeywords = new String[0];
         }
 
-        if (!tag.equals("")) {
+        if (!"".equals(tag)) {
             tagKeywords = tag.split("\\s+");
         } else {
             tagKeywords = new String[0];

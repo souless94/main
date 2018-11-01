@@ -34,11 +34,11 @@ public class FindCommandParserTest {
      * Parses {@code nameInput, phoneInput, addressInput, emailInput, tagInput}
      * into a {@code FindCommand}.
      */
-    private FindCommand prepareFindCommand(String nameInput, String phoneInput,
-                                           String addressInput, String emailInput, String tagInput) {
-        return new FindCommand(Arrays.asList(nameInput.split("\\s+")),
-                Arrays.asList(phoneInput.split("\\s+")), Arrays.asList(addressInput.split("\\s+")),
-                Arrays.asList(emailInput.split("\\s+")), Arrays.asList(tagInput.split("\\s+")));
-    }
+    //private FindCommand prepareFindCommand(String nameInput, String phoneInput,
+    //                                       String addressInput, String emailInput, String tagInput) {
+    //    return new FindCommand(Arrays.asList(nameInput.split("\\s+")),
+    //            Arrays.asList(phoneInput.split("\\s+")), Arrays.asList(addressInput.split("\\s+")),
+    //            Arrays.asList(emailInput.split("\\s+")), Arrays.asList(tagInput.split("\\s+")));
+    //}
 
 }
