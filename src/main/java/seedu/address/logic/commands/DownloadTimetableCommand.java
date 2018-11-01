@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_GROUPS;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.io.File;
@@ -60,6 +61,7 @@ public class DownloadTimetableCommand extends Command {
         Timetable timetable = personToDownloadTimetable.getTimetable();
         timetable.downloadTimetableAsCsv();
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        model.updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
         model.commitAddressBook();
         return new CommandResult(
             String.format(MESSAGE_DOWNLOAD_TIMETABLE_SUCCESS)

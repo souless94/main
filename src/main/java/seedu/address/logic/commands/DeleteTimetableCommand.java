@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_GROUPS;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.io.File;
@@ -55,6 +56,7 @@ public class DeleteTimetableCommand extends Command {
         Person updatedPerson = createPersonWithNewTimetable(personToDeleteTimetable);
         model.update(personToDeleteTimetable, updatedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        model.updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
         model.commitAddressBook();
         if (toBeDeleted.exists()) {
             toBeDeleted.delete();

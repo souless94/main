@@ -11,25 +11,26 @@ import seedu.address.model.group.Group;
 import seedu.address.model.person.Name;
 
 /**
- * Lists all available timeslots with no conflicts
+ * Lists all time slots at which everyone is available
  */
-public class ViewGroupAvailableTimeslotCommand extends Command {
+public class ViewGroupAllAvailableTimeslotCommand extends Command {
 
-    public static final String COMMAND_WORD = "view_group_slots_available";
+    public static final String COMMAND_WORD = "view_slots_all";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": View the available timeslots of a group"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": View the time slots of a group "
+            + "where everyone is available at"
             + "[" + PREFIX_NAME + " GROUP NAME]\n"
             + "Example: " + COMMAND_WORD
             + PREFIX_NAME + "Family ";
 
-    public static final String MESSAGE_SUCCESS = "Listed all available timeslots:\n";
+    public static final String MESSAGE_SUCCESS = "Listed all time slots which everyone is available at:\n";
 
     private final Name groupName;
 
     /**
      * @param groupName of the group to find the available timeslots of its members
      */
-    public ViewGroupAvailableTimeslotCommand(Name groupName) {
+    public ViewGroupAllAvailableTimeslotCommand(Name groupName) {
         requireNonNull(groupName);
         this.groupName = groupName;
     }
@@ -41,7 +42,7 @@ public class ViewGroupAvailableTimeslotCommand extends Command {
         Group group = CommandUtil.retrieveGroupFromName(model, groupName);
 
         model.updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
-        return new CommandResult(MESSAGE_SUCCESS + group.listAvailableTimeslots());
+        return new CommandResult(MESSAGE_SUCCESS + group.listAllAvailableTimeslots());
     }
 
 }
