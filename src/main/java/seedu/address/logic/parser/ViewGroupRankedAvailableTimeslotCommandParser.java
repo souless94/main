@@ -10,13 +10,13 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Name;
 
 /**
- * Parses input arguments and creates a new ViewGroupAvailableTimeSlotCommand object
+ * Parses input arguments and creates a new ViewGroupRankedAvailableTimeSlotCommand object
  */
 public class ViewGroupRankedAvailableTimeslotCommandParser implements Parser<ViewGroupRankedAvailableTimeslotCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the ViewGroupAvailableTimeSlotCommand
-     * and returns an ViewGroupAvailableTimeSlotCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the ViewGroupRankedAvailableTimeSlotCommand
+     * and returns an ViewGroupRankedAvailableTimeSlotCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public ViewGroupRankedAvailableTimeslotCommand parse(String args) throws ParseException {

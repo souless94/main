@@ -116,9 +116,10 @@ public class Group extends Entity {
     }
 
     /**
-     * Returns all available time slots among the group as a String in ascending order in terms of timing
+     * Returns all time slots where everyone among the group is available at as a String
+     * in ascending order in terms of timing
      */
-    public String listAvailableTimeslots() {
+    public String listAllAvailableTimeslots() {
         Iterator<Person> personItr = groupMembers.iterator();
         StringBuilder builder = new StringBuilder();
         TreeSet<Integer> availableSlots = new TreeSet<>();
@@ -126,7 +127,16 @@ public class Group extends Entity {
         boolean isFirstPerson = true;
         while (personItr.hasNext()) {
             Person currPerson = personItr.next();
-            boolean[][] isFree = currPerson.getTimetable().getTimetable().getBooleanTimetable();
+            builder.append("my name is " + currPerson.getName() + "\n");
+            String[][] test = currPerson.getTimetable().getTimetable().getTimetable();
+            boolean[][] isFree = currPerson.getTimetable().getTimetable().getBooleanTimetableData();
+            for (int i = 1; i <= 7; i++) {
+                for (int j = 1; j <= 16; j++) {
+                    builder.append("[" + i + "]" + "[" + j + "] entry is(");
+                    builder.append(test[i][j]);
+                    builder.append(")\n");
+                }
+            }
             if (isFirstPerson) {
                 for (int i = 1; i <= 7; i++) {
                     for (int j = 1; j <= 16; j++) {
@@ -165,13 +175,23 @@ public class Group extends Entity {
      * Returns the time slots among the group as a String in descending order with respect to number of
      * people available and then ascending order in terms of timing
      */
-    public String listRankedAvailableTimeslots () {
+    public String listRankedAvailableTimeslots() {
         Iterator<Person> personItr = groupMembers.iterator();
         StringBuilder builder = new StringBuilder();
         TreeMap<Integer, Integer> availableSlots = new TreeMap<>();
         while (personItr.hasNext()) {
             Person currPerson = personItr.next();
-            boolean[][] isFree = currPerson.getTimetable().getTimetable().getBooleanTimetable();
+            builder.append("my name is " + currPerson.getName() + "\n");
+            String[][] test = currPerson.getTimetable().getTimetableMatrix();
+            for (int i = 1; i <= 7; i++) {
+                for (int j = 1; j <= 16; j++) {
+                    int timing = (j + 7) * 100;
+                    builder.append("On day " + i + " and timing " + timing + " I am doing(");
+                    builder.append(test[i][j]);
+                    builder.append(")\n");
+                }
+            }
+            boolean[][] isFree = currPerson.getTimetable().getTimetable().getBooleanTimetableData();
             for (int i = 1; i <= 7; i++) {
                 for (int j = 1; j <= 16; j++) {
                     if (isFree[i][j]) {

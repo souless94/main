@@ -449,25 +449,25 @@ Examples:
 
 (deletes the 1st person displayed in `view_group` command.)
 
-== List available time slots in group (Nigel)
+== Time slots (Nigel)
 
-=== List all available time slots : `view_group_slots_available`
+=== List all time slots of a group at which everyone is available : `view_slots_everyone`
 
 List all of the available time slots in a group +
-Format: `view_group_available n/GROUP_NAME `
+Format: `view_slots_everyone n/GROUP_NAME `
 
 ****
-* List all of the available time slots in a group at the specified `GROUPNAME`
+* List all time slots in a group at which everyone is available at the specified `GROUPNAME`
 ****
 
 Examples:
 
-* ``view_group_available n/happyfriends ``
+* `view_slots_everyone n/happyfriends`
 
-=== List all time slots of a group in descending order of availability: `view_group_slots_ranked`
+=== List all time slots of a group in descending order of availability: `view_slots_ranked`
 
 List all time slots of a group in descending order of availability: +
-Format: `view_group_ranked n/GROUP_NAME `
+Format: `view_slots_ranked n/GROUP_NAME `
 
 ****
 * List all time slots of a group in descending order of availability at the specified `GROUPNAME`
@@ -475,7 +475,17 @@ Format: `view_group_ranked n/GROUP_NAME `
 
 Examples:
 
-* ``view_group_ranked n/happyfriends `` +
+* `view_slots_ranked n/happyfriends`
+
+== Security (Leslie)
+=== Create an account: `create`
+
+Create an account in the system. The password and security answer are both case sensitive. +
+Format: `create u/USERNAME pw/PASSWORD`
+
+Examples:
+
+* `create u/sampleUser pw/dontUseWeakPassword`
 
 == Security (Leslie)
 === Create an account: `create`

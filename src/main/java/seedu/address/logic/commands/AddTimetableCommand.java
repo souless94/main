@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_TIMETABLE_NOT_FOUND;
 import static seedu.address.logic.commands.EditTimetableCommand.createUpdatedPerson;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FILE_LOCATION;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_GROUPS;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.io.File;
@@ -92,6 +93,7 @@ public class AddTimetableCommand extends Command {
             Person updatedPerson = createUpdatedPerson(personToEdit, timetable, filePath);
             model.update(personToEdit, updatedPerson);
             model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+            model.updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
             model.commitAddressBook();
             return new CommandResult(
                 String.format(MESSAGE_ADD_TIMETABLE_SUCCESS, updatedPerson.getStoredLocation()));
