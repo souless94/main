@@ -8,6 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Arrays;
+import java.util.List;
 
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -38,6 +39,8 @@ public class FindCommandParser implements Parser<FindCommand> {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
+
+        checkPrefixes(argMultimap, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG);
 
         String name = argMultimap.getValue(PREFIX_NAME).orElse("");
         String phone = argMultimap.getValue(PREFIX_PHONE).orElse("");
@@ -83,6 +86,15 @@ public class FindCommandParser implements Parser<FindCommand> {
 
         return new FindCommand(Arrays.asList(nameKeywords), Arrays.asList(phoneKeywords),
                 Arrays.asList(addressKeywords), Arrays.asList(emailKeywords), Arrays.asList(tagKeywords));
+    }
+
+    public static void checkPrefixes(ArgumentMultimap argMultimap, Prefix... prefixes)throws ParseException {
+        for (Prefix prefix: prefixes){
+            if ((argMultimap.getAllValues(prefix).size()) > 1) {
+                throw new ParseException(
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+            }
+        }
     }
 
 }
