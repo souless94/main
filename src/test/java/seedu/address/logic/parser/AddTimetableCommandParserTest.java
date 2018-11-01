@@ -3,12 +3,15 @@ package seedu.address.logic.parser;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_FILE_EXTENSION;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_FILE_PATH;
 import static seedu.address.commons.core.Messages.MESSAGE_IS_FILE_DIRECTORY;
 import static seedu.address.commons.core.Messages.MESSAGE_NOT_UNIQUE_PREFIX_INPUT;
-import static seedu.address.commons.core.Messages.MESSAGE_TIMETABLE_NOT_FOUND;
+
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FILE_LOCATION;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static seedu.address.testutil.PersonBuilder.DEFAULT_STORED_INVALID_TIMETABLE_LOCATION;
 import static seedu.address.testutil.PersonBuilder.DEFAULT_STORED_LOCATION;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND;
 import static seedu.address.testutil.TypicalPersons.BOB;
@@ -65,18 +68,29 @@ public class AddTimetableCommandParserTest {
     }
 
     @Test
-    public void parseAddTimetableWithInvalidFileLocationFailure() {
+    public void parseAddTimetableWithInvalidFilePathFailure() {
         String targetIndex = INDEX_SECOND.getOneBased() + " ";
-        String fileLocation = BOB.getStoredLocation();
-        String expectedMessage = MESSAGE_TIMETABLE_NOT_FOUND;
-        File timetable = new File(BOB.getStoredLocation());
-        boolean doesFileExists = timetable.exists();
-        if (doesFileExists) {
-            timetable.delete();
-        }
-        doesFileExists = timetable.exists();
+        String fileLocation = DEFAULT_STORED_INVALID_TIMETABLE_LOCATION + "/test/test.csv";
+        String expectedMessage = MESSAGE_INVALID_FILE_PATH;
         String userInput = targetIndex + PREFIX_FILE_LOCATION + fileLocation;
-        assertFalse(doesFileExists);
+        assertParseFailure(parser, userInput, expectedMessage);
+    }
+
+    @Test
+    public void parseAddTimetableWithNoDirFilePathFailure() {
+        String targetIndex = INDEX_SECOND.getOneBased() + " ";
+        String fileLocation = "gg.csv";
+        String expectedMessage = MESSAGE_INVALID_FILE_PATH;
+        String userInput = targetIndex + PREFIX_FILE_LOCATION + fileLocation;
+        assertParseFailure(parser, userInput, expectedMessage);
+    }
+
+    @Test
+    public void parseAddTimetableWithInvalidFileExtension() {
+        String targetIndex = INDEX_SECOND.getOneBased() + " ";
+        String fileLocation = DEFAULT_STORED_INVALID_TIMETABLE_LOCATION + "/1.txt";
+        String expectedMessage = MESSAGE_INVALID_FILE_EXTENSION;
+        String userInput = targetIndex + PREFIX_FILE_LOCATION + fileLocation;
         assertParseFailure(parser, userInput, expectedMessage);
     }
 

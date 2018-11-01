@@ -107,8 +107,8 @@ Example:
 === Editing a person : `edit`
 
 Edits an existing person in the address book. +
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [f/FORMAT]
-[sl/STORED_LOCATION] [dl/DOWNLOAD_LOCATION] [t/TAG]...`
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS]
+[fl/STORED_LOCATION] [t/TAG]...`
 
 ****
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index *must be a positive integer* 1, 2, 3, ...
@@ -116,6 +116,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [f/FORMAT]
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
 * You can remove all the person's tags by typing `t/` without specifying any tags after it.
+*
 ****
 
 Examples:
@@ -124,8 +125,8 @@ Examples:
 Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 * `edit 2 n/Betsy Crower t/` +
 Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
-* `edit 1 f/vertical sl/C:\Users\admin\Downloads\cs2103\tiredAndSadness` +
-Edits the format and stored location of the 1st person to be `vertical` and `C:/Users/admin/Downloads/cs2103/tiredAndSadness/` respectively.
+* `edit 1 sl/C:\Users\admin\Downloads\cs2103\tiredAndSadness` +
+Edits the stored location of the 1st person to be `C:/Users/admin/Downloads/cs2103/tiredAndSadness/` respectively.
 
 === Locating persons with search all (except email): `find`
 
@@ -351,40 +352,39 @@ Format: `clear`
 == Timetable(Wen Kai)
 
 === Adding a timetable: `add_timetable`
-user to download timetable template first using download_timetable INDEX and changing csv at the location +
-add details of a timetable csv file to the person specified by `INDEX` from the stored folder of the person specified by `INDEX` if no file location is present. +
-Adds details of a timetable csv file to the person specified by the `INDEX` from file location if file location is present. +
-Will not be able to add if timetable is not present in the stored location of person specified by `INDEX`. +
-Existing values will be overwritten by the input values. +
+User to download timetable template first before using download_timetable INDEX and change csv at the location. +
 Reload page by clicking on another person and then click again +
-Or right click and select the reload page option.
+Or right click on timetable and select the reload page option.
 
 Format: `add_timetable INDEX [fl/FILE_LOCATION]`
 
 ****
-* Excel will delete leading zeros of timetable csv file by default.
+* add details of a timetable csv file to the person specified by `INDEX` from the stored folder of the person specified by `INDEX` if no file location is present.
+* Adds details of a timetable csv file to the person specified by the `INDEX` from file location if file location is present.
 * Add the timetable at the specified `INDEX`.
+* Existing values will be updated to the input values.
 * The index refers to the index number shown in the displayed person list.
 * The index *must be a positive integer* 1, 2, 3, ...
+* Will not be able to add if timetable is not present in the stored location of person specified by `INDEX`
 ****
 
 Examples:
 
 * `add_timetable 1`
 
-* `add_timetable 1 fl/C:\Users\timetable\timetable.csv `
+* `add_timetable 1 fl/C:\Users\timetable\timetable.csv`
 
 === editing a timetable: `edit_timetable`
 Edits a timetable timeslot of the timetable from the person specified by the `INDEX`. +
-days are days of a week. And timings are in 24h format from 0800 to 2300. Existing values will be overwritten by the input details.
 Format: `add_timetable INDEX day/DAY timing/TIMING [m/DETAILS]  `
 
 ****
-* Add the timetable at the specified `INDEX`.
+* timings are in 24h format from 0800 to 2300.
+* Existing values will be overwritten by the input details.
+* days are days of a week in *full name(case insensitive)* from Monday to Friday.
+* edit the timetable at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list.
 * The index *must be a positive integer* 1, 2, 3, ...
-day refers to days of a week and day is in *full name(case insensitive)* monday,tuesday,TUesday ...
-timing is in 24h format and is from 0800 to 2300
 ****
 
 Examples:
@@ -395,13 +395,14 @@ Examples:
 
 === Download timetable : `download_timetable`
 
-Download a timetable from the person specified by the `INDEX` to the stored folder from the person specified by the `INDEX` as a csv file. Will not download if there is a file with same filename as the filename of the timetable from the person specified by the `INDEX`. +
+Download a timetable from the person specified by the `INDEX` to the stored folder from the person specified by the `INDEX` as a csv file.  +
 Format: `download_timetable INDEX `
 
 ****
 * Download the timetable at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list.
 * The index *must be a positive integer* 1, 2, 3, ...
+* Will not download if there is a file with same filename as the filename of the timetable from the person specified by the `INDEX`.
 ****
 
 Examples:
