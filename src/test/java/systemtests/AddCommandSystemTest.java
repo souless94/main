@@ -110,7 +110,6 @@ public class AddCommandSystemTest extends AddressBookSystemTest {
         /* -------------------------- Perform add operation on the shown filtered list ------------------------------ */
 
         /* Case: filters the person list before adding -> added */
-        //showPersonsWithName(KEYWORD_MATCHING_MEIER);
         showPersonsWithName(KEYWORD_MATCHING_MEIER);
         assertCommandSuccess(IDA);
 
