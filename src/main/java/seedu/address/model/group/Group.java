@@ -116,9 +116,9 @@ public class Group extends Entity {
     }
 
     /**
-     * Returns all available time slots among the group as a String in ascending order in terms of timing
+     * Returns all time slots where everyone among the group is available at as a String in ascending order in terms of timing
      */
-    public String listEveryoneAvailableTimeslots() {
+    public String listAllAvailableTimeslots() {
         Iterator<Person> personItr = groupMembers.iterator();
         StringBuilder builder = new StringBuilder();
         TreeSet<Integer> availableSlots = new TreeSet<>();
