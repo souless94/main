@@ -36,7 +36,9 @@ import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.RegisterCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.UndoCommand;
+import seedu.address.logic.commands.ViewGroupAvailableTimeslotCommand;
 import seedu.address.logic.commands.ViewGroupCommand;
+import seedu.address.logic.commands.ViewGroupRankedAvailableTimeslotCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -89,6 +91,9 @@ public class AddressBookParser {
         case DeleteCommand.COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);
 
+        case DeleteMemberCommand.COMMAND_WORD:
+            return new DeleteMemberCommandParser().parse(arguments);
+
         case AddGroupCommand.COMMAND_WORD:
             return new AddGroupCommandParser().parse(arguments);
 
@@ -101,14 +106,17 @@ public class AddressBookParser {
         case FindGroupCommand.COMMAND_WORD:
             return new FindGroupCommandParser().parse(arguments);
 
+        case ViewGroupAvailableTimeslotCommand.COMMAND_WORD:
+            return new ViewGroupAvailableTimeslotCommandParser().parse(arguments);
+
+        case ViewGroupRankedAvailableTimeslotCommand.COMMAND_WORD:
+            return new ViewGroupRankedAvailableTimeslotCommandParser().parse(arguments);
+
         case ViewGroupCommand.COMMAND_WORD:
             return new ViewGroupCommandParser().parse(arguments);
 
         case RegisterCommand.COMMAND_WORD:
             return new RegisterCommandParser().parse(arguments);
-
-        case DeleteMemberCommand.COMMAND_WORD:
-            return new DeleteMemberCommandParser().parse(arguments);
 
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();

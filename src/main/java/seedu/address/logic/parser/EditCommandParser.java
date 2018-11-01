@@ -4,10 +4,9 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_FILE_LOCATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_STORED_LOCATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Collection;
@@ -37,7 +36,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         ArgumentMultimap argMultimap =
             ArgumentTokenizer
                 .tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG,
-                    PREFIX_FORMAT, PREFIX_STORED_LOCATION);
+                    PREFIX_FILE_LOCATION);
 
         Index index;
 
@@ -65,13 +64,10 @@ public class EditCommandParser implements Parser<EditCommand> {
             editPersonDescriptor
                 .setAddress(ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get()));
         }
-        if (argMultimap.getValue(PREFIX_FORMAT).isPresent()) {
+        if (argMultimap.getValue(PREFIX_FILE_LOCATION).isPresent()) {
             editPersonDescriptor
-                .setFormat(argMultimap.getValue(PREFIX_FORMAT).get());
-        }
-        if (argMultimap.getValue(PREFIX_STORED_LOCATION).isPresent()) {
-            editPersonDescriptor
-                .setStoredLocation(argMultimap.getValue(PREFIX_STORED_LOCATION).get());
+                .setStoredLocation(
+                    ParserUtil.parseLocation(argMultimap.getValue(PREFIX_FILE_LOCATION).get()));
         }
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG))
             .ifPresent(editPersonDescriptor::setTags);

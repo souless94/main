@@ -25,8 +25,10 @@ public class DeleteTimetableCommand extends Command {
 
     public static final String COMMAND_WORD = "delete_timetable";
     public static final String MESSAGE_USAGE =
-        COMMAND_WORD + ": delete timetable and adds a default timetable to the person identified"
-            + "by the index number used in the displayed person list."
+        COMMAND_WORD
+            + ": delete timetable from stored location and adds a default timetable to the person identified"
+            + "by the index number used in the displayed person list. \n"
+            + "resets the timetable of the person if there is no timetable in the stored location"
             + " \n"
             + "Parameters : INDEX (must be a positive integer) "
             + "Example: " + COMMAND_WORD + " 1 ";
@@ -34,6 +36,8 @@ public class DeleteTimetableCommand extends Command {
     public static final String MESSAGE_DELETE_TIMETABLE_SUCCESS = "delete and reset timetable successfully";
 
     public static final String MESSAGE_RESET_TIMETABLE_SUCCESS = "reset timetable successfully";
+
+    public static final String MESSAGE_DELETE_TIMETABLE_FAILURE = "timetable was not deleted, but reset successfully";
 
     private final Index index;
 
@@ -54,12 +58,17 @@ public class DeleteTimetableCommand extends Command {
         model.commitAddressBook();
         if (toBeDeleted.exists()) {
             toBeDeleted.delete();
-            return new CommandResult(
-                String.format(MESSAGE_DELETE_TIMETABLE_SUCCESS, updatedPerson));
+            if (!toBeDeleted.exists()) {
+                return new CommandResult(
+                    String.format(MESSAGE_DELETE_TIMETABLE_SUCCESS, updatedPerson));
+            } else {
+                throw new CommandException(MESSAGE_DELETE_TIMETABLE_FAILURE);
+            }
         } else {
             return new CommandResult(
                 String.format(MESSAGE_RESET_TIMETABLE_SUCCESS, updatedPerson));
         }
+
     }
 
     /**
@@ -75,6 +84,13 @@ public class DeleteTimetableCommand extends Command {
         Address updatedAddress = personToEdit.getAddress();
         Set<Tag> updatedTags = personToEdit.getTags();
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags,
-            "default", "default", "default");
+            null, null);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+            || (other instanceof DeleteTimetableCommand // instanceof handles nulls
+            && index.equals(((DeleteTimetableCommand) other).index));
     }
 }
