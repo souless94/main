@@ -8,7 +8,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Arrays;
-import java.util.List;
 
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -88,8 +87,13 @@ public class FindCommandParser implements Parser<FindCommand> {
                 Arrays.asList(addressKeywords), Arrays.asList(emailKeywords), Arrays.asList(tagKeywords));
     }
 
+    /**
+     * Parses the given {@code Prefix, ArgumentMultimap} of arguments
+     * to check no more than 1 prefix of the same type has been keyed.
+     * @throws ParseException if the user input does not conform the expected format
+     */
     public static void checkPrefixes(ArgumentMultimap argMultimap, Prefix... prefixes)throws ParseException {
-        for (Prefix prefix: prefixes){
+        for (Prefix prefix: prefixes) {
             if ((argMultimap.getAllValues(prefix).size()) > 1) {
                 throw new ParseException(
                         String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
