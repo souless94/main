@@ -10,9 +10,7 @@ public class Messages {
     public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "The person index provided is invalid";
     public static final String MESSAGE_INVALID_DAY = "Days are in full name, from Monday to Friday";
     public static final String MESSAGE_INVALID_TIMING = "timings are in 24h format and is from 0800 to 2300";
-    public static final String MESSAGE_INVALID_DAY_AND_TIMING =
-    public static final String MESSAGE_INVALID_FILE = "timetable can only be in csv";
-        MESSAGE_INVALID_DAY + "\n" + MESSAGE_INVALID_TIMING;
+    public static final String MESSAGE_INVALID_DAY_AND_TIMING = MESSAGE_INVALID_DAY + "\n" + MESSAGE_INVALID_TIMING;
     public static final String MESSAGE_INVALID_FILE_EXTENSION = "timetable can only be in csv";
     public static final String MESSAGE_INVALID_FILE_PATH = "That is not a valid file path";
     public static final String MESSAGE_NO_MATCH_TO_EXISTING_GROUP = "There is no match to an existing group.";
