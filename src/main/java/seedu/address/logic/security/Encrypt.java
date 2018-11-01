@@ -12,6 +12,9 @@ import com.google.common.hash.Hashing;
  */
 public class Encrypt {
 
+    /**
+     * Encrypts a given string
+     */
     public static String encryptString(String plainString) {
         String encryptedString = Hashing.sha256()
             .hashString(plainString, StandardCharsets.UTF_8)
