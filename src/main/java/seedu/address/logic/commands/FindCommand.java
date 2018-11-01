@@ -1,6 +1,11 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.List;
 
@@ -17,10 +22,22 @@ public class FindCommand extends Command {
 
     public static final String COMMAND_WORD = "find";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons with any parameters contain any of "
-            + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
-            + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " alex friends gardens";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all person in the address book " +
+            "(Prefix Search/ Case-Insensitive) and displays them as a list.\n"
+            + "Parameters:\n"
+            + PREFIX_NAME + "NAME "
+            + PREFIX_PHONE + "PHONE "
+            + PREFIX_EMAIL + "EMAIL "
+            + PREFIX_ADDRESS + "ADDRESS "
+            + "[" + PREFIX_TAG + "TAG]...\n"
+            + "Example: " + COMMAND_WORD + " "
+            + PREFIX_NAME + "alex "
+            + PREFIX_PHONE + "99272758 "
+            + PREFIX_EMAIL + "charlotte@example.com "
+            + PREFIX_ADDRESS + "Tampines "
+            + PREFIX_TAG + "friends family\n"
+            + "Example: " + COMMAND_WORD + " n/alex bernice e/lidavid@example.com";
+
 
     public final List<String> nameKeywords;
     public final List<String> phoneKeywords;
