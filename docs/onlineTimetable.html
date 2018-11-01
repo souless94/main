@@ -3,10 +3,7 @@
 <head>
   <meta charset="utf-8">
     <title>Dummy Search Page</title>
-</head>
-<body>
-    <p id="check"></p>
-  <script type="text/javascript">
+    <script type="text/javascript">
       function getJsonFromUrl() {
       var query = location.search.substr(1);
       var result = {};
@@ -18,8 +15,15 @@
     }
 	var matrixAsString = "";
 	document.addEventListener("DOMContentLoaded", function(event) {
-      matrixAsString =getJsonFromUrl().name;
+      document.getElementById("name").value=getJsonFromUrl();
     });
+    </script>
+</head>
+<body>
+    <p id="check"></p>
+    <input type ="hidden" id="name" value="">
+  <script type="text/javascript">
+     var matrixAsString = document.getElementById("name").value;
      if (matrixAsString == ""){
           document.getElementById("check").innerHTML= "there seems to be an issue";
           var m = null;
