@@ -133,9 +133,9 @@ public class AddressBookParser {
 
             case ViewGroupRankedAvailableTimeslotCommand.COMMAND_WORD:
                 return new ViewGroupRankedAvailableTimeslotCommandParser().parse(arguments);
-                
+
             case ViewGroupEveryoneAvailableTimeslotCommand.COMMAND_WORD:
-                return new ViewGroupEveryoneAvailableTimeslotCommandParser().parse(arguments);    
+                return new ViewGroupEveryoneAvailableTimeslotCommandParser().parse(arguments);
 
             case ClearCommand.COMMAND_WORD:
                 return new ClearCommand();
