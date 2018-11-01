@@ -19,7 +19,6 @@ import com.opencsv.CSVWriter;
 public class TimetableData {
 
     private final String[][] timetable;
-    private final boolean[][] booleanTimetable;
     private String[] timings = {"0800", "0900", "1000", "1100", "1200", "1300",
         "1400", "1500", "1600", "1700", "1800", "1900", "2000", "2100", "2200", "2300"};
     private final String[] days = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday",
@@ -60,7 +59,6 @@ public class TimetableData {
         }
         this.timetable = timetable;
         checkTimetableForCorrectRowsAndColumns();
-        this.booleanTimetable = booleanTimetableData(this.timetable);
     }
 
     /**
@@ -118,6 +116,15 @@ public class TimetableData {
             timetableMatrix = readTimetableData(storedLocation, timetableMatrix);
         }
         return timetableMatrix;
+    }
+
+    /**
+     *
+     * @return a 2D boolean matrix of a timetable
+     */
+    public boolean[][] getBooleanTimetableData() {
+        String[][] timetableMatrix = this.getTimetable();
+        return stringMatrixToBooleanMatrix(timetableMatrix);
     }
 
     /**
@@ -238,14 +245,7 @@ public class TimetableData {
      * @return a string matrix of a timetable
      */
     public String[][] getTimetable() {
-        return timetable;
-    }
-
-    /**
-     * @return a string matrix of a timetable
-     */
-    public boolean[][] getBooleanTimetable() {
-        return booleanTimetable;
+        return this.timetable;
     }
 
     /**
@@ -282,18 +282,18 @@ public class TimetableData {
     }
 
     /**
-     * creates a boolean timetable for quick access
+     * takes in 2d string matrix and converts it into a 2d boolean matrix
      *
      * @return a boolean 2D array
      */
-    public boolean[][] booleanTimetableData(String[][] timetable) {
+    public boolean[][] stringMatrixToBooleanMatrix(String[][] timetable) {
         boolean[][] booleanTimetable = new boolean[this.noOfRows][this.noOfColumns];
         for (int i = 1; i < this.noOfRows; i++) {
             for (int j = 1; j < this.noOfColumns; j++) {
                 if (timetable[i][j].equals(" ")) {
-                    booleanTimetable[j][i] = true;
+                    booleanTimetable[i][j] = true;
                 } else {
-                    booleanTimetable[j][i] = false;
+                    booleanTimetable[i][j] = false;
                 }
             }
         }
