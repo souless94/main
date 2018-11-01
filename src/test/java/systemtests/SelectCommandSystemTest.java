@@ -13,6 +13,8 @@ import static seedu.address.testutil.TypicalPersons.KEYWORD_MATCHING_MEIER;
 import org.junit.Test;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.CreateCommand;
+import seedu.address.logic.commands.LoginCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.UndoCommand;
@@ -22,6 +24,12 @@ public class SelectCommandSystemTest extends AddressBookSystemTest {
     @Test
     public void select() {
         /* ------------------------ Perform select operations on the shown unfiltered list -------------------------- */
+
+        /* Case: create account and login first */
+        String createCommand = CreateCommand.COMMAND_WORD + " u/user pw/pass";
+        executeCommand(createCommand);
+        String loginCommand = LoginCommand.COMMAND_WORD + " u/user pw/pass";
+        executeCommand(loginCommand);
 
         /* Case: select the first card in the person list, command with leading spaces and trailing spaces
          * -> selected
