@@ -32,7 +32,7 @@ public class CommandBoxTest extends GuiUnitTest {
 
         CommandBox commandBox = new CommandBox(logic);
         commandBoxHandle = new CommandBoxHandle(getChildNode(commandBox.getRoot(),
-                CommandBoxHandle.COMMAND_INPUT_FIELD_ID));
+            CommandBoxHandle.COMMAND_INPUT_FIELD_ID));
         uiPartRule.setUiPart(commandBox);
 
         defaultStyleOfCommandBox = new ArrayList<>(commandBoxHandle.getStyleClass());
@@ -97,7 +97,7 @@ public class CommandBoxTest extends GuiUnitTest {
         assertInputHistory(KeyCode.UP, COMMAND_THAT_FAILS);
         assertInputHistory(KeyCode.UP, COMMAND_THAT_SUCCEEDS);
         assertInputHistory(KeyCode.DOWN, COMMAND_THAT_FAILS);
-        
+
         assertInputHistory(KeyCode.DOWN, thirdCommand);
         assertInputHistory(KeyCode.DOWN, "");
     }
@@ -128,8 +128,8 @@ public class CommandBoxTest extends GuiUnitTest {
 
     /**
      * Runs a command that fails, then verifies that <br>
-     *      - the text remains <br>
-     *      - the command box's style is the same as {@code errorStyleOfCommandBox}.
+     * - the text remains <br>
+     * - the command box's style is the same as {@code errorStyleOfCommandBox}.
      */
     private void assertBehaviorForFailedCommand() {
         commandBoxHandle.run(COMMAND_THAT_FAILS);
@@ -139,8 +139,8 @@ public class CommandBoxTest extends GuiUnitTest {
 
     /**
      * Runs a command that succeeds, then verifies that <br>
-     *      - the text is cleared <br>
-     *      - the command box's style is the same as {@code defaultStyleOfCommandBox}.
+     * - the text is cleared <br>
+     * - the command box's style is the same as {@code defaultStyleOfCommandBox}.
      */
     private void assertBehaviorForSuccessfulCommand() {
         commandBoxHandle.run(COMMAND_THAT_SUCCEEDS);

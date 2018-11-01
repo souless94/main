@@ -2,7 +2,6 @@ package seedu.address.logic.commands;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.Test;
 
@@ -31,17 +30,17 @@ public class LoginCommandTest {
         assertFalse(login.getLoginIsSuccessful());
     }
 
-    @Test // expects null pointer exception since we are using a username that is not in hashmap
-    public void executeLoginWithWrongUsernameFailure() {
-        String wrongUsername = "wrong-username";
-        String rightPassword = "test-password";
-        Accounts wrongAccount = new Accounts(wrongUsername, rightPassword);
 
-        assertThrows(NullPointerException.class, (
-        ) -> {
-            LoginCommand login = new LoginCommand(wrongAccount);
-        });
+    @Test
+    public void executeLoginWithWrongUserName() {
+        String rightUsername = "wrong-username";
+        String wrongPassword = "test-password";
+        Accounts wrongAccount = new Accounts(rightUsername, wrongPassword);
+
+        LoginCommand login = new LoginCommand(wrongAccount);
+        assertFalse(login.getLoginIsSuccessful());
     }
+
 
 
 }

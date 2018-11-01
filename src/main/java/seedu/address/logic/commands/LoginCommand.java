@@ -33,23 +33,23 @@ public class LoginCommand extends Command {
             + PREFIX_USERNAME + "username "
             + PREFIX_PASSWORD + "password ";
 
-    private static final String MESSAGE_FAILURE = "Login failed!";
+    private static final String MESSAGE_FAILURE = "Login failed! "
+        + "Please check your username and/or password.";
     //TODO: throw exception message
 
     /**
      * Login
      */
     public LoginCommand(Accounts account) {
-        if (UserAccountStorage.checkPasswordMatch(account.getUsername(), account.getPassword())) {
+        if (!UserAccountStorage.checkDuplicateUser(account.getUsername())) {
+            loginIsSuccessful = false;
+        } else if (UserAccountStorage.checkPasswordMatch(account.getUsername(), account.getPassword())) {
             loginIsSuccessful = true;
             AddressBookParser.updateLoggedOnStatus(true);
         } else {
             loginIsSuccessful = false;
         }
     }
-
-
-
 
 
     @Override
