@@ -1,7 +1,8 @@
 package seedu.address.logic.security;
 
 import java.nio.charset.StandardCharsets;
-import java.util.Base64;
+
+import com.google.common.hash.Hashing;
 
 
 //@@author aspiringdevslog
@@ -12,7 +13,11 @@ import java.util.Base64;
 public class Encrypt {
 
     public static String encryptString(String plainString) {
-        return Base64.getEncoder().encodeToString(plainString.getBytes(StandardCharsets.UTF_8));
+        String encryptedString = Hashing.sha256()
+            .hashString(plainString, StandardCharsets.UTF_8)
+            .toString();
+
+        return encryptedString;
     }
 
     public static String decryptString(String encryptedString) {
