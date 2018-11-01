@@ -5,7 +5,6 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_TIMETABLE_NOT_FOUND;
 import static seedu.address.logic.commands.EditTimetableCommand.createUpdatedPerson;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FILE_LOCATION;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_GROUPS;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.io.File;
@@ -14,6 +13,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.group.Group;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.timetable.Timetable;
 
@@ -91,9 +91,11 @@ public class AddTimetableCommand extends Command {
                 }
             }
             Person updatedPerson = createUpdatedPerson(personToEdit, timetable, filePath);
+            for (Group group : personToEdit.getGroups()) {
+                CommandUtil.replacePersonInGroup(model, group, personToEdit, updatedPerson);
+            }
             model.update(personToEdit, updatedPerson);
             model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-            model.updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
             model.commitAddressBook();
             return new CommandResult(
                 String.format(MESSAGE_ADD_TIMETABLE_SUCCESS, updatedPerson.getStoredLocation()));
