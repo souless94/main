@@ -42,7 +42,8 @@ public class BrowserPanelTest extends GuiUnitTest {
 
         // associated web page of a person TODO change expectedPersonUrl when done uploading the page
         postNow(selectionChangedEventStub);
-        URL expectedPersonUrl = browserPanelHandle.getLoadedUrl();
+        URL expectedPersonUrl = new URL(
+            BrowserPanel.ONLINE_PAGE_URL + ALICE.getTimetable().getTimetableAsString());
 
         waitUntilBrowserLoaded(browserPanelHandle);
         assertEquals(expectedPersonUrl, browserPanelHandle.getLoadedUrl());
