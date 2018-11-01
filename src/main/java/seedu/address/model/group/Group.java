@@ -123,7 +123,6 @@ public class Group extends Entity {
         Iterator<Person> personItr = groupMembers.iterator();
         StringBuilder builder = new StringBuilder();
         TreeSet<Integer> availableSlots = new TreeSet<>();
-        Iterator<Integer> slotsItr = availableSlots.iterator();
         boolean isFirstPerson = true;
         while (personItr.hasNext()) {
             Person currPerson = personItr.next();
@@ -138,24 +137,17 @@ public class Group extends Entity {
                 }
                 isFirstPerson = false;
             } else {
-                while (slotsItr.hasNext()) {
-                    int currTimeslot = slotsItr.next();
-                    builder.append("First person is free at " + currTimeslot + "\n");
-                    int row = currTimeslot / 100;
-                    int col = currTimeslot % 100;
-                    if (!isFree[row][col]) {
-                        builder.append(currPerson.getName() + " is not free at current slot\n");
-                        availableSlots.remove(currTimeslot);
-                    }
-                    if (availableSlots.isEmpty()) {
-                        return "There are no available slots!";
+                for (int i = 1; i <= 7; i++) {
+                    for (int j = 1; j <= 16; j++) {
+                        int currTimeslot = i * 100 + j;
+                        if (availableSlots.contains(currTimeslot) && !isFree[i][j]) {
+                            availableSlots.remove(currTimeslot);
+                        }
                     }
                 }
             }
-            if (personItr.hasNext()) {
-                slotsItr = availableSlots.iterator();
-            }
         }
+        Iterator<Integer> slotsItr = availableSlots.iterator();
         while (slotsItr.hasNext()) {
             int currTimeslot2 = slotsItr.next();
             int day = currTimeslot2 / 100;
