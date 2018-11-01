@@ -581,12 +581,19 @@ Examples:
 
 === login to an account : `login`
 Login into the system. +
+Users are required to login to execute most commands of the NUS Hangs
+
 Format: `login u/USERNAME pw/PASSWORD`
 Examples:
 
 * `login u/username pw/dontUseWeakPassword`
 
-=== Changing password: `update_pw `
+===	Encrypt timetable data
+
+Encrypts password so that it will not be stored as plain text.
+This function runs when dealing with user's password.
+
+=== Changing password: `update_pw `  `[coming in v2.0]`
 
 Change the user password, requires user to be logged in first. +
 Format: `update_pw c/CURRENT_PASSWORD n/NEW_PASSWORD`
@@ -595,29 +602,12 @@ Examples:
 
 * `update_pw c/password n/newpass`
 
-===	Encrypt timetable data : `encrypt `
 
-Encrypt a timetable, requires user to be logged in first. +
-Format: `encrypt t/TIMETABLE_INDEX`
-
-Examples:
-
-* `encrypt t/1`
-
-===	Decrypt timetable data  : `decrypt `
-
-Decrypt a timetable, requires user to be logged in first. +
-Format: `decrypt t/TIMETABLE_INDEX`
-
-Examples:
-
-* `decrypt t/1`
-
-=== get Security question password : `get`
+=== get Security question password : `get` `[coming in v2.0]`
 Shows the security question . +
 Format: `get`
 
-===	Reset password  : `reset`
+===	Reset password  : `reset` `[coming in v2.0]`
 
 Resets a password by answering the security question correctly. +
 Format: `reset a/SECURITY_ANSWER n/NEW_PASSWORD`
@@ -626,7 +616,7 @@ Examples:
 
 * `reset a/Near the moon`
 
-===	Changing security question and answer : `update_sq`
+===	Changing security question and answer : `update_sq` `[coming in v2.0]`
 
 Change the user security question and answer, requires user to be logged in first. +
 Format: `update_sq c/CURRENT_PASSWORD [n/NEWSECURITY_QUESTION]  [a/SECURITY_ANSWER]`
@@ -682,19 +672,15 @@ e.g. `delete_group 3`
 * *viewgroup* : `view_group i/GROUP_INDEX`+
 e.g. `viewgroup 3`
 * *register* `register f/FRIEND_INDEX g/GROUP_INDEX` +
-e.g. `register f/1 g/1`
+e.g. `register f/1 g/1`cr
 * *find_time* : `find k/KTH_BEST g/GROUPINDEX` +
 e.g. `find k/1 g/1`
-* *create* : `create u/USERNAME p/PASSWORD e/EMAIL q/SECURITY_QUESTION a/SECURITY_ANSWER` +
-e.g. `create u/iamgod p/kamisama e/enel@skypiea.com q/Where is fairy vearth? a/Near the moon`
-* *login* : `login u/USERNAME p/PASSWORD` +
-e.g. `login u/James Jake p/gg`
+* *create* : `create u/USERNAME pw/PASSWORD` +
+e.g. `create u/user pw/strongpass`
+* *login* : `login u/USERNAME pw/PASSWORD` +
+e.g. `login u/user pw/strongpass`
 * *update_pw* : `update_pw c/CURRENT_PASSWORD n/NEW_PASSWORD` +
 e.g. `update_pw c/password n/newpass`
-* *encrypt* : `encrypt t/TIMETABLE_INDEX` +
-e.g. `encrypt t/1`
-* *decrypt* : `decrypt t/TIMETABLE_INDEX` +
-e.g. `decrypt t/1`
 * *get* : `get`
 * *reset* : `reset a/SECURITY_ANSWER n/NEW_PASSWORD` +
 e.g. `reset a/SECURITY_ANSWER n/NEW_PASSWORD`

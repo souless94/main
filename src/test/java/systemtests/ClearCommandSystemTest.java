@@ -7,6 +7,8 @@ import org.junit.Test;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.ClearCommand;
+import seedu.address.logic.commands.CreateCommand;
+import seedu.address.logic.commands.LoginCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.model.Model;
@@ -17,6 +19,12 @@ public class ClearCommandSystemTest extends AddressBookSystemTest {
     @Test
     public void clear() {
         final Model defaultModel = getModel();
+
+        /* Case: create account and login first */
+        String createCommand = CreateCommand.COMMAND_WORD + " u/user pw/pass";
+        executeCommand(createCommand);
+        String loginCommand = LoginCommand.COMMAND_WORD + " u/user pw/pass";
+        executeCommand(loginCommand);
 
         /* Case: clear non-empty address book, command with leading spaces and trailing alphanumeric characters and
          * spaces -> cleared
@@ -57,11 +65,13 @@ public class ClearCommandSystemTest extends AddressBookSystemTest {
     }
 
     /**
-     * Executes {@code command} and verifies that the command box displays an empty string, the result display
-     * box displays {@code ClearCommand#MESSAGE_SUCCESS} and the model related components equal to an empty model.
-     * These verifications are done by
-     * {@code AddressBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>
-     * Also verifies that the command box has the default style class and the status bar's sync status changes.
+     * Executes {@code command} and verifies that the command box displays an empty string, the
+     * result display box displays {@code ClearCommand#MESSAGE_SUCCESS} and the model related
+     * components equal to an empty model. These verifications are done by {@code
+     * AddressBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br> Also
+     * verifies that the command box has the default style class and the status bar's sync status
+     * changes.
+     *
      * @see AddressBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)
      */
     private void assertCommandSuccess(String command) {
@@ -69,11 +79,14 @@ public class ClearCommandSystemTest extends AddressBookSystemTest {
     }
 
     /**
-     * Performs the same verification as {@code assertCommandSuccess(String)} except that the result box displays
-     * {@code expectedResultMessage} and the model related components equal to {@code expectedModel}.
+     * Performs the same verification as {@code assertCommandSuccess(String)} except that the result
+     * box displays {@code expectedResultMessage} and the model related components equal to {@code
+     * expectedModel}.
+     *
      * @see ClearCommandSystemTest#assertCommandSuccess(String)
      */
-    private void assertCommandSuccess(String command, String expectedResultMessage, Model expectedModel) {
+    private void assertCommandSuccess(String command, String expectedResultMessage,
+        Model expectedModel) {
         executeCommand(command);
         assertApplicationDisplaysExpected("", expectedResultMessage, expectedModel);
         assertCommandBoxShowsDefaultStyle();
@@ -81,12 +94,13 @@ public class ClearCommandSystemTest extends AddressBookSystemTest {
     }
 
     /**
-     * Executes {@code command} and verifies that the command box displays {@code command}, the result display
-     * box displays {@code expectedResultMessage} and the model related components equal to the current model.
-     * These verifications are done by
-     * {@code AddressBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>
-     * Also verifies that the browser url, selected card and status bar remain unchanged, and the command box has the
-     * error style.
+     * Executes {@code command} and verifies that the command box displays {@code command}, the
+     * result display box displays {@code expectedResultMessage} and the model related components
+     * equal to the current model. These verifications are done by {@code
+     * AddressBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br> Also
+     * verifies that the browser url, selected card and status bar remain unchanged, and the command
+     * box has the error style.
+     *
      * @see AddressBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)
      */
     private void assertCommandFailure(String command, String expectedResultMessage) {
