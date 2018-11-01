@@ -5,7 +5,6 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DAY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DETAILS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIMING;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_GROUPS;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Set;
@@ -14,6 +13,8 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.UniqueList;
+import seedu.address.model.group.Group;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -71,9 +72,11 @@ public class EditTimetableCommand extends Command {
         Timetable timetable = new Timetable(filePath,
             personToEdit.getTimetable().getTimetableDataString(), 3, day, timing, details);
         Person updatedPerson = createUpdatedPerson(personToEdit, timetable, filePath);
+        for (Group group : personToEdit.getGroups()) {
+            CommandUtil.replacePersonInGroup(model, group, personToEdit, updatedPerson);
+        }
         model.update(personToEdit, updatedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        model.updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
         model.commitAddressBook();
         return new CommandResult(String.format(MESSAGE_EDIT_TIMETABLE_SUCCESS, updatedPerson));
     }
@@ -94,8 +97,11 @@ public class EditTimetableCommand extends Command {
         String storedLocation = filePath;
         String timetableString = timetable.getTimetableDataString();
 
+        UniqueList<Group> uniqueGroupList = new UniqueList<>();
+        uniqueGroupList.setElements(personToEdit.getGroups());
+
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags,
-            storedLocation, timetableString);
+            uniqueGroupList, storedLocation, timetableString);
     }
 
     @Override

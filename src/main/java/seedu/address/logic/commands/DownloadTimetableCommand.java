@@ -1,13 +1,13 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_GROUPS;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.io.File;
 import java.util.List;
 
-import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -32,7 +32,7 @@ public class DownloadTimetableCommand extends Command {
 
     public static final String MESSAGE_DOWNLOAD_TIMETABLE_SUCCESS = "timetable downloaded successfully to : ";
     public static final String MESSAGE_TIMETABLE_IS_PRESENT =
-        "there is a csv file with same name as your timetable filename";
+        "there is a csv file with same name as your timetable filename at: ";
     private final Index index;
 
     /**
@@ -50,13 +50,14 @@ public class DownloadTimetableCommand extends Command {
         List<Person> lastShownList = model.getFilteredPersonList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
         Person personToDownloadTimetable = lastShownList.get(index.getZeroBased());
         boolean doesFileExists = new File(personToDownloadTimetable.getStoredLocation()).exists();
         if (doesFileExists) {
-            throw new CommandException(MESSAGE_TIMETABLE_IS_PRESENT);
+            throw new CommandException(
+                MESSAGE_TIMETABLE_IS_PRESENT + personToDownloadTimetable.getStoredLocation());
         }
         Timetable timetable = personToDownloadTimetable.getTimetable();
         timetable.downloadTimetableAsCsv();

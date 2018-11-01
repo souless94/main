@@ -1,7 +1,6 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_GROUPS;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.io.File;
@@ -12,6 +11,8 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.UniqueList;
+import seedu.address.model.group.Group;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -54,9 +55,11 @@ public class DeleteTimetableCommand extends Command {
         File toBeDeleted = new File(personToDeleteTimetable.getStoredLocation());
 
         Person updatedPerson = createPersonWithNewTimetable(personToDeleteTimetable);
+        for (Group group : personToDeleteTimetable.getGroups()) {
+            CommandUtil.replacePersonInGroup(model, group, personToDeleteTimetable, updatedPerson);
+        }
         model.update(personToDeleteTimetable, updatedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        model.updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
         model.commitAddressBook();
         if (toBeDeleted.exists()) {
             toBeDeleted.delete();
@@ -85,8 +88,12 @@ public class DeleteTimetableCommand extends Command {
         Email updatedEmail = personToEdit.getEmail();
         Address updatedAddress = personToEdit.getAddress();
         Set<Tag> updatedTags = personToEdit.getTags();
+
+        UniqueList<Group> uniqueGroupList = new UniqueList<>();
+        uniqueGroupList.setElements(personToEdit.getGroups());
+
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags,
-            null, null);
+            uniqueGroupList, null, null);
     }
 
     @Override

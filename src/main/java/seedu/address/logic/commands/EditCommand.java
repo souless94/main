@@ -80,11 +80,9 @@ public class EditCommand extends Command {
         if (!personToEdit.isSame(editedPerson) && model.has(editedPerson)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
-
         for (Group group : editedPerson.getGroups()) {
             CommandUtil.replacePersonInGroup(model, group, personToEdit, editedPerson);
         }
-
         model.update(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         model.commitAddressBook();
