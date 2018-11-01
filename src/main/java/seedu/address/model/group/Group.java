@@ -116,7 +116,7 @@ public class Group extends Entity {
     }
 
     /**
-     * Returns all time slots where everyone among the group is available at as a String 
+     * Returns all time slots where everyone among the group is available at as a String
      * in ascending order in terms of timing
      */
     public String listAllAvailableTimeslots() {
