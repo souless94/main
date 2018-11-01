@@ -170,7 +170,7 @@ public class ParserUtil {
                 throw new ParseException(MESSAGE_INVALID_FILE_PATH);
             }
             File timetableParent = new File(timetable.getParent());
-            if (!timetableParent.exists()) {
+            if (!timetableParent.exists() || !timetableParent.isDirectory()) {
                 throw new ParseException(MESSAGE_INVALID_FILE_PATH);
             }
             if (timetable.isDirectory()) {
