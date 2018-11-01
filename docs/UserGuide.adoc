@@ -67,7 +67,7 @@ Format: `exit`
 Address book data are saved in the hard disk automatically after any command that changes the data. +
 There is no need to save manually.
 
-== Friends(Zhi Wei)
+== Person (Zhi Wei)
 === Adding a person: `add`
 
 Adds a person to the address book +
@@ -89,7 +89,7 @@ Examples:
 Shows a list of all persons in the address book. +
 Format: `list`
 
-=== Listing all groups a person is in : `list`
+=== Listing all groups a person is in : `list` (Melodies)
 
 Shows a list of all groups the person specified by his PERSON_INDEX is in. +
 Format: `list PERSON_INDEX`
