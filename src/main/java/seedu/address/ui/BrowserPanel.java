@@ -89,8 +89,7 @@ public class BrowserPanel extends UiPart<Region> {
             conn.getInputStream().close();
             return true;
         } catch (MalformedURLException e) {
-            e.printStackTrace();
-            return false;
+            throw new RuntimeException(e);
         } catch (IOException e) {
             return false;
         }

@@ -3,25 +3,34 @@
 <head>
   <meta charset="utf-8">
     <title>Dummy Search Page</title>
+    <script type="text/javascript">
+      function getJsonFromUrl() {
+      var query = location.search.substr(1);
+      var result = {};
+      query.split("&").forEach(function(part) {
+        var item = part.split("=");
+        result[item[0]] = decodeURIComponent(item[1]);
+      });
+      return result;
+    }
+	var matrixAsString = "";
+	document.addEventListener("DOMContentLoaded", function(event) {
+      document.getElementById("name").value=getJsonFromUrl();
+    });
+    </script>
 </head>
 <body>
-    <input type="hidden" id="timetable" value="">
-
     <p id="check"></p>
+    <input type ="hidden" id="name">
   <script type="text/javascript">
-      var matrixAsString =document.getElementById("timetable").value;
-      if (matrixAsString == ""){
+      var matrixAsString = document.getElementById("name").value;
+     if (matrixAsString == ""){
           document.getElementById("check").innerHTML= "there seems to be an issue";
           var m = null;
       } else{
       var matrixArray = matrixAsString.split(",");
       var rows = 8;
       var columns = 17;
-      if (matrixArray[0] == "vertical"){
-          //means vertical
-          rows=17;
-          columns=8;
-      }
       var counter =0;
       //@@author souless94 -reused
       // used code from marchen in https://stackoverflow.com/questions/39242313/how-to-create-nxn-matrix-array-in-javascript
