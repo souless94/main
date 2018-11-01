@@ -38,6 +38,8 @@ public class DeleteTimetableCommand extends Command {
 
     public static final String MESSAGE_RESET_TIMETABLE_SUCCESS = "reset timetable successfully";
 
+    public static final String MESSAGE_DELETE_TIMETABLE_FAILURE = "timetable was not deleted, but reset successfully";
+
     private final Index index;
 
     public DeleteTimetableCommand(Index index) {
@@ -58,12 +60,17 @@ public class DeleteTimetableCommand extends Command {
         model.commitAddressBook();
         if (toBeDeleted.exists()) {
             toBeDeleted.delete();
-            return new CommandResult(
-                String.format(MESSAGE_DELETE_TIMETABLE_SUCCESS, updatedPerson));
+            if (!toBeDeleted.exists()) {
+                return new CommandResult(
+                    String.format(MESSAGE_DELETE_TIMETABLE_SUCCESS, updatedPerson));
+            } else {
+                throw new CommandException(MESSAGE_DELETE_TIMETABLE_FAILURE);
+            }
         } else {
             return new CommandResult(
                 String.format(MESSAGE_RESET_TIMETABLE_SUCCESS, updatedPerson));
         }
+
     }
 
     /**

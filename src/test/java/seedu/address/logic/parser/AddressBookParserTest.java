@@ -56,7 +56,8 @@ public class AddressBookParserTest {
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
-    private final AddressBookParser parser = new AddressBookParser();
+    private final AddressBookParser parser = new AddressBookParser(true);
+
 
     @Test
     public void parseCommand_add() throws Exception {
