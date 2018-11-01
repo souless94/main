@@ -2,6 +2,8 @@ package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.commons.core.Messages.MESSAGE_USER_ALREADY_LOGGED_IN;
+import static seedu.address.commons.core.Messages.MESSAGE_USER_NOT_LOGGED_IN;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -36,7 +38,10 @@ import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.RegisterCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.UndoCommand;
+import seedu.address.logic.commands.ViewGroupAllAvailableTimeslotCommand;
 import seedu.address.logic.commands.ViewGroupCommand;
+import seedu.address.logic.commands.ViewGroupRankedAvailableTimeslotCommand;
+
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -48,6 +53,19 @@ public class AddressBookParser {
      * Used for initial separation of command word and args.
      */
     private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
+    private static boolean userIsLoggedOn = false;
+
+
+    public AddressBookParser(boolean setLoggedOn) { // for test
+        this.userIsLoggedOn = setLoggedOn;
+    }
+
+    public AddressBookParser() { // default constructor
+    }
+
+    public static void updateLoggedOnStatus(boolean status) {
+        userIsLoggedOn = status;
+    }
 
     /**
      * Parses user input into command for execution.
@@ -56,6 +74,7 @@ public class AddressBookParser {
      * @return the command based on the user input
      * @throws ParseException if the user input does not conform the expected format
      */
+
     public Command parseCommand(String userInput) throws ParseException {
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
         if (!matcher.matches()) {
@@ -64,100 +83,134 @@ public class AddressBookParser {
 
         final String commandWord = matcher.group("commandWord");
         final String arguments = matcher.group("arguments");
-        switch (commandWord) {
-        case AddTimetableCommand.COMMAND_WORD:
-            return new AddTimetableCommandParser().parse(arguments);
 
-        case EditTimetableCommand.COMMAND_WORD:
-            return new EditTimetableCommandParser().parse(arguments);
+        if (userIsLoggedOn) {
+            switch (commandWord) {
+            case AddTimetableCommand.COMMAND_WORD:
+                return new AddTimetableCommandParser().parse(arguments);
 
-        case DeleteTimetableCommand.COMMAND_WORD:
-            return new DeleteTimetableCommandParser().parse(arguments);
+            case DeleteTimetableCommand.COMMAND_WORD:
+                return new DeleteTimetableCommandParser().parse(arguments);
 
-        case DownloadTimetableCommand.COMMAND_WORD:
-            return new DownloadTimetableCommandParser().parse(arguments);
+            case DownloadTimetableCommand.COMMAND_WORD:
+                return new DownloadTimetableCommandParser().parse(arguments);
 
-        case AddCommand.COMMAND_WORD:
-            return new AddCommandParser().parse(arguments);
+            case EditTimetableCommand.COMMAND_WORD:
+                return new EditTimetableCommandParser().parse(arguments);
 
-        case EditCommand.COMMAND_WORD:
-            return new EditCommandParser().parse(arguments);
+            case AddCommand.COMMAND_WORD:
+                return new AddCommandParser().parse(arguments);
 
-        case SelectCommand.COMMAND_WORD:
-            return new SelectCommandParser().parse(arguments);
+            case EditCommand.COMMAND_WORD:
+                return new EditCommandParser().parse(arguments);
 
-        case DeleteCommand.COMMAND_WORD:
-            return new DeleteCommandParser().parse(arguments);
+            case SelectCommand.COMMAND_WORD:
+                return new SelectCommandParser().parse(arguments);
 
-        case AddGroupCommand.COMMAND_WORD:
-            return new AddGroupCommandParser().parse(arguments);
+            case DeleteCommand.COMMAND_WORD:
+                return new DeleteCommandParser().parse(arguments);
 
-        case DeleteGroupCommand.COMMAND_WORD:
-            return new DeleteGroupCommandParser().parse(arguments);
+            case AddGroupCommand.COMMAND_WORD:
+                return new AddGroupCommandParser().parse(arguments);
 
-        case EditGroupCommand.COMMAND_WORD:
-            return new EditGroupCommandParser().parse(arguments);
+            case DeleteMemberCommand.COMMAND_WORD:
+                return new DeleteMemberCommandParser().parse(arguments);
 
-        case FindGroupCommand.COMMAND_WORD:
-            return new FindGroupCommandParser().parse(arguments);
+            case DeleteGroupCommand.COMMAND_WORD:
+                return new DeleteGroupCommandParser().parse(arguments);
 
-        case ViewGroupCommand.COMMAND_WORD:
-            return new ViewGroupCommandParser().parse(arguments);
+            case EditGroupCommand.COMMAND_WORD:
+                return new EditGroupCommandParser().parse(arguments);
 
-        case RegisterCommand.COMMAND_WORD:
-            return new RegisterCommandParser().parse(arguments);
+            case FindGroupCommand.COMMAND_WORD:
+                return new FindGroupCommandParser().parse(arguments);
 
-        case DeleteMemberCommand.COMMAND_WORD:
-            return new DeleteMemberCommandParser().parse(arguments);
+            case ViewGroupCommand.COMMAND_WORD:
+                return new ViewGroupCommandParser().parse(arguments);
 
-        case ClearCommand.COMMAND_WORD:
-            return new ClearCommand();
+            case RegisterCommand.COMMAND_WORD:
+                return new RegisterCommandParser().parse(arguments);
 
-        case FindCommand.COMMAND_WORD:
-            return new FindCommandParser().parse(arguments);
+            case ViewGroupRankedAvailableTimeslotCommand.COMMAND_WORD:
+                return new ViewGroupRankedAvailableTimeslotCommandParser().parse(arguments);
 
-        case FindTagCommand.COMMAND_WORD:
-            return new FindTagCommandParser().parse(arguments);
+            case ViewGroupAllAvailableTimeslotCommand.COMMAND_WORD:
+                return new ViewGroupAllAvailableTimeslotCommandParser().parse(arguments);
 
-        case FindAddressCommand.COMMAND_WORD:
-            return new FindAddressCommandParser().parse(arguments);
+            case ClearCommand.COMMAND_WORD:
+                return new ClearCommand();
 
-        case FindPhoneCommand.COMMAND_WORD:
-            return new FindPhoneCommandParser().parse(arguments);
+            case FindCommand.COMMAND_WORD:
+                return new FindCommandParser().parse(arguments);
 
-        case FindEmailCommand.COMMAND_WORD:
-            return new FindEmailCommandParser().parse(arguments);
+            case FindTagCommand.COMMAND_WORD:
+                return new FindTagCommandParser().parse(arguments);
 
-        case FindNameCommand.COMMAND_WORD:
-            return new FindNameCommandParser().parse(arguments);
+            case FindAddressCommand.COMMAND_WORD:
+                return new FindAddressCommandParser().parse(arguments);
 
-        case ListCommand.COMMAND_WORD:
-            return new ListCommandParser().parse(arguments);
+            case FindPhoneCommand.COMMAND_WORD:
+                return new FindPhoneCommandParser().parse(arguments);
 
-        case HistoryCommand.COMMAND_WORD:
-            return new HistoryCommand();
+            case FindEmailCommand.COMMAND_WORD:
+                return new FindEmailCommandParser().parse(arguments);
 
-        case ExitCommand.COMMAND_WORD:
-            return new ExitCommand();
+            case FindNameCommand.COMMAND_WORD:
+                return new FindNameCommandParser().parse(arguments);
 
-        case HelpCommand.COMMAND_WORD:
-            return new HelpCommand();
+            case HistoryCommand.COMMAND_WORD:
+                return new HistoryCommand();
 
-        case UndoCommand.COMMAND_WORD:
-            return new UndoCommand();
+            case ExitCommand.COMMAND_WORD:
+                return new ExitCommand();
 
-        case RedoCommand.COMMAND_WORD:
-            return new RedoCommand();
+            case HelpCommand.COMMAND_WORD:
+                return new HelpCommand();
 
-        case CreateCommand.COMMAND_WORD:
-            return new CreateCommandParser().parse(arguments);
+            case UndoCommand.COMMAND_WORD:
+                return new UndoCommand();
 
-        case LoginCommand.COMMAND_WORD:
-            return new LoginCommandParser().parse(arguments);
+            case ListCommand.COMMAND_WORD:
+                return new ListCommandParser().parse(arguments);
 
-        default:
-            throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
+            case RedoCommand.COMMAND_WORD:
+                return new RedoCommand();
+
+            case CreateCommand.COMMAND_WORD:
+                return new CreateCommandParser().parse(arguments);
+
+            case LoginCommand.COMMAND_WORD:
+                throw new ParseException(MESSAGE_USER_ALREADY_LOGGED_IN);
+
+            default:
+                throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
+            }
+
+        } else {
+            switch (commandWord) {
+            case ExitCommand.COMMAND_WORD:
+                return new ExitCommand();
+
+            case HelpCommand.COMMAND_WORD:
+                return new HelpCommand();
+
+            case UndoCommand.COMMAND_WORD:
+                return new UndoCommand();
+
+            case RedoCommand.COMMAND_WORD:
+                return new RedoCommand();
+
+            case CreateCommand.COMMAND_WORD:
+                return new CreateCommandParser().parse(arguments);
+
+            case LoginCommand.COMMAND_WORD:
+                return new LoginCommandParser().parse(arguments);
+
+            default:
+                throw new ParseException(MESSAGE_USER_NOT_LOGGED_IN);
+            }
+
         }
-    }
 
+    }
 }
