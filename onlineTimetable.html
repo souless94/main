@@ -15,9 +15,11 @@
       });
       return result;
     }
-      var matrixAsString =getJsonFromUrl().name;
-      console.log(matrixAsString);
-      if (matrixAsString == ""){
+	var matrixAsString = "";
+	document.addEventListener("DOMContentLoaded", function(event) {
+      matrixAsString =getJsonFromUrl().name;
+    });
+     if (matrixAsString == ""){
           document.getElementById("check").innerHTML= "there seems to be an issue";
           var m = null;
       } else{
