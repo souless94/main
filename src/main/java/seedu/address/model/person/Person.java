@@ -4,6 +4,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.io.File;
 
+import java.nio.file.Paths;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -32,7 +33,6 @@ public class Person extends Entity {
     private final Address address;
     private final Timetable timetable;
     private final Set<Tag> tags = new HashSet<>();
-    private final String format;
     private final String storedLocation;
     private UniqueList<Group> groups;
 
@@ -41,7 +41,7 @@ public class Person extends Entity {
      * as empty list.
      */
     public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags,
-        String format, String storedLocation, String timetableString) {
+        String storedLocation, String timetableString) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
@@ -51,24 +51,20 @@ public class Person extends Entity {
         this.groups = new UniqueList<>();
 
         this.tags.addAll(tags);
-        if (format.equals("default")) {
-            this.format = "horizontal";
-        } else {
-            this.format = format;
-        }
-        if (storedLocation.equals("default")) {
-            String location = new File("").getAbsolutePath().replace("\\", "/")
-                + "/data/timetable";
+        if (storedLocation == null) {
+            String location = Paths.get("data", "timetable").toAbsolutePath().toString();
             File directory = new File(location);
             if (!directory.exists()) {
                 directory.mkdirs();
             }
-            this.storedLocation = location + "/" + String.valueOf(hashCode()) + " timetable.csv";
+            this.storedLocation =
+                location.replace("\\", "/")
+                    + "/" + String.valueOf(hashCode())
+                    + " timetable.csv";
         } else {
             this.storedLocation = storedLocation.replace("\\", "/");
         }
         this.timetable = new Timetable(this.storedLocation,
-            this.format,
             timetableString, 1, null, null, null);
     }
 
@@ -77,8 +73,8 @@ public class Person extends Entity {
      */
     public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags,
         UniqueList<Group> groups,
-        String format, String storedLocation, String timetableString) {
-        Person temp = new Person(name, phone, email, address, tags, format, storedLocation,
+        String storedLocation, String timetableString) {
+        Person temp = new Person(name, phone, email, address, tags, storedLocation,
             timetableString);
 
         this.name = temp.getName();
@@ -86,7 +82,6 @@ public class Person extends Entity {
         this.email = temp.getEmail();
         this.address = temp.getAddress();
         this.tags.addAll(temp.getTags());
-        this.format = temp.getFormat();
         this.storedLocation = temp.getStoredLocation();
         this.timetable = temp.getTimetable();
 
@@ -108,10 +103,6 @@ public class Person extends Entity {
 
     public Address getAddress() {
         return address;
-    }
-
-    public String getFormat() {
-        return format;
     }
 
     public String getStoredLocation() {

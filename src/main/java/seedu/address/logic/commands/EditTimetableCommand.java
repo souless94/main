@@ -1,5 +1,6 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.isNull;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DAY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DETAILS;
@@ -12,6 +13,8 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.UniqueList;
+import seedu.address.model.group.Group;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -29,6 +32,8 @@ public class EditTimetableCommand extends Command {
     public static final String MESSAGE_USAGE =
         COMMAND_WORD + ": edit timetable for the person identified "
             + "by the index number used in the displayed person list."
+            + "if no details is entered, make the details blank "
+            + "for the timeslot in the timetable"
             + " \n"
             + "Parameters : INDEX (must be a positive integer) "
             + "[" + PREFIX_DAY + "DAY] "
@@ -37,7 +42,7 @@ public class EditTimetableCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_DAY + "Wednesday "
             + PREFIX_TIMING + "1700 "
-            + PREFIX_DETAILS + "do cs2103";
+            + "[" + PREFIX_DETAILS + "]" + "do cs2103";
 
     public static final String MESSAGE_EDIT_TIMETABLE_SUCCESS = "timetable edited successfully";
 
@@ -64,9 +69,12 @@ public class EditTimetableCommand extends Command {
         requireNonNull(model);
         Person personToEdit = CommandUtil.retrievePersonFromIndex(model, index);
         String filePath = personToEdit.getStoredLocation();
-        Timetable timetable = new Timetable(filePath, personToEdit.getFormat(),
+        Timetable timetable = new Timetable(filePath,
             personToEdit.getTimetable().getTimetableDataString(), 3, day, timing, details);
         Person updatedPerson = createUpdatedPerson(personToEdit, timetable, filePath);
+        for (Group group : personToEdit.getGroups()) {
+            CommandUtil.replacePersonInGroup(model, group, personToEdit, updatedPerson);
+        }
         model.update(personToEdit, updatedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         model.commitAddressBook();
@@ -86,11 +94,31 @@ public class EditTimetableCommand extends Command {
         Email updatedEmail = personToEdit.getEmail();
         Address updatedAddress = personToEdit.getAddress();
         Set<Tag> updatedTags = personToEdit.getTags();
-        String format = personToEdit.getFormat();
         String storedLocation = filePath;
         String timetableString = timetable.getTimetableDataString();
 
+        UniqueList<Group> uniqueGroupList = new UniqueList<>();
+        uniqueGroupList.setElements(personToEdit.getGroups());
+
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags,
-            format, storedLocation, timetableString);
+            uniqueGroupList, storedLocation, timetableString);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (day == null && timing == null) {
+            return other == this // short circuit if same object
+                || (other instanceof EditTimetableCommand // instanceof handles nulls
+                && index.equals(((EditTimetableCommand) other).index))
+                && isNull(((EditTimetableCommand) other).day)
+                && isNull(((EditTimetableCommand) other).timing)
+                && details.equals(((EditTimetableCommand) other).details);
+        }
+        return other == this // short circuit if same object
+            || (other instanceof EditTimetableCommand // instanceof handles nulls
+            && index.equals(((EditTimetableCommand) other).index))
+            && day.equals(((EditTimetableCommand) other).day)
+            && timing.equals(((EditTimetableCommand) other).timing)
+            && details.equals(((EditTimetableCommand) other).details);
     }
 }

@@ -268,7 +268,7 @@ This section describes some noteworthy details on how certain features are imple
 The objective of the `add_timetable` feature is to to add data entries of a timetable into NUS Hangs. But it is hard to visualise the adding of the entries so we allowed user to add directly all the entries from a csv file. For `edit_timetable` , it is for User who just want to edit entries without going to find the timetable. For `download_timetable`, it is to allow the user to share their timetable to their friends.
 
 ==== How to implement
-For `add_timetable` , we create a `timetable` class in `person` first,we store the `format` of the timetable , then we create a `timetableData` class with method to create a String [][] Matrix from the data from the csv file. Then we create a timetableString to which contains information on the entries about the `timetable` and store it in the xml file of the person in the addressbook.
+For `add_timetable` , we create a `timetable` class in `person` first, then we create a `timetableData` class with method to create a String [][] Matrix from the data from the csv file. Then we create a timetableString to which contains information on the entries about the `timetable` and store it in the xml file of the person in the addressbook.
 
 ==== Current Implementation
 
@@ -539,32 +539,27 @@ The 'Person' class extends the `Entity` abstract class and it is contained withi
 The current person implementation are:
 
 * 'add' -- add any person with the choice of adding address, phone, email and tags
-* 'find' -- find all functions that search all details of any person, except for email
-* 'find_address' -- find address in any person and returns any matching keywords
-* 'find_email' -- find email in any person and returns any matching keywords
-* 'find_phone' -- find phone in any person and returns any matching keywords
-* 'find_name' -- find name in any person and returns any matching keywords
-* 'find_tag' -- find tag in any person and returns any matching keywords
+* 'find' -- finds all persons in NusHangs, whose contain keywords provided by prefix(es)
 
 The following activity diagram shows how 'find' feature works:
 
-image::FindFeature1.png[width="300"]
+image::FindFeature1.png[width="600"]
 
 ==== Design Considerations
 
 ===== Aspect: How should each specific 'find' feature work
 
-*Alternative 1 (Current Choice) :* Create a class for each information (e.g. find_address)
+*Alternative 1 (Current Choice) :* Use prefixes for specific search (e.g. find n/alex bernice t/friends)
+
+Pros: Higher flexibility. Greater control of search range
+
+Cons: Harder to implement
+
+*Alternative 2 :* Create a class for each information (e.g. find_address)
 
 Pros: Easy to implement, with specific search focus
 
 Cons: Repetitive code base with less flexibility
-
-*Alternative 2 :* Use prefixes for specific search (e.g. find a/gardens)
-
-Pros: Higher flexibility
-
-Cons: Harder to implement. May allow greater control for larger search range
 
 == Documentation
 
@@ -793,7 +788,7 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* * *` |user  |Have <<standardised,standardised>> Date,time,time zone format  |I am clear on the meeting time and dates
 
-|`* * *` |user  |view timetable in <<horizontal_mode,horizontal mode>> or <<vertical_mode,vertical mode>> |I can view my timetable faster for the mode i am familiar with
+|`* *` |user  |view timetable in <<horizontal_mode,horizontal mode>> or <<vertical_mode,vertical mode>> |I can view my timetable faster for the mode i am familiar with
 
 |`* *` |user  |Upload my timetable
 In excel format
@@ -1381,12 +1376,6 @@ _{More to be added}_
 
 [[mainstream-os]] Mainstream OS::
 Windows, Linux, Unix, OS-X
-s
-[[vertical_mode]] vertical mode::
-Vertical mode means the rows are days of the week and the columns are time
-
-[[horizontal_mode]] horizontal mode::
-Horizontal mode means the rows are time and the columns are days of the week
 
 
 [appendix]
