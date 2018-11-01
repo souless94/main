@@ -5,33 +5,33 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
 import java.util.stream.Stream;
 
-import seedu.address.logic.commands.ViewGroupEveryoneAvailableTimeslotCommand;
+import seedu.address.logic.commands.ViewGroupAllAvailableTimeslotCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Name;
 
 /**
- * Parses input arguments and creates a new ViewGroupEveryoneAvailableTimeSlotCommand object
+ * Parses input arguments and creates a new ViewGroupAllAvailableTimeSlotCommand object
  */
-public class ViewGroupEveryoneAvailableTimeslotCommandParser implements Parser<ViewGroupEveryoneAvailableTimeslotCommand> {
+public class ViewGroupAllAvailableTimeslotCommandParser implements Parser<ViewGroupAllAvailableTimeslotCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the ViewGroupEveryoneAvailableTimeSlotCommand
-     * and returns an ViewGroupEveryoneAvailableTimeSlotCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the ViewGroupAllAvailableTimeSlotCommand
+     * and returns an ViewGroupAllAvailableTimeSlotCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-    public ViewGroupEveryoneAvailableTimeslotCommand parse(String args) throws ParseException {
+    public ViewGroupAllAvailableTimeslotCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    ViewGroupEveryoneAvailableTimeslotCommand.MESSAGE_USAGE));
+                    ViewGroupAllAvailableTimeslotCommand.MESSAGE_USAGE));
         }
 
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
 
-        return new ViewGroupEveryoneAvailableTimeslotCommand(name);
+        return new ViewGroupAllAvailableTimeslotCommand(name);
     }
 
     /**

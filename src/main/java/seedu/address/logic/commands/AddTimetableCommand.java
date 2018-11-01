@@ -8,7 +8,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_FILE_LOCATION;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_GROUPS;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
-
 import java.io.File;
 
 import seedu.address.commons.core.index.Index;

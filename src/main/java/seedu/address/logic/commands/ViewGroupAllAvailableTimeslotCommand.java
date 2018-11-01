@@ -13,9 +13,9 @@ import seedu.address.model.person.Name;
 /**
  * Lists all time slots at which everyone is available
  */
-public class ViewGroupEveryoneAvailableTimeslotCommand extends Command {
+public class ViewGroupAllAvailableTimeslotCommand extends Command {
 
-    public static final String COMMAND_WORD = "view_slots_everyone";
+    public static final String COMMAND_WORD = "view_slots_all";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": View the time slots of a group "
             + "where everyone is available at"
@@ -30,7 +30,7 @@ public class ViewGroupEveryoneAvailableTimeslotCommand extends Command {
     /**
      * @param groupName of the group to find the available timeslots of its members
      */
-    public ViewGroupEveryoneAvailableTimeslotCommand(Name groupName) {
+    public ViewGroupAllAvailableTimeslotCommand(Name groupName) {
         requireNonNull(groupName);
         this.groupName = groupName;
     }
@@ -42,7 +42,7 @@ public class ViewGroupEveryoneAvailableTimeslotCommand extends Command {
         Group group = CommandUtil.retrieveGroupFromName(model, groupName);
 
         model.updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
-        return new CommandResult(MESSAGE_SUCCESS + group.listEveryoneAvailableTimeslots());
+        return new CommandResult(MESSAGE_SUCCESS + group.listAllAvailableTimeslots());
     }
 
 }
