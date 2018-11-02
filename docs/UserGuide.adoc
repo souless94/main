@@ -67,7 +67,7 @@ Format: `exit`
 Address book data are saved in the hard disk automatically after any command that changes the data. +
 There is no need to save manually.
 
-== Friends(Zhi Wei)
+== Person (Zhi Wei)
 === Adding a person: `add`
 
 Adds a person to the address book +
@@ -89,7 +89,7 @@ Examples:
 Shows a list of all persons in the address book. +
 Format: `list`
 
-=== Listing all groups a person is in : `list`
+=== Listing all groups a person is in : `list` (Melodies)
 
 Shows a list of all groups the person specified by his PERSON_INDEX is in. +
 Format: `list PERSON_INDEX`
@@ -261,7 +261,7 @@ Format: `clear`
 
 === Adding a timetable: `add_timetable`
 User to download timetable template first before using download_timetable INDEX and change csv at the location. +
-Reload page by clicking on another person and then click again +
+Reload page by clicking on another person and then click on the person again +
 Or right click on timetable and select the reload page option.
 
 Format: `add_timetable INDEX [fl/FILE_LOCATION]`
@@ -451,18 +451,18 @@ Examples:
 
 == Time slots (Nigel)
 
-=== List all time slots of a group at which everyone is available : `view_slots_everyone`
+=== List all time slots of a group at which everyone is available : `view_slots_all`
 
 List all of the available time slots in a group +
-Format: `view_slots_everyone n/GROUP_NAME `
+Format: `view_slots_all n/GROUP_NAME `
 
 ****
-* List all time slots in a group at which everyone is available at the specified `GROUPNAME`
+* List all time slots in a group at which all person in the group is available at the specified `GROUPNAME`
 ****
 
 Examples:
 
-* `view_slots_everyone n/happyfriends`
+* `view_slots_all n/happyfriends`
 
 === List all time slots of a group in descending order of availability: `view_slots_ranked`
 
@@ -492,6 +492,8 @@ Examples:
 
 Create an account in the system. The password and security answer are both case sensitive. +
 Format: `create u/USERNAME pw/PASSWORD`
+
+(Coming soon: Stores account details after closing and reopening app)
 
 Examples:
 
