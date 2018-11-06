@@ -501,6 +501,7 @@ Examples:
 * `view_slots_ranked n/happyfriends`
 
 == Security (Leslie)
+
 === Create an account: `create`
 
 Create an account in the system. The password and security answer are both case sensitive. +
@@ -522,7 +523,7 @@ Examples:
 
 * `create u/sampleUser pw/dontUseWeakPassword`
 
-=== login to an account : `login`
+=== Login to an account : `login`
 Login into the system. +
 Users are required to login to execute most commands of the NUS Hangs
 
@@ -582,6 +583,7 @@ Examples:
 *A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Address Book folder.
 
 == Command Summary
+
 * *help* : `help`
 * *add*: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…` *Inputs in square brackets are optional* +
 e.g. `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
