@@ -35,7 +35,9 @@ import org.junit.Test;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.CreateCommand;
 import seedu.address.logic.commands.EditCommand;
+import seedu.address.logic.commands.LoginCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.model.Model;
@@ -55,6 +57,12 @@ public class EditCommandSystemTest extends AddressBookSystemTest {
         Model model = getModel();
 
         /* ----------------- Performing edit operation while an unfiltered list is being shown ---------------------- */
+
+        /* Case: create account and login first */
+        String createCommand = CreateCommand.COMMAND_WORD + " u/user pw/pass";
+        executeCommand(createCommand);
+        String loginCommand = LoginCommand.COMMAND_WORD + " u/user pw/pass";
+        executeCommand(loginCommand);
 
         /* Case: edit all fields, command with leading spaces, trailing spaces and multiple spaces between each field
          * -> edited

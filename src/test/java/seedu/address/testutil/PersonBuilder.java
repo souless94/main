@@ -1,7 +1,7 @@
 package seedu.address.testutil;
 
 import java.io.File;
-
+import java.nio.file.Paths;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -26,11 +26,11 @@ public class PersonBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "alice@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
-    public static final String DEFAULT_FORMAT = "horizontal";
-    public static final String DEFAULT_STORED_LOCATION =
-        new File("").getAbsolutePath().replace("\\", "/")
-            + "/data/timetable";
-    public static final String DEFAULT_TIMETABLE_STRING = "default";
+    public static final String DEFAULT_STORED_LOCATION = Paths
+        .get("src", "test", "data", "timetable").toAbsolutePath().toString();
+    public static final String DEFAULT_STORED_INVALID_TIMETABLE_LOCATION = Paths
+        .get("src", "test", "data", "wrongTimetable").toAbsolutePath().toString();
+    public static final String DEFAULT_TIMETABLE_STRING = null;
     private Name name;
     private Phone phone;
     private Email email;
@@ -48,9 +48,20 @@ public class PersonBuilder {
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
         groups = new UniqueList<>();
-        format = DEFAULT_FORMAT;
-        storedLocation = DEFAULT_STORED_LOCATION;
-        timetableString = DEFAULT_TIMETABLE_STRING;
+        storedLocation = DEFAULT_STORED_LOCATION + "/"
+            + String.valueOf(this.hashCode()) + " timetable.csv";
+        File testDirectory = new File(DEFAULT_STORED_LOCATION);
+        if (!testDirectory.exists()) {
+            testDirectory.mkdirs();
+        }
+        File wrongTimetableDirectory = new File(DEFAULT_STORED_INVALID_TIMETABLE_LOCATION);
+        if (!wrongTimetableDirectory.exists()) {
+            wrongTimetableDirectory.mkdirs();
+        }
+        timetable = new Timetable(storedLocation, DEFAULT_TIMETABLE_STRING,
+            1, null, null,
+            null);
+        timetableString = timetable.getTimetableDataString();
         tags = new HashSet<>();
     }
 
@@ -64,8 +75,8 @@ public class PersonBuilder {
         address = personToCopy.getAddress();
         groups = new UniqueList<>();
         groups.setElements(personToCopy.getGroups());
-        format = personToCopy.getFormat();
         storedLocation = personToCopy.getStoredLocation();
+        timetable = personToCopy.getTimetable();
         timetableString = personToCopy.getTimetable().getTimetableDataString();
         tags = new HashSet<>(personToCopy.getTags());
     }
@@ -90,7 +101,8 @@ public class PersonBuilder {
      * Sets the {@code storedLocation} of the {@code Person} that we are building.
      */
     public PersonBuilder withStoredLocation(String storedLocation) {
-        this.storedLocation = storedLocation;
+        this.storedLocation = storedLocation + "/"
+            + String.valueOf(this.hashCode()) + " timetable.csv";
         return this;
     }
 
@@ -140,7 +152,7 @@ public class PersonBuilder {
      * @return a person
      */
     public Person build() {
-        return new Person(name, phone, email, address, tags, format, storedLocation,
+        return new Person(name, phone, email, address, tags, storedLocation,
             timetableString);
     }
 

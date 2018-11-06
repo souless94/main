@@ -1,5 +1,8 @@
 package seedu.address.model.person.timetable;
 
+import java.math.BigInteger;
+import java.util.Base64;
+
 import seedu.address.model.Entity;
 
 /**
@@ -8,8 +11,7 @@ import seedu.address.model.Entity;
 public class Timetable extends Entity {
 
     // Identity fields
-    private final String fileName;
-    private final String format;
+    private final String filePath;
     private final String timetableString;
 
     // create timetable data
@@ -17,27 +19,15 @@ public class Timetable extends Entity {
 
 
     /**
-     * Construct a timetable using the timetableString
+     * Construct a timetable using the timetableString if option is 1 Construct a timetable using
+     * the timetable csv file if option is 2
      */
-    public Timetable(String fileName, String format,
-        String timetableString) {
-        this.fileName = fileName + " timetable";
-        this.format = format;
-        this.matrix = new TimetableData(format, timetableString);
-        this.timetableString = getTimetableDataString();
-    }
-
-    /**
-     *   construct a timetable using a csv timetable file
-     * @param fileName
-     * @param format
-     * @param index
-     */
-    public Timetable(String fileName, String format, int index) {
-        this.fileName = fileName;
-        this.format = format;
-        this.matrix = new TimetableData(format, fileName, index);
-        this.timetableString = getTimetableDataString();
+    public Timetable(String filePath,
+        String timetableString, int option, String day, String timing, String message) {
+        this.filePath = filePath;
+        this.matrix = new TimetableData(this.filePath, timetableString,
+            option, day, timing, message);
+        this.timetableString = generateTimetableDataString();
     }
 
     /**
@@ -48,37 +38,50 @@ public class Timetable extends Entity {
         String[][] timetableMatrix = this.matrix.getTimetable();
         for (int i = 0; i < matrix.getRows(); i++) {
             for (int j = 0; j < matrix.getColumns(); j++) {
+                //@@author souless94 -reused
+                // Solution on converting string to hex string below gotten from Laurence Gonsalves
+                // from https://stackoverflow.com/questions/923863/converting-a-string-to-hexadecimal-in-java
+
+                byte[] bytes = timetableMatrix[i][j].getBytes();
+                String data = new BigInteger(bytes).toString(16);
+                //@@author
                 if (i == matrix.getRows() - 1 && j == matrix.getColumns() - 1) {
-                    timetableString += timetableMatrix[i][j];
+                    timetableString += data;
                 } else {
-                    timetableString += timetableMatrix[i][j] + ",";
+                    timetableString += data + ",";
                 }
             }
         }
         return timetableString;
     }
 
+
     /**
      * @return a timetable string for the xml storage
      */
     public String getTimetableDataString() {
+        return this.timetableString;
+    }
+
+    /**
+     * Generate a timetable string for the xml storage
+     */
+    public String generateTimetableDataString() {
         String timetableDataString = "";
         String[][] timetableMatrix = this.matrix.getTimetable();
         for (int i = 0; i < matrix.getRows(); i++) {
             for (int j = 0; j < matrix.getColumns(); j++) {
                 if (j == matrix.getColumns() - 1) {
-                    timetableDataString += timetableMatrix[i][j];
+                    timetableDataString += Base64.getEncoder()
+                        .encodeToString(timetableMatrix[i][j].getBytes());
                 } else {
-                    timetableDataString += timetableMatrix[i][j] + ",";
+                    timetableDataString += Base64.getEncoder()
+                        .encodeToString(timetableMatrix[i][j].getBytes()) + ",";
                 }
             }
             timetableDataString += "\n";
         }
         return timetableDataString;
-    }
-
-    public String getFormat() {
-        return this.format;
     }
 
     public TimetableData getTimetable() {
@@ -88,10 +91,27 @@ public class Timetable extends Entity {
     /**
      * download timetable to the given location
      */
-    public void downloadTimetable() {
-        String filepath = this.fileName;
-        this.matrix.downloadTimetableData(filepath);
+    public void downloadTimetableAsCsv() {
+        String filepath = this.filePath;
+        this.matrix.downloadTimetableDataAsCsv(filepath);
     }
+
+    public boolean isValid() {
+        return isCorrectSize() && hasCorrectFirstRowsAndColumns();
+    }
+
+    public boolean isCorrectSize() {
+        return this.matrix.isCorrectSize();
+    }
+
+    public boolean hasCorrectFirstRowsAndColumns() {
+        return this.matrix.hasCorrectFirstRowsAndColumns();
+    }
+
+    public String[][] getTimetableMatrix() {
+        return this.matrix.getTimetable();
+    }
+
 
     @Override
     public boolean isSame(Object other) {
@@ -105,4 +125,5 @@ public class Timetable extends Entity {
         Timetable otherTimetable = (Timetable) other;
         return otherTimetable.equals(other);
     }
+
 }

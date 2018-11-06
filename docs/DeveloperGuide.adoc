@@ -263,39 +263,50 @@ Certain properties of the application can be controlled (e.g App name, logging l
 This section describes some noteworthy details on how certain features are implemented.
 
 === Timetable Feature
+
+==== Reason for implementation
+The objective of the `add_timetable` feature is to to add data entries of a timetable into NUS Hangs. But it is hard to visualise the adding of the entries so we allowed user to add directly all the entries from a csv file. For `edit_timetable` , it is for User who just want to edit entries without going to find the timetable. For `download_timetable`, it is to allow the user to share their timetable to their friends.
+
+==== How to implement
+For `add_timetable` , we create a `timetable` class in `person` first, then we create a `timetableData` class with method to create a String [][] Matrix from the data from the csv file. Then we create a timetableString to which contains information on the entries about the `timetable` and store it in the xml file of the person in the addressbook.
+
 ==== Current Implementation
 
-The `timetable` is contained in `person` which is in `model`.
+The current `timetable` commands are:
 
 * `add_timetable` -- adds a timetable from the csv file to the person.
 * `delete_timetable` -- delete a timetable from the person and creates a default timetable in person. It will also find the timetable csv file of the person and deletes it.
+* `edit_timetable` -- edit a timetable timeslot in the person
 * `download_timetable` -- downloads a timetable into a csv file into a stored folder location from the person.
 
 These operations are handled by the `logic` component and uses the `person` in `model` to do the execution.
+
+Given below is an activity diagram.
+
+image::timetableworkflow.png[width="500"]
 
 Given below is an example usage scenario and how the `add_timetable` behaves at each step.
 
 Step 1: The user launches the application for the first time. The NUS Hangs will initialise the person with the timetable with the details which was stored using Storage.
 
-image::addTimetable-step-1.png[width="300"]
+Step 2:  user finds a timetable of first `person` in the stored location which is called 495011161 timetable.csv. Using this command, User does not need to find the timetable. As shown in the diagram below its easy to see what event the person has.
 
-Step 2:  user opens a timetable of first `person` in the stored location and edits it via microsoft excel or with his preferred software.
+image::addTimetable-step-2.png[width="500"]
 
-image::addTimetable-step-2.png[width="300"]
+Step 3: The user executes `add_timetable 1` to add the timetable of first `person` in stored folder to NUS hangs. A new `timetable` will be created containing the data of the `timetable` of first `person` in stored folder. The `timetable` of first `person` will be replaced by this new `timetable`.
 
-Step 3: The user executes `add_timetable 1` to add the timetable of first `person` in stored folder to NUS hangs. A new `timetable` will be created containing the data of the `timetable` of first `person` in stored folder. The `timetable` of first `person` will be replaced by this new `timetable`. The `timetable` is then added to storage as a String.
+The `timetable` is then added to storage as a String which contains all of the data. This is to allow the app to save time in storage.
 
-image::addTimetable-step-3.png[width="300"]
 
 The following sequence diagram shows how `add_timetable` works.
 
 image::addtimetablediagram.png[width="500"]
 
 ==== Design Considerations
-* **Alternative 1 (current choice for v1.2):** adds the timetable via a csv file.
+* **Alternative 1 :** adds the timetable via a csv file.
 ** Pros: Easier for user to visualise and edit his timetable
 ** Cons: Hard to implement. No choice other than to edit his timetable from the stored folder defined.
-* **Alternative 2 :** adds the timetable via a csv file from other locations.
+* **Alternative 2 (current choice) :** adds the timetable via a csv file from other locations.
 ** Pros: Easier for user to visualise and edit his timetable and allows user a choice on where to edit his timetable.
 ** Cons: Hard to implement, and user has to know how to get file location of a file.
 * **Alternative 3:** User knows how to edit via the xml file of the person.
@@ -305,11 +316,11 @@ image::addtimetablediagram.png[width="500"]
 ===== Aspect: Data structure to support the add_timetable commands
 
 * **Alternative 1 (current choice):** Use a String [][] Matrix to store entries of the timetable.
-** Pros: Easy for new Computer Science student undergraduates to understand, who are likely to be the new incoming developers of our project.
-** Cons: Slower Time efficiency because using 2 for loops to fill the Matrix with the data.
+** Pros: Easy for new Computer Science student undergraduates to understand, who are likely to be the new incoming developers of our project. Better intuition to access entries of the matrix (matrix[i][j]) Which makes `edit_timetable` easier to implement.
+** Cons: Slower Time efficiency because using 2 for loops to fill the Matrix with the data. Unable to use functions in ArrayList.
 * **Alternative 2:** Use ArrayList<ArrayList<String>>
-** Pros: Faster Time efficiency because using 1 for loops to fill the Matrix with the data.
-** Cons: Harder for new Computer Science student undergraduates to understand, who are likely to be the new incoming developers of our project.
+** Pros: Faster Time efficiency because using 1 for loops to fill the Matrix with the data. Able to use functions in ArrayList
+** Cons: Harder for new Computer Science student undergraduates to understand, who are likely to be the new incoming developers of our project. Less intuition to access entries of the matrix (matrix.get(i).get(j)).
 
 === Security Mechanism
 
@@ -342,6 +353,13 @@ The first step in securing the system is to restrict access to unauthorised user
 Both functions are handled by the logic component, make use of the model component and is eventually managed through the storage component.
 
 The username is stored as a key in a hashmap while the password is encrypted and stored as the value. By using a hashmap to store the account login credentials, it becomes easy to implement the create and login function.
+
+.Sequence Diagram of Create Command
+image::CreateCommandSequenceDiagram.png[width="800"]
+
+
+.Sequence Diagram of Login Command
+image::LoginCommandSequenceDiagram.png[width="800"]
 
 *To be implemented: *
 
@@ -399,7 +417,7 @@ In version 2.0, encryption would be extended to other essential data stored with
 
 ==== Design Considerations
 
-Aspect: Create and Login
+===== Aspect: Create and Login
 
 *Alternative 1 (current choice):* create stores data in a hashmap.
 
@@ -424,7 +442,7 @@ Cons:
 
 [LeslieTODO: to be updated: ]
 
-Aspect: How encryption executes
+===== Aspect: How encryption executes
 
 *Alternative 1 (current choice):* a function call to encryption before storing password data into hashmap. when logging in, a function call encrypts the user entered password before comparing to stored password in hashmap
 
@@ -456,7 +474,7 @@ The current group commands added are:
 * `register` -- register a member into an existing group and include a reference to the group in the member (Person class)
 * `delete_member` -- delete an existing member from an existing group and remove reference to that group in the member
 * `view_group` -- view the existing members in the group and is updated whenever any member is added or deleted.
-* `list` -- lists both the updated list of groups and persons
+* `list [index]` -- lists all the groups the person at [index] is currently in.
 
 These functions and their parsers are handled in `Logic`, makes use of and updates `Model` and `Storage` and displaying the updated result on the `UI`.
 
@@ -471,11 +489,16 @@ Step 3: `RegisterCommand` adds the person as a member in the group and adds a re
 Step 4: `Model` is updated of the new `Group` and `Person`. `FilteredPersonList` and `FilteredGroupList` is also updated to display the new groups and persons in the `UI`. A successful message is also displayed to the user below the UI's command box.
 [MelodiesTODO: Elaborate on how connection to UI is created.]
 
-[Include sequence diagram here]
+.Sequence Diagram of RegisterCommand (Logic component)
+image::RegisterCommandLogicSequenceDiagram.png[width="750"]
+
+
+.Sequence Diagram of RegisterCommand (Model component)
+image::RegisterCommandModelSequenceDiagram.png[width="750"]
 
 ==== Design Considerations
 
-Aspect: How to implement `Group` class
+===== Aspect: How to implement `Group` class
 
 *Alternative 1 (current choice):* `Group` as an immutable class.
 
@@ -489,7 +512,7 @@ Pros: Easier and less code for methods involving groups. Faster as do not have t
 
 Cons: Miss out on the advantages of immutable object (above). Good practice to use immutable objects.
 
-Aspect: Interactions between person and groups
+===== Aspect: Interactions between person and groups
 
 Deleting a person from a group will affect the person's reference to that group and vice versa (similar for adding and editing).
 
@@ -516,16 +539,27 @@ The 'Person' class extends the `Entity` abstract class and it is contained withi
 The current person implementation are:
 
 * 'add' -- add any person with the choice of adding address, phone, email and tags
-* 'find' -- find all functions that search all details of any person, except for email
-* 'find_address' -- find address in any person and returns any matching keywords
-* 'find_email' -- find email in any person and returns any matching keywords
-* 'find_phone' -- find phone in any person and returns any matching keywords
-* 'find_name' -- find name in any person and returns any matching keywords
-* 'find_tag' -- find tag in any person and returns any matching keywords
+* 'find' -- finds all persons in NusHangs, whose contain keywords provided by prefix(es)
+
+The following activity diagram shows how 'find' feature works:
+
+image::FindFeature1.png[width="600"]
 
 ==== Design Considerations
 
-To be continued :)
+===== Aspect: How should each specific 'find' feature work
+
+*Alternative 1 (Current Choice) :* Use prefixes for specific search (e.g. find n/alex bernice t/friends)
+
+Pros: Higher flexibility. Greater control of search range
+
+Cons: Harder to implement
+
+*Alternative 2 :* Create a class for each information (e.g. find_address)
+
+Pros: Easy to implement, with specific search focus
+
+Cons: Repetitive code base with less flexibility
 
 == Documentation
 
@@ -754,7 +788,7 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* * *` |user  |Have <<standardised,standardised>> Date,time,time zone format  |I am clear on the meeting time and dates
 
-|`* * *` |user  |view timetable in <<horizontal_mode,horizontal mode>> or <<vertical_mode,vertical mode>> |I can view my timetable faster for the mode i am familiar with
+|`* *` |user  |view timetable in <<horizontal_mode,horizontal mode>> or <<vertical_mode,vertical mode>> |I can view my timetable faster for the mode i am familiar with
 
 |`* *` |user  |Upload my timetable
 In excel format
@@ -964,7 +998,7 @@ Use case ends.
 
 1.	User logins to System and requests help to add a timetable
 2.	System shows how to add a timetable
-3.	User adds inputs accordingly
+3.	User enters inputs accordingly
 4.	System shows his timetable and ask user for confirmation.
 5.	User confirms the addition of his timetable into the System.
 6.	System shows his timetable is added successfully.
@@ -988,6 +1022,53 @@ Use case resumes at step 2.
 +
 Use case ends
 
+[discrete]
+=== Use case: edit a timetable
+*MSS*
+
+1.	User logins to System and requests help to edit a timetable
+2.	System shows how to edit a timetable
+3.	User enters inputs accordingly
+4.	System shows his timetable and ask user for confirmation.
+5.	User confirms the edit of his timetable into the System.
+6.	System shows his timetable is edit successfully.
+
+
+*Extensions*
+
+* 3a. User enters invalid input.
++
+[none]
+** 3a1.System shows an error message.
++
+Use case resumes at step 2.
+* 4a.User does not confirm the addition of the timetable into the System.
++
+Use case ends
+
+[discrete]
+=== Use case: download a timetable
+*MSS*
+
+1.	User logins to System and requests help to download a timetable
+2.	System shows how to download a timetable
+3.	User enters inputs accordingly
+4.	System shows his timetable and ask user for confirmation.
+5.	User confirms the edit of his timetable into the System.
+6.	System shows his timetable is edit successfully.
+
+
+*Extensions*
+
+* 3a. User enters invalid input.
++
+[none]
+** 3a1.System shows an error message.
++
+Use case resumes at step 2.
+* 4a.User does not confirm the download of the timetable
++
+Use case ends
 
 [discrete]
 === Use case: Delete a timetable
@@ -1295,12 +1376,6 @@ _{More to be added}_
 
 [[mainstream-os]] Mainstream OS::
 Windows, Linux, Unix, OS-X
-
-[[vertical_mode]] vertical mode::
-Vertical mode means the rows are days of the week and the columns are time
-
-[[horizontal_mode]] horizontal mode::
-Horizontal mode means the rows are time and the columns are days of the week
 
 
 [appendix]

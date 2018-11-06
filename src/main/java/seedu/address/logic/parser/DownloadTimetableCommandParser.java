@@ -21,13 +21,13 @@ public class DownloadTimetableCommandParser implements Parser<DownloadTimetableC
         Index index;
         try {
             index = ParserUtil.parseIndex(args);
-            return new DownloadTimetableCommand(index);
+
         } catch (ParseException pe) {
             throw new ParseException(
                 String
                     .format(MESSAGE_INVALID_COMMAND_FORMAT, DownloadTimetableCommand.MESSAGE_USAGE),
                 pe);
         }
-
+        return new DownloadTimetableCommand(index);
     }
 }

@@ -26,9 +26,8 @@ class DeleteTimetableCommandTest {
     void deleteTimetableSuccess() {
         Person personToDeleteTimetable = model.getFilteredPersonList()
             .get(INDEX_FIRST.getZeroBased());
-        personToDeleteTimetable.getTimetable().downloadTimetable();
-        assertTrue(new File(personToDeleteTimetable.getStoredLocation()
-            + "/" + personToDeleteTimetable.hashCode() + " timetable.csv").exists());
+        personToDeleteTimetable.getTimetable().downloadTimetableAsCsv();
+        assertTrue(new File(personToDeleteTimetable.getStoredLocation()).exists());
         DeleteTimetableCommand deleteTimetableCommand = new DeleteTimetableCommand(
             INDEX_FIRST);
         String expectedMessage = String
@@ -41,7 +40,28 @@ class DeleteTimetableCommandTest {
         assertCommandSuccess(deleteTimetableCommand, model, commandHistory, expectedMessage,
             expectedModel);
 
-        assertFalse(new File(personToDeleteTimetable.getStoredLocation()
-            + "/" + personToDeleteTimetable.hashCode() + " timetable.csv").exists());
+        assertFalse(new File(personToDeleteTimetable.getStoredLocation()).exists());
+    }
+
+    @Test
+    void resetTimetableSuccess() {
+        Person personToDeleteTimetable = model.getFilteredPersonList()
+            .get(INDEX_FIRST.getZeroBased());
+        File timetable = new File(personToDeleteTimetable.getStoredLocation());
+        if (timetable.exists()) {
+            timetable.delete();
+        }
+        assertFalse(timetable.exists());
+        DeleteTimetableCommand deleteTimetableCommand = new DeleteTimetableCommand(
+            INDEX_FIRST);
+        String expectedMessage = String
+            .format(DeleteTimetableCommand.MESSAGE_RESET_TIMETABLE_SUCCESS,
+                personToDeleteTimetable);
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
+            new UserPrefs());
+        expectedModel.update(model.getFilteredPersonList().get(0), personToDeleteTimetable);
+        expectedModel.commitAddressBook();
+        assertCommandSuccess(deleteTimetableCommand, model, commandHistory, expectedMessage,
+            expectedModel);
     }
 }

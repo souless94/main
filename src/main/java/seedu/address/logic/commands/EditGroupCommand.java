@@ -37,7 +37,7 @@ public class EditGroupCommand extends Command {
 
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_EDIT_GROUP_SUCCESS = "Edited Group: %1$s";
-    public static final String MESSAGE_DUPLICATE_GROUP = "This person already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_GROUP = "This group already exists in the address book.";
 
     private final Name oldName;
     private final EditGroupDescriptor editGroupDescriptor;
@@ -64,6 +64,10 @@ public class EditGroupCommand extends Command {
 
         if (!groupToBeEdited.isSame(editedGroup) && model.has(editedGroup)) {
             throw new CommandException(MESSAGE_DUPLICATE_GROUP);
+        }
+
+        for (Person person : editedGroup.getGroupMembers()) {
+            CommandUtil.replaceGroupInPerson(model, person, groupToBeEdited, editedGroup);
         }
 
         model.update(groupToBeEdited, editedGroup);

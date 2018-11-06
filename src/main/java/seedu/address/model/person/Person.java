@@ -4,6 +4,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.io.File;
 
+import java.nio.file.Paths;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -18,8 +19,7 @@ import seedu.address.model.tag.Tag;
 
 /**
  * Represents a Person in the address book. Guarantees: details are present and not null, field
- * values are validated, immutable.
- * #TODO: Remove setGroups method and combine 2 constructors into 1 (by v1.3)
+ * values are validated, immutable. #TODO: Remove setGroups method
  */
 public class Person extends Entity {
 
@@ -32,16 +32,15 @@ public class Person extends Entity {
     private final Address address;
     private final Timetable timetable;
     private final Set<Tag> tags = new HashSet<>();
-    private final String format;
     private final String storedLocation;
     private UniqueList<Group> groups;
 
     /**
-     * Every field must be present and not null. creates a person with timetable
-     * Initialises groups as empty list.
+     * Every field must be present and not null. creates a person with timetable Initialises groups
+     * as empty list.
      */
     public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags,
-        String format, String storedLocation, String timetableString) {
+        String storedLocation, String timetableString) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
@@ -51,62 +50,42 @@ public class Person extends Entity {
         this.groups = new UniqueList<>();
 
         this.tags.addAll(tags);
-        if (format.equals("default")) {
-            this.format = "horizontal";
-        } else {
-            this.format = format;
-        }
-        if (storedLocation.equals("default")) {
-            this.storedLocation = new File("").getAbsolutePath().replace("\\", "/")
-                + "/data/timetable";
-            File directory = new File(this.storedLocation);
+        if (storedLocation == null) {
+            String location = Paths.get("data", "timetable").toAbsolutePath().toString();
+            File directory = new File(location);
             if (!directory.exists()) {
                 directory.mkdirs();
             }
+            this.storedLocation =
+                location.replace("\\", "/")
+                    + "/" + String.valueOf(hashCode())
+                    + " timetable.csv";
         } else {
             this.storedLocation = storedLocation.replace("\\", "/");
         }
-        this.timetable = new Timetable(this.storedLocation + "/"
-            + this.hashCode(),
-            this.format,
-            timetableString);
+        this.timetable = new Timetable(this.storedLocation,
+            timetableString, 1, null, null, null);
     }
 
     /**
-     * Every field must be present and not null. creates a person with timetable
-     * Initialises groups as empty list.
+     * Every field must be present and not null. creates a person with timetable.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, UniqueList<Group> groups,
-                  String format, String storedLocation, String timetableString) {
-        requireAllNonNull(name, phone, email, address, tags);
-        this.name = name;
-        this.phone = phone;
-        this.email = email;
-        this.address = address;
+    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags,
+        UniqueList<Group> groups,
+        String storedLocation, String timetableString) {
+        Person temp = new Person(name, phone, email, address, tags, storedLocation,
+            timetableString);
+
+        this.name = temp.getName();
+        this.phone = temp.getPhone();
+        this.email = temp.getEmail();
+        this.address = temp.getAddress();
+        this.tags.addAll(temp.getTags());
+        this.storedLocation = temp.getStoredLocation();
+        this.timetable = temp.getTimetable();
 
         this.groups = new UniqueList<>();
         this.groups.setElements(groups.asUnmodifiableObservableList());
-
-        this.tags.addAll(tags);
-        if (format.equals("default")) {
-            this.format = "horizontal";
-        } else {
-            this.format = format;
-        }
-        if (storedLocation.equals("default")) {
-            this.storedLocation = new File("").getAbsolutePath().replace("\\", "/")
-                    + "/data/timetable";
-            File directory = new File(this.storedLocation);
-            if (!directory.exists()) {
-                directory.mkdirs();
-            }
-        } else {
-            this.storedLocation = storedLocation.replace("\\", "/");
-        }
-        this.timetable = new Timetable(this.storedLocation + "/"
-                + String.valueOf(this.hashCode()),
-                this.format,
-                timetableString);
     }
 
     public Name getName() {
@@ -123,10 +102,6 @@ public class Person extends Entity {
 
     public Address getAddress() {
         return address;
-    }
-
-    public String getFormat() {
-        return format;
     }
 
     public String getStoredLocation() {

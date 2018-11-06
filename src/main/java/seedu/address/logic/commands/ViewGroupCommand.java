@@ -2,7 +2,6 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_GROUPS;
 
 import java.util.function.Predicate;
 
@@ -43,9 +42,27 @@ public class ViewGroupCommand extends Command {
         Group group = CommandUtil.retrieveGroupFromName(model, groupName);
 
         Predicate<Person> predicateShowAllGroupMembers = person -> group.getGroupMembers().contains(person);
+        Predicate<Group> predicateShowGroupOnly = g -> group.equals(g);
 
-        model.updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
+        model.updateFilteredGroupList(predicateShowGroupOnly);
         model.updateFilteredPersonList(predicateShowAllGroupMembers);
         return new CommandResult(MESSAGE_SUCCESS);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        // short circuit if same object
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof ViewGroupCommand)) {
+            return false;
+        }
+
+        // state check
+        ViewGroupCommand e = (ViewGroupCommand) other;
+        return groupName.equals(e.groupName);
     }
 }

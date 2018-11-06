@@ -2,10 +2,19 @@ package seedu.address.model.group;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Objects;
+import java.util.TreeMap;
+import java.util.TreeSet;
+import java.util.stream.Collectors;
 
 import javafx.collections.ObservableList;
+
 import seedu.address.model.Entity;
 import seedu.address.model.UniqueList;
 import seedu.address.model.person.Name;
@@ -70,6 +79,128 @@ public class Group extends Entity {
         while (itr.hasNext()) {
             builder.append(count).append(". ").append(itr.next().getName().fullName).append("\n");
             count += 1;
+        }
+        return builder.toString();
+    }
+
+    /**
+     * Returns the string representation of the integer variable "day" used in listAvailableTimeslots
+     * and listRankedAvailableTimeslots
+     */
+    private String dayToString(int day) {
+        switch (day) {
+        case 1:
+            return "Monday";
+
+        case 2:
+            return "Tuesday";
+
+        case 3:
+            return "Wednesday";
+
+        case 4:
+            return "Thursday";
+
+        case 5:
+            return "Friday";
+
+        case 6:
+            return "Saturday";
+
+        case 7:
+            return "Sunday";
+
+        default:
+            return "Invalid day";
+        }
+    }
+
+    /**
+     * Returns all time slots where everyone among the group is available at as a String
+     * in ascending order in terms of timing
+     */
+    public String listAllAvailableTimeslots() {
+        Iterator<Person> personItr = groupMembers.iterator();
+        StringBuilder builder = new StringBuilder();
+        TreeSet<Integer> availableSlots = new TreeSet<>();
+        boolean isFirstPerson = true;
+        while (personItr.hasNext()) {
+            Person currPerson = personItr.next();
+            boolean[][] isFree = currPerson.getTimetable().getTimetable().getBooleanTimetableData();
+            if (isFirstPerson) {
+                for (int i = 1; i <= 7; i++) {
+                    for (int j = 1; j <= 16; j++) {
+                        if (isFree[i][j]) {
+                            availableSlots.add(i * 100 + j);
+                        }
+                    }
+                }
+                isFirstPerson = false;
+            } else {
+                for (int i = 1; i <= 7; i++) {
+                    for (int j = 1; j <= 16; j++) {
+                        int currTimeslot = i * 100 + j;
+                        if (availableSlots.contains(currTimeslot) && !isFree[i][j]) {
+                            availableSlots.remove(currTimeslot);
+                        }
+                    }
+                }
+            }
+        }
+        Iterator<Integer> slotsItr = availableSlots.iterator();
+        while (slotsItr.hasNext()) {
+            int currTimeslot2 = slotsItr.next();
+            int day = currTimeslot2 / 100;
+            int timing = (currTimeslot2 % 100 + 7) * 100;
+            builder.append("Day: ");
+            builder.append(dayToString(day));
+            builder.append(" ").append("Time: ").append(Integer.toString(timing)).append("\n");
+        }
+        return builder.toString();
+    }
+    /**
+     * Returns the time slots among the group as a String in descending order with respect to number of
+     * people available and then ascending order in terms of timing
+     */
+    public String listRankedAvailableTimeslots() {
+        Iterator<Person> personItr = groupMembers.iterator();
+        StringBuilder builder = new StringBuilder();
+        TreeMap<Integer, Integer> availableSlots = new TreeMap<>();
+        while (personItr.hasNext()) {
+            Person currPerson = personItr.next();
+            boolean[][] isFree = currPerson.getTimetable().getTimetable().getBooleanTimetableData();
+            for (int i = 1; i <= 7; i++) {
+                for (int j = 1; j <= 16; j++) {
+                    if (isFree[i][j]) {
+                        int slot = i * 100 + j;
+                        if (availableSlots.containsKey(slot)) {
+                            int count = availableSlots.get(slot) + 1;
+                            availableSlots.put(slot, count);
+                        } else {
+                            availableSlots.put(slot, 1);
+                        }
+                    }
+                }
+            }
+        }
+        Map<Integer, Integer> sortedSlots = availableSlots.entrySet().stream()
+                                                          .sorted(Collections.reverseOrder
+                                                                  (Comparator.comparing(Entry::getValue)))
+                                                          .collect(Collectors.toMap(Entry::getKey, Entry::getValue, (
+                                                                  e1, e2) -> e1, LinkedHashMap::new));
+        int prev = 0;
+        for (Integer key : sortedSlots.keySet()) {
+            int currTimeslot = key;
+            int day = currTimeslot / 100;
+            int timing = (currTimeslot % 100 + 7) * 100;
+            int availablePersons = sortedSlots.get(key);
+            if (availablePersons != prev) {
+                builder.append("Number of people available: " + availablePersons + "\n");
+                prev = availablePersons;
+            }
+            builder.append("Day: ");
+            builder.append(dayToString(day));
+            builder.append(" ").append("Time: ").append(Integer.toString(timing)).append("\n");
         }
         return builder.toString();
     }

@@ -1,5 +1,10 @@
 package seedu.address.logic.security;
 
+import java.nio.charset.StandardCharsets;
+
+import com.google.common.hash.Hashing;
+
+
 //@@author aspiringdevslog
 
 /**
@@ -7,8 +12,15 @@ package seedu.address.logic.security;
  */
 public class Encrypt {
 
+    /**
+     * Encrypts a given string
+     */
     public static String encryptString(String plainString) {
-        return plainString.concat("encrypt123456");
+        String encryptedString = Hashing.sha256()
+            .hashString(plainString, StandardCharsets.UTF_8)
+            .toString();
+
+        return encryptedString;
     }
 
     public static String decryptString(String encryptedString) {

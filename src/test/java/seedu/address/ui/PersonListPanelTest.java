@@ -29,7 +29,8 @@ public class PersonListPanelTest extends GuiUnitTest {
     private static final ObservableList<Person> TYPICAL_PERSONS =
         FXCollections.observableList(getTypicalPersons());
 
-    private static final JumpToListRequestEvent JUMP_TO_SECOND_EVENT = new JumpToListRequestEvent(INDEX_SECOND);
+    private static final JumpToListRequestEvent JUMP_TO_SECOND_EVENT = new JumpToListRequestEvent(
+        INDEX_SECOND);
 
     private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "sandbox");
 
@@ -57,7 +58,8 @@ public class PersonListPanelTest extends GuiUnitTest {
         postNow(JUMP_TO_SECOND_EVENT);
         guiRobot.pauseForHuman();
 
-        PersonCardHandle expectedPerson = personListPanelHandle.getPersonCardHandle(INDEX_SECOND.getZeroBased());
+        PersonCardHandle expectedPerson = personListPanelHandle
+            .getPersonCardHandle(INDEX_SECOND.getZeroBased());
         PersonCardHandle selectedPerson = personListPanelHandle.getHandleToSelectedCard();
         assertCardEquals(expectedPerson, selectedPerson);
     }
@@ -102,9 +104,18 @@ public class PersonListPanelTest extends GuiUnitTest {
             builder.append("<phone>000</phone>\n");
             builder.append("<email>a@aa</email>\n");
             builder.append("<address>a</address>\n");
-            builder.append("<format>horizontal</format>\n");
             builder.append("<storedLocation>default</storedLocation>\n");
-            builder.append("<timetableString>default</timetableString>\n");
+            builder.append(
+                "<timetableString>IA==,MDgwMA==,MDkwMA==,MTAwMA==,MTEwMA==,MTIwMA==,MTMwMA==,"
+                    + "MTQwMA==,MTUwMA==,MTYwMA==,MTcwMA==,MTgwMA==,MTkwMA==,MjAwMA==,MjEwMA==,MjIwMA==,MjMwMA==\n"
+                    + "TW9uZGF5,IA==,IA==,IA==,IA==,IA==,IA==,IA==,IA==,IA==,IA==,IA==,IA==,IA==,IA==,IA==,IA==\n"
+                    + "VHVlc2RheQ==,IA==,IA==,IA==,IA==,IA==,IA==,IA==,IA==,IA==,IA==,IA==,IA==,IA==,IA==,IA==,IA==\n"
+                    + "V2VkbmVzZGF5,IA==,IA==,IA==,IA==,IA==,IA==,IA==,IA==,IA==,IA==,IA==,IA==,IA==,IA==,IA==,IA==\n"
+                    + "VGh1cnNkYXk=,IA==,IA==,IA==,IA==,IA==,IA==,IA==,IA==,IA==,IA==,IA==,IA==,IA==,IA==,IA==,IA==\n"
+                    + "RnJpZGF5,IA==,IA==,IA==,IA==,IA==,IA==,IA==,IA==,IA==,IA==,IA==,IA==,IA==,IA==,IA==,IA==\n"
+                    + "U2F0dXJkYXk=,IA==,IA==,IA==,IA==,IA==,IA==,IA==,IA==,IA==,IA==,IA==,IA==,IA==,IA==,IA==,IA==\n"
+                    + "U3VuZGF5,IA==,IA==,IA==,IA==,IA==,IA==,IA==,IA==,IA==,IA==,IA==,IA==,IA==,IA==,IA==,IA=="
+                    + "</timetableString>\n");
             builder.append("</persons>\n");
 
         }
