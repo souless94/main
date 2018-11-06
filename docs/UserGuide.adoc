@@ -482,19 +482,7 @@ Examples:
 List all time slots of a group in descending order of availability: +
 Format: `view_slots_ranked n/GROUP_NAME`
 
-****TAG]...`
-75
-* Inputs in square brackets are optional
-76
-​
-77
-[TIP]
-78
-A person can have any number of tags (including 0)
-79
-​
 * List all time slots of a group in descending order of availability at the specified `GROUPNAME`
-****
 
 Examples:
 
