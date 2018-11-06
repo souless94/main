@@ -489,17 +489,6 @@ Examples:
 * `view_slots_ranked n/happyfriends`
 
 == Security (Leslie)
-
-=== Create an account: `create`
-
-Create an account in the system. The password and security answer are both case sensitive. +
-Format: `create u/USERNAME pw/PASSWORD`
-
-Examples:
-
-* `create u/sampleUser pw/dontUseWeakPassword`
-
-== Security (Leslie)
 === Create an account: `create`
 
 Create an account in the system. The password and security answer are both case sensitive. +
