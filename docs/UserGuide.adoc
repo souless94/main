@@ -286,7 +286,7 @@ Examples:
 
 === Editing a timetable: `edit_timetable`
 Edits a timetable timeslot of the timetable from the person specified by the `INDEX`. +
-Format: `edit_timetable INDEX day/DAY timing/TIMING [m/DETAILS]  `
+Format: `edit_timetable INDEX day/DAY timing/TIMING [m/DETAILS]`
 
 ****
 * timings are in 24h format from 0800 to 2300.
