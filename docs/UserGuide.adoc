@@ -33,9 +33,9 @@ image::Ui.png[width="790"]
 e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 .  Some example commands you can try:
 
-* *`list_friends`* : lists all friends you added
-* **`add_friend`**`add u/Damith C. Rajapakse` : adds a friend named `Damith C. Rajapakse ` to Erium.
-* **`delete`**`3` : deletes the 3rd friend shown in the current friend list
+* *`list`* : lists all person
+* *`add_group`*: `add_group n/Family d/This is a family group description` : adds a group named "Family" with the following description.
+* *`delete_group`*: `delete_group n/Family` : deletes the Family group from NUS Hang.
 * *`exit`* : exits the app
 
 .  Refer to <<Features>> for details of each command.
@@ -48,7 +48,7 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `n/NAME_OF_FRIEND`, `NAME_OF_FRIEND` is a parameter which can be used as `add n/John Doe`.
 * Items in square brackets are optional e.g `n/NAME [i/INDEX_OF_TIMETABLE]` can be used as `n/John Doe i/1` or as `n/John Doe`.
-* Parameters can be in any order e.g. if the command specifies `n/NAME_OF_FRIEND i/INDEX_OF_TIMETABLE`, `i/INDEX_OF_TIMETABLE n/NAME_OF_FRIEND` is also acceptable.
+* Parameters can be in any order e.g. if the command specifies `n/GROUPNAME INDEX`, `INDEX n/GROUPNAME` is also acceptable.
 ====
 
 == common
@@ -67,11 +67,11 @@ Format: `exit`
 Address book data are saved in the hard disk automatically after any command that changes the data. +
 There is no need to save manually.
 
-== Person (Zhi Wei)
+== Person
 === Adding a person: `add`
 
 Adds a person to the address book +
-Format: `add n/NAME [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...`
 * Inputs in square brackets are optional
 
 [TIP]
@@ -93,6 +93,8 @@ Format: `list`
 
 Shows a list of all groups the person specified by his PERSON_INDEX is in. +
 Format: `list PERSON_INDEX`
+
+(Remember to `list` first)
 
 ****
 * List the groups that the person at the specified `INDEX` is currently in. The index refers to the index number shown in the displayed person list. The index *must be a positive integer* 1, 2, 3, ...
@@ -128,7 +130,7 @@ Edits the name of the 2nd person to be `Betsy Crower` and clears all existing ta
 * `edit 1 sl/C:\Users\admin\Downloads\cs2103\tiredAndSadness` +
 Edits the stored location of the 1st person to be `C:/Users/admin/Downloads/cs2103/tiredAndSadness/` respectively.
 
-=== Finding a person : `find`
+=== Finding a person : `find` (ZhiWei)
 
 Finds all persons in NusHangs, whose contain keywords provided by prefix(es). +
 Format: `find [n/NAME...] [p/PHONE_NUMBER...] [e/EMAIL...] [a/ADDRESS...] [t/TAG...]`
@@ -144,7 +146,7 @@ Format: `find [n/NAME...] [p/PHONE_NUMBER...] [e/EMAIL...] [a/ADDRESS...] [t/TAG
 Examples:
 
 * `find n/alex` +
-Returns any person having names `Alex Yeoh`
+Returns any person having names with `alex`
 * `find n/Betsy Tim John` +
 Returns any person having names `Betsy`, `Tim`, or `John`
 * `find n/alex bernice t/friends` +
@@ -282,7 +284,7 @@ Examples:
 
 * `add_timetable 1 fl/C:\Users\timetable\timetable.csv`
 
-=== editing a timetable: `edit_timetable`
+=== Editing a timetable: `edit_timetable`
 Edits a timetable timeslot of the timetable from the person specified by the `INDEX`. +
 Format: `add_timetable INDEX day/DAY timing/TIMING [m/DETAILS]  `
 
@@ -341,7 +343,7 @@ Deletes the 1st timetable in the results of the `find_timetable` command.
 === Adding a group: `add_group`
 
 Add a group to the System +
-Format: add_group n/GROUPNAME [d/GROUPDESCRIPTION]`
+Format: `add_group n/GROUPNAME [d/GROUPDESCRIPTION]`
 
 (`d/GROUPDESCRIPTION` is optional)
 
@@ -374,13 +376,22 @@ Find groups whose names contain any of the given keywords +
 Format: `find_group KEYWORD [MORE_KEYWORDS]`
 
 ****
-* The search is case insensitive. e.g `hans` will match `Hans`
+* The search is case insensitive. e.g `family` will match `Family`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* Only the group name is searched.
+* Only full words will be matched e.g. `Family` will not match `Families`
 ****
-
+TAG]...`
+75
+* Inputs in square brackets are optional
+76
+​
+77
+[TIP]
+78
+A person can have any number of tags (including 0)
+79
+​
 Examples:
 
 * `find_group John` +
@@ -391,7 +402,7 @@ Returns any group having names `Betsy`, `Tim`, or `John`
 === Deleting a group : `delete_group`
 
 Delete a group in the system by name +
-Format: `delete_group n/GROUPNAME `
+Format: `delete_group n/GROUPNAME`
 
 ****
 * Deletes the group with the specified `GROUPNAME`
@@ -406,6 +417,8 @@ Examples:
 Adds a person using the person index to a group if group exists +
 Format: `register PERSON_INDEX n/GROUP_NAME`
 
+*Remember to `list` before using register command.*
+
 ****
 * Adds the person at the specified `PERSON_INDEX`. The index refers to the index number shown in the displayed person panel. The index *must be a positive integer* 1, 2, 3, ...
 * Adds this person to the group with GROUPNAME.
@@ -413,7 +426,9 @@ Format: `register PERSON_INDEX n/GROUP_NAME`
 
 Examples:
 
-* `register 1 n/happyfriends `
+`list` +
+
+`register 1 n/happyfriends `
 
 (Adds the first person in the displayed person panel to the group happyfriends)
 
@@ -454,7 +469,7 @@ Examples:
 === List all time slots of a group at which everyone is available : `view_slots_all`
 
 List all of the available time slots in a group +
-Format: `view_slots_all n/GROUP_NAME `
+Format: `view_slots_all n/GROUP_NAME`
 
 ****
 * List all time slots in a group at which all person in the group is available at the specified `GROUPNAME`
@@ -467,25 +482,13 @@ Examples:
 === List all time slots of a group in descending order of availability: `view_slots_ranked`
 
 List all time slots of a group in descending order of availability: +
-Format: `view_slots_ranked n/GROUP_NAME `
+Format: `view_slots_ranked n/GROUP_NAME`
 
-****
 * List all time slots of a group in descending order of availability at the specified `GROUPNAME`
-****
 
 Examples:
 
 * `view_slots_ranked n/happyfriends`
-
-== Security (Leslie)
-=== Create an account: `create`
-
-Create an account in the system. The password and security answer are both case sensitive. +
-Format: `create u/USERNAME pw/PASSWORD`
-
-Examples:
-
-* `create u/sampleUser pw/dontUseWeakPassword`
 
 == Security (Leslie)
 === Create an account: `create`
@@ -499,7 +502,7 @@ Examples:
 
 * `create u/sampleUser pw/dontUseWeakPassword`
 
-=== login to an account : `login`
+=== Login to an account : `login`
 Login into the system. +
 Users are required to login to execute most commands of the NUS Hangs
 
@@ -559,42 +562,49 @@ Examples:
 *A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Address Book folder.
 
 == Command Summary
+
 * *help* : `help`
-* *Add_friend* `add_friend n/NAME_OF_FRIEND [t/TEXT_FILE l/TEXT_FILE_LOCATION] [i/INDEX_OF_TIMETABLE]` +
-e.g. `add u/Damith C. Rajapakse [i/1] [t/friends.txt l/C://Users/abc/mysecretstash]`
-* *list_friends* : `list_friends`
-* *edit_friend* : `edit_friend [n/NEW_NAME] i/INDEX_OF_FRIEND [t/TIMETABLE_INDEX]` +
-e.g. `edit_friend [n/iamgod] i/1 [t/1]`
-* *find_friend* : `find_friend  KEYWORD [MORE_KEYWORDS]` +
-e.g. `find_friend James Jake`
-* *delete_friend* : `delete i/INDEX_OF_FRIEND` +
-e.g. `delete_friend 3`
-* *clear_friend* : `clear_friend`
-* *grouplist* : `listgroup`
-* *add_timetable* `add_timetable INDEX [fl/FILE_LOCATION]` +
+* *add*: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…` *Inputs in square brackets are optional* +
+e.g. `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
+* *edit*: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [fl/STORED_LOCATION] [t/TAG]…` +
+e.g. `edit 1 p/91234567 e/johndoe@example.com`
+* *find*: `find [n/NAME…] [p/PHONE_NUMBER…] [e/EMAIL…] [a/ADDRESS…] [t/TAG…]` +
+e.g. `find a/tampines p/12345678 87654321`
+* *delete*: `delete INDEX` +
+e.g. `delete 1`
+* *list*: Listing all persons +
+eg. `list`
+* *list PERSON_INDEX*: List all the groups the person is in +
+e.g. `list 1`
+* *undo*
+* *redo*
+* *history*: Lists all the commands that you have entered in reverse chronological order.
+* *add_timetable*: `add_timetable INDEX [fl/FILE_LOCATION]` +
 e.g. `add_timetable 1`
-* *edit_timetable* `edit_timetable INDEX day/DAY timing/TIMING [m/DETAILS]` +
+* *edit_timetable*: `edit_timetable INDEX day/DAY timing/TIMING [m/DETAILS]` +
 e.g. `edit_timetable 1 day/wednesday timing/1800 m/do cs2103`
 * *download_timetable* : `download_timetable INDEX` +
 e.g. `download_timetable 1 l/C://Users/abc/mysecretstash`
 * *delete_timetable* : `delete INDEX p/password` +
 e.g. `delete_timetable 3 p/password`
-* *add_group* `add_group g/GROUPNAME d/GROUPDESCRIPTION m/MAXNUMBEROFPEOPLE` +
-e.g. `add_group g/happyfriends d/a group of happy friends m/3`
-* *list_groups* : `list_groups`
-* *edit_group* : `edit_group i/GROUPINDEX [g/NEWGROUPNAME] [d/NEWGROUPDESCRIPTION] [m/NEWMAXNUMBEROFPEOPLE]  [s/STATUS]` +
-e.g. `edit_group i/1 g/sadfriends d/sad because of cs2103 s/closed`
-* *find_group* : `find_friend  KEYWORD [MORE_KEYWORDS]` +
-e.g. `find_group James Jake`
-* *delete_group* : `delete i/INDEX_OF_FRIEND` +
-e.g. `delete_group 3`
-* *clear_groups* : `clear_groups`
-* *viewgroup* : `view_group i/GROUP_INDEX`+
-e.g. `viewgroup 3`
-* *register* `register f/FRIEND_INDEX g/GROUP_INDEX` +
-e.g. `register f/1 g/1`cr
-* *find_time* : `find k/KTH_BEST g/GROUPINDEX` +
-e.g. `find k/1 g/1`
+* *add_group*: `add_group n/GROUPNAME [d/GROUPDESCRIPTION]`` +
+e.g. `add_group n/happyfriends d/a group of happy friends`
+* *edit_group* : `edit_group OLDGROUPNAME [n/NEWGROUPNAME] [d/NEWGROUPDESCRIPTION]` +
+e.g. `edit_group happyfriends n/sadfriends d/sad because of cs2103`
+* *find_group* : `find_group KEYWORD [MORE_KEYWORDS]` +
+e.g. `find_group Family Friends`
+* *delete_group* : `delete n/GROUPNAMR` +
+e.g. `delete_group Family`
+* *view_group* : View a group's members `view_group n/GROUPNAME`+
+e.g. `view_group Family`
+* *register* `register PERSON_INDEX n/GROUP_NAME` +
+e.g. `register 1 n/Family`
+* *delete_member*: Always use view_group before doing delete_member +
+`delete_member PERSON_INDEX n/GROUP_NAME` +
+e.g. `view_group n/Family` +
+`delete_member 1 n/Family`
+* *view_slots_all*: `view_slots_all n/GROUP_NAME`
+* *view_slots_ranked*: `view_slots_ranked n/GROUP_NAME`
 * *create* : `create u/USERNAME pw/PASSWORD` +
 e.g. `create u/user pw/strongpass`
 * *login* : `login u/USERNAME pw/PASSWORD` +
