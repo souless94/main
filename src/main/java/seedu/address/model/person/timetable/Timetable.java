@@ -64,9 +64,9 @@ public class Timetable extends Entity {
     }
 
     /**
-     * generate a timetable string for the xml storage
+     * Generate a timetable string for the xml storage
      */
-    private String generateTimetableDataString() {
+    public String generateTimetableDataString() {
         String timetableDataString = "";
         String[][] timetableMatrix = this.matrix.getTimetable();
         for (int i = 0; i < matrix.getRows(); i++) {
