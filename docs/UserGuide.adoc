@@ -379,7 +379,17 @@ Format: `find_group KEYWORD [MORE_KEYWORDS]`
 * Only the group name is searched.
 * Only full words will be matched e.g. `Family` will not match `Families`
 ****
-
+TAG]...`
+75
+* Inputs in square brackets are optional
+76
+​
+77
+[TIP]
+78
+A person can have any number of tags (including 0)
+79
+​
 Examples:
 
 * `find_group John` +
@@ -472,7 +482,17 @@ Examples:
 List all time slots of a group in descending order of availability: +
 Format: `view_slots_ranked n/GROUP_NAME`
 
-****
+****TAG]...`
+75
+* Inputs in square brackets are optional
+76
+​
+77
+[TIP]
+78
+A person can have any number of tags (including 0)
+79
+​
 * List all time slots of a group in descending order of availability at the specified `GROUPNAME`
 ****
 
@@ -563,7 +583,7 @@ Examples:
 
 == Command Summary
 * *help* : `help`
-* *add*: `add n/NAME [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…` *Inputs in square brackets are optional* +
+* *add*: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…` *Inputs in square brackets are optional* +
 e.g. `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * *edit*: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [fl/STORED_LOCATION] [t/TAG]…` +
 e.g. `edit 1 p/91234567 e/johndoe@example.com`
