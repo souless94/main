@@ -273,6 +273,7 @@ Format: `add_timetable INDEX [fl/FILE_LOCATION]`
 * Adds details of a timetable csv file to the person specified by the `INDEX` from file location if file location is present.
 * Add the timetable at the specified `INDEX`.
 * Existing values will be updated to the input values.
+* timings are start time of the event. Eg. if timetable shows 0800, it means the event is from 0800 to 0900.
 * The index refers to the index number shown in the displayed person list.
 * The index *must be a positive integer* 1, 2, 3, ...
 * Will not be able to add if timetable is not present in the stored location of person specified by `INDEX`
@@ -290,6 +291,7 @@ Format: `edit_timetable INDEX day/DAY timing/TIMING [m/DETAILS]`
 
 ****
 * timings are in 24h format from 0800 to 2300.
+* timings are start time of the event. Eg. if timetable shows 0800, it means the event is from 0800 to 0900.
 * Existing values will be overwritten by the input details.
 * days are days of a week in *full name(case insensitive)* from Monday to Friday.
 * edit the timetable at the specified `INDEX`.
