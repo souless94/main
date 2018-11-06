@@ -33,6 +33,8 @@ public class DownloadTimetableCommand extends Command {
     public static final String MESSAGE_DOWNLOAD_TIMETABLE_SUCCESS = "timetable downloaded successfully to : ";
     public static final String MESSAGE_TIMETABLE_IS_PRESENT =
         "there is a csv file with same name as your timetable filename at: ";
+    public static final String MESSAGE_INVALID_FILE_PATH_DOWNLOAD = "That is not a valid file path,"
+        + " as there is no such folder present: ";
     private final Index index;
 
     /**
@@ -54,7 +56,13 @@ public class DownloadTimetableCommand extends Command {
         }
 
         Person personToDownloadTimetable = lastShownList.get(index.getZeroBased());
-        boolean doesFileExists = new File(personToDownloadTimetable.getStoredLocation()).exists();
+        File timetableToDownload = new File(personToDownloadTimetable.getStoredLocation());
+        boolean doesFileExists = timetableToDownload.exists();
+        boolean doesFolderExists = new File(timetableToDownload.getParent()).exists();
+        if (!doesFolderExists) {
+            throw new CommandException(
+                MESSAGE_INVALID_FILE_PATH_DOWNLOAD + timetableToDownload.getParent());
+        }
         if (doesFileExists) {
             throw new CommandException(
                 MESSAGE_TIMETABLE_IS_PRESENT + personToDownloadTimetable.getStoredLocation());

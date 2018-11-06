@@ -127,7 +127,7 @@ Examples:
 Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 * `edit 2 n/Betsy Crower t/` +
 Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
-* `edit 1 sl/C:\Users\admin\Downloads\cs2103\tiredAndSadness` +
+* `edit 1 fl/C:\Users\admin\Downloads\cs2103\tiredAndSadness` +
 Edits the stored location of the 1st person to be `C:/Users/admin/Downloads/cs2103/tiredAndSadness/` respectively.
 
 === Finding a person : `find` (ZhiWei)
@@ -286,13 +286,14 @@ Examples:
 
 === Editing a timetable: `edit_timetable`
 Edits a timetable timeslot of the timetable from the person specified by the `INDEX`. +
-Format: `add_timetable INDEX day/DAY timing/TIMING [m/DETAILS]  `
+Format: `edit_timetable INDEX day/DAY timing/TIMING [m/DETAILS]  `
 
 ****
 * timings are in 24h format from 0800 to 2300.
 * Existing values will be overwritten by the input details.
 * days are days of a week in *full name(case insensitive)* from Monday to Friday.
 * edit the timetable at the specified `INDEX`.
+* can only edit 1 hour timeslot at a time.
 * The index refers to the index number shown in the displayed person list.
 * The index *must be a positive integer* 1, 2, 3, ...
 ****
@@ -313,6 +314,7 @@ Format: `download_timetable INDEX `
 * The index refers to the index number shown in the displayed person list.
 * The index *must be a positive integer* 1, 2, 3, ...
 * Will not download if there is a file with same filename as the filename of the timetable from the person specified by the `INDEX`.
+* Will not download if there is no such folder to download the timetable csv file given by the file location from the person specified by the `INDEX`.
 ****
 
 Examples:
@@ -580,13 +582,13 @@ e.g. `list 1`
 * *redo*
 * *history*: Lists all the commands that you have entered in reverse chronological order.
 * *add_timetable*: `add_timetable INDEX [fl/FILE_LOCATION]` +
-e.g. `add_timetable 1`
+e.g. `add_timetable 1 fl/C:\Users\timetable\timetable.csv`
 * *edit_timetable*: `edit_timetable INDEX day/DAY timing/TIMING [m/DETAILS]` +
 e.g. `edit_timetable 1 day/wednesday timing/1800 m/do cs2103`
 * *download_timetable* : `download_timetable INDEX` +
-e.g. `download_timetable 1 l/C://Users/abc/mysecretstash`
-* *delete_timetable* : `delete INDEX p/password` +
-e.g. `delete_timetable 3 p/password`
+e.g. `download_timetable 1`
+* *delete_timetable* : `delete_timetable INDEX` +
+e.g. `delete_timetable 3`
 * *add_group*: `add_group n/GROUPNAME [d/GROUPDESCRIPTION]`` +
 e.g. `add_group n/happyfriends d/a group of happy friends`
 * *edit_group* : `edit_group OLDGROUPNAME [n/NEWGROUPNAME] [d/NEWGROUPDESCRIPTION]` +

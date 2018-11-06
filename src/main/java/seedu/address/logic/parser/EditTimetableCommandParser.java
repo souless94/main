@@ -1,7 +1,6 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.commons.core.Messages.MESSAGE_NOT_UNIQUE_PREFIX_INPUT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DAY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DETAILS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIMING;
@@ -39,17 +38,12 @@ public class EditTimetableCommandParser implements Parser<EditTimetableCommand> 
             throw new ParseException(
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditTimetableCommand.MESSAGE_USAGE));
         }
-        if (!argMultimap.isOnlyOnePrefix(PREFIX_DAY) || !argMultimap
-            .isOnlyOnePrefix(PREFIX_TIMING)) {
-            throw new ParseException(String.format(MESSAGE_NOT_UNIQUE_PREFIX_INPUT));
-        }
         ParserUtil.checkBothDayAndTiming(argMultimap.getValue(PREFIX_DAY).get(),
             argMultimap.getValue(PREFIX_TIMING).get());
         String day = ParserUtil.parseDay(argMultimap.getValue(PREFIX_DAY).get());
         String timing = ParserUtil.parseTiming(argMultimap.getValue(PREFIX_TIMING).get());
         String details = " ";
-        if (argMultimap.getValue(PREFIX_DETAILS).isPresent() && argMultimap
-            .isOnlyOnePrefix(PREFIX_DETAILS)) {
+        if (argMultimap.getValue(PREFIX_DETAILS).isPresent()) {
             details = ParserUtil.parseDetails(argMultimap.getValue(PREFIX_DETAILS).get());
         }
         return new EditTimetableCommand(index, day, timing, details);
