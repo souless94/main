@@ -33,9 +33,9 @@ image::Ui.png[width="790"]
 e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 .  Some example commands you can try:
 
-* *`list_friends`* : lists all friends you added
-* **`add_friend`**`add u/Damith C. Rajapakse` : adds a friend named `Damith C. Rajapakse ` to Erium.
-* **`delete`**`3` : deletes the 3rd friend shown in the current friend list
+* *`list`* : lists all person
+* *`add_group`*: `add_group n/Family d/This is a family group description` : adds a group named "Family" with the following description.
+* *`delete_group`*: `delete_group n/Family` : deletes the Family group from NUS Hang.
 * *`exit`* : exits the app
 
 .  Refer to <<Features>> for details of each command.
@@ -48,7 +48,7 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `n/NAME_OF_FRIEND`, `NAME_OF_FRIEND` is a parameter which can be used as `add n/John Doe`.
 * Items in square brackets are optional e.g `n/NAME [i/INDEX_OF_TIMETABLE]` can be used as `n/John Doe i/1` or as `n/John Doe`.
-* Parameters can be in any order e.g. if the command specifies `n/NAME_OF_FRIEND i/INDEX_OF_TIMETABLE`, `i/INDEX_OF_TIMETABLE n/NAME_OF_FRIEND` is also acceptable.
+* Parameters can be in any order e.g. if the command specifies `n/GROUPNAME INDEX`, `INDEX n/GROUPNAME` is also acceptable.
 ====
 
 == common
@@ -341,7 +341,7 @@ Deletes the 1st timetable in the results of the `find_timetable` command.
 === Adding a group: `add_group`
 
 Add a group to the System +
-Format: add_group n/GROUPNAME [d/GROUPDESCRIPTION]`
+Format: `add_group n/GROUPNAME [d/GROUPDESCRIPTION]`
 
 (`d/GROUPDESCRIPTION` is optional)
 
@@ -457,7 +457,7 @@ Examples:
 === List all time slots of a group at which everyone is available : `view_slots_all`
 
 List all of the available time slots in a group +
-Format: `view_slots_all n/GROUP_NAME `
+Format: `view_slots_all n/GROUP_NAME`
 
 ****
 * List all time slots in a group at which all person in the group is available at the specified `GROUPNAME`
@@ -470,7 +470,7 @@ Examples:
 === List all time slots of a group in descending order of availability: `view_slots_ranked`
 
 List all time slots of a group in descending order of availability: +
-Format: `view_slots_ranked n/GROUP_NAME `
+Format: `view_slots_ranked n/GROUP_NAME`
 
 ****
 * List all time slots of a group in descending order of availability at the specified `GROUPNAME`
