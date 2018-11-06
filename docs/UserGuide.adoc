@@ -390,7 +390,7 @@ Returns any group having names `Betsy`, `Tim`, or `John`
 === Deleting a group : `delete_group`
 
 Delete a group in the system by name +
-Format: `delete_group n/GROUPNAME `
+Format: `delete_group n/GROUPNAME`
 
 ****
 * Deletes the group with the specified `GROUPNAME`
