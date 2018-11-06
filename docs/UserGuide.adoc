@@ -594,7 +594,6 @@ e.g. `edit_group happyfriends n/sadfriends d/sad because of cs2103`
 e.g. `find_group Family Friends`
 * *delete_group* : `delete n/GROUPNAMR` +
 e.g. `delete_group Family`
-* *clear_groups* : `clear_groups`
 * *view_group* : View a group's members `view_group n/GROUPNAME`+
 e.g. `view_group Family`
 * *register* `register PERSON_INDEX n/GROUP_NAME` +
