@@ -539,32 +539,27 @@ The 'Person' class extends the `Entity` abstract class and it is contained withi
 The current person implementation are:
 
 * 'add' -- add any person with the choice of adding address, phone, email and tags
-* 'find' -- find all functions that search all details of any person, except for email
-* 'find_address' -- find address in any person and returns any matching keywords
-* 'find_email' -- find email in any person and returns any matching keywords
-* 'find_phone' -- find phone in any person and returns any matching keywords
-* 'find_name' -- find name in any person and returns any matching keywords
-* 'find_tag' -- find tag in any person and returns any matching keywords
+* 'find' -- finds all persons in NusHangs, whose contain keywords provided by prefix(es)
 
 The following activity diagram shows how 'find' feature works:
 
-image::FindFeature1.png[width="300"]
+image::FindFeature1.png[width="600"]
 
 ==== Design Considerations
 
 ===== Aspect: How should each specific 'find' feature work
 
-*Alternative 1 (Current Choice) :* Create a class for each information (e.g. find_address)
+*Alternative 1 (Current Choice) :* Use prefixes for specific search (e.g. find n/alex bernice t/friends)
+
+Pros: Higher flexibility. Greater control of search range
+
+Cons: Harder to implement
+
+*Alternative 2 :* Create a class for each information (e.g. find_address)
 
 Pros: Easy to implement, with specific search focus
 
 Cons: Repetitive code base with less flexibility
-
-*Alternative 2 :* Use prefixes for specific search (e.g. find a/gardens)
-
-Pros: Higher flexibility
-
-Cons: Harder to implement. May allow greater control for larger search range
 
 == Documentation
 

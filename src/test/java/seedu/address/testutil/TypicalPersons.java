@@ -88,7 +88,7 @@ public class TypicalPersons {
         .withStoredLocation(DEFAULT_STORED_LOCATION)
         .build();
 
-    public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
+    public static final String KEYWORD_MATCHING_MEIER = "n/Meier"; // A keyword that matches MEIER
 
     private TypicalPersons() {
     } // prevents instantiation

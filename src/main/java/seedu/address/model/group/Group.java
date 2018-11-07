@@ -123,20 +123,10 @@ public class Group extends Entity {
         Iterator<Person> personItr = groupMembers.iterator();
         StringBuilder builder = new StringBuilder();
         TreeSet<Integer> availableSlots = new TreeSet<>();
-        Iterator<Integer> slotsItr = availableSlots.iterator();
         boolean isFirstPerson = true;
         while (personItr.hasNext()) {
             Person currPerson = personItr.next();
-            builder.append("my name is " + currPerson.getName() + "\n");
-            String[][] test = currPerson.getTimetable().getTimetable().getTimetable();
             boolean[][] isFree = currPerson.getTimetable().getTimetable().getBooleanTimetableData();
-            for (int i = 1; i <= 7; i++) {
-                for (int j = 1; j <= 16; j++) {
-                    builder.append("[" + i + "]" + "[" + j + "] entry is(");
-                    builder.append(test[i][j]);
-                    builder.append(")\n");
-                }
-            }
             if (isFirstPerson) {
                 for (int i = 1; i <= 7; i++) {
                     for (int j = 1; j <= 16; j++) {
@@ -147,20 +137,17 @@ public class Group extends Entity {
                 }
                 isFirstPerson = false;
             } else {
-                while (slotsItr.hasNext()) {
-                    int currTimeslot = slotsItr.next();
-                    int row = currTimeslot / 100;
-                    int col = currTimeslot % 100;
-                    if (!isFree[row][col]) {
-                        availableSlots.remove(currTimeslot);
-                    }
-                    if (availableSlots.isEmpty()) {
-                        return "There are no available slots!";
+                for (int i = 1; i <= 7; i++) {
+                    for (int j = 1; j <= 16; j++) {
+                        int currTimeslot = i * 100 + j;
+                        if (availableSlots.contains(currTimeslot) && !isFree[i][j]) {
+                            availableSlots.remove(currTimeslot);
+                        }
                     }
                 }
             }
         }
-        slotsItr = availableSlots.iterator();
+        Iterator<Integer> slotsItr = availableSlots.iterator();
         while (slotsItr.hasNext()) {
             int currTimeslot2 = slotsItr.next();
             int day = currTimeslot2 / 100;
@@ -181,16 +168,6 @@ public class Group extends Entity {
         TreeMap<Integer, Integer> availableSlots = new TreeMap<>();
         while (personItr.hasNext()) {
             Person currPerson = personItr.next();
-            builder.append("my name is " + currPerson.getName() + "\n");
-            String[][] test = currPerson.getTimetable().getTimetableMatrix();
-            for (int i = 1; i <= 7; i++) {
-                for (int j = 1; j <= 16; j++) {
-                    int timing = (j + 7) * 100;
-                    builder.append("On day " + i + " and timing " + timing + " I am doing(");
-                    builder.append(test[i][j]);
-                    builder.append(")\n");
-                }
-            }
             boolean[][] isFree = currPerson.getTimetable().getTimetable().getBooleanTimetableData();
             for (int i = 1; i <= 7; i++) {
                 for (int j = 1; j <= 16; j++) {
