@@ -295,7 +295,7 @@ Example (user provides a file path):
 * the first row and first column should be left alone
 * can only edit in given rows and columns of the timetable.
 * any invalid timetable will be ignored.
-* examples of correctly formatted timetable is given below
+* example of correctly formatted timetable is given below
 
 image::add_timetable_fl.png[width="700"]
 
