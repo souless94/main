@@ -1,0 +1,59 @@
+= John Doe - Project Portfolio
+:site-section: AboutUs
+:imagesDir: ../images
+:stylesDir: ../stylesheets
+
+== PROJECT: AddressBook - Level 4
+
+---
+
+== Overview
+
+AddressBook - Level 4 is a desktop address book application used for teaching Software Engineering principles. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
+
+== Summary of contributions
+
+* *Major enhancement*: added *the ability to create account and login*
+** What it does: prevents unauthorised users from accessing the application
+** Justification: This feature secures the application by preventing unauthorised users from accessing it.
+
+
+* *Minor enhancement*: *added an encrypt function*
+** What it does: encrypts password before storage to prevent compromising of password information.
+
+
+* *Code contributed*: https://nus-cs2103-ay1819s1.github.io/cs2103-dashboard/#=undefined&search=aspiringdevslog
+
+* *Other contributions*:
+
+** Project management:
+*** Set up issues tracker on Github:
+**** Created labels
+**** Created project board
+**** Set up milestones and deadlines
+** Documentation:
+***
+
+
+== Contributions to the User Guide
+
+
+|===
+|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|===
+
+include::../UserGuide.adoc[tag=undoredo]
+
+include::../UserGuide.adoc[tag=dataencryption]
+
+== Contributions to the Developer Guide
+
+|===
+|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|===
+
+include::../DeveloperGuide.adoc[tag=undoredo]
+
+include::../DeveloperGuide.adoc[tag=dataencryption]
+
+
