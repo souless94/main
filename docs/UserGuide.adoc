@@ -155,7 +155,7 @@ Returns any person having names with `alex`
 * `find n/Betsy Tim John` +
 Returns any person having names `Betsy`, `Tim`, or `John`
 * `find n/alex bernice t/friends` +
-Returns any person having `alex` and 'bernice' in name and `friends` in tags
+Returns any person having `alex` and `bernice` in name and `friends` in tags
 * `find a/tampines p/12345678 87654321` +
 Returns any person having `Tampines` in address and `12345678` & `87654321` in phone
 
