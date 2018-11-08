@@ -145,8 +145,8 @@ Inputs in square brackets are optional
 * All information of a person will be searched, provided by the prefix
 * Only full words will be matched e.g. `Han` will not match `Hans`
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
-e.g. `Hans Bo` will return `Hans Gruber` and `Bo Yang`
 ****
+e.g. `Hans Bo` will return `Hans Gruber` and `Bo Yang`
 
 Examples:
 
