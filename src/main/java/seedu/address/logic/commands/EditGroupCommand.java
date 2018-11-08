@@ -66,6 +66,10 @@ public class EditGroupCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_GROUP);
         }
 
+        for (Person person : editedGroup.getGroupMembers()) {
+            CommandUtil.replaceGroupInPerson(model, person, groupToBeEdited, editedGroup);
+        }
+
         model.update(groupToBeEdited, editedGroup);
         model.updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
         model.commitAddressBook();
