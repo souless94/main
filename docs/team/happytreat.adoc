@@ -25,7 +25,7 @@ i.e. add_group, delete_group, edit_group, register, delete_member, find_group, v
 
 ** Justification: This feature improves the product's functionality significantly because a user can now better organise his contacts into groups and easily coordinate common time slots to meet.
 ** Highlights: This enhancement affects existing commands and commands to be added in future.The implementation too was challenging as it required changes to existing commands:
-*** The integration of Group and Person Class. For instance, delete_group requires the group to be deleted and all reference to the group in all Persons registered to be deleted.
+*** The integration of Group and Person Class. For instance, delete_group requires the group to be deleted and all reference to the group in all Persons registered to be deleted. https://github.com/CS2103-AY1819S1-F11-4/main/pull/92[#92]
 *** Changes in the UI and Storage components. For instance, the GroupPanel has to be created to show and update all groups. Group Data have to stored after the app closes inside addressbook.xml and reloaded into the app as Group objects once the user reopens the app.
 
 * *Minor enhancement*: Enhance `list` command to list both groups and persons. Added a `list INDEX` command to show all the groups that the person at INDEX is currently in.
@@ -42,16 +42,16 @@ i.e. add_group, delete_group, edit_group, register, delete_member, find_group, v
 
 ** Project management:
 *** Managed releases `v1.1` - `v1.3` (3 releases) on GitHub
+*** Edited the badges: Codacy badge, Coverage and Build status on README.adoc.
 ** Enhancements to existing features:
-*** Wrote additional tests for existing features to increase coverage by 5% (Pull requests https://github.com[#36], https://github.com[#38])
+*** Wrote additional tests for existing features to increase coverage by >4% (Pull requests https://github.com/CS2103-AY1819S1-F11-4/main/pull/80[#80], https://github.com/CS2103-AY1819S1-F11-4/main/pull/123[#123], https://github.com/CS2103-AY1819S1-F11-4/main/pull/146[#146])
 ** Documentation:
-*** Edit the Model Sequence Diagram in Dev Guide to include Group and Entity classes: https://github.com[#14]
-*** Edit the UI Sequence Diagram in Dev Guide to include Group UI features.
+*** Edit the Model OOP Class Diagram in Dev Guide to include Group classes: https://github.com/CS2103-AY1819S1-F11-4/main/pull/202[#202]
+*** Edit the Storage Class Diagram in Dev Guide to include Group class: https://github.com/CS2103-AY1819S1-F11-4/main/pull/200[#200]
 ** Community:
-*** PRs reviewed (with non-trivial review comments): https://github.com[#12], https://github.com[#32], https://github.com[#19], https://github.com[#42]
-*** Reported bugs and suggestions for another team (examples:  https://github.com[1], https://github.com[2], https://github.com[3])
-*** Some parts of the group feature I added was adopted by several other teammates (https://github.com[1], https://github.com[2])
-*** Create a CommandUtil.java with many common functiosn reused by different commands including those in AB4 and those used by other teammates.) Several other teammates reused the functions I have created in CommandUtil. ()
+*** PRs reviewed (with non-trivial review comments): https://github.com/CS2103-AY1819S1-F11-4/main/pull/71[#71])
+*** Some parts of the group feature I added was adopted by several other teammates (https://github.com/CS2103-AY1819S1-F11-4/main/pull/160[#160])
+*** Create a CommandUtil.java with many common functions reused by different commands including those in AB4 and those used by other teammates.
 
 == Contributions to the User Guide
 |===
