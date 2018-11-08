@@ -30,7 +30,7 @@ public class Phone {
      * Returns true if a given string is a valid phone number.
      */
     public static boolean isValidPhone(String test) {
-        return test.matches(PHONE_VALIDATION_REGEX) || (test == "<no input>");
+        return test.matches(PHONE_VALIDATION_REGEX) || ("<no input>".equals(test));
     }
 
     @Override
