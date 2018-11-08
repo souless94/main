@@ -24,16 +24,15 @@ i.e. add_group, delete_group, edit_group, register, delete_member, find_group, v
 *** view_group: View all members of the group in UI.
 
 ** Justification: This feature improves the product's functionality significantly because a user can now better organise his contacts into groups and easily coordinate common time slots to meet.
-** Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands:
-*** The integration of Group and Person Class. For instance, delete_group requires the group to be deleted and all reference to the group in all Persons registered to be deleted. Edit_group also requires the group to be edited and all reference to the group (reference by the person who is a member) to be edited correspondingly.
-*** Changes in the UI and Storage components. For instance, the GroupPanel has to be created to show and update all groups. Group Data have to stored after the app closes inside addressbook.xml and reloaded into the app as Group obects once the user reopens the app.
-** Credits: _{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}_
+** Highlights: This enhancement affects existing commands and commands to be added in future.The implementation too was challenging as it required changes to existing commands:
+*** The integration of Group and Person Class. For instance, delete_group requires the group to be deleted and all reference to the group in all Persons registered to be deleted.
+*** Changes in the UI and Storage components. For instance, the GroupPanel has to be created to show and update all groups. Group Data have to stored after the app closes inside addressbook.xml and reloaded into the app as Group objects once the user reopens the app.
 
 * *Minor enhancement*: Enhance `list` command to list both groups and persons. Added a `list INDEX` command to show all the groups that the person at INDEX is currently in.
 
 * *Minor enhancement*: Created short hands/short forms for most commands.
 
-* *Minor enhancement*: Refactored UniquePersonList into UniqueList<T> for different classes: Groups, Person and Timetable. 
+* *Minor enhancement*: Refactored UniquePersonList into UniqueList<T> for different classes: Groups, Person and Timetable.
 
 * *Minor enhancement*: Created an Abstract class Entity which Group and Person extends from to allow for polymorphism: Refactored the ModelManager and AddressBook function to include Polymorphism. E.g. addPerson() --> add() which performs add on Group or Person class based on polymorphism.
 
@@ -54,30 +53,14 @@ i.e. add_group, delete_group, edit_group, register, delete_member, find_group, v
 *** Some parts of the group feature I added was adopted by several other teammates (https://github.com[1], https://github.com[2])
 *** Create a CommandUtil.java with many common functiosn reused by different commands including those in AB4 and those used by other teammates.) Several other teammates reused the functions I have created in CommandUtil. ()
 
-
-_{you can add/remove categories in the list above}_
-
 == Contributions to the User Guide
-
-
 |===
 |_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
 |===
-
-include::../UserGuide.adoc[tag=undoredo]
-
-include::../UserGuide.adoc[tag=dataencryption]
-
+include::../UserGuide.adoc[tag=group]
 == Contributions to the Developer Guide
-
 |===
 |_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
 |===
-
-include::../DeveloperGuide.adoc[tag=undoredo]
-
-include::../DeveloperGuide.adoc[tag=dataencryption]
-
+include::../DeveloperGuide.adoc[tag=group]
 ---
-
-_{Optionally, you may include other projects in your portfolio.}_
