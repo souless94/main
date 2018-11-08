@@ -68,10 +68,11 @@ Address book data are saved in the hard disk automatically after any command tha
 There is no need to save manually.
 
 == Person
-=== Adding a person: `add`
+=== Adding a person: `add` (ZhiWei)
 
 Adds a person to the address book +
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...`
+Format: `add n/NAME [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
+
 * Inputs in square brackets are optional
 
 [TIP]
@@ -81,8 +82,8 @@ Examples:
 
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
-* `add n/Nancy t/friend`
-* `add n/James  t/friend e/betsycrowe@example.com t/criminal`
+* `add n/Nancy t/friend t/neighbour`
+* `add n/James t/friend e/james@example.com t/classmates`
 
 === Listing all persons : `list`
 
@@ -135,12 +136,16 @@ Edits the stored location of the 1st person to be `C:/Users/admin/Downloads/cs21
 Finds all persons in NusHangs, whose contain keywords provided by prefix(es). +
 Format: `find [n/NAME...] [p/PHONE_NUMBER...] [e/EMAIL...] [a/ADDRESS...] [t/TAG...]`
 
+[TIP]
+Inputs in square brackets are optional
+
 ****
 * The search is case insensitive. e.g `hans` will match `Hans`
 * The order of the keywords and the prefix does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * All information of a person will be searched, provided by the prefix
 * Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* Persons matching at least one keyword will be returned (i.e. `OR` search).
+e.g. `Hans Bo` will return `Hans Gruber` and `Bo Yang`
 ****
 
 Examples:
