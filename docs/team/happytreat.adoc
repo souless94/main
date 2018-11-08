@@ -38,7 +38,7 @@ i.e. add_group, delete_group, edit_group, register, delete_member, find_group, v
 * *Minor enhancement*: Created an Abstract class Entity which Group and Person extends from to allow for polymorphism: Refactored the ModelManager and AddressBook function to include Polymorphism. 
 E.g. addPerson() --> add() which performs add on Group or Person class based on polymorphism.
 
-* *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]] _{give links to collated code files}_
+* *Code contributed*: [https://nus-cs2103-ay1819s1.github.io/cs2103-dashboard/#=undefined&search=happytreat[Functional and Test code]]  _{give links to collated code files}_
 
 * *Other contributions*:
 
