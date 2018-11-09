@@ -186,6 +186,30 @@ public class AddressBookParser {
             case LoginCommand.COMMAND_WORD:
                 return new LoginCommandParser().parse(arguments);
 
+            case SelectCommand.COMMAND_WORD:
+                return new SelectCommandParser().parse(arguments);
+
+            case FindGroupCommand.COMMAND_WORD:
+                return new FindGroupCommandParser().parse(arguments);
+
+            case ViewGroupCommand.COMMAND_WORD:
+                return new ViewGroupCommandParser().parse(arguments);
+
+            case ViewGroupRankedAvailableTimeslotCommand.COMMAND_WORD:
+                return new ViewGroupRankedAvailableTimeslotCommandParser().parse(arguments);
+
+            case ViewGroupAllAvailableTimeslotCommand.COMMAND_WORD:
+                return new ViewGroupAllAvailableTimeslotCommandParser().parse(arguments);
+
+            case FindCommand.COMMAND_WORD:
+                return new FindCommandParser().parse(arguments);
+
+            case HistoryCommand.COMMAND_WORD:
+                return new HistoryCommand();
+
+            case ListCommand.COMMAND_WORD:
+                return new ListCommandParser().parse(arguments);
+
             default:
                 throw new ParseException(MESSAGE_USER_NOT_LOGGED_IN);
             }
