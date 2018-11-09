@@ -54,15 +54,6 @@ public class ArgumentMultimap {
     }
 
     /**
-     * checks if there argMultimap contains only 1 prefix for each input by the user
-     * returns true if there is only 1.
-     */
-    public boolean isOnlyOnePrefix(Prefix prefix) {
-        int noOfInput = this.getAllValues(prefix).size();
-        return noOfInput == 1;
-    }
-
-    /**
      * Returns the preamble (text before the first valid prefix). Trims any leading/trailing
      * spaces.
      */

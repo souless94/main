@@ -80,20 +80,21 @@ public class DeleteTimetableCommand extends Command {
      * it creates a new person with a default timetable while not changing other details of person
      * Creates and returns a {@code Person} with the details of {@code personToEdit}
      */
-    private Person createPersonWithNewTimetable(Person personToEdit) {
-        assert personToEdit != null;
+    private Person createPersonWithNewTimetable(Person personToDeleteTimetable) {
+        assert personToDeleteTimetable != null;
 
-        Name updatedName = personToEdit.getName();
-        Phone updatedPhone = personToEdit.getPhone();
-        Email updatedEmail = personToEdit.getEmail();
-        Address updatedAddress = personToEdit.getAddress();
-        Set<Tag> updatedTags = personToEdit.getTags();
+        Name updatedName = personToDeleteTimetable.getName();
+        Phone updatedPhone = personToDeleteTimetable.getPhone();
+        Email updatedEmail = personToDeleteTimetable.getEmail();
+        Address updatedAddress = personToDeleteTimetable.getAddress();
+        Set<Tag> updatedTags = personToDeleteTimetable.getTags();
+        String storedLocation = personToDeleteTimetable.getStoredLocation();
 
         UniqueList<Group> uniqueGroupList = new UniqueList<>();
-        uniqueGroupList.setElements(personToEdit.getGroups());
+        uniqueGroupList.setElements(personToDeleteTimetable.getGroups());
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags,
-            uniqueGroupList, null, null);
+            uniqueGroupList, storedLocation, null);
     }
 
     @Override
