@@ -632,12 +632,5 @@ e.g. `view_group n/Family` +
 e.g. `create u/user pw/strongpass`
 * *login* : `login u/USERNAME pw/PASSWORD` +
 e.g. `login u/user pw/strongpass`
-* *update_pw* : `update_pw c/CURRENT_PASSWORD n/NEW_PASSWORD` +
-e.g. `update_pw c/password n/newpass`
-* *get* : `get`
-* *reset* : `reset a/SECURITY_ANSWER n/NEW_PASSWORD` +
-e.g. `reset a/SECURITY_ANSWER n/NEW_PASSWORD`
-* *update_sq* : `update_sq c/CURRENT_PASSWORD [n/NEWSECURITY_QUESTION]  [a/SECURITY_ANSWER]` +
-e.g. `update_pw c/password n/why me? a/because it is cs2103`
 
 
