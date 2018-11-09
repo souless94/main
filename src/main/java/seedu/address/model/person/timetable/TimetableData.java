@@ -152,8 +152,8 @@ public class TimetableData {
                     break;
                 }
                 for (int j = 0; j < getColumns(); j++) {
-                    if ("".equals(timetableRow[j])){
-                        timetableRow[j]=" ";
+                    if ("".equals(timetableRow[j])) {
+                        timetableRow[j] = " ";
                     }
                 }
                 timetableMatrix[i] = timetableRow;
