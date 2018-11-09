@@ -21,6 +21,9 @@ import seedu.address.model.person.timetable.Timetable;
 public class DownloadTimetableCommand extends Command {
 
     public static final String COMMAND_WORD = "download_timetable";
+
+    public static final String ALIAS = "dlt";
+
     public static final String MESSAGE_USAGE =
         COMMAND_WORD + ": download timetable from the person identified "
             + "by the index number used in the displayed person list. "

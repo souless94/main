@@ -26,6 +26,8 @@ public class RegisterCommand extends Command {
 
     public static final String COMMAND_WORD = "register";
 
+    public static final String ALIAS = "r";
+
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Add an existing person to a group "
             + "Parameters: INDEX (must be a positive integer)\n"
             + "[" + PREFIX_NAME + " GROUP NAME]\n"

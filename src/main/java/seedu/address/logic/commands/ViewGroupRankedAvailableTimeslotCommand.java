@@ -17,6 +17,8 @@ public class ViewGroupRankedAvailableTimeslotCommand extends Command {
 
     public static final String COMMAND_WORD = "view_slots_ranked";
 
+    public static final String ALIAS = "vr";
+
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": View the time slots of a group in descending order "
             + "in terms of availability"
             + "[" + PREFIX_NAME + " GROUP NAME]\n"

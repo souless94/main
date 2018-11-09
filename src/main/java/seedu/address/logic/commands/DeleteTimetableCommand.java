@@ -26,6 +26,9 @@ import seedu.address.model.tag.Tag;
 public class DeleteTimetableCommand extends Command {
 
     public static final String COMMAND_WORD = "delete_timetable";
+
+    public static final String ALIAS = "dt";
+
     public static final String MESSAGE_USAGE =
         COMMAND_WORD
             + ": delete timetable from stored location and adds a default timetable to the person identified"
