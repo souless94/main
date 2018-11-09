@@ -21,7 +21,7 @@ public class ViewGroupRankedAvailableTimeslotCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": View the time slots of a group in descending order "
             + "in terms of availability with a minimum number of people available required "
-            + "[" + PREFIX_NAME + "GROUP NAME] [" + PREFIX_NUMBER + "NUM REQ]\n"
+            + PREFIX_NAME + "GROUP NAME " + PREFIX_NUMBER + "NUM REQ\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "Family " + PREFIX_NUMBER + "1";
 
