@@ -18,9 +18,9 @@ public class ViewGroupAllAvailableTimeslotCommand extends Command {
     public static final String COMMAND_WORD = "view_slots_all";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": View the time slots of a group "
-            + "where everyone is available at"
-            + "[" + PREFIX_NAME + " GROUP NAME]\n"
-            + "Example: " + COMMAND_WORD
+            + "where everyone is available at "
+            + "[" + PREFIX_NAME + "GROUP NAME]\n"
+            + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "Family ";
 
     public static final String MESSAGE_SUCCESS = "Listed all time slots which everyone is available at:\n";

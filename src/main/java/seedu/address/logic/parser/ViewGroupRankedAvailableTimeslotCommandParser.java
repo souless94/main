@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NUMBER;
 
 import java.util.stream.Stream;
 
@@ -21,17 +22,18 @@ public class ViewGroupRankedAvailableTimeslotCommandParser implements Parser<Vie
      */
     public ViewGroupRankedAvailableTimeslotCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME);
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_NUMBER);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME)
+        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_NUMBER)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     ViewGroupRankedAvailableTimeslotCommand.MESSAGE_USAGE));
         }
 
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
+        int numReq = ParserUtil.parseNumReq(argMultimap.getValue(PREFIX_NUMBER).get());
 
-        return new ViewGroupRankedAvailableTimeslotCommand(name);
+        return new ViewGroupRankedAvailableTimeslotCommand(name, numReq);
     }
 
     /**

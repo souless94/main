@@ -31,6 +31,7 @@ import seedu.address.model.tag.Tag;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_INVALID_NUMBER = "Number required is not an unsigned integer";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing
@@ -45,6 +46,21 @@ public class ParserUtil {
             throw new ParseException(MESSAGE_INVALID_INDEX);
         }
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
+    }
+
+    /**
+     * Parses {@code numReq} into an {@code int} and returns it. Leading and trailing
+     * whitespaces will be trimmed. Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the specified number is invalid (not unsigned integer).
+     */
+    public static Integer parseNumReq(String numReq) throws ParseException {
+        requireNonNull(numReq);
+        String trimmedNumReq = numReq.trim();
+        if (!StringUtil.isNonZeroUnsignedInteger(trimmedNumReq)) {
+            throw new ParseException(MESSAGE_INVALID_NUMBER);
+        }
+        return Integer.parseInt(numReq);
     }
 
     /**
