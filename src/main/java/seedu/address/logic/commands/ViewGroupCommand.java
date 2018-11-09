@@ -19,6 +19,8 @@ public class ViewGroupCommand extends Command {
 
     public static final String COMMAND_WORD = "view_group";
 
+    public static final String ALIAS = "vg";
+
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": View group members of a group"
             + "[" + PREFIX_NAME + " GROUP NAME]\n"
             + "Example: " + COMMAND_WORD
