@@ -59,11 +59,10 @@ public class EditCommandSystemTest extends AddressBookSystemTest {
         /* ----------------- Performing edit operation while an unfiltered list is being shown ---------------------- */
 
         /* Case: create account and login first */
-        String createCommand = CreateCommand.COMMAND_WORD + " u/user pw/pass";
+        String createCommand = CreateCommand.COMMAND_WORD + " u/admin pw/adminPassword";
         executeCommand(createCommand);
-        String loginCommand = LoginCommand.COMMAND_WORD + " u/user pw/pass";
+        String loginCommand = LoginCommand.COMMAND_WORD + " u/admin pw/adminPassword";
         executeCommand(loginCommand);
-
         /* Case: edit all fields, command with leading spaces, trailing spaces and multiple spaces between each field
          * -> edited
          */
