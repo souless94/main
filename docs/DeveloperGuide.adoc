@@ -458,6 +458,8 @@ Cons:
 
 The `Group` class extends the `Entity` abstract class just like a `Person` class does. An `Entity` contains an abstract method `isSame` that is necessary for the class to be used in `UniqueList<T extends Entity>`. `Group` class is an immutable class that is contained inside `Model`.
 
+As shown in the diagram below, group and person classes are associated. Each group contains a UniqueList<Person>, a list of its members. Likewise, each person contains a UniqueList<Group>, a list of all groups he is in. Due to these mutual association, commands editing/deleting instances of group or person may have to edit the corresponding member/group lists respectively. (Refer to DeleteGroupCommand example below.)
+
 .Class Diagram of Group and Person
 image::GroupPersonClassDiagram.png[width="600"]
 
@@ -468,34 +470,54 @@ image::GroupPersonClassDiagram.png[width="600"]
 ==== Current Implementation
 The current group commands added are:
 
-* `add_group` -- adds a group with an optional description
-* `delete_group` -- deletes a group and all references from its members to it
-* `edit_group` -- edit name/description of a group, maintaining uniqueness in group names
-* `find_group` -- search for groups using keywords that must match exactly a word in Group name (TODO v1.4: Edit to find_group keyword matches substring of a word in group name or description)
-* `register` -- register a member into an existing group and include a reference to the group in the member (Person class)
-* `delete_member` -- delete an existing member from an existing group and remove reference to that group in the member
-* `view_group` -- view the existing members in the group and is updated whenever any member is added or deleted.
-* `list [index]` -- lists all the groups the person at [index] is currently in.
+* `add_group`/`ag` -- adds a group with an optional description
+* `delete_group/`dg`` -- deletes a group and all references from its members to it
+* `edit_group`/`eg` -- edit name/description of a group while maintaining uniqueness of all group names
+* `find_group`/`fg` -- search for groups using keywords that must match exactly a word in Group name
+* `register`/`r` -- register a member into an existing group and include a reference to the group in the member (Person class)
+* `delete_member/`dm` -- delete an existing member from an existing group and remove reference to that group in the member
+* `view_group`/`vg` -- view the existing members in the group and is updated whenever any member is added or deleted.
+* `list [person_index]`/`l [person_index]` -- lists all the groups the person at `[person_index]` is currently in.
 
-These functions and their parsers are handled in `Logic`, makes use of and updates `Model` and `Storage` and displaying the updated result on the `UI`.
+These functions and their parsers are handled in `Logic`, before updating `Model` and `Storage` and displaying the updated result on the `UI`.
 
-Given below is an example usage scenario and how `register` behaves at each stop.
+==== An Example: DeleteGroupCommand
+The DeleteGroupCommand is a good example of how Group and Person classes are interacting (dependent and associated with each other). An example usage scenario of how `delete_group` behaves at each stop is explained below.
 
-Step 1: The user launches the application. (Assuming that the user has already added a group and person.) `VersionedAddressBook` will be loaded with the final addressbook state before the application is closed. Lists of groups and persons added previously will be loaded from storage xml file into `Model` using `XmlAdaptedPerson` and `XmlAdaptedGroup` classes. The updated lists will be displayed in the `UI`.
+Step 1: The user launches the application. (We assume that the user has already added a group and person.)
 
-Step 2:The user enters the index of the person and name of the group he wants to add the person into. `RegisterParser` creates a new `RegisterCommand` object with the Person and Group that is involved which checks whether the person and group already exist (else throwing `CommandException`).
+*`VersionedAddressBook` will be loaded with the final addressbook state before the application was closed.
 
-Step 3: `RegisterCommand` adds the person as a member in the group and adds a reference to the group inside the person's `List<Group>`. Since `Group` and `Person` are immutable classes, a new object has to be created in this step.
+*Lists of groups and persons added previously will be loaded from `addressbook.xml` file into `Model` using `XmlAdaptedPerson` and `XmlAdaptedGroup` classes.
 
-Step 4: `Model` is updated of the new `Group` and `Person`. `FilteredPersonList` and `FilteredGroupList` is also updated to display the new groups and persons in the `UI`. A successful message is also displayed to the user below the UI's command box.
-[MelodiesTODO: Elaborate on how connection to UI is created.]
+*The updated lists will be displayed in the `UI`.
 
-.Sequence Diagram of RegisterCommand (Logic component)
-image::RegisterCommandLogicSequenceDiagram.png[width="750"]
+.Sequence Diagram of DeleteGroupCommand (Logic component)
+image::DeleteGroupCommandLogicSD.png[width="750"]
 
+Step 2: The user enters the command `dg n/Family` to delete the existing group with group name Family. 
 
-.Sequence Diagram of RegisterCommand (Model component)
-image::RegisterCommandModelSequenceDiagram.png[width="750"]
+* The `LogicManager` class parses the command to `AddressBookParser`.
+
+* `AddressBookParser` creates a `DeleteGroupCommandParser` instance which parses the String "Family" into a `Name` name. The parser creates a `Group` gr with the name (Family). This group is needed for the function below.
+
+* The parser creates a `DeleteGroupCommand` object with parameters gr. Subsequently, `retrieveGroupFromName(m, gr.getName())` is called to the Model component in order to retrieve the actual group with the name "Family".
+
+.Sequence Diagram of DeleteGroupCommand (Model component)
+image::DeleteGroupCommandModelSD.png[width="700"]
+
+* After retrieving the actual group `g` with name "Family" from Model `m`, the model performs deletion of the group using an internal function `delete(g)`.
+
+* However, the group still has to be deleted from the groupList from all of its members. _(Refer to GroupPersonClassDiagram above.)_ `deleteGroupFromMembers(m, g)` is called from DeleteGroupCommand object to do so. This method calls the `UnModifiableObservableList()` method in its UniqueList<Person> to return a list of `members` in `g`.
+
+* For every `member` in the list of `members` (for loop), `updatePersonDeleteGroupFromGroupList(m, g, member)` deletes the reference to `g` in `member`.
+
+* Finally, the address book is committed with all the changes.
+
+Step 4: `FilteredPersonList` and `FilteredGroupList` is also updated correspondingly to display the new groups and persons in the `UI`. A successful message is also displayed to the user below the UI's command box. _(Refer to High level sequence diagrams Figure 3 and 4 for a similar illustration of the concept.)_
+
+Step 5: Before the application is closed, all groups and persons are stored in `addressbook.xml` using `XmlAdaptedGroup` and `XmlAdaptedPerson` classes. _(Refer to High level sequence diagrams Figure 3 and 4 for a similar illustration of the concept.)_
+
 
 ==== Design Considerations
 
