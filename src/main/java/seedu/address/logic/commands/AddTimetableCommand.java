@@ -45,7 +45,8 @@ public class AddTimetableCommand extends Command {
         + "0800,0900,1000,1100 \n"
         + "1200,1300,1400,1500,1600 \n"
         + "1700,1800,1900,2000,2100,2200,2300 \n";
-    private static final String days = "correctDays(case-sensitive) in order: {Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday}";
+    private static final String days = "correctDays(case-sensitive) in order: \n"
+        + "{Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday}";
 
     public static final String MESSAGE_INVALID_TIMETABLE = "timetable to be added is wrong: \n"
         + "does not have correct timings in first row and correct days in first column in the csv file \n"
