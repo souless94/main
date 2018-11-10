@@ -495,7 +495,7 @@ Step 1: The user launches the application. (We assume that the user has already 
 .Sequence Diagram of DeleteGroupCommand (Logic component)
 image::DeleteGroupCommandLogicSD.png[width="750"]
 
-Step 2: The user enters the command `dg n/Family` to delete the existing group with group name Family. 
+Step 2: The user enters the command `dg n/Family` to delete the existing group with group name Family.
 
 * The `LogicManager` class parses the command to `AddressBookParser`.
 
