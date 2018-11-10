@@ -34,6 +34,7 @@ import org.junit.Test;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.CreateCommand;
 import seedu.address.logic.commands.LoginCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.UndoCommand;
@@ -56,6 +57,8 @@ public class AddCommandSystemTest extends AddressBookSystemTest {
         /* ------------------------ Perform add operations on the shown unfiltered list ----------------------------- */
 
         /* Case: create account and login first */
+        String createCommand = CreateCommand.COMMAND_WORD + " u/admin pw/adminPass";
+        executeCommand(createCommand);
         String loginCommand = LoginCommand.COMMAND_WORD + " u/admin pw/adminPass";
         executeCommand(loginCommand);
 

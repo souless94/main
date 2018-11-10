@@ -7,6 +7,7 @@ import org.junit.Test;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.ClearCommand;
+import seedu.address.logic.commands.CreateCommand;
 import seedu.address.logic.commands.LoginCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.UndoCommand;
@@ -20,6 +21,8 @@ public class ClearCommandSystemTest extends AddressBookSystemTest {
         final Model defaultModel = getModel();
 
         /* Case: create account and login first */
+        String createCommand = CreateCommand.COMMAND_WORD + " u/admin pw/adminPass";
+        executeCommand(createCommand);
         String loginCommand = LoginCommand.COMMAND_WORD + " u/admin pw/adminPass";
         executeCommand(loginCommand);
 

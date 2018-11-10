@@ -14,6 +14,7 @@ import org.junit.Test;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.CreateCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.LoginCommand;
 import seedu.address.logic.commands.RedoCommand;
@@ -31,6 +32,8 @@ public class DeleteCommandSystemTest extends AddressBookSystemTest {
         /* ----------------- Performing delete operation while an unfiltered list is being shown -------------------- */
 
         /* Case: create account and login first */
+        String createCommand = CreateCommand.COMMAND_WORD + " u/admin pw/adminPass";
+        executeCommand(createCommand);
         String loginCommand = LoginCommand.COMMAND_WORD + " u/admin pw/adminPass";
         executeCommand(loginCommand);
 

@@ -11,6 +11,7 @@ import static seedu.address.testutil.TypicalPersons.KEYWORD_MATCHING_MEIER;
 import org.junit.Test;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.CreateCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.LoginCommand;
@@ -23,6 +24,8 @@ public class FindCommandSystemTest extends AddressBookSystemTest {
     @Test
     public void find() {
         /* Case: create account and login first */
+        String createCommand = CreateCommand.COMMAND_WORD + " u/admin pw/adminPass";
+        executeCommand(createCommand);
         String loginCommand = LoginCommand.COMMAND_WORD + " u/admin pw/adminPass";
         executeCommand(loginCommand);
 
