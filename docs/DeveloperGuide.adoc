@@ -455,6 +455,7 @@ Cons:
 - [LeslieTODO: to be updated]
 
 === Group Feature
+:group:
 
 The `Group` class extends the `Entity` abstract class just like a `Person` class does. An `Entity` contains an abstract method `isSame` that is necessary for the class to be used in `UniqueList<T extends Entity>`. `Group` class is an immutable class that is contained inside `Model`.
 
