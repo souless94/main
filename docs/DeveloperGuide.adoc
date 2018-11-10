@@ -458,11 +458,12 @@ Cons:
 
 The `Group` class extends the `Entity` abstract class just like a `Person` class does. An `Entity` contains an abstract method `isSame` that is necessary for the class to be used in `UniqueList<T extends Entity>`. `Group` class is an immutable class that is contained inside `Model`.
 
+.Class Diagram of Group and Person
+image::GroupPersonClassDiagram.png[width="600"]
+
 `Group` features make use of `Storage` to load information on groups added by the user before the UI is closed. `XmlAdaptedGroup` class helps the convert groups detail from xml files to the `AddressBook` when `MainApp` starts and similarly convert `Group` objects into xml files.
 
 `Group` features also updates the Group Panel inside the `UI` using a predicate.
-
-[MelodiesTODO: Add diagram showing how Group class interacts with Storage, UI, Model and Logic]
 
 ==== Current Implementation
 The current group commands added are:
