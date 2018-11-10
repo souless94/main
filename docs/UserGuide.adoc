@@ -35,7 +35,7 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 
 . The application launch in a state which grant *read-only rights* to the user. Some of the commands that are available in this state includes:
 
-- <<viewing_help_code_help_code>>
+- <<help>>
 - <<locating_group_by_name_code_find_group_code>>
 - <<list_all_persons_of_a_group_code_view_group_code>>
 - <<list_all_time_slots_of_a_group_at_which_everyone_is_available_code_view_slots_all_code>>
@@ -80,6 +80,7 @@ An example in the context of an interest group: Only committee members should be
 
 == common
 
+[[help]]
 === Viewing help : `help`
 
 Format: `help`
