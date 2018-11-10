@@ -1,6 +1,6 @@
 = Sim Ming Hui Melodies (Happytreat) - Project Portfolio
 :site-section: AboutUs
-:imagesDir: ../images/Happytreat.png
+:imagesDir: ../images
 :stylesDir: ../stylesheets
 
 == PROJECT: NUS Hangs
