@@ -1250,7 +1250,7 @@ Use case ends.
 
 [discrete]
 
-// tag::security-mechanism-use-case-01[]
+// tag::security-mechanism-use-case[]
 === Use case: Create an Account
 *MSS*
 
@@ -1271,7 +1271,6 @@ Use case resumes at step 2
 
 [discrete]
 
-// tag::security-mechanism-use-case-02[]
 === Use case: Login to Account
 *MSS*
 
@@ -1309,7 +1308,6 @@ Use case resumes at step 4
 +
 Use case resumes at step 4
 
-// tag::security-mechanism-use-case-03[]
 [discrete]
 === Use case: reset password
 *MSS*
@@ -1333,6 +1331,8 @@ Use case resumes at step 1.
 ** 2a1.System prompts user to enter security answer again
 +
 Use case resumes at step 2.
+
+// end::security-mechanism-use-case[]
 
 _{More to be added}_
 

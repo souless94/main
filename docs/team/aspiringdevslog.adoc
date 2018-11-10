@@ -62,9 +62,7 @@ include::../UserGuide.adoc[tag=security-mechanism]
 |===
 
 include::../DeveloperGuide.adoc[tag=security-mechanism]
-include::../DeveloperGuide.adoc[tag=security-mechanism-use-case-01]
-include::../DeveloperGuide.adoc[tag=security-mechanism-use-case-02]
-include::../DeveloperGuide.adoc[tag=security-mechanism-use-case-03]
+include::../DeveloperGuide.adoc[tag=security-mechanism-use-case]
 
 
 

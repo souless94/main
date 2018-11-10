@@ -59,6 +59,8 @@ An example in the context of an interest group: Only committee members should be
 - <<create_an_account_code_create_code>>
 - <<login_to_an_account_code_login_code>>
 
+// end::quick-start[]
+
 .  Some example commands you can try:
 * *`list`* : lists all person
 * *`add_group`*: `add_group n/Family d/This is a family group description` : adds a group named "Family" with the following description.
@@ -650,9 +652,9 @@ Format: `update_sq c/CURRENT_PASSWORD [n/NEWSECURITY_QUESTION]  [a/SECURITY_ANSW
 ****
 Examples:
 
-* `update_pw c/password n/why me? a/because it is cs2103`
+* `update_pw c/password n/Is this a good question? a/A better question is if this is a good answer`
 
-
+// end::security-mechanism[]
 
 == FAQ
 
