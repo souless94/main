@@ -401,6 +401,7 @@ Deletes the 2nd timetable in the address book.
 `delete_timetable 1` +
 Deletes the 1st timetable in the results of the `find_timetable` command.
 
+//tag::groups[]
 == Groups (Melodies)
 === Adding a group: `add_group`
 
@@ -529,6 +530,7 @@ Examples:
 * `delete_member 1 n/happyfriends`
 
 (deletes the 1st person displayed in `view_group` command.)
+//end::groups[]
 
 == Time slots (Nigel)
 
