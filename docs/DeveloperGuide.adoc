@@ -505,8 +505,6 @@ Step 2: The user enters the command `dg n/Family` to delete the existing group w
 
 .Sequence Diagram of DeleteGroupCommand (Model component)
 image::DeleteGroupCommandModelSD.png[width="700"]
-
-
 * After retrieving the actual group `g` with name "Family" from Model `m`, the model performs deletion of the group using an internal function `delete(g)`.
 
 * However, the group still has to be deleted from the groupList from all of its members. _(Refer to GroupPersonClassDiagram above.)_ `deleteGroupFromMembers(m, g)` is called from DeleteGroupCommand object to do so. This method calls the `UnModifiableObservableList()` method in its UniqueList<Person> to return a list of `members` in `g`.
