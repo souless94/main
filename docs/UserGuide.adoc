@@ -32,25 +32,32 @@ image::Ui.png[width="790"]
 .  Type the command in the command box and press kbd:[Enter] to execute it. +
 e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 
-
+[[aspiringdevslog-start-01]]
 . The application launch in a state which grant *read-only rights* to the user. Some of the commands that are available in this state includes:
 
-- <<_viewing_help_code_help_code>>
-- <<_locating_group_by_name_code_find_group_code>>
-- <<_list_all_persons_of_a_group_code_view_group_code>>
-- <<_list_all_time_slots_of_a_group_at_which_everyone_is_available_code_view_slots_all_code>>
-- <<_list_all_time_slots_of_a_group_in_descending_order_of_availability_code_view_slots_ranked_code>>
-
-- <<_listing_all_persons_code_list_code>>
-- <<_finding_a_person_code_find_code>>
-- <<_selecting_a_person_code_select_code>>
+- <<help>>
+- <<list>>
+- <<find>>
+- <<select>>
+- <<find_group>>
+- <<view_group>>
+- <<view_slots_all>>
+- <<view_slots_ranked>>
 
 
 . To make use of functions that add or edit information, the application requires the user to create and login to an account.
 
-- <<_create_an_account_code_create_code>>
-- <<_login_to_an_account_code_login_code>>
++
+[NOTE]
+The default username is "*admin*" and the default password is "*adminPassword*". +
+To prevent unauthorized users from creating an account, `create` *can only be executed when a user is logged on*. +
+An example in the context of an interest group: Only committee members should be allowed to make changes to the data while members are restricted to viewing rights.
++
 
+- <<create_an_account_code_create_code>>
+- <<login_to_an_account_code_login_code>>
+
+[[aspiringdevslog-end-01]]
 
 .  Some example commands you can try:
 * *`list`* : lists all person
@@ -73,6 +80,7 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 
 == common
 
+[[help]]
 === Viewing help : `help`
 
 Format: `help`
@@ -108,6 +116,7 @@ Examples:
 * `add n/James t/friend e/james@example.com t/classmates`
 * `a n/Joji t/Singer`
 
+[[list]]
 === Listing all persons : `list`
 
 Short form/Alias: `l`
@@ -161,6 +170,7 @@ Edits the name of the 2nd person to be `Betsy Crower` and clears all existing ta
 * `edit 1 fl/C:\Users\admin\Downloads\cs2103\tiredAndSadness` +
 Edits the stored location of the 1st person to be `C:/Users/admin/Downloads/cs2103/tiredAndSadness/` respectively.
 
+[[find]]
 === Finding a person : `find`
 
 Finds all persons in NusHangs, whose contain keywords provided by prefix(es). +
@@ -211,6 +221,7 @@ Deletes the 2nd person in the address book.
 `delete 1` +
 Deletes the 1st person in the results of the `find` command.
 
+[[select]]
 === Selecting a person : `select`
 
 Selects the person identified by the index number used in the displayed person list. +
@@ -443,6 +454,7 @@ Examples:
 
 (Changes only description.)
 
+[[find_group]]
 === Locating group by name: `find_group`
 
 Short form/Alias: `fg`
@@ -501,6 +513,7 @@ Examples:
 
 (Adds the first person in the displayed person panel to the group happyfriends)
 
+[[view_group]]
 === List all persons of a group : `view_group`
 
 Short form/Alias: `vg`
@@ -538,7 +551,7 @@ Examples:
 // end::groups[]
 
 == Time slots (Nigel)
-
+[[view_slots_all]]
 === List all time slots of a group at which everyone is available : `view_slots_all`
 Short form/Alias: `va`
 
@@ -553,7 +566,9 @@ Examples:
 
 * `view_slots_all n/happyfriends`
 
+
 === List all time slots of a group in descending order of availability with a minimum number of people available required: `view_slots_ranked`
+
 
 Short form/Alias: `vr`
 List all time slots of a group in descending order of availability with a minimum number of people available required: +
@@ -570,10 +585,17 @@ Examples:
 == Security (Leslie)
 === Create an account: `create`
 
-Create an account in the system. The password and security answer are both case sensitive. +
+Create an account in the system. The password is case sensitive. +
 Format: `create u/USERNAME pw/PASSWORD`
 
-(Coming in v2.0: Stores account details after closing and reopening app. *At this stage, the user is required to create a new account each time they restart the application*)
+(Coming in v2.0: Stores account details after closing and reopening app.)
+
+
+[NOTE]
+At this stage, the user is required to create a new account each time they restart the application +
+To prevent unauthorized users from creating an account, only admin or other logged in users can create account +
+Admin Username: *admin*, Admin Password: *adminPassword*
+
 
 Examples:
 

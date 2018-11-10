@@ -324,135 +324,130 @@ image::addtimetablediagram.png[width="500"]
 
 === Security Mechanism
 
-The main objectives of the security mechanism includes:
+==== Reason for Implementation
+In a typical interest group setting, there are two main stakeholders. The (1) committee members whom organizes events and the (2) group members whom participates in the event. In this context, these two stakeholders are the main users of NUS Hangs.
 
-* Preventing unauthorised usage of the application
-* Preventing unauthorised access and editing rights to the data stored within the application
+The security mechanism is implemented on the following premises:
 
-The following activity diagram illustrates how the workflow is restricted through the security mechanism.
+-	The application is used by the interest group on a shared computer
+-	The application is offline
+-	Only the two stakeholders mentioned have access to the shared computer
+
+Based on the above premises, the main objectives of the security mechanism include:
+
+•	Restrict group members to read-only commands
+•	Only committee members can add and edit information stored in the application
+
+The following activity diagram illustrates the workflow involving security mechanism.
+
 
 .Activity Diagram of Security Mechanism
 image::SecurityMechanismActivityDiagram.png[width="800"]
 
 
-To prevent unauthorised access (read, edit and other commands) of application users are required to login to the application. Each users would only be able to access data created by themselves or data which they have been granted rights to access.
+The three main components that works together to achieve this workflow are:
 
-To meet this end, various functions are implemented.
+1.	Account creation
+2.	Account login
+3.	Validation of login status prior to executing functions
+
 
 
 ==== Current Implementation
 
 
-*Account Creation and Login* [implemented in v1.1, incomplete]
+===== *Account Creation*
 
-The first step in securing the system is to restrict access to unauthorised users. This is accomplished by setting up `create` and `login` functions.
+The first thing a new user must do is to create a new account. To prevent unauthorized members from creating an account, the create command can only be executed if the user is logged in. A default admin account is provided (username: admin, password: adminPassword) to allow the committee members to create their first account.
 
-- `create`: creates an account
-- `login`: login to account
-
-Both functions are handled by the logic component, make use of the model component and is eventually managed through the storage component.
-
-The username is stored as a key in a hashmap while the password is encrypted and stored as the value. By using a hashmap to store the account login credentials, it becomes easy to implement the create and login function.
+The following sequence diagram illustrates the interactions between the different classes in the process of creating an account.
 
 .Sequence Diagram of Create Command
 image::CreateCommandSequenceDiagram.png[width="800"]
 
+*There are four new classes that are added to AddressBook4 in the implementation of account creation:*
+
+-	CreateCommandParser: parses input arguments and creates a new CreateCommand object
+-	CreateCommand: creates a new account for NUS Hangs
+-	Accounts: represents an account with username and password fields
+-	UserAccountStorage: storage of account credentials in a hashmap
+
+*Minor extensions are added to the other existing classes in AddressBook4:*
+
+-	AddressBookParser: added the create command keyword for parsing
+-	ParserUtil: added functions to parse username and password
+
+
+===== *Login Account*
+
+The following sequence diagram illustrates the interactions between the different classes in the process of logging in to an account. Upon successful login, LoginCommand changes the flag in AddressBookParser to allow users to execute add/edit commands on top of read-only commands.
 
 .Sequence Diagram of Login Command
 image::LoginCommandSequenceDiagram.png[width="800"]
 
-*To be implemented: *
-
-convert hashmap storage into XML and vice-versa
-
-*Password Encryption* [implemented in v1.2, to be improved]
-
-To prevent unauthorised users from getting the password by looking at the .xml files, the password is encrypted before storage. This is done by implementing Java Cryptography module.
-
-
-*Login Status Check* [to be implemented in v1.3]
-
-Next, there is a need to check if user is logged in before executing any entered commands. This is done by implementing a check function in the AddressBookParser.
-
-
-
-Step 1: A new user launches the application for the first time. The welcome page would prompt the user to create an account and refer to `help` function for more details.
-
-[LeslieTODO: to be updated - add image]
-image::SecurityMechanism-Step01-Diagram.png[width="300"]
-
-Step 2: The user follows the prompt to create an account, supplying a username and password.
-[LeslieTODO: to be updated - add image]
-image::SecurityMechanism-Step02-Diagram.png[width="300"]
-
-Step 2a: The user supplies a duplicate username and is prompted to choose another.
-[LeslieTODO: to be updated - add image]
-image::SecurityMechanism-Step02a-Diagram.png[width="300"]
-
-Step 2b: The user supplies a unique username and the account is successfully created.
-[LeslieTODO: to be updated - add image]
-image::SecurityMechanism-Step02b-Diagram.png[width="300"]
-
-Step 3: The user is prompted to login.
-[LeslieTODO: to be updated - add image]
-image::SecurityMechanism-Step03-Diagram.png[width="300"]
-
-Step 3a: The user supplies the wrong login credentials.
-[LeslieTODO: to be updated - add image]
-image::SecurityMechanism-Step03a-Diagram.png[width="300"]
-
-Step 3b: The user supplies the right login credentials.
-[LeslieTODO: to be updated - add image]
-image::SecurityMechanism-Step03b-Diagram.png[width="300"]
-
-Step 4: The user now have access to most of the commands.
-[LeslieTODO: to be updated - add image]
-image::SecurityMechanism-Step04-Diagram.png[width="300"]
-
-In version 1.1, the implementation is up to step 3b.
-In version 1.2, the user password is encrypted to prevent loss of password.
-In version 1.3, step 4 would be implemented.
-
-In version 2.0, encryption would be extended to other essential data stored within the system.
+There are four new classes that are added to AddressBook4 in the implementation of account creation:
+-	LoginCommandParser: parses input arguments and creates a new LoginCommand object
+-	LoginCommand: login to an account of NUS Hangs
+-	Accounts: represents an account with username and password fields
+-	UserAccountStorage: retrieval and checking of account credentials in a hashmap
+Minor extensions are added to the other existing classes in AddressBook4:
+-	AddressBookParser: added the login command keyword for parsing, added a check on login status to control commands execution
+-	ParserUtil: added functions to parse username and password
 
 ==== Design Considerations
 
-===== Aspect: Create and Login
+*Aspect: Implementation of UserAccountStorage*
 
-*Alternative 1 (current choice):* create stores data in a hashmap.
+*Alternative 1 (current choice): Storing account credentials in a HashMap*
 
-Pros:
+Pros: HashMap is one of the simplest data structures to make use of. It’s especially useful since it maps values to keys. In this case, username serves as keys while the passwords serve as values to be stored in the hashmap.
 
-- hashmap does not allows duplicate keys, making it easy to implement
+Cons: By default, adding a duplicate key would overwrite the initial value. i.e. if a username is already used, the password would be changed. To prevent this, we need to implement a function to check for duplicate username before adding the account credentials.
 
-Cons:
+*Alternative 2: Storing account credentials in a LinkedHashMap*
 
-- [LeslieTODO: to be updated]
+Pros: captures the order of account creation
 
-*Alternative 2:*
+Cons: LinkedHashMaps is implemented by maintaining a doubly-linked list running through all entries to capture the order. This additional data structure results in additional memory usage.
 
-Pros:
+*Aspect: Implementation of Encrypt*
 
-- [LeslieTODO: to be updated]
+*Alternative 1(current choice): SHA-256*
 
-Cons:
+Pros: SHA-256 is a one-way hashing algorithm. This means that it is not feasible to invert which prevents unauthorized users from getting the plain text passwords. In version 1.4, NUS Hangs is an offline application situated on a single shared computer. Hence, a simple hash function is adequate in preventing unauthorized users from retrieving the passwords from the application.
 
-- [LeslieTODO: to be updated]
+Cons: Shorter hash outputs makes it easier to brute force.
+
+*Alternative 2: SHA-512 + Salting*
+
+Pros: Longer hash output that is less predictable protects it from rainbow table attacks.
+
+Cons: Uses more memory space to store the longer hash output.
+
+*Aspect: Validation of Login Status*
+
+*Alternative 1 (current choice): Login Status Flag implemented directly in AddressBookParser*
+
+Pros: This allows for simple implementation to control commands rights
+
+Cons: As the amount of commands increases, this might become difficult to maintain.
+
+*Alternative 2: Creating two different parsers for read-only commands and add/edit commands*
+
+Pros: Easier to maintain as the amount of commands increases
+
+Cons: Requires significant changes to the current architecture.
+
+==== Limitations (version 1.4)
+
+*Account Credentials does not persist*
+
+Account credentials are stored in a hashmap. The problem with the current storage of account credentials is the lack of persistence, i.e. when the user closes the application, the account credentials are lost. In the future version, this problem will be solved either by storing credentials in an external file (such as .xml, .txt) or in a database.
 
 
-[LeslieTODO: to be updated: ]
+*No restrictions on password*
 
-===== Aspect: How encryption executes
-
-*Alternative 1 (current choice):* a function call to encryption before storing password data into hashmap. when logging in, a function call encrypts the user entered password before comparing to stored password in hashmap
-
-Pros:
-
-- hashmap does not allows duplicate keys, making it easy to implement
-
-Cons:
-
-- [LeslieTODO: to be updated]
+There are no restrictions on password, namely there is no checks to ensure that the passwords are strong. This means that users can use weak passwords or even leave the password field empty to make it easy to log in.
 
 // tag::groups[]
 === Group Feature

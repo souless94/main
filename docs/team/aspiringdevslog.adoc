@@ -13,16 +13,21 @@ NUS Hangs is a desktop Schedule Manager application. It has a GUI but most of th
 
 == Summary of contributions
 
-* *Major enhancement*: added *the ability to create account and login*
-** What it does: prevents unauthorised users from accessing the application
-** Justification: This feature secures the application by preventing unauthorised users from accessing it.
+* *Major enhancement*: implemented security mechanism
+** What it does: manages command execution rights to two main stakeholders
+*** Guest users (users without account): can only execute read-only commands
+*** Admins (users with account): can execute all commands accessible by guest users. On top of that, is able to execute commands related to add and editing of data.
+** Justification: This feature secures the information stored in the application by preventing unauthorised users from manipulating it, while allowing all users to view the data. +
+An example of a situation where this would be useful is in the context of an interest group. In an interest group, committee members would need to organize activities while maximizing attendance. In that case, only the committee members should have the rights to add and update the information within the application. After the committee members setup the schedule, members whom are interested would be able to gain read-only access to view the information available. Alternatively, members could also access the application to verify if the information are accurate.
+
+
 
 
 * *Minor enhancement*: *added an encrypt function*
 ** What it does: encrypts password before storage to prevent compromising of password information.
 
 
-* *Code contributed*: https://nus-cs2103-ay1819s1.github.io/cs2103-dashboard/#=undefined&search=aspiringdevslog
+* *Code contributed*: [https://nus-cs2103-ay1819s1.github.io/cs2103-dashboard/#=undefined&search=aspiringdevslog[Functional and Test code]]
 
 * *Other contributions*:
 
@@ -31,8 +36,13 @@ NUS Hangs is a desktop Schedule Manager application. It has a GUI but most of th
 **** Created labels
 **** Created project board
 **** Set up milestones and deadlines
+**** Set up branch protection
+*** Trial release for .jar in v1.2.1 [Pull Request: https://github.com/CS2103-AY1819S1-F11-4/main/pull/145[#145]]
 ** Documentation:
-***
+*** Created initial UI mockup [https://github.com/CS2103-AY1819S1-F11-4/main/pull/1[#1]]
+*** Updated Quick Start portion in User Guide [https://github.com/CS2103-AY1819S1-F11-4/main/pull/209/commits/c2ac0183c643fd9621d6e77a781e0d53039444ab[#209]]
+** Community
+*** Created Initial Personal Portfolio Pages for all members [https://github.com/CS2103-AY1819S1-F11-4/main/pull/197/files[#197]]
 
 
 == Contributions to the User Guide
@@ -42,7 +52,9 @@ NUS Hangs is a desktop Schedule Manager application. It has a GUI but most of th
 |_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
 |===
 
-include::../UserGuide.adoc[tag=temp]
+include::../UserGuide.adoc[tag=aspiringdevslog-start-01]
+
+
 
 
 == Contributions to the Developer Guide
@@ -51,6 +63,6 @@ include::../UserGuide.adoc[tag=temp]
 |_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
 |===
 
-include::../DeveloperGuide.adoc[tag=temp]
+include::../DeveloperGuide.adoc[tag=security-mechanism]
 
 
