@@ -58,10 +58,11 @@ i.e. add_group, delete_group, edit_group, register, delete_member, find_group, v
 |===
 |_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
 |===
+include::../UserGuide.adoc[tag=list]
 include::../UserGuide.adoc[tag=groups]
 
 == Contributions to the Developer Guide
 |===
 |_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
 |===
-include::../DeveloperGuide.adoc[tag=group]
+include::../DeveloperGuide.adoc[tag=groups]
