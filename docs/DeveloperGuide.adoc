@@ -1118,6 +1118,7 @@ Use case resumes at step 2.
 2.	System shows how to add a group
 3.	User adds inputs accordingly
 4.	System shows group is created successfully
+
 *Extensions*
 
 * 3a. User enters invalid input or format.
@@ -1126,7 +1127,7 @@ Use case resumes at step 2.
 ** 3a1.System shows an error message.
 +
 Use case resumes at step 2.
-* 3b. User enters a group name that already exists. 
+* 3b. User enters a group name that already exists.
 ** 3b1. System shows an error message: Group already existed
 +
 Use case ends.
