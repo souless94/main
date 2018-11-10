@@ -35,7 +35,7 @@ public class RegisterCommand extends Command {
             + PREFIX_NAME + "Family ";
 
     public static final String MISSING_GROUP_NAME = "Please enter group name.";
-    private static final String MESSAGE_EDIT_GROUP_SUCCESS = "Added member to group: %1$s";
+    public static final String MESSAGE_SUCCESS = "Added member to group: %1$s";
     private static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the group.";
 
 
@@ -62,17 +62,11 @@ public class RegisterCommand extends Command {
         Person personToAdd = CommandUtil.retrievePersonFromIndex(model, index);
 
         try {
-            Pair pair = addMemberToGroup(groupToBeEdited, personToAdd);
-            Group editedGroup = (Group) pair.getKey();
-            Person updatedPersonToAdd = (Person) pair.getValue();
-
-            model.update(groupToBeEdited, editedGroup);
-            model.update(personToAdd, updatedPersonToAdd);
-
+            addMemberToGroup(model, groupToBeEdited, personToAdd);
             model.updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
             model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
             model.commitAddressBook();
-            return new CommandResult(String.format(MESSAGE_EDIT_GROUP_SUCCESS, updatedPersonToAdd));
+            return new CommandResult(String.format(MESSAGE_SUCCESS, personToAdd));
 
         } catch (DuplicateElementException e) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
@@ -81,26 +75,27 @@ public class RegisterCommand extends Command {
     }
 
     /**
-     * Creates and returns a {@code group} with a new member {@code personToAdd}
-     * in {@code groupToBeEdited}.
-     * Adds {@code groupToBeEdited} into the list of groups inside {@code personToAdd}.
-     * Returns the updated group and updated person.
+     * Create {@code newGroup} by adding a new member {@code personToAdd} into {@code groupToBeEdited}.
+     * Create {@code newPerson} by adding {@code groupToBeEdited} into the list of groups inside
+     * {@code personToAdd}.
+     * Updates the {@code model} with the updated group {@code newGroup} and updated person {@code personToAdd}.
      */
-    private static Pair<Group, Person> addMemberToGroup(Group groupToBeEdited, Person personToAdd)
+    public static void addMemberToGroup(Model model, Group groupToBeEdited, Person personToAdd)
             throws DuplicateElementException {
         assert groupToBeEdited != null;
 
         List<Group> groupList = new ArrayList<>();
         groupList.add(groupToBeEdited);
         groupList.addAll(personToAdd.getGroups());
-        personToAdd = personToAdd.defensiveSetGroups(groupList);
+        Person newPerson = personToAdd.defensiveSetGroups(groupList);
 
         UniqueList<Person> newGroupMembers = new UniqueList<>();
         newGroupMembers.setElements(groupToBeEdited.getGroupMembers());
         newGroupMembers.add(personToAdd);
         Group newGroup = new Group(groupToBeEdited.getName(), groupToBeEdited.getDescription(), newGroupMembers);
 
-        return new Pair(newGroup, personToAdd);
+        model.update(groupToBeEdited, newGroup);
+        model.update(personToAdd, newPerson);
     }
 
     @Override
