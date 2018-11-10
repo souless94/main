@@ -44,9 +44,9 @@ public class UserAccountStorage {
     }
 
     /**
-     *  initialize hashmap with admin account
+     * initialize hashmap with admin account
      */
-    public static void addAdminAccount(){
+    public static void addAdminAccount() {
         String encryptedAdminPassword = Encrypt.encryptString(adminPassword);
         userHashMap.put(adminUsername, encryptedAdminPassword);
     }

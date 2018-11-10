@@ -26,7 +26,7 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.util.SampleDataUtil;
-import seedu.address.storage.*;
+import seedu.address.storage.UserAccountStorage;
 import seedu.address.ui.Ui;
 import seedu.address.ui.UiManager;
 

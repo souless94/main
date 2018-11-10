@@ -160,7 +160,7 @@ public class AddressBookParser {
                 return new CreateCommandParser().parse(arguments);
 
             case LoginCommand.COMMAND_WORD:
-                throw new ParseException(MESSAGE_USER_ALREADY_LOGGED_IN);
+                return new LoginCommandParser().parse(arguments);
 
             default:
                 throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
