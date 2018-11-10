@@ -454,8 +454,8 @@ Cons:
 
 - [LeslieTODO: to be updated]
 
+// tag::groups[]
 === Group Feature
-:group:
 
 The `Group` class extends the `Entity` abstract class just like a `Person` class does. An `Entity` contains an abstract method `isSame` that is necessary for the class to be used in `UniqueList<T extends Entity>`. `Group` class is an immutable class that is contained inside `Model`.
 
@@ -551,6 +551,7 @@ Cons: Have to update both lists in most group commands (e.g. registering a new m
 Pros: Less issues with enforcing referential integrity (see alternative 1).
 
 Cons: Can be more expensive to look for groups for a particular person.
+// end::groups[]
 
 === Person Feature
 
