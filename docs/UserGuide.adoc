@@ -33,7 +33,7 @@ image::Ui.png[width="790"]
 e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 
 [[aspiringdevslog-start-01]]
-. The application launch in a state which grant *read-only rights* to the user. Some of the commands that are available in this state includes:
+.  The application launch in a state which grant *read-only rights* to the user. Some of the commands that are available in this state includes:
 
 - <<help>>
 - <<list>>
@@ -45,7 +45,7 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 - <<view_slots_ranked>>
 
 
-. To make use of functions that add or edit information, the application requires the user to create and login to an account.
+.  To make use of functions that add or edit information, the application requires the user to create and login to an account.
 
 +
 [NOTE]

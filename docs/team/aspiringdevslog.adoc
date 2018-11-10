@@ -52,7 +52,8 @@ An example of a situation where this would be useful is in the context of an int
 |_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
 |===
 
-include::../UserGuide.adoc[tag=temp]
+include::../UserGuide.adoc[tag=quick-start]
+include::../UserGuide.adoc[tag=security]
 
 
 == Contributions to the Developer Guide
@@ -61,6 +62,6 @@ include::../UserGuide.adoc[tag=temp]
 |_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
 |===
 
-include::../DeveloperGuide.adoc[tag=temp]
+include::../DeveloperGuide.adoc[tag=security-mechanism]
 
 
