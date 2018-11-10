@@ -243,7 +243,7 @@ public class ParserUtilTest {
     @Test
     public void parseLocationSuccess() throws Exception {
         File location = new File(VALID_LOCATION);
-        assertEquals(location.getAbsolutePath().replace("\\", "/"), parseLocation(VALID_LOCATION));
+        assertEquals(location.getAbsolutePath().replace("\\", "/"), ParserUtil.parseLocation(VALID_LOCATION));
     }
 
     @Test
