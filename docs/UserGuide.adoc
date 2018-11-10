@@ -31,8 +31,28 @@ image::Ui.png[width="790"]
 +
 .  Type the command in the command box and press kbd:[Enter] to execute it. +
 e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
-.  Some example commands you can try:
 
+
+. The application launch in a state which grant *read-only rights* to the user. Some of the commands that are available in this state includes:
+
+- <<_viewing_help_code_help_code>>
+- <<_locating_group_by_name_code_find_group_code>>
+- <<_list_all_persons_of_a_group_code_view_group_code>>
+- <<_list_all_time_slots_of_a_group_at_which_everyone_is_available_code_view_slots_all_code>>
+- <<_list_all_time_slots_of_a_group_in_descending_order_of_availability_code_view_slots_ranked_code>>
+
+- <<_listing_all_persons_code_list_code>>
+- <<_finding_a_person_code_find_code>>
+- <<_selecting_a_person_code_select_code>>
+
+
+. To make use of functions that add or edit information, the application requires the user to create and login to an account.
+
+- <<_create_an_account_code_create_code>>
+- <<_login_to_an_account_code_login_code>>
+
+
+.  Some example commands you can try:
 * *`list`* : lists all person
 * *`add_group`*: `add_group n/Family d/This is a family group description` : adds a group named "Family" with the following description.
 * *`delete_group`*: `delete_group n/Family` : deletes the Family group from NUS Hang.
@@ -138,7 +158,7 @@ Edits the name of the 2nd person to be `Betsy Crower` and clears all existing ta
 * `edit 1 fl/C:\Users\admin\Downloads\cs2103\tiredAndSadness` +
 Edits the stored location of the 1st person to be `C:/Users/admin/Downloads/cs2103/tiredAndSadness/` respectively.
 
-=== Finding a person : `find` (ZhiWei)
+=== Finding a person : `find`
 
 Finds all persons in NusHangs, whose contain keywords provided by prefix(es). +
 Format: `find [n/NAME...] [p/PHONE_NUMBER...] [e/EMAIL...] [a/ADDRESS...] [t/TAG...]`
@@ -546,7 +566,7 @@ Examples:
 Create an account in the system. The password and security answer are both case sensitive. +
 Format: `create u/USERNAME pw/PASSWORD`
 
-(Coming soon: Stores account details after closing and reopening app)
+(Coming in v2.0: Stores account details after closing and reopening app. *At this stage, the user is required to create a new account each time they restart the application*)
 
 Examples:
 
@@ -587,7 +607,7 @@ Format: `reset a/SECURITY_ANSWER n/NEW_PASSWORD`
 
 Examples:
 
-* `reset a/Near the moon`
+* `reset a/My security answer`
 
 ===	Changing security question and answer : `update_sq` `[coming in v2.0]`
 
@@ -601,8 +621,6 @@ Format: `update_sq c/CURRENT_PASSWORD [n/NEWSECURITY_QUESTION]  [a/SECURITY_ANSW
 Examples:
 
 * `update_pw c/password n/why me? a/because it is cs2103`
-
-===	Suggest, Requesting new password `[coming in v2.0]`
 
 
 
