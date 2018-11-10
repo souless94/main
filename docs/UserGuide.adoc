@@ -115,6 +115,8 @@ Short form/Alias: `l`
 Shows a list of all persons in the address book. +
 Format: `list`
 
+// tag::list[]
+
 === Listing all groups a person is in : `list` (Melodies)
 
 Shows a list of all groups the person specified by his PERSON_INDEX is in. +
@@ -131,6 +133,7 @@ Example:
 * `list 1`
 
 (lists all the groups that the person at index 1 is added to previously)
+// end::list[]
 
 === Editing a person : `edit`
 
@@ -402,9 +405,9 @@ Deletes the 2nd timetable in the address book.
 * `find_timetable Betsy` +
 `delete_timetable 1` +
 Deletes the 1st timetable in the results of the `find_timetable` command.
-
 // end::timetable[]
 
+// tag::groups[]
 == Groups (Melodies)
 === Adding a group: `add_group`
 
@@ -531,8 +534,8 @@ Examples:
 
 * `view_group n/happyfriends`
 * `delete_member 1 n/happyfriends`
-
 (deletes the 1st person displayed in `view_group` command.)
+// end::groups[]
 
 == Time slots (Nigel)
 
