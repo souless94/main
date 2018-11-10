@@ -455,7 +455,6 @@ Cons:
 - [LeslieTODO: to be updated]
 
 // tag::groups[]
-
 === Group Feature
 
 The `Group` class extends the `Entity` abstract class just like a `Person` class does. An `Entity` contains an abstract method `isSame` that is necessary for the class to be used in `UniqueList<T extends Entity>`. `Group` class is an immutable class that is contained inside `Model`.
@@ -496,7 +495,7 @@ Step 1: The user launches the application. (We assume that the user has already 
 
 .Sequence Diagram of DeleteGroupCommand (Logic component)
 image::DeleteGroupCommandLogicSD.png[width="750"]
-
+  _{give links to collated code files}_
 Step 2: The user enters the command `dg n/Family` to delete the existing group with group name Family.
 
 * The `LogicManager` class parses the command to `AddressBookParser`.
@@ -552,7 +551,6 @@ Cons: Have to update both lists in most group commands (e.g. registering a new m
 Pros: Less issues with enforcing referential integrity (see alternative 1).
 
 Cons: Can be more expensive to look for groups for a particular person.
-
 // end::groups[]
 
 === Person Feature
