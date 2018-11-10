@@ -35,15 +35,15 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 
 . The application launch in a state which grant *read-only rights* to the user. Some of the commands that are available in this state includes:
 
-- <<_viewing_help_code_help_code>>
-- <<_locating_group_by_name_code_find_group_code>>
-- <<_list_all_persons_of_a_group_code_view_group_code>>
-- <<_list_all_time_slots_of_a_group_at_which_everyone_is_available_code_view_slots_all_code>>
-- <<_list_all_time_slots_of_a_group_in_descending_order_of_availability_code_view_slots_ranked_code>>
+- <<viewing_help_code_help_code>>
+- <<locating_group_by_name_code_find_group_code>>
+- <<list_all_persons_of_a_group_code_view_group_code>>
+- <<list_all_time_slots_of_a_group_at_which_everyone_is_available_code_view_slots_all_code>>
+- <<list_all_time_slots_of_a_group_in_descending_order_of_availability_code_view_slots_ranked_code>>
 
-- <<_listing_all_persons_code_list_code>>
-- <<_finding_a_person_code_find_code>>
-- <<_selecting_a_person_code_select_code>>
+- <<listing_all_persons_code_list_code>>
+- <<finding_a_person_code_find_code>>
+- <<selecting_a_person_code_select_code>>
 
 
 . To make use of functions that add or edit information, the application requires the user to create and login to an account.
@@ -55,8 +55,8 @@ To prevent unauthorized users from creating an account, `create` *can only be ex
 An example in the context of an interest group: Only committee members should be allowed to make changes to the data while members are restricted to viewing rights.
 +
 
-- <<_create_an_account_code_create_code>>
-- <<_login_to_an_account_code_login_code>>
+- <<create_an_account_code_create_code>>
+- <<login_to_an_account_code_login_code>>
 
 
 .  Some example commands you can try:

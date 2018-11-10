@@ -16,7 +16,7 @@ public class UserAccountStorage {
     private static final String adminPassword = "adminPassword";
 
     public UserAccountStorage() {
-
+        addAdminAccount();
     }
 
     /**
