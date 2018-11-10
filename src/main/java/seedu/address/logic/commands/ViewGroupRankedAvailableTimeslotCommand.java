@@ -54,5 +54,4 @@ public class ViewGroupRankedAvailableTimeslotCommand extends Command {
         return new CommandResult(MESSAGE_SUCCESS + this.numberRequired + " person(s) available:\n"
                 + group.listRankedAvailableTimeslots(numberRequired));
     }
-
 }
