@@ -820,7 +820,6 @@ In excel format
 |`* * *` |Organiser of the group  |See if there are any available time slots which are not in conflict with everyone’s time table.
  |I can plan or attend an activity accordingly
 
-
 |`* *` |Organiser of the group  |See the time slot with the least number of conflicts if there are no time slots available for everyone
  |I can ensure maximum participation if it is not possible for everyone to make it
 
@@ -830,41 +829,14 @@ In excel format
  |`* *` |Organiser of the group  |See the time slot with the least number of conflicts given a set of specific time slots.
  |I can ensure maximum participation with the additional constraint
 
- |`* *` |user  |See the people whose time table have conflicts with the time slot with the least number of conflicts.
- |I can adjust my time table if I am one of the people and increase participation
-
-|`* * *` |Organiser of the group  |Choose to create either open or closed group
- | Dont need to reject people because they know if they can join the group
-
- |`* *` |Organiser of the group  |Book venues based on decide free time slot
- |I can have a venue to hold my event
-
-  |`* *` |member of a group  |Sync with the real-time (almost) information to get updated time and venues
- |I am always updated with the latest timetable of everyone in the group
-
-  |`* *` |member of a group  |Notify organiser or other members of change of timetable/clashes
- |To update the timings of future possible meetings/RSVP
-
  |`* *` |member of a group  |Have a list of groups i am currently in
  |I can remember what groups i am in
 
  |`* *` |Organiser of the group  |Be notified of each members’ changes in available time slot
  |I can decide how and what to plan for the upcoming meeting
 
- |`* * *` |Organiser of the group  |Be able to ‘close’ or finalise the planning
- |So that no changes can be made thereafter
-
  |`* * *` |Organiser of the group  |I want to dismiss members who are no longer affiliated to the group
  |So that the time slot available is up to date, to ensure maximum participation
-
- |`* *` |user  |I want to view my meeting on all my devices
- |I have a back up in the event I lost access to one of my devices
-
- |`* *` |Organiser of the group  |I want to send an invite link
- |So that I can easily coordinate the meeting timing with my group members
-
- |`* *` | Committee member of the Interest Group  | I want to allow members of the interest group to have only read access to the application while allowing other committee members whom have an account to make changes to the data in the application
- | So that members are able to keep updated to the schedule of others while ONLY the committee can manage the schedule data of the members
 
  |`* *` | Committee member of the Interest Group  | I want the password to be encrypted
  | So that members are unable to retrieve the password from the application to gain unauthorised access.
@@ -891,13 +863,13 @@ _{More to be added}_
 
 
 [discrete]
-=== Use case: add friend
+=== Use case: Add a person into the system.
 *MSS*
 
-1.	User logins to System and requests help to add a friend
-2.	System shows him how to add a friend
+1.	User logins to System and requests help to add a person
+2.	System shows him how to add a person
 3.	User input add command accordingly
-4.	System displays friend is added successfully
+4.	System displays person is added successfully
 
 *Extensions*
 
@@ -909,13 +881,13 @@ _{More to be added}_
 Use case resumes at step 2.
 
 [discrete]
-=== Use case: Find friend by Name
+=== Use case: Find person by Name or other details (e.g. address/phone)
 *MSS*
 
-1.	User logins to System and requests help to find a friend
-2.	System shows how to find a friend
+1.	User logins to System and requests help to find a person
+2.	System shows how to find a person based on different details
 3.	User inputs command accordingly
-4.	System shows friend details
+4.	System shows full person details
 
 
 *Extensions*
@@ -928,60 +900,54 @@ Use case resumes at step 2.
 Use case resumes at step 2.
 +
 [none]
-* 4a.System cannot find friend.
+* 4a.System cannot find person.
 +
-Use case resumes at step 2.
+System reports 0 person listed.
++
+Use case ends.
 
 [discrete]
-=== Use case: List all friends
+=== Use case: List all persons and groups.
 
 *MSS*
 
-1.	User logins to System and requests help to list all friends
-2.	System shows a list of all friends
+1.	User logins to System and requests help to list all person
+2.      User enters list command.
+2.	System shows a list of all persons and groups.
 
 [discrete]
-=== Use case: Delete a friend
+=== Use case: Delete a person
 *MSS*
 
-1.  User logins to System and requests help to delete a friend
-2.	System shows how to delete a friend
-3.	User enters input accordingly
-4.	System asks user for confirmation.
-5.	User confirms his choice.
-6.	System shows friend is deleted successfully.
-
-
+1.      User logins to System and requests help to delete a person.
+2.	System shows how to delete a person.
+3.	User enters input accordingly.
+4.	System shows person is deleted successfully.
 
 *Extensions*
 
-* 3a. User enters invalid input.
+* 3a. User enters invalid input or format.
 +
 [none]
 ** 3a1.System shows an error message.
 +
 Use case resumes at step 2.
-* 4a. Friend is not in the System.
+* 4a. Index of person is not in the System (e.g. index larger than number of people in system).
 +
 [none]
-** 4a1.System shows an error message.
+** 4a1.System shows an error message: Invalid index entered.
 +
 Use case ends.
-* 5a. User does not confirm the deletion of the friend
-+
 
-Use case ends.
 
 [discrete]
-=== Use case: Edit a friend
+=== Use case: Edit a person.
 *MSS*
 
 1.  User logins to System and requests help to edit a friend
-2.	System shows how to edit a friend
-3.	User enters input accordingly
-4.	System asks user for confirmation.
-5.	User confirms his choice.
-6.	System shows friend is edited successfully.
+2.	System shows how to edit a person.
+3.	User enters input accordingly.
+4.	System shows person is edited successfully.
 
 
 
@@ -993,23 +959,20 @@ Use case ends.
 ** 3a1.System shows an error message.
 +
 Use case resumes at step 2.
-* 4a. Friend is not in the System.
+* 4a. Person is not in the System (index inputted invalid or larger than number of people in system).
 +
 [none]
-** 4a1.System shows an error message.
-+
-Use case resumes at step 2.
-* 5a. User does not confirm the editing of the friend
+** 4a1.System shows an error message: Invalid index entered.
 +
 Use case ends.
 
 [discrete]
-=== Use case: List all groups a friend have
+=== Use case: List all groups a person is in.
 
 *MSS*
 
-1.	User logins to System and requests help to list all groups a friend have
-2.	System shows a list of all groups a friend have
+1.	User logins to System and requests help to list all groups a person is in.
+2.	System shows a list of all groups a friend is in.
 
 [discrete]
 === Use case: add a timetable
@@ -1148,22 +1111,26 @@ Use case resumes at step 2.
 Use case resumes at step 2.
 
 [discrete]
-=== Use case:create a group
+=== Use case: Add a group
 *MSS*
 
-1.	User logins to System and requests help to create a group
-2.	System shows how to create a group
+1.	User logins to System and requests help to add a group
+2.	System shows how to add a group
 3.	User adds inputs accordingly
 4.	System shows group is created successfully
 
 *Extensions*
 
-* 3a. User enters invalid input.
+* 3a. User enters invalid input or format.
 +
 [none]
 ** 3a1.System shows an error message.
 +
 Use case resumes at step 2.
+* 3b. User enters a group name that already exists. 
+** 3b1. System shows an error message: Group already existed
++
+Use case ends.
 
 [discrete]
 === Use case: Find group by Name
@@ -1187,15 +1154,9 @@ Use case resumes at step 2.
 [none]
 * 4a.System cannot find group.
 +
-Use case resumes at step 2.
-
-[discrete]
-=== Use case: List all groups
-
-*MSS*
-
-1.	User logins to System and requests help to list all groups
-2.	System shows a list of all groups
+** 4a1 System reports 0 groups listed.
++
+Use case ends.
 
 [discrete]
 === Use case: Delete a group
@@ -1204,15 +1165,11 @@ Use case resumes at step 2.
 1.  User logins to System and requests help to delete a group
 2.	System shows how to delete a group
 3.	User enters input accordingly
-4.	System asks user for confirmation.
-5.	User confirms his choice.
-6.	System shows group is deleted successfully.
-
-
+4.	System shows group is deleted successfully.
 
 *Extensions*
 
-* 3a. User enters invalid input.
+* 3a. User enters invalid input/format.
 +
 [none]
 ** 3a1.System shows an error message.
@@ -1221,12 +1178,8 @@ Use case resumes at step 2.
 * 4a. Group is not in the System.
 +
 [none]
-** 4a1.System shows an error message.
+** 4a1.System shows an error message stating no such group exists.
 +
-Use case ends.
-* 5a. User does not confirm the deletion of the group
-+
-
 Use case ends.
 
 [discrete]
@@ -1236,9 +1189,7 @@ Use case ends.
 1.  User logins to System and requests help to edit a group
 2.	System shows how to edit a group
 3.	User enters input accordingly
-4.	System asks user for confirmation.
-5.	User confirms his choice.
-6.	System shows group is edited successfully.
+4.	System shows group is edited successfully.
 
 
 
@@ -1253,12 +1204,9 @@ Use case resumes at step 2.
 * 4a. Group is not in the System.
 +
 [none]
-** 4a1.System shows an error message.
+** 4a1.System shows an error message stating no such group exists.
 +
 Use case resumes at step 2.
-* 5a. User does not confirm the editing of the group
-+
-Use case ends.
 
 [discrete]
 === Use case: List all members a group have
@@ -1277,11 +1225,9 @@ Use case ends.
 3.	User enters input accordingly
 4.	System shows a member is added to a group successfully.
 
-
-
 *Extensions*
 
-* 3a. User enters invalid input.
+* 3a. User enters invalid input/format.
 +
 [none]
 ** 3a1.System shows an error message.
@@ -1290,12 +1236,19 @@ Use case resumes at step 2.
 * 3b. Group or member is not in the System.
 +
 [none]
-** 3b1.System shows an error message.
+** 3b1.System shows an error message saying group does not exists/index of person entered is invalid respectively.
 +
 Use case ends.
-* 3c.Group is closed
-+
-Use case ends.
+
+[discrete]
+=== Use case: delete a member to a group
+*MSS*
+
+1.  User logins to System and requests help to delete a member to a group
+2.	System shows how to delete a member to a group
+3.	User enters input accordingly
+4.	System shows a member is delete from the group successfully.
+
 
 [discrete]
 === Use case: Create an Account
