@@ -541,6 +541,10 @@ The current person implementation are:
 * 'add' -- add any person with the choice of adding address, phone, email and tags
 * 'find' -- finds all persons in NusHangs, whose contain keywords provided by prefix(es)
 
+Given below is the Sequence Diagram for interactions within the Logic component for the execute("find n/alex") API call.
+
+image::FindSequence.png[width="600"]
+
 The following activity diagram shows how 'find' feature works:
 
 image::FindFeature1.png[width="600"]
