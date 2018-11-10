@@ -322,6 +322,7 @@ image::addtimetablediagram.png[width="500"]
 ** Pros: Faster Time efficiency because using 1 for loops to fill the Matrix with the data. Able to use functions in ArrayList
 ** Cons: Harder for new Computer Science student undergraduates to understand, who are likely to be the new incoming developers of our project. Less intuition to access entries of the matrix (matrix.get(i).get(j)).
 
+// tag::security-mechanism[]
 === Security Mechanism
 
 ==== Reason for Implementation
@@ -449,6 +450,8 @@ Account credentials are stored in a hashmap. The problem with the current storag
 
 There are no restrictions on password, namely there is no checks to ensure that the passwords are strong. This means that users can use weak passwords or even leave the password field empty to make it easy to log in.
 
+// end::security-mechanism[]
+
 // tag::groups[]
 === Group Feature
 
@@ -561,9 +564,13 @@ The current person implementation are:
 * 'add' -- add any person with the choice of adding address, phone, email and tags
 * 'find' -- finds all persons in NusHangs, whose contain keywords provided by prefix(es)
 
+Given below is the Sequence Diagram for interactions within the Logic component for the execute("find n/alex") API call.
+
+image::FindSequence1.png[width="800"]
+
 The following activity diagram shows how 'find' feature works:
 
-image::FindFeature1.png[width="600"]
+image::FindFeature1.png[width="800"]
 
 ==== Design Considerations
 
@@ -1248,6 +1255,8 @@ Use case ends.
 
 
 [discrete]
+
+// tag::security-mechanism-use-case[]
 === Use case: Create an Account
 *MSS*
 
@@ -1267,6 +1276,7 @@ Use case resumes at step 2
 
 
 [discrete]
+
 === Use case: Login to Account
 *MSS*
 
@@ -1304,7 +1314,6 @@ Use case resumes at step 4
 +
 Use case resumes at step 4
 
-
 [discrete]
 === Use case: reset password
 *MSS*
@@ -1328,6 +1337,8 @@ Use case resumes at step 1.
 ** 2a1.System prompts user to enter security answer again
 +
 Use case resumes at step 2.
+
+// end::security-mechanism-use-case[]
 
 _{More to be added}_
 
