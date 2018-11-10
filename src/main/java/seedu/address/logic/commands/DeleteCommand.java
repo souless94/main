@@ -57,7 +57,6 @@ public class DeleteCommand extends Command {
         }
 
         model.delete(personToDelete);
-
         model.updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
         model.commitAddressBook();
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, personToDelete));

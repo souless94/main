@@ -1,5 +1,7 @@
 package seedu.address.model.person.timetable;
 
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -7,6 +9,8 @@ import java.io.IOException;
 
 import java.util.Base64;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.apache.commons.lang3.ArrayUtils;
 
 import com.opencsv.CSVReader;
@@ -32,6 +36,11 @@ public class TimetableData {
     private final int noOfColumns;
     private boolean isCorrectSize;
     private boolean hasCorrectFirstRowsAndColumns;
+    private static Logger logger = Logger.getLogger("Foo");
+    private static String tooManyRows = "has more rows than expected";
+    private static String tooManyColumns = "has more columns than expected";
+    private static String noOfExpectedRows = "number of rows should be 8";
+    private static String noOfExpectedColumns = "number of columns should be 17";
 
     /**
      * uses format and timetableString to create a matrix uses the day and time to find the cell of
@@ -39,10 +48,13 @@ public class TimetableData {
      */
     public TimetableData(String filePath, String timetableString, int option,
         String day, String timing, String message) {
+        requireAllNonNull(filePath, option);
         this.isCorrectSize = true;
         this.hasCorrectFirstRowsAndColumns = true;
         this.noOfRows = noOfDays + 1;
         this.noOfColumns = noOfTimings + 1;
+        assert this.noOfRows == 8 : noOfExpectedRows;
+        assert this.noOfColumns == 17 : noOfExpectedColumns;
         String[][] timetable;
         if (option == 1) {
             timetable = getTimetableFromString(timetableString);
@@ -51,10 +63,8 @@ public class TimetableData {
             timetable = getTimetableData(locationFrom);
         } else {
             timetable = getTimetableFromString(timetableString);
-            int rowToChange;
-            int columnToChange;
-            rowToChange = ArrayUtils.indexOf(getDaysInLowerCase(), day.toLowerCase()) + 1;
-            columnToChange = ArrayUtils.indexOf(timings, timing) + 1;
+            int rowToChange = ArrayUtils.indexOf(getDaysInLowerCase(), day.toLowerCase()) + 1;
+            int columnToChange = ArrayUtils.indexOf(timings, timing) + 1;
             timetable[rowToChange][columnToChange] = message;
         }
         this.timetable = timetable;
@@ -71,12 +81,14 @@ public class TimetableData {
         } else {
             String[] rows = timetableString.split("\n");
             if (rows.length > getRows()) {
+                logger.log(Level.WARNING, tooManyRows);
                 this.isCorrectSize = false;
                 return timetableMatrix;
             }
             for (int i = 0; i < getRows(); i++) {
                 String[] decodedRows = rows[i].split(",");
                 if (decodedRows.length != getColumns()) {
+                    logger.log(Level.WARNING, tooManyColumns);
                     this.isCorrectSize = false;
                 }
                 for (int j = 0; j < getColumns(); j++) {
@@ -98,10 +110,12 @@ public class TimetableData {
     }
 
     public int getRows() {
+        assert this.noOfRows == 8 : noOfExpectedRows;
         return this.noOfRows;
     }
 
     public int getColumns() {
+        assert this.noOfColumns == 17 : noOfExpectedColumns;
         return this.noOfColumns;
     }
 
@@ -144,10 +158,12 @@ public class TimetableData {
             String[] timetableRow;
             while ((timetableRow = csvReader.readNext()) != null) {
                 if (timetableRow.length != getColumns()) {
+                    logger.log(Level.WARNING, tooManyColumns);
                     this.isCorrectSize = false;
                     break;
                 }
                 if (i >= getRows()) {
+                    logger.log(Level.WARNING, tooManyRows);
                     this.isCorrectSize = false;
                     break;
                 }
