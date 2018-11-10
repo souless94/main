@@ -55,7 +55,6 @@ An example of a situation where this would be useful is in the context of an int
 include::../UserGuide.adoc[tag=quick-start]
 include::../UserGuide.adoc[tag=security]
 
-
 == Contributions to the Developer Guide
 
 |===

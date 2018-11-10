@@ -80,54 +80,70 @@ public class AddressBookParser {
 
         if (userIsLoggedOn) {
             switch (commandWord) {
+            case AddTimetableCommand.ALIAS:
             case AddTimetableCommand.COMMAND_WORD:
                 return new AddTimetableCommandParser().parse(arguments);
 
+            case DeleteTimetableCommand.ALIAS:
             case DeleteTimetableCommand.COMMAND_WORD:
                 return new DeleteTimetableCommandParser().parse(arguments);
 
+            case DownloadTimetableCommand.ALIAS:
             case DownloadTimetableCommand.COMMAND_WORD:
                 return new DownloadTimetableCommandParser().parse(arguments);
 
+            case EditTimetableCommand.ALIAS:
             case EditTimetableCommand.COMMAND_WORD:
                 return new EditTimetableCommandParser().parse(arguments);
 
+            case AddCommand.ALIAS:
             case AddCommand.COMMAND_WORD:
                 return new AddCommandParser().parse(arguments);
 
+            case EditCommand.ALIAS:
             case EditCommand.COMMAND_WORD:
                 return new EditCommandParser().parse(arguments);
 
             case SelectCommand.COMMAND_WORD:
                 return new SelectCommandParser().parse(arguments);
 
+            case DeleteCommand.ALIAS:
             case DeleteCommand.COMMAND_WORD:
                 return new DeleteCommandParser().parse(arguments);
 
+            case AddGroupCommand.ALIAS:
             case AddGroupCommand.COMMAND_WORD:
                 return new AddGroupCommandParser().parse(arguments);
 
+            case DeleteMemberCommand.ALIAS:
             case DeleteMemberCommand.COMMAND_WORD:
                 return new DeleteMemberCommandParser().parse(arguments);
 
+            case DeleteGroupCommand.ALIAS:
             case DeleteGroupCommand.COMMAND_WORD:
                 return new DeleteGroupCommandParser().parse(arguments);
 
+            case EditGroupCommand.ALIAS:
             case EditGroupCommand.COMMAND_WORD:
                 return new EditGroupCommandParser().parse(arguments);
 
+            case FindGroupCommand.ALIAS:
             case FindGroupCommand.COMMAND_WORD:
                 return new FindGroupCommandParser().parse(arguments);
 
+            case ViewGroupCommand.ALIAS:
             case ViewGroupCommand.COMMAND_WORD:
                 return new ViewGroupCommandParser().parse(arguments);
 
+            case RegisterCommand.ALIAS:
             case RegisterCommand.COMMAND_WORD:
                 return new RegisterCommandParser().parse(arguments);
 
+            case ViewGroupRankedAvailableTimeslotCommand.ALIAS:
             case ViewGroupRankedAvailableTimeslotCommand.COMMAND_WORD:
                 return new ViewGroupRankedAvailableTimeslotCommandParser().parse(arguments);
 
+            case ViewGroupAllAvailableTimeslotCommand.ALIAS:
             case ViewGroupAllAvailableTimeslotCommand.COMMAND_WORD:
                 return new ViewGroupAllAvailableTimeslotCommandParser().parse(arguments);
 
@@ -149,6 +165,7 @@ public class AddressBookParser {
             case UndoCommand.COMMAND_WORD:
                 return new UndoCommand();
 
+            case ListCommand.ALIAS:
             case ListCommand.COMMAND_WORD:
                 return new ListCommandParser().parse(arguments);
 

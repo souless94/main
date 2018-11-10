@@ -24,6 +24,9 @@ public class AddTimetableCommand extends Command {
 
 
     public static final String COMMAND_WORD = "add_timetable";
+
+    public static final String ALIAS = "at";
+
     public static final String MESSAGE_USAGE =
         COMMAND_WORD + ": adds timetable to the person identified "
             + "by the index number used in the displayed person list."

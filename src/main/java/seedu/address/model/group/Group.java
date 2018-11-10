@@ -120,6 +120,11 @@ public class Group extends Entity {
      * in ascending order in terms of timing
      */
     public String listAllAvailableTimeslots() {
+        int numOfPeople = groupMembers.getSize();
+        if (numOfPeople == 0) {
+            return "There are no members in the group";
+        }
+
         Iterator<Person> personItr = groupMembers.iterator();
         StringBuilder builder = new StringBuilder();
         TreeSet<Integer> availableSlots = new TreeSet<>();
@@ -147,6 +152,9 @@ public class Group extends Entity {
                 }
             }
         }
+        if (availableSlots.size() == 0) {
+            return "There are no available slots";
+        }
         Iterator<Integer> slotsItr = availableSlots.iterator();
         while (slotsItr.hasNext()) {
             int currTimeslot2 = slotsItr.next();
@@ -160,9 +168,14 @@ public class Group extends Entity {
     }
     /**
      * Returns the time slots among the group as a String in descending order with respect to number of
-     * people available and then ascending order in terms of timing
+     * people available and then ascending order in terms of timing, with the parameter being the
+     * minimum number of people required to be available
      */
-    public String listRankedAvailableTimeslots() {
+    public String listRankedAvailableTimeslots(int numberRequired) {
+        int numOfPeople = groupMembers.getSize();
+        if (numOfPeople == 0) {
+            return "There are no members in the group";
+        }
         Iterator<Person> personItr = groupMembers.iterator();
         StringBuilder builder = new StringBuilder();
         TreeMap<Integer, Integer> availableSlots = new TreeMap<>();
@@ -183,6 +196,9 @@ public class Group extends Entity {
                 }
             }
         }
+        if (availableSlots.size() == 0) {
+            return "There are no available slots";
+        }
         Map<Integer, Integer> sortedSlots = availableSlots.entrySet().stream()
                                                           .sorted(Collections.reverseOrder
                                                                   (Comparator.comparing(Entry::getValue)))
@@ -194,6 +210,9 @@ public class Group extends Entity {
             int day = currTimeslot / 100;
             int timing = (currTimeslot % 100 + 7) * 100;
             int availablePersons = sortedSlots.get(key);
+            if (availablePersons < numberRequired) {
+                return builder.toString();
+            }
             if (availablePersons != prev) {
                 builder.append("Number of people available: " + availablePersons + "\n");
                 prev = availablePersons;
