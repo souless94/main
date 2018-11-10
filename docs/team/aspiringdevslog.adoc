@@ -52,11 +52,11 @@ An example of a situation where this would be useful is in the context of an int
 |_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
 |===
 
-include::../UserGuide.adoc[aspiringdevslog-start-01]
+include::../UserGuide.adoc[https://github.com/aspiringdevslog/main/blob/v1.4/docs/UserGuide.adoc#aspiringdevslog-start-01]
 
 include::../UserGuide.adoc[aspiringdevslog-end-01]
 
-include::../UserGuide.adoc[tag=aspiringdevslog-start-01]
+include::../UserGuide.adoc[#aspiringdevslog-start-01]
 
 
 
