@@ -2,7 +2,6 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_FILE_EXTENSION;
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_FILE_PATH;
 import static seedu.address.commons.core.Messages.MESSAGE_IS_FILE_DIRECTORY;
 
 import java.io.File;
@@ -182,13 +181,6 @@ public class ParserUtil {
         String fileExtension = FilenameUtils.getExtension(trimmedLocation);
         if ("csv".equals(fileExtension)) {
             File timetable = new File(trimmedLocation);
-            if (timetable.getParent() == null) {
-                throw new ParseException(MESSAGE_INVALID_FILE_PATH);
-            }
-            File timetableParent = new File(timetable.getParent());
-            if (!timetableParent.exists() || !timetableParent.isDirectory()) {
-                throw new ParseException(MESSAGE_INVALID_FILE_PATH);
-            }
             if (timetable.isDirectory()) {
                 throw new ParseException(MESSAGE_IS_FILE_DIRECTORY);
             }

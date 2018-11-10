@@ -29,6 +29,9 @@ import seedu.address.model.tag.Tag;
 public class EditTimetableCommand extends Command {
 
     public static final String COMMAND_WORD = "edit_timetable";
+
+    public static final String ALIAS = "et";
+
     public static final String MESSAGE_USAGE =
         COMMAND_WORD + ": edit timetable for the person identified "
             + "by the index number used in the displayed person list."
@@ -36,9 +39,9 @@ public class EditTimetableCommand extends Command {
             + "for the timeslot in the timetable"
             + " \n"
             + "Parameters : INDEX (must be a positive integer) "
-            + "[" + PREFIX_DAY + "DAY] "
-            + "[" + PREFIX_TIMING + "TIMING] "
-            + "[" + PREFIX_DETAILS + "DETAILS] "
+            + PREFIX_DAY + "DAY"
+            + PREFIX_TIMING + "TIMING "
+            + PREFIX_DETAILS + "DETAILS "
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_DAY + "Wednesday "
             + PREFIX_TIMING + "1700 "

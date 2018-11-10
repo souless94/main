@@ -23,6 +23,8 @@ public class ListCommand extends Command {
 
     public static final String COMMAND_WORD = "list";
 
+    public static final String ALIAS = "l";
+
     public static final String MESSAGE_SUCCESS = "Listed all persons and groups.";
 
     private static final String MESSAGE_SUCCESS_LIST_GROUPS = "Listed all groups the person is in.";

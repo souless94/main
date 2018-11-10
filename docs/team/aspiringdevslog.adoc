@@ -1,0 +1,56 @@
+= Tang Wee Jie Leslie (aspiringdevslog) - Project Portfolio
+:site-section: AboutUs
+:imagesDir: ../images
+:stylesDir: ../stylesheets
+
+== PROJECT: NUS Hangs
+
+---
+
+== Overview
+
+NUS Hangs is a desktop Schedule Manager application. It has a GUI but most of the user interactions happen using a CLI (Command Line Interface). It is a Java application written by developers of F11-4, to target small/mid-size interest/study groups in NUS.
+
+== Summary of contributions
+
+* *Major enhancement*: added *the ability to create account and login*
+** What it does: prevents unauthorised users from accessing the application
+** Justification: This feature secures the application by preventing unauthorised users from accessing it.
+
+
+* *Minor enhancement*: *added an encrypt function*
+** What it does: encrypts password before storage to prevent compromising of password information.
+
+
+* *Code contributed*: https://nus-cs2103-ay1819s1.github.io/cs2103-dashboard/#=undefined&search=aspiringdevslog
+
+* *Other contributions*:
+
+** Project management:
+*** Set up issues tracker on Github:
+**** Created labels
+**** Created project board
+**** Set up milestones and deadlines
+** Documentation:
+***
+
+
+== Contributions to the User Guide
+
+
+|===
+|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|===
+
+include::../UserGuide.adoc[tag=temp]
+
+
+== Contributions to the Developer Guide
+
+|===
+|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|===
+
+include::../DeveloperGuide.adoc[tag=temp]
+
+

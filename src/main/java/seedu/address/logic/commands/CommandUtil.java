@@ -79,6 +79,22 @@ public class CommandUtil {
     }
 
     /**
+     * Remove {@code oldGroup} from {@code person} and instead adds {@code newGroup}
+     */
+    public static void replaceGroupInPerson (Model model, Person person, Group oldGroup, Group newGroup)
+            throws CommandException {
+        List<Group> groupList = new ArrayList<>(person.getGroups());
+        groupList.remove(oldGroup);
+        groupList.add(newGroup);
+        UniqueList<Group> uniqueGroupList = new UniqueList<>();
+        uniqueGroupList.setElements(groupList);
+        Person newPerson = new Person(person.getName(), person.getPhone(), person.getEmail(), person.getAddress(),
+                person.getTags(), uniqueGroupList, person.getStoredLocation(),
+                person.getTimetable().generateTimetableDataString());
+        model.update(person, newPerson);
+    }
+
+    /**
      * Adds {@code target} to model if there it has not been added before.
      */
     public static void addTargetToModelIfNoDuplicates(Model model, Entity target)

@@ -17,10 +17,12 @@ public class AddGroupCommand extends Command {
 
     public static final String COMMAND_WORD = "add_group";
 
+    public static final String ALIAS = "ag";
+
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a new group. "
             + "Parameters: "
             + PREFIX_NAME + "GROUP NAME "
-            + PREFIX_DESCRIPTION + "OPTIONAL DESCRIPTION";
+            + "[" + PREFIX_DESCRIPTION + "OPTIONAL DESCRIPTION]";
 
     public static final String MESSAGE_SUCCESS = "Added group successfully.";
     public static final String MESSAGE_DUPLICATE_GROUP = "This group already exists in the address book";

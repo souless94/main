@@ -1,4 +1,4 @@
-= AddressBook Level 4 - Developer Guide
+= NUS Hangs - Developer Guide
 :site-section: DeveloperGuide
 :toc:
 :toc-title:
@@ -47,10 +47,10 @@ Do not disable them. If you have disabled them, go to `File` > `Settings` > `Plu
 . Click `OK` to accept the default settings
 . Open a console and run the command `gradlew processResources` (Mac/Linux: `./gradlew processResources`). It should finish with the `BUILD SUCCESSFUL` message. +
 This will generate all resources required by the application and tests.
-. Open link:{repoURL}/src/main/java/seedu/address/storage/XmlAdaptedPerson.java[`XmlAdaptedPerson.java`] and link:{repoURL}/src/main/java/seedu/address/ui/MainWindow.java[`MainWindow.java`] and check for any code errors
+. Open link:https://github.com/CS2103-AY1819S1-F11-4/main/tree/master/src/main/java/seedu/address/storage/XmlAdaptedPerson.java[`XmlAdaptedPerson.java`] and link:https://github.com/CS2103-AY1819S1-F11-4/main/tree/master/src/main/java/seedu/address/ui/MainWindow.java[`MainWindow.java`] and check for any code errors
 .. Due to an ongoing https://youtrack.jetbrains.com/issue/IDEA-189060[issue] with some of the newer versions of IntelliJ, code errors may be detected even if the project can be built and run successfully
 .. To resolve this, place your cursor over any of the code section highlighted in red. Press kbd:[ALT + ENTER], and select `Add '--add-modules=...' to module compiler options` for each error
-. Repeat this for the test folder as well (e.g. check link:{repoURL}/src/test/java/seedu/address/commons/util/XmlUtilTest.java[`XmlUtilTest.java`] and link:{repoURL}/src/test/java/seedu/address/ui/HelpWindowTest.java[`HelpWindowTest.java`] for code errors, and if so, resolve it the same way)
+. Repeat this for the test folder as well (e.g. check link:https://github.com/CS2103-AY1819S1-F11-4/main/tree/master/src/test/java/seedu/address/commons/util/XmlUtilTest.java[`XmlUtilTest.java`] and link:https://github.com/CS2103-AY1819S1-F11-4/main/tree/master/src/test/java/seedu/address/ui/HelpWindowTest.java[`HelpWindowTest.java`] for code errors, and if so, resolve it the same way)
 
 === Verifying the setup
 
@@ -114,9 +114,9 @@ image::Architecture.png[width="600"]
 The *_Architecture Diagram_* given above explains the high-level design of the App. Given below is a quick overview of each component.
 
 [TIP]
-The `.pptx` files used to create diagrams in this document can be found in the link:{repoURL}/docs/diagrams/[diagrams] folder. To update a diagram, modify the diagram in the pptx file, select the objects of the diagram, and choose `Save as picture`.
+The `.pptx` files used to create diagrams in this document can be found in the link:https://github.com/CS2103-AY1819S1-F11-4/main/tree/master/docs/diagrams/[diagrams] folder. To update a diagram, modify the diagram in the pptx file, select the objects of the diagram, and choose `Save as picture`.
 
-`Main` has only one class called link:{repoURL}/src/main/java/seedu/address/MainApp.java[`MainApp`]. It is responsible for,
+`Main` has only one class called link:https://github.com/CS2103-AY1819S1-F11-4/main/tree/master/src/main/java/seedu/address/MainApp.java[`MainApp`]. It is responsible for,
 
 * At app launch: Initializes the components in the correct sequence, and connects them up with each other.
 * At shut down: Shuts down the components and invokes cleanup method where necessary.
@@ -152,11 +152,11 @@ The _Sequence Diagram_ below shows how the components interact for the scenario 
 image::SDforDeletePerson.png[width="800"]
 
 [NOTE]
-Note how the `Model` simply raises a `AppChangedEvent` when the Address Book data are changed, instead of asking the `Storage` to save the updates to the hard disk.
+Note how the `Model` simply raises a `AppChangedEvent` when the NUS Hangs Address Book data are changed, instead of asking the `Storage` to save the updates to the hard disk.
 
 The diagram below shows how the `EventsCenter` reacts to that event, which eventually results in the updates being saved to the hard disk and the status bar of the UI being updated to reflect the 'Last Updated' time.
 
-.Component interactions for `delete_friend 1` command (part 2)
+.Component interactions for `delete 1` command (part 2)
 image::SDforDeletePersonEventHandling.png[width="800"]
 
 [NOTE]
@@ -170,11 +170,11 @@ The sections below give more details of each component.
 .Structure of the UI Component
 image::UiClassDiagram.png[width="800"]
 
-*API* : link:{repoURL}/src/main/java/seedu/address/ui/Ui.java[`Ui.java`]
+*API* : link:https://github.com/CS2103-AY1819S1-F11-4/main/tree/master/src/main/java/seedu/address/ui/Ui.java[`Ui.java`]
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter`, `BrowserPanel` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
 
-The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the link:{repoURL}/src/main/java/seedu/address/ui/MainWindow.java[`MainWindow`] is specified in link:{repoURL}/src/main/resources/view/MainWindow.fxml[`MainWindow.fxml`]
+The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the link:https://github.com/CS2103-AY1819S1-F11-4/main/tree/master/src/main/java/seedu/address/ui/MainWindow.java[`MainWindow`] is specified in link:https://github.com/CS2103-AY1819S1-F11-4/main/tree/master/src/main/resources/view/MainWindow.fxml[`MainWindow.fxml`]
 
 The `UI` component,
 
@@ -190,7 +190,7 @@ The `UI` component,
 image::LogicClassDiagram.png[width="800"]
 
 *API* :
-link:{repoURL}/src/main/java/seedu/address/logic/Logic.java[`Logic.java`]
+link:https://github.com/CS2103-AY1819S1-F11-4/main/tree/master/src/main/java/seedu/address/logic/Logic.java[`Logic.java`]
 
 .  `Logic` uses the `AddressBookParser` class to parse the user command.
 .  This results in a `Command` object which is executed by the `LogicManager`.
@@ -207,14 +207,14 @@ image::DeletePersonSdForLogic.png[width="800"]
 === Model component
 
 .Structure of the Model Component
-image::ModelClassDiagram.png[width="800"]
+image::ModelComponentClassUpdatedOOPDiagram.png[width="800"]
 
-*API* : link:{repoURL}/src/main/java/seedu/address/model/Model.java[`Model.java`]
+*API* : link:https://github.com/CS2103-AY1819S1-F11-4/main/tree/master/src/main/java/seedu/address/model/Model.java[`Model.java`]
 
 The `Model`,
 
 * stores a `UserPref` object that represents the user's preferences.
-* stores the Address Book data.
+* stores the NUS Hangs Address Book data.
 * exposes an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * does not depend on any of the other three components.
 
@@ -223,14 +223,14 @@ The `Model`,
 === Storage component
 
 .Structure of the Storage Component
-image::StorageClassDiagram.png[width="800"]
+image::updatedstoragewithgroup.png[width="800"]
 
-*API* : link:{repoURL}/src/main/java/seedu/address/storage/Storage.java[`Storage.java`]
+*API* : link:https://github.com/CS2103-AY1819S1-F11-4/main/tree/master/src/main/java/seedu/address/storage/Storage.java[`Storage.java`]
 
 The `Storage` component,
 
 * can save `UserPref` objects in json format and read it back.
-* can save the Erium data in xml format and read it back.
+* can save NUS Hangs data in xml format when app closes and load it back when app is reopened.
 
 [[Design-Commons]]
 === Common classes
@@ -594,7 +594,7 @@ image::chrome_save_as_pdf.png[width="300"]
 [[Docs-SiteWideDocSettings]]
 === Site-wide Documentation Settings
 
-The link:{repoURL}/build.gradle[`build.gradle`] file specifies some project-specific https://asciidoctor.org/docs/user-manual/#attributes[asciidoc attributes] which affects how all documentation files within this project are rendered.
+The link:https://github.com/CS2103-AY1819S1-F11-4/main/tree/master/build.gradle[`build.gradle`] file specifies some project-specific https://asciidoctor.org/docs/user-manual/#attributes[asciidoc attributes] which affects how all documentation files within this project are rendered.
 
 [TIP]
 Attributes left unset in the `build.gradle` file will use their *default value*, if any.
@@ -652,15 +652,15 @@ _{asterisk} Official SE-EDU projects only_
 
 === Site Template
 
-The files in link:{repoURL}/docs/stylesheets[`docs/stylesheets`] are the https://developer.mozilla.org/en-US/docs/Web/CSS[CSS stylesheets] of the site.
+The files in link:https://github.com/CS2103-AY1819S1-F11-4/main/tree/master/docs/stylesheets[`docs/stylesheets`] are the https://developer.mozilla.org/en-US/docs/Web/CSS[CSS stylesheets] of the site.
 You can modify them to change some properties of the site's design.
 
-The files in link:{repoURL}/docs/templates[`docs/templates`] controls the rendering of `.adoc` files into HTML5.
+The files in link:https://github.com/CS2103-AY1819S1-F11-4/main/tree/master/docs/templates[`docs/templates`] controls the rendering of `.adoc` files into HTML5.
 These template files are written in a mixture of https://www.ruby-lang.org[Ruby] and http://slim-lang.com[Slim].
 
 [WARNING]
 ====
-Modifying the template files in link:{repoURL}/docs/templates[`docs/templates`] requires some knowledge and experience with Ruby and Asciidoctor's API.
+Modifying the template files in link:https://github.com/CS2103-AY1819S1-F11-4/main/tree/master/docs/templates[`docs/templates`] requires some knowledge and experience with Ruby and Asciidoctor's API.
 You should only modify them if you need greater control over the site's layout than what stylesheets can provide.
 The SE-EDU team does not provide support for modified template files.
 ====
@@ -734,7 +734,7 @@ When a pull request has changes to asciidoc files, you can use https://www.netli
 
 Here are the steps to create a new release.
 
-.  Update the version number in link:{repoURL}/src/main/java/seedu/address/MainApp.java[`MainApp.java`].
+.  Update the version number in link:https://github.com/CS2103-AY1819S1-F11-4/main/tree/master/src/main/java/seedu/address/MainApp.java[`MainApp.java`].
 .  Generate a JAR file <<UsingGradle#creating-the-jar-file, using Gradle>>.
 .  Tag the repo with the version number. e.g. `v0.1`
 .  https://help.github.com/articles/creating-releases/[Create a new release using GitHub] and upload the JAR file you created.
@@ -755,7 +755,7 @@ Do take a look at <<Design-Model>> before attempting to modify the `Model` compo
 == Product Scope
 
 *Target user profile*:
-.We target:
+
 . Small to medium scale interest groups in NUS
 . Groups who find organising a common / least conflicted dtime slot to meet a hassle
 
@@ -822,36 +822,32 @@ In excel format
   |`* *` |member of a group  |Notify organiser or other members of change of timetable/clashes
  |To update the timings of future possible meetings/RSVP
 
-   |`* *` |member of a group  |Have a list of groups i am currently in
+ |`* *` |member of a group  |Have a list of groups i am currently in
  |I can remember what groups i am in
 
-  |`* *` |Organiser of the group  |Be notified of each members’ changes in available time slot
+ |`* *` |Organiser of the group  |Be notified of each members’ changes in available time slot
  |I can decide how and what to plan for the upcoming meeting
 
-  |`* * *` |Organiser of the group  |Be able to ‘close’ or finalise the planning
+ |`* * *` |Organiser of the group  |Be able to ‘close’ or finalise the planning
  |So that no changes can be made thereafter
-
- |`* * *` |user  |I want to be able to retrieve my password back
- |I will still be able to log in, even in urgent cases
-
-
- |`* *` |user  |I want to be able to export the information from the server
- |So that I can print, convert or edit in another file
 
  |`* * *` |Organiser of the group  |I want to dismiss members who are no longer affiliated to the group
  |So that the time slot available is up to date, to ensure maximum participation
 
-  |`* *` |user  |I want to easily change my password
- |To keep my account details secure
-
-   |`* *` |user  |I want to view my meeting on all my devices
+ |`* *` |user  |I want to view my meeting on all my devices
  |I have a back up in the event I lost access to one of my devices
-
-  |`* *` |user  |The system to be password protected
- |My information will not be shared with everyone
 
  |`* *` |Organiser of the group  |I want to send an invite link
  |So that I can easily coordinate the meeting timing with my group members
+
+ |`* *` | Committee member of the Interest Group  | I want to allow members of the interest group to have only read access to the application while allowing other committee members whom have an account to make changes to the data in the application
+ | So that members are able to keep updated to the schedule of others while ONLY the committee can manage the schedule data of the members
+
+ |`* *` | Committee member of the Interest Group  | I want the password to be encrypted
+ | So that members are unable to retrieve the password from the application to gain unauthorised access.
+
+ |`*` | Committee member of the Interest Group  | I want the option to have an empty password
+ | the login process is faster
 
 |=======================================================================
 
@@ -1407,9 +1403,9 @@ _{ more test cases ... }_
 . Deleting a person while all persons are listed
 
 .. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
-.. Test case: `delete_friend 1` +
+.. Test case: `delete 1` +
    Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
-.. Test case: `delete_friend 0` +
+.. Test case: `delete 0` +
    Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 .. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size) _{give more}_ +
    Expected: Similar to previous.
