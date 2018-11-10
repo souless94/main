@@ -322,6 +322,7 @@ image::addtimetablediagram.png[width="500"]
 ** Pros: Faster Time efficiency because using 1 for loops to fill the Matrix with the data. Able to use functions in ArrayList
 ** Cons: Harder for new Computer Science student undergraduates to understand, who are likely to be the new incoming developers of our project. Less intuition to access entries of the matrix (matrix.get(i).get(j)).
 
+// tag::security-mechanism[]
 === Security Mechanism
 
 ==== Reason for Implementation
@@ -1248,6 +1249,8 @@ Use case ends.
 
 
 [discrete]
+
+// tag::security-mechanism-use-case-01[]
 === Use case: Create an Account
 *MSS*
 
@@ -1267,6 +1270,8 @@ Use case resumes at step 2
 
 
 [discrete]
+
+// tag::security-mechanism-use-case-02[]
 === Use case: Login to Account
 *MSS*
 
@@ -1304,7 +1309,7 @@ Use case resumes at step 4
 +
 Use case resumes at step 4
 
-
+// tag::security-mechanism-use-case-03[]
 [discrete]
 === Use case: reset password
 *MSS*
