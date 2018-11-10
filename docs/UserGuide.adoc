@@ -36,14 +36,13 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 . The application launch in a state which grant *read-only rights* to the user. Some of the commands that are available in this state includes:
 
 - <<help>>
+- <<list>>
+- <<find>>
+- <<select>>
 - <<find_group>>
 - <<view_group>>
 - <<view_slots_all>>
 - <<view_slots_ranked>>
-
-- <<list>>
-- <<find>>
-- <<select>>
 
 
 . To make use of functions that add or edit information, the application requires the user to create and login to an account.
