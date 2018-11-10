@@ -684,5 +684,3 @@ e.g. `view_group n/Family` +
 e.g. `create u/user pw/strongpass`
 * *login* : `login u/USERNAME pw/PASSWORD` +
 e.g. `login u/user pw/strongpass`
-
-
