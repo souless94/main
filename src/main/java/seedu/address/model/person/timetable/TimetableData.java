@@ -173,6 +173,9 @@ public class TimetableData {
                 timetableMatrix[i] = timetableRow;
                 i++;
             }
+            if (i != 8) {
+                this.isCorrectSize = false;
+            }
             csvReader.close();
         } catch (IOException e) {
             e.printStackTrace();
