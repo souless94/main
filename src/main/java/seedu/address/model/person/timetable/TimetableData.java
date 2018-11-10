@@ -32,8 +32,8 @@ public class TimetableData {
         "1400", "1500", "1600", "1700", "1800", "1900", "2000", "2100", "2200", "2300"};
 
     private static Logger logger = Logger.getLogger("Foo");
-    private static String tooManyRows = "has more rows than expected";
-    private static String tooManyColumns = "has more columns than expected";
+    private static String wrongNoOfRows = "has more rows than expected";
+    private static String wrongNoOfColumns = "has more columns than expected";
     private static String noOfExpectedRows = "number of rows should be 8";
     private static String noOfExpectedColumns = "number of columns should be 17";
     private static String expectedRowToChange = "row to change should be > 0 and < 8";
@@ -87,14 +87,14 @@ public class TimetableData {
         } else {
             String[] rows = timetableString.split("\n");
             if (rows.length > getRows()) {
-                logger.log(Level.WARNING, tooManyRows);
+                logger.log(Level.WARNING, wrongNoOfRows);
                 this.isCorrectSize = false;
                 return timetableMatrix;
             }
             for (int i = 0; i < getRows(); i++) {
                 String[] decodedRows = rows[i].split(",");
                 if (decodedRows.length != getColumns()) {
-                    logger.log(Level.WARNING, tooManyColumns);
+                    logger.log(Level.WARNING, wrongNoOfColumns);
                     this.isCorrectSize = false;
                 }
                 for (int j = 0; j < getColumns(); j++) {
@@ -156,12 +156,12 @@ public class TimetableData {
             String[] timetableRow;
             while ((timetableRow = csvReader.readNext()) != null) {
                 if (timetableRow.length != getColumns()) {
-                    logger.log(Level.WARNING, tooManyColumns);
+                    logger.log(Level.WARNING, wrongNoOfColumns);
                     this.isCorrectSize = false;
                     break;
                 }
                 if (i >= getRows()) {
-                    logger.log(Level.WARNING, tooManyRows);
+                    logger.log(Level.WARNING, wrongNoOfRows);
                     this.isCorrectSize = false;
                     break;
                 }
