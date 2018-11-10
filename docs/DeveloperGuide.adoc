@@ -502,8 +502,10 @@ Step 2: The user enters the command `dg n/Family` to delete the existing group w
 
 * The parser creates a `DeleteGroupCommand` object with parameters gr. Subsequently, `retrieveGroupFromName(m, gr.getName())` is called to the Model component in order to retrieve the actual group with the name "Family".
 
+
 .Sequence Diagram of DeleteGroupCommand (Model component)
 image::DeleteGroupCommandModelSD.png[width="700"]
+
 
 * After retrieving the actual group `g` with name "Family" from Model `m`, the model performs deletion of the group using an internal function `delete(g)`.
 
@@ -1576,4 +1578,5 @@ Expected: As there is a typo in the group name, the person will not be added; un
 Expected: 1st member in the group is deleted.
 
 // end::manual-test[]
+
 
