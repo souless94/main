@@ -12,8 +12,8 @@ import seedu.address.model.group.Group;
 import seedu.address.model.person.Name;
 
 /**
- * Lists all time slots in descending order in terms of availablility with 
- * a minimum number of people available required
+ * Lists all time slots in descending order in terms of availablility with a minimum number of people available
+ * required
  */
 public class ViewGroupRankedAvailableTimeslotCommand extends Command {
 
@@ -51,8 +51,7 @@ public class ViewGroupRankedAvailableTimeslotCommand extends Command {
         Group group = CommandUtil.retrieveGroupFromName(model, groupName);
 
         model.updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
-        return new CommandResult(MESSAGE_SUCCESS + this.numberRequired + " person(s) available:\n" + 
-            group.listRankedAvailableTimeslots(numberRequired));
+        return new CommandResult(MESSAGE_SUCCESS + this.numberRequired + " person(s) available:\n"
+                + group.listRankedAvailableTimeslots(numberRequired));
     }
-
 }

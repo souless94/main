@@ -120,10 +120,11 @@ public class Group extends Entity {
      * in ascending order in terms of timing
      */
     public String listAllAvailableTimeslots() {
-    	int numOfPeople = groupMembers.getSize();
-    	if (numOfPeople == 0) {
-    		return "There are no members in the group";
-    	}
+        int numOfPeople = groupMembers.getSize();
+        if (numOfPeople == 0) {
+            return "There are no members in the group";
+        }
+
         Iterator<Person> personItr = groupMembers.iterator();
         StringBuilder builder = new StringBuilder();
         TreeSet<Integer> availableSlots = new TreeSet<>();
@@ -152,7 +153,7 @@ public class Group extends Entity {
             }
         }
         if (availableSlots.size() == 0) {
-        	return "There are no available slots";
+            return "There are no available slots";
         }
         Iterator<Integer> slotsItr = availableSlots.iterator();
         while (slotsItr.hasNext()) {
@@ -171,10 +172,10 @@ public class Group extends Entity {
      * minimum number of people required to be available
      */
     public String listRankedAvailableTimeslots(int numberRequired) {
-    	int numOfPeople = groupMembers.getSize();
-    	if (numOfPeople == 0) {
-    		return "There are no members in the group";
-    	}
+        int numOfPeople = groupMembers.getSize();
+        if (numOfPeople == 0) {
+            return "There are no members in the group";
+        }
         Iterator<Person> personItr = groupMembers.iterator();
         StringBuilder builder = new StringBuilder();
         TreeMap<Integer, Integer> availableSlots = new TreeMap<>();
@@ -196,7 +197,7 @@ public class Group extends Entity {
             }
         }
         if (availableSlots.size() == 0) {
-        	return "There are no available slots";
+            return "There are no available slots";
         }
         Map<Integer, Integer> sortedSlots = availableSlots.entrySet().stream()
                                                           .sorted(Collections.reverseOrder

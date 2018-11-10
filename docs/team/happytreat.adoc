@@ -30,7 +30,7 @@ i.e. add_group, delete_group, edit_group, register, delete_member, find_group, v
 
 * *Minor enhancement*: Enhance `list` command to list both groups and persons. Added a `list INDEX` command to show all the groups that the person at INDEX is currently in.
 
-* *Minor enhancement*: Created short hands/short forms for most commands.
+* *Minor enhancement*: Created short hands/short forms for most commands. (https://github.com/CS2103-AY1819S1-F11-4/main/pull/208[#208])
 
 * *Minor enhancement*: Refactored UniquePersonList into UniqueList<T> for different classes: Groups, Person and Timetable.
 
@@ -46,11 +46,12 @@ i.e. add_group, delete_group, edit_group, register, delete_member, find_group, v
 ** Enhancements to existing features:
 *** Wrote additional tests for existing features to increase coverage by >4% (Pull requests https://github.com/CS2103-AY1819S1-F11-4/main/pull/80[#80], https://github.com/CS2103-AY1819S1-F11-4/main/pull/123[#123], https://github.com/CS2103-AY1819S1-F11-4/main/pull/146[#146])
 ** Documentation:
-*** Edit the Model OOP Class Diagram in Dev Guide to include Group classes: https://github.com/CS2103-AY1819S1-F11-4/main/pull/202[#202]
-*** Edit the Storage Class Diagram in Dev Guide to include Group class: https://github.com/CS2103-AY1819S1-F11-4/main/pull/200[#200]
+*** Edit the Model OOP Class Diagram in Dev Guide to include new classes: https://github.com/CS2103-AY1819S1-F11-4/main/pull/202[#202]
+*** Edit the Storage Class Diagram in Dev Guide to include new class: https://github.com/CS2103-AY1819S1-F11-4/main/pull/200[#200]
+*** Update Logic and High Level Sequence Diagrams to current implementation https://github.com/CS2103-AY1819S1-F11-4/main/pull/213[#213]
 ** Community:
 *** PRs reviewed (with non-trivial review comments): https://github.com/CS2103-AY1819S1-F11-4/main/pull/71[#71])
-*** Some parts of the group feature I added was adopted by several other teammates (https://github.com/CS2103-AY1819S1-F11-4/main/pull/160[#160])
+*** Some parts of the group feature I added was adopted by several other teammates (https://github.com/CS2103-AY1819S1-F11-4/main/pull/155[#155], https://github.com/CS2103-AY1819S1-F11-4/main/pull/160[#160])
 *** Create a CommandUtil.java with many common functions reused by different commands including those in AB4 and those used by other teammates.
 
 == Contributions to the User Guide
