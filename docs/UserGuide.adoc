@@ -32,18 +32,18 @@ image::Ui.png[width="790"]
 .  Type the command in the command box and press kbd:[Enter] to execute it. +
 e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 
-
+[[aspiringdevslog-start-01]]
 . The application launch in a state which grant *read-only rights* to the user. Some of the commands that are available in this state includes:
 
 - <<help>>
-- <<locating_group_by_name_code_find_group_code>>
-- <<list_all_persons_of_a_group_code_view_group_code>>
-- <<list_all_time_slots_of_a_group_at_which_everyone_is_available_code_view_slots_all_code>>
-- <<list_all_time_slots_of_a_group_in_descending_order_of_availability_code_view_slots_ranked_code>>
+- <<find_group>>
+- <<view_group>>
+- <<view_slots_all>>
+- <<view_slots_ranked>>
 
-- <<listing_all_persons_code_list_code>>
-- <<finding_a_person_code_find_code>>
-- <<selecting_a_person_code_select_code>>
+- <<list>>
+- <<find>>
+- <<select>>
 
 
 . To make use of functions that add or edit information, the application requires the user to create and login to an account.
@@ -58,6 +58,7 @@ An example in the context of an interest group: Only committee members should be
 - <<create_an_account_code_create_code>>
 - <<login_to_an_account_code_login_code>>
 
+[[aspiringdevslog-end-01]]
 
 .  Some example commands you can try:
 * *`list`* : lists all person
@@ -112,6 +113,7 @@ Examples:
 * `add n/Nancy t/friend`
 * `add n/James  t/friend e/betsycrowe@example.com t/criminal`
 
+[[list]]
 === Listing all persons : `list`
 
 Shows a list of all persons in the address book. +
@@ -158,6 +160,7 @@ Edits the name of the 2nd person to be `Betsy Crower` and clears all existing ta
 * `edit 1 sl/C:\Users\admin\Downloads\cs2103\tiredAndSadness` +
 Edits the stored location of the 1st person to be `C:/Users/admin/Downloads/cs2103/tiredAndSadness/` respectively.
 
+[[find]]
 === Finding a person : `find`
 
 Finds all persons in NusHangs, whose contain keywords provided by prefix(es). +
@@ -202,6 +205,7 @@ Deletes the 2nd person in the address book.
 `delete 1` +
 Deletes the 1st person in the results of the `find` command.
 
+[[select]]
 === Selecting a person : `select`
 
 Selects the person identified by the index number used in the displayed person list. +
@@ -398,6 +402,7 @@ Examples:
 
 (Changes only description.)
 
+[[find_group]]
 === Locating group by name: `find_group`
 
 Find groups whose names contain any of the given keywords +
@@ -460,6 +465,7 @@ Examples:
 
 (Adds the first person in the displayed person panel to the group happyfriends)
 
+[[view_group]]
 === List all persons of a group : `view_group`
 
 shows a list of all persons in a group +
@@ -493,7 +499,7 @@ Examples:
 (deletes the 1st person displayed in `view_group` command.)
 
 == Time slots (Nigel)
-
+[[view_slots_all]]
 === List all time slots of a group at which everyone is available : `view_slots_all`
 
 List all of the available time slots in a group +
@@ -507,6 +513,7 @@ Examples:
 
 * `view_slots_all n/happyfriends`
 
+[[view_slots_ranked]]
 === List all time slots of a group in descending order of availability: `view_slots_ranked`
 
 List all time slots of a group in descending order of availability: +
