@@ -1118,7 +1118,6 @@ Use case resumes at step 2.
 2.	System shows how to add a group
 3.	User adds inputs accordingly
 4.	System shows group is created successfully
-
 *Extensions*
 
 * 3a. User enters invalid input or format.
