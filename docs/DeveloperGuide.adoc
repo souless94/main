@@ -1575,5 +1575,5 @@ Expected: As there is a typo in the group name, the person will not be added; un
 .. Test case: `delete_member 1 n/CS2103 Dry Run` +
 Expected: 1st member in the group is deleted.
 
-
 // end::manual-test[]
+

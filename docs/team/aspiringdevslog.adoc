@@ -41,6 +41,7 @@ An example of a situation where this would be useful is in the context of an int
 ** Documentation:
 *** Created initial UI mockup [https://github.com/CS2103-AY1819S1-F11-4/main/pull/1[#1]]
 *** Updated Quick Start portion in User Guide [https://github.com/CS2103-AY1819S1-F11-4/main/pull/209/commits/c2ac0183c643fd9621d6e77a781e0d53039444ab[#209]]
+*** Updated Manual Testing portion in Developer Guide
 ** Community
 *** Created Initial Personal Portfolio Pages for all members [https://github.com/CS2103-AY1819S1-F11-4/main/pull/197/files[#197]]
 
