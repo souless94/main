@@ -11,6 +11,7 @@ import java.util.Base64;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import org.apache.commons.lang3.ArrayUtils;
 
 import com.opencsv.CSVReader;
@@ -22,25 +23,30 @@ import com.opencsv.CSVWriter;
  */
 public class TimetableData {
 
-    private final String[][] timetable;
-    private String[] timings = {"0800", "0900", "1000", "1100", "1200", "1300",
-        "1400", "1500", "1600", "1700", "1800", "1900", "2000", "2100", "2200", "2300"};
-    private final String[] days = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday",
+    public static final String[] DAYS = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday",
         "Saturday", "Sunday"};
-    private final String[] daysInLowerCase = {"monday", "tuesday", "wednesday", "thursday",
+    public static final String[] DAYS_IN_LOWER_CASE = {"monday", "tuesday", "wednesday", "thursday",
         "friday",
         "saturday", "sunday"};
-    private final int noOfTimings = timings.length;
-    private final int noOfDays = days.length;
-    private final int noOfRows;
-    private final int noOfColumns;
-    private boolean isCorrectSize;
-    private boolean hasCorrectFirstRowsAndColumns;
+    public static final String[] TIMINGS = {"0800", "0900", "1000", "1100", "1200", "1300",
+        "1400", "1500", "1600", "1700", "1800", "1900", "2000", "2100", "2200", "2300"};
+
     private static Logger logger = Logger.getLogger("Foo");
     private static String tooManyRows = "has more rows than expected";
     private static String tooManyColumns = "has more columns than expected";
     private static String noOfExpectedRows = "number of rows should be 8";
     private static String noOfExpectedColumns = "number of columns should be 17";
+    private static String expectedRowToChange = "row to change should be > 0 and < 8";
+    private static String expectedColumnToChange = "row to change should be > 0 and < 17";
+
+    private final String[][] timetable;
+    private final int noOfTimings = TIMINGS.length;
+    private final int noOfDays = DAYS.length;
+    private final int noOfRows;
+    private final int noOfColumns;
+    private boolean isCorrectSize;
+    private boolean hasCorrectFirstRowsAndColumns;
+
 
     /**
      * uses format and timetableString to create a matrix uses the day and time to find the cell of
@@ -53,8 +59,6 @@ public class TimetableData {
         this.hasCorrectFirstRowsAndColumns = true;
         this.noOfRows = noOfDays + 1;
         this.noOfColumns = noOfTimings + 1;
-        assert this.noOfRows == 8 : noOfExpectedRows;
-        assert this.noOfColumns == 17 : noOfExpectedColumns;
         String[][] timetable;
         if (option == 1) {
             timetable = getTimetableFromString(timetableString);
@@ -63,8 +67,10 @@ public class TimetableData {
             timetable = getTimetableData(locationFrom);
         } else {
             timetable = getTimetableFromString(timetableString);
-            int rowToChange = ArrayUtils.indexOf(getDaysInLowerCase(), day.toLowerCase()) + 1;
-            int columnToChange = ArrayUtils.indexOf(timings, timing) + 1;
+            int rowToChange = ArrayUtils.indexOf(DAYS_IN_LOWER_CASE, day.toLowerCase()) + 1;
+            int columnToChange = ArrayUtils.indexOf(TIMINGS, timing) + 1;
+            assert rowToChange > 0 && rowToChange < 8 : expectedRowToChange;
+            assert columnToChange > 0 && columnToChange < 17 : expectedColumnToChange;
             timetable[rowToChange][columnToChange] = message;
         }
         this.timetable = timetable;
@@ -101,21 +107,13 @@ public class TimetableData {
         }
     }
 
-    public String[] getTimings() {
-        return timings;
-    }
-
-    public String[] getDaysInLowerCase() {
-        return daysInLowerCase;
-    }
-
     public int getRows() {
-        assert this.noOfRows == 8 : noOfExpectedRows;
+        assert this.noOfRows == noOfDays + 1 : noOfExpectedRows;
         return this.noOfRows;
     }
 
     public int getColumns() {
-        assert this.noOfColumns == 17 : noOfExpectedColumns;
+        assert this.noOfColumns == noOfTimings + 1 : noOfExpectedColumns;
         return this.noOfColumns;
     }
 
@@ -213,11 +211,11 @@ public class TimetableData {
     private void fillTimetableData(String[][] timetable) {
         // set first column to be days
         for (int i = 1; i < this.getRows(); i++) {
-            timetable[i][0] = days[i - 1];
+            timetable[i][0] = DAYS[i - 1];
         }
         // set first row  to be timings
         for (int j = 1; j < this.getColumns(); j++) {
-            timetable[0][j] = timings[j - 1];
+            timetable[0][j] = TIMINGS[j - 1];
         }
     }
 
@@ -226,23 +224,23 @@ public class TimetableData {
      */
     private void checkTimetableForCorrectRowsAndColumns() {
         String[] firstRow = this.timetable[0];
-        if (!firstRow[1].equals(timings[0])
+        if (!firstRow[1].equals(TIMINGS[0])
             && !firstRow[1].equals("800")) {
             this.hasCorrectFirstRowsAndColumns = false;
         }
-        if (!firstRow[2].equals(timings[1])
+        if (!firstRow[2].equals(TIMINGS[1])
             && !firstRow[2].equals("900")) {
             this.hasCorrectFirstRowsAndColumns = false;
         }
         for (int i = 3; i < getColumns(); i++) {
             String firstRowEntry = firstRow[i];
-            if (!firstRowEntry.equals(timings[i - 1])) {
+            if (!firstRowEntry.equals(TIMINGS[i - 1])) {
                 this.hasCorrectFirstRowsAndColumns = false;
             }
         }
         for (int j = 1; j < getRows(); j++) {
             String firstColumnEntry = this.timetable[j][0];
-            if (!firstColumnEntry.equals(days[j - 1])) {
+            if (!firstColumnEntry.equals(DAYS[j - 1])) {
                 this.hasCorrectFirstRowsAndColumns = false;
             }
         }
