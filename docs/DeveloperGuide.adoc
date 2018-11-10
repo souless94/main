@@ -547,7 +547,7 @@ image::FindSequence.png[width="800"]
 
 The following activity diagram shows how 'find' feature works:
 
-image::FindActivity.png[width="600"]
+image::Find-Activity.png[width="600"]
 
 ==== Design Considerations
 
