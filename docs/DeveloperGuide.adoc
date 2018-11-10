@@ -756,7 +756,7 @@ Do take a look at <<Design-Model>> before attempting to modify the `Model` compo
 == Product Scope
 
 *Target user profile*:
-.We target:
+
 . Small to medium scale interest groups in NUS
 . Groups who find organising a common / least conflicted dtime slot to meet a hassle
 
@@ -823,36 +823,32 @@ In excel format
   |`* *` |member of a group  |Notify organiser or other members of change of timetable/clashes
  |To update the timings of future possible meetings/RSVP
 
-   |`* *` |member of a group  |Have a list of groups i am currently in
+ |`* *` |member of a group  |Have a list of groups i am currently in
  |I can remember what groups i am in
 
-  |`* *` |Organiser of the group  |Be notified of each members’ changes in available time slot
+ |`* *` |Organiser of the group  |Be notified of each members’ changes in available time slot
  |I can decide how and what to plan for the upcoming meeting
 
-  |`* * *` |Organiser of the group  |Be able to ‘close’ or finalise the planning
+ |`* * *` |Organiser of the group  |Be able to ‘close’ or finalise the planning
  |So that no changes can be made thereafter
-
- |`* * *` |user  |I want to be able to retrieve my password back
- |I will still be able to log in, even in urgent cases
-
-
- |`* *` |user  |I want to be able to export the information from the server
- |So that I can print, convert or edit in another file
 
  |`* * *` |Organiser of the group  |I want to dismiss members who are no longer affiliated to the group
  |So that the time slot available is up to date, to ensure maximum participation
 
-  |`* *` |user  |I want to easily change my password
- |To keep my account details secure
-
-   |`* *` |user  |I want to view my meeting on all my devices
+ |`* *` |user  |I want to view my meeting on all my devices
  |I have a back up in the event I lost access to one of my devices
-
-  |`* *` |user  |The system to be password protected
- |My information will not be shared with everyone
 
  |`* *` |Organiser of the group  |I want to send an invite link
  |So that I can easily coordinate the meeting timing with my group members
+
+ |`* *` | Committee member of the Interest Group  | I want to allow members of the interest group to have only read access to the application while allowing other committee members whom have an account to make changes to the data in the application
+ | So that members are able to keep updated to the schedule of others while ONLY the committee can manage the schedule data of the members
+
+ |`* *` | Committee member of the Interest Group  | I want the password to be encrypted
+ | So that members are unable to retrieve the password from the application to gain unauthorised access.
+
+ |`*` | Committee member of the Interest Group  | I want the option to have an empty password
+ | the login process is faster
 
 |=======================================================================
 
