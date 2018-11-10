@@ -93,7 +93,7 @@ public class RegisterCommand extends Command {
         List<Group> groupList = new ArrayList<>();
         groupList.add(groupToBeEdited);
         groupList.addAll(personToAdd.getGroups());
-        personToAdd.setGroups(groupList);
+        personToAdd = personToAdd.defensiveSetGroups(groupList);
 
         UniqueList<Person> newGroupMembers = new UniqueList<>();
         newGroupMembers.setElements(groupToBeEdited.getGroupMembers());
