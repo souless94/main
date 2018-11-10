@@ -33,6 +33,12 @@ public class PersonTest {
     }
 
     @Test
+    public void nullInDefensiveSetGroupsMethodReturnsSamePerson() {
+        Person person = ALICE.defensiveSetGroups(null);
+        assertTrue(ALICE == person);
+    }
+
+    @Test
     public void isSamePerson() {
         // same object -> returns true
         assertTrue(ALICE.isSame(ALICE));
