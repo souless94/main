@@ -21,9 +21,9 @@ public class ClearCommandSystemTest extends AddressBookSystemTest {
         final Model defaultModel = getModel();
 
         /* Case: create account and login first */
-        String createCommand = CreateCommand.COMMAND_WORD + " u/admin pw/adminPass";
+        String createCommand = CreateCommand.COMMAND_WORD + " u/admin pw/adminPassword";
         executeCommand(createCommand);
-        String loginCommand = LoginCommand.COMMAND_WORD + " u/admin pw/adminPass";
+        String loginCommand = LoginCommand.COMMAND_WORD + " u/admin pw/adminPassword";
         executeCommand(loginCommand);
 
         /* Case: clear non-empty address book, command with leading spaces and trailing alphanumeric characters and

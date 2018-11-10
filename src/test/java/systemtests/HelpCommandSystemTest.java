@@ -34,9 +34,9 @@ public class HelpCommandSystemTest extends AddressBookSystemTest {
     public void openHelpWindow() {
 
         /* Case: create account and login first */
-        String createCommand = CreateCommand.COMMAND_WORD + " u/admin pw/adminPass";
+        String createCommand = CreateCommand.COMMAND_WORD + " u/admin pw/adminPassword";
         executeCommand(createCommand);
-        String loginCommand = LoginCommand.COMMAND_WORD + " u/admin pw/adminPass";
+        String loginCommand = LoginCommand.COMMAND_WORD + " u/admin pw/adminPassword";
         executeCommand(loginCommand);
         //use accelerator
         getCommandBox().click();

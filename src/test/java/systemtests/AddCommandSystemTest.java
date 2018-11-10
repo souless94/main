@@ -57,9 +57,9 @@ public class AddCommandSystemTest extends AddressBookSystemTest {
         /* ------------------------ Perform add operations on the shown unfiltered list ----------------------------- */
 
         /* Case: create account and login first */
-        String createCommand = CreateCommand.COMMAND_WORD + " u/admin pw/adminPass";
+        String createCommand = CreateCommand.COMMAND_WORD + " u/admin pw/adminPassword";
         executeCommand(createCommand);
-        String loginCommand = LoginCommand.COMMAND_WORD + " u/admin pw/adminPass";
+        String loginCommand = LoginCommand.COMMAND_WORD + " u/admin pw/adminPassword";
         executeCommand(loginCommand);
 
         /* Case: add a person without tags to a non-empty address book, command with leading spaces and trailing spaces
