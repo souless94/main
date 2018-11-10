@@ -32,9 +32,11 @@ i.e. add_group, delete_group, edit_group, register, delete_member, find_group, v
 
 * *Minor enhancement*: Created short hands/short forms for most commands. (https://github.com/CS2103-AY1819S1-F11-4/main/pull/208[#208])
 
-* *Minor enhancement*: Refactored UniquePersonList into UniqueList<T> for different classes: Groups, Person and Timetable.
+* *Minor enhancement*: Refactored UniquePersonList into UniqueList<T> for different classes: Group and Person.
 
 * *Minor enhancement*: Created an Abstract class Entity which Group and Person extends from to allow for polymorphism: Refactored the ModelManager and AddressBook function to include Polymorphism. E.g. addPerson() --> add() which performs add on Group or Person class based on polymorphism.
+
+* *Minor enhancement*: Created a defensive defensiveSetGroups method in Person class enforcing compulsory association of Person and groupList- instead of setGroup() which can alter a private groupList field in Person and also checks for null entries of groupList (https://github.com/CS2103-AY1819S1-F11-4/main/pull/222[#222]).
 
 * *Code contributed*: [https://nus-cs2103-ay1819s1.github.io/cs2103-dashboard/#=undefined&search=happytreat[Functional and Test code]]
 
@@ -44,15 +46,15 @@ i.e. add_group, delete_group, edit_group, register, delete_member, find_group, v
 *** Managed releases `v1.1` - `v1.3` (3 releases) on GitHub
 *** Edited the badges: Codacy badge, Coverage and Build status on README.adoc.
 ** Enhancements to existing features:
-*** Wrote additional tests for existing features to increase coverage by >4% (Pull requests https://github.com/CS2103-AY1819S1-F11-4/main/pull/80[#80], https://github.com/CS2103-AY1819S1-F11-4/main/pull/123[#123], https://github.com/CS2103-AY1819S1-F11-4/main/pull/146[#146])
+*** Wrote additional tests for existing features to increase coverage by >5% (Pull requests https://github.com/CS2103-AY1819S1-F11-4/main/pull/222[#222], https://github.com/CS2103-AY1819S1-F11-4/main/pull/80[#80], https://github.com/CS2103-AY1819S1-F11-4/main/pull/123[#123], https://github.com/CS2103-AY1819S1-F11-4/main/pull/146[#146])
 ** Documentation:
 *** Edit the Model OOP Class Diagram in Dev Guide to include new classes: https://github.com/CS2103-AY1819S1-F11-4/main/pull/202[#202]
 *** Edit the Storage Class Diagram in Dev Guide to include new class: https://github.com/CS2103-AY1819S1-F11-4/main/pull/200[#200]
-*** Update Logic and High Level Sequence Diagrams to current implementation https://github.com/CS2103-AY1819S1-F11-4/main/pull/213[#213]
+*** Update Logic and High Level Sequence Diagrams to current implementation https://github.com/CS2103-AY1819S1-F11-4/main/pull/213[#213], 
 ** Community:
-*** PRs reviewed (with non-trivial review comments): https://github.com/CS2103-AY1819S1-F11-4/main/pull/71[#71])
-*** Some parts of the group feature I added was adopted by several other teammates (https://github.com/CS2103-AY1819S1-F11-4/main/pull/155[#155], https://github.com/CS2103-AY1819S1-F11-4/main/pull/160[#160])
-*** Create a CommandUtil.java with many common functions reused by different commands including those in AB4 and those used by other teammates.
+*** PRs reviewed (with non-trivial review comments): https://github.com/CS2103-AY1819S1-F11-4/main/pull/71[#71], https://github.com/CS2103-AY1819S1-F11-4/main/pull/155[#155])
+*** Some parts of the group feature I added was adopted by several other teammates (https://github.com/CS2103-AY1819S1-F11-4/main/pull/160[#160])
+*** Create a CommandUtil.java with many common functions reused by different commands including those in AB4 and those used by other teammates (https://github.com/CS2103-AY1819S1-F11-4/main/pull/211[#211])
 
 == Contributions to the User Guide
 |===
