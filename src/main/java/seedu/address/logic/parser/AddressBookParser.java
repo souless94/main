@@ -180,9 +180,6 @@ public class AddressBookParser {
             case RedoCommand.COMMAND_WORD:
                 return new RedoCommand();
 
-            case CreateCommand.COMMAND_WORD:
-                return new CreateCommandParser().parse(arguments);
-
             case LoginCommand.COMMAND_WORD:
                 return new LoginCommandParser().parse(arguments);
 

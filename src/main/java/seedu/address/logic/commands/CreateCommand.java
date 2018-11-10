@@ -13,7 +13,7 @@ import seedu.address.storage.UserAccountStorage;
 //@@author aspiringdevslog
 
 /**
- * Creates a user for address book.
+ * Creates a account for NUS Hangs.
  */
 public class CreateCommand extends Command {
 
@@ -33,7 +33,7 @@ public class CreateCommand extends Command {
             + PREFIX_PASSWORD + "password ";
 
     /**
-     * Creates an CreateCommand to add the specified {@code Person}
+     * Creates an CreateCommand to add the specified {@code Account}
      */
     public CreateCommand(Accounts account) {
 

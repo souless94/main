@@ -12,8 +12,11 @@ import seedu.address.logic.security.Encrypt;
 public class UserAccountStorage {
 
     private static HashMap<String, String> userHashMap = new HashMap<>();
+    private static final String adminUsername = "admin";
+    private static final String adminPassword = "adminPassword";
 
     public UserAccountStorage() {
+
     }
 
     /**
@@ -33,17 +36,6 @@ public class UserAccountStorage {
      */
     public static boolean checkPasswordMatch(String username, String password) {
         String encryptedPassword = Encrypt.encryptString(password);
-        /*
-        TODO: remove this line, temporary to see output.
-        System.out.print("Encrypted password: " + encryptedPassword +
-        " User entered: " + password + " Stored in hashmap: " + userHashMap.get(username) + " Decrypted password: "
-        + Encrypt.decryptString(userHashMap.get(username)));
-         */
-
-        /* TODO: add some sort of check, e.g. if userHashMap contains user,
-        throw wrong credentials, else throw user doesn't exisit...
-        but this might divulge information that might lead to security flaw
-         */
         return userHashMap.get(username).equals(encryptedPassword);
     }
 
@@ -51,25 +43,11 @@ public class UserAccountStorage {
         return userHashMap.containsKey(username);
     }
 
-}
-
-/**
- * Class for username and password
- */
-class Account {
-    private String username;
-    private String password;
-
-    public Account(String username, String password) {
-        this.username = username;
-        this.password = password;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public String getPassword() {
-        return password;
+    /**
+     *  initialize hashmap with admin account
+     */
+    public static void addAdminAccount(){
+        String encryptedAdminPassword = Encrypt.encryptString(adminPassword);
+        userHashMap.put(adminUsername, encryptedAdminPassword);
     }
 }
