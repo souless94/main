@@ -543,7 +543,7 @@ The current person implementation are:
 
 Given below is the Sequence Diagram for interactions within the Logic component for the execute("find n/alex") API call.
 
-image::FindSequence.png[width="600"]
+image::FindSequence1.png[width="800"]
 
 The following activity diagram shows how 'find' feature works:
 
