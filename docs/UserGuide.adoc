@@ -293,6 +293,7 @@ The `redo` command fails as there are no `undo` commands executed previously.
 Clears all entries from the address book. +
 Format: `clear`
 
+tag::timetable[]
 == Timetable(Wen Kai)
 
 === Adding a timetable: `add_timetable`
@@ -400,6 +401,8 @@ Deletes the 2nd timetable in the address book.
 * `find_timetable Betsy` +
 `delete_timetable 1` +
 Deletes the 1st timetable in the results of the `find_timetable` command.
+
+end::timetable[]
 
 == Groups (Melodies)
 === Adding a group: `add_group`
