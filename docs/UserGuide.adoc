@@ -533,11 +533,10 @@ Examples:
 == Time slots (Nigel)
 
 === List all time slots of a group at which everyone is available : `view_slots_all`
-
 Short form/Alias: `va`
 
 List all of the available time slots in a group +
-Format: `view_slots_all n/GROUP_NAME`
+Format: `view_slots_all n/GROUP_NAME `
 
 ****
 * List all time slots in a group at which all person in the group is available at the specified `GROUPNAME`
@@ -547,18 +546,19 @@ Examples:
 
 * `view_slots_all n/happyfriends`
 
-=== List all time slots of a group in descending order of availability: `view_slots_ranked`
+=== List all time slots of a group in descending order of availability with a minimum number of people available required: `view_slots_ranked`
 
 Short form/Alias: `vr`
+List all time slots of a group in descending order of availability with a minimum number of people available required: +
+Format: `view_slots_ranked n/GROUP_NAME num/NUM_REQ`
 
-List all time slots of a group in descending order of availability: +
-Format: `view_slots_ranked n/GROUP_NAME`
-
-* List all time slots of a group in descending order of availability at the specified `GROUPNAME`
+****
+* List all time slots of a group in descending order of availability at the specified `GROUPNAME` with a minimum number of people available required
+****
 
 Examples:
 
-* `view_slots_ranked n/happyfriends`
+* `view_slots_ranked n/happyfriends num/4`
 
 == Security (Leslie)
 === Create an account: `create`

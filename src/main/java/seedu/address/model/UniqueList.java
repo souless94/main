@@ -139,5 +139,12 @@ public class UniqueList<T extends Entity> implements Iterable<T> {
         }
         return true;
     }
+
+    /**
+     * Returns the number of elements of the list.
+     */
+    public int getSize() {
+        return internalList.size();
+    }
 }
 
