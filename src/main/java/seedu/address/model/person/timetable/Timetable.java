@@ -1,5 +1,7 @@
 package seedu.address.model.person.timetable;
 
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
 import java.math.BigInteger;
 import java.util.Base64;
 
@@ -24,6 +26,7 @@ public class Timetable extends Entity {
      */
     public Timetable(String filePath,
         String timetableString, int option, String day, String timing, String message) {
+        requireAllNonNull(filePath, option);
         this.filePath = filePath;
         this.matrix = new TimetableData(this.filePath, timetableString,
             option, day, timing, message);
