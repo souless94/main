@@ -48,6 +48,13 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 
 . To make use of functions that add or edit information, the application requires the user to create and login to an account.
 
++
+[NOTE]
+The default username is "*admin*" and the default password is "*adminPassword*". +
+To prevent unauthorized users from creating an account, `create` *can only be executed when a user is logged on*. +
+An example in the context of an interest group: Only committee members should be allowed to make changes to the data while members are restricted to viewing rights.
++
+
 - <<_create_an_account_code_create_code>>
 - <<_login_to_an_account_code_login_code>>
 
@@ -513,10 +520,17 @@ Examples:
 == Security (Leslie)
 === Create an account: `create`
 
-Create an account in the system. The password and security answer are both case sensitive. +
+Create an account in the system. The password is case sensitive. +
 Format: `create u/USERNAME pw/PASSWORD`
 
-(Coming in v2.0: Stores account details after closing and reopening app. *At this stage, the user is required to create a new account each time they restart the application*)
+(Coming in v2.0: Stores account details after closing and reopening app.)
+
+
+[NOTE]
+At this stage, the user is required to create a new account each time they restart the application +
+To prevent unauthorized users from creating an account, only admin or other logged in users can create account +
+Admin Username: *admin*, Admin Password: *adminPassword*
+
 
 Examples:
 
