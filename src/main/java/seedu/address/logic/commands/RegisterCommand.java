@@ -8,7 +8,6 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import java.util.ArrayList;
 import java.util.List;
 
-import javafx.util.Pair;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -36,7 +35,7 @@ public class RegisterCommand extends Command {
 
     public static final String MISSING_GROUP_NAME = "Please enter group name.";
     public static final String MESSAGE_SUCCESS = "Added member to group: %1$s";
-    private static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the group.";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the group.";
 
 
     private final Index index;

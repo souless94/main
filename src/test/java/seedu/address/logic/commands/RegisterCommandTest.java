@@ -7,10 +7,13 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalGroups.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND;
+import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD;
+import static seedu.address.testutil.TypicalPersons.CARL;
 
 import org.junit.Test;
 
 import seedu.address.commons.core.Messages;
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -20,62 +23,85 @@ import seedu.address.testutil.GroupBuilder;
 
 /**
  * Contains integration tests (interaction with the Model, UndoCommand and RedoCommand) and unit tests for
- * {@code DeleteGroupCommand}.
+ * {@code RegisterCommand}.
  */
-public class DeleteGroupCommandTest {
+public class RegisterCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     private CommandHistory commandHistory = new CommandHistory();
 
     @Test
-    public void execute_groupExists_success() {
-        Group groupToDelete = model.getFilteredGroupList().get(INDEX_FIRST.getZeroBased());
-        DeleteGroupCommand deleteGroupCommand = new DeleteGroupCommand(groupToDelete);
+    public void executeGroupExistsSuccess() {
+        Group group = model.getFilteredGroupList().get(INDEX_SECOND.getZeroBased());
+        // Registering CARL to BESTFRIEND
+        RegisterCommand registerCommand = new RegisterCommand(group.getName(), INDEX_THIRD);
 
-        String expectedMessage = String.format(DeleteGroupCommand.MESSAGE_SUCCESS, groupToDelete.getName());
+        String expectedMessage = String.format(RegisterCommand.MESSAGE_SUCCESS, CARL);
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.delete(groupToDelete);
+        RegisterCommand.addMemberToGroup(expectedModel, group, CARL);
         expectedModel.commitAddressBook();
 
-        assertCommandSuccess(deleteGroupCommand, model, commandHistory, expectedMessage, expectedModel);
+        assertCommandSuccess(registerCommand, model, commandHistory, expectedMessage, expectedModel);
     }
 
     @Test
-    public void execute_groupDoesNotExist_throwsCommandException() {
-        Group groupToDelete = new GroupBuilder().build();
-        DeleteGroupCommand deleteGroupCommand = new DeleteGroupCommand(groupToDelete);
+    public void executeGroupDoesNotExistThrowsCommandException() {
+        Group group = new GroupBuilder().build();
+        RegisterCommand registerCommand = new RegisterCommand(group.getName(), INDEX_FIRST);
 
-        assertCommandFailure(deleteGroupCommand, model, commandHistory, Messages.MESSAGE_NO_MATCH_TO_EXISTING_GROUP);
+        assertCommandFailure(registerCommand, model, commandHistory, Messages.MESSAGE_NO_MATCH_TO_EXISTING_GROUP);
     }
 
     @Test
-    public void executeUndoRedo_groupExists_success() throws Exception {
-        Group groupToDelete = model.getFilteredGroupList().get(INDEX_FIRST.getZeroBased());
-        DeleteGroupCommand deleteGroupCommand = new DeleteGroupCommand(groupToDelete);
+    public void executeDuplicatePersonInGroupThrowsCommandException() {
+        Group group = model.getFilteredGroupList().get(INDEX_SECOND.getZeroBased());
+        // Registering ALICE to BESTFRIEND (duplicate person)
+        RegisterCommand registerCommand = new RegisterCommand(group.getName(), INDEX_FIRST);
+        assertCommandFailure(registerCommand, model, commandHistory, RegisterCommand.MESSAGE_DUPLICATE_PERSON);
+    }
+
+    @Test
+    public void executeUndoRedoGroupExistsSsuccess() throws Exception {
+        Group group = model.getFilteredGroupList().get(INDEX_SECOND.getZeroBased());
+        RegisterCommand registerCommand = new RegisterCommand(group.getName(), INDEX_THIRD);
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.delete(groupToDelete);
+        RegisterCommand.addMemberToGroup(expectedModel, group, CARL);
         expectedModel.commitAddressBook();
 
-        // delete -> first group deleted
-        deleteGroupCommand.execute(model, commandHistory);
+        // register CARL into BESTFRIEND group
+        registerCommand.execute(model, commandHistory);
 
         // undo -> reverts addressbook back to previous state and filtered group list to show all groups
         expectedModel.undoAddressBook();
         assertCommandSuccess(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_SUCCESS, expectedModel);
 
-        // redo -> same first group deleted again
+        // redo -> CARL added to BESTFRIEND again
         expectedModel.redoAddressBook();
         assertCommandSuccess(new RedoCommand(), model, commandHistory, RedoCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
     @Test
-    public void executeUndoRedo_groupDoesNotExists_failure() {
-        Group groupToDelete = new GroupBuilder().build();
-        DeleteGroupCommand deleteGroupCommand = new DeleteGroupCommand(groupToDelete);
+    public void executeUndoRedoGroupDoesNotExistsFailure() {
+        Group group = new GroupBuilder().build();
+        RegisterCommand registerCommand = new RegisterCommand(group.getName(), INDEX_FIRST);
 
         // execution failed -> address book state not added into model
-        assertCommandFailure(deleteGroupCommand, model, commandHistory, Messages.MESSAGE_NO_MATCH_TO_EXISTING_GROUP);
+        assertCommandFailure(registerCommand, model, commandHistory, Messages.MESSAGE_NO_MATCH_TO_EXISTING_GROUP);
+
+        // single address book state in model -> undoCommand and redoCommand fail
+        assertCommandFailure(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_FAILURE);
+        assertCommandFailure(new RedoCommand(), model, commandHistory, RedoCommand.MESSAGE_FAILURE);
+    }
+
+    @Test
+    public void executeUndoRedoDuplicatePersonFailure() {
+        Group group = model.getFilteredGroupList().get(INDEX_SECOND.getZeroBased());
+        // Registering ALICE to BESTFRIEND (duplicate person)
+        RegisterCommand registerCommand = new RegisterCommand(group.getName(), INDEX_FIRST);
+
+        // execution failed -> address book state not added into model
+        assertCommandFailure(registerCommand, model, commandHistory, RegisterCommand.MESSAGE_DUPLICATE_PERSON);
 
         // single address book state in model -> undoCommand and redoCommand fail
         assertCommandFailure(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_FAILURE);
@@ -86,23 +112,31 @@ public class DeleteGroupCommandTest {
     public void equals() {
         Group groupAtIndexFirst = model.getFilteredGroupList().get(INDEX_FIRST.getZeroBased());
         Group groupAtIndexSecond = model.getFilteredGroupList().get(INDEX_SECOND.getZeroBased());
-        DeleteGroupCommand deleteFirstCommand = new DeleteGroupCommand(groupAtIndexFirst);
-        DeleteGroupCommand deleteSecondCommand = new DeleteGroupCommand(groupAtIndexSecond);
+        RegisterCommand registerFirstCommand = new RegisterCommand(groupAtIndexFirst.getName(),
+                Index.fromOneBased(8));
+        RegisterCommand registerSecondCommand = new RegisterCommand(groupAtIndexSecond.getName(),
+                Index.fromOneBased(8));
+        RegisterCommand registerThirdCommand = new RegisterCommand(groupAtIndexFirst.getName(),
+                Index.fromOneBased(9));
 
         // same object -> returns true
-        assertTrue(deleteFirstCommand.equals(deleteFirstCommand));
+        assertTrue(registerFirstCommand.equals(registerFirstCommand));
 
         // same values -> returns true
-        DeleteGroupCommand deleteFirstCommandCopy = new DeleteGroupCommand(groupAtIndexFirst);
-        assertTrue(deleteFirstCommand.equals(deleteFirstCommandCopy));
+        RegisterCommand registerFirstCommandCopy = new RegisterCommand(groupAtIndexFirst.getName(),
+                Index.fromOneBased(8));
+        assertTrue(registerFirstCommandCopy.equals(registerFirstCommand));
 
         // different types -> returns false
-        assertFalse(deleteFirstCommand.equals(1));
+        assertFalse(registerFirstCommand.equals(1));
 
         // null -> returns false
-        assertFalse(deleteFirstCommand.equals(null));
+        assertFalse(registerFirstCommand.equals(null));
 
-        // different group deleted -> returns false
-        assertFalse(deleteFirstCommand.equals(deleteSecondCommand));
+        // different group with same person added -> returns false
+        assertFalse(registerFirstCommand.equals(registerSecondCommand));
+
+        // different person added to same group --> returns false
+        assertFalse(registerFirstCommand.equals(registerThirdCommand));
     }
 }
