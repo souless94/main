@@ -483,22 +483,14 @@ These functions and their parsers are handled in `Logic`, before updating `Model
 ==== An Example: DeleteGroupCommand
 The DeleteGroupCommand is a good example of how Group and Person classes are interacting (dependent and associated with each other). An example usage scenario of how `delete_group` behaves at each stop is explained below.
 
-Step 1: The user launches the application. (We assume that the user has already added a group and person.)
-
-*`VersionedAddressBook` will be loaded with the final addressbook state before the application was closed.
-
-*Lists of groups and persons added previously will be loaded from `addressbook.xml` file into `Model` using `XmlAdaptedPerson` and `XmlAdaptedGroup` classes.
-
-*The updated lists will be displayed in the `UI`.
+Step 1: The user launches the application. (We assume that the user has already added a group and person.) `VersionedAddressBook` will be loaded with the final addressbook state before the application was closed. Lists of groups and persons added previously will be loaded from `addressbook.xml` file into `Model` using `XmlAdaptedPerson` and `XmlAdaptedGroup` classes. Updated lists will be displayed in the `UI`.
 
 .Sequence Diagram of DeleteGroupCommand (Logic component)
 image::DeleteGroupCommandLogicSD.png[width="750"]
-  _{give links to collated code files}_
+
 Step 2: The user enters the command `dg n/Family` to delete the existing group with group name Family.
 
-* The `LogicManager` class parses the command to `AddressBookParser`.
-
-* `AddressBookParser` creates a `DeleteGroupCommandParser` instance which parses the String "Family" into a `Name` name. The parser creates a `Group` gr with the name (Family). This group is needed for the function below.
+* The `LogicManager` class parses the command to `AddressBookParser`. `AddressBookParser` creates a `DeleteGroupCommandParser` instance which parses the String "Family" into a `Name` name. The parser creates a `Group` gr with the name (Family). This group is needed for the function below.
 
 * The parser creates a `DeleteGroupCommand` object with parameters gr. Subsequently, `retrieveGroupFromName(m, gr.getName())` is called to the Model component in order to retrieve the actual group with the name "Family".
 
@@ -507,13 +499,11 @@ image::DeleteGroupCommandModelSD.png[width="700"]
 
 * After retrieving the actual group `g` with name "Family" from Model `m`, the model performs deletion of the group using an internal function `delete(g)`.
 
-* However, the group still has to be deleted from the groupList from all of its members. _(Refer to GroupPersonClassDiagram above.)_ `deleteGroupFromMembers(m, g)` is called from DeleteGroupCommand object to do so. This method calls the `UnModifiableObservableList()` method in its UniqueList<Person> to return a list of `members` in `g`.
-
-* For every `member` in the list of `members` (for loop), `updatePersonDeleteGroupFromGroupList(m, g, member)` deletes the reference to `g` in `member`.
+* However, the group still has to be deleted from the groupList from all of its members. _(Refer to GroupPersonClassDiagram above.)_ `deleteGroupFromMembers(m, g)` is called from DeleteGroupCommand object to do so. This method calls the `UnModifiableObservableList()` method in its UniqueList<Person> to return a list of `members` in `g`. For every `member` in the list of `members` (for loop), `updatePersonDeleteGroupFromGroupList(m, g, member)` deletes the reference to `g` in `member`.
 
 * Finally, the address book is committed with all the changes.
 
-Step 4: `FilteredPersonList` and `FilteredGroupList` is also updated correspondingly to display the new groups and persons in the `UI`. A successful message is also displayed to the user below the UI's command box. _(Refer to High level sequence diagrams Figure 3 and 4 for a similar illustration of the concept.)_
+Step 4: `FilteredPersonList` and `FilteredGroupList` is also updated correspondingly to display the new groups and persons in the `UI`. A successful message is also displayed to the user below the UI's command box. 
 
 Step 5: Before the application is closed, all groups and persons are stored in `addressbook.xml` using `XmlAdaptedGroup` and `XmlAdaptedPerson` classes. _(Refer to High level sequence diagrams Figure 3 and 4 for a similar illustration of the concept.)_
 
