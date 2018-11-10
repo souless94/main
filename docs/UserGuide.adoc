@@ -20,6 +20,7 @@ By: `Team F11-4`      Since: `Jun 2016`      Licence: `MIT`
 
 NUS Hangs is for those who *Wants to find a convenient time slot for the people who are joining his/her event*. More importantly, NUS Hangs is *optimized for those who prefer to work with a Command Line Interface* (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast,NUS Hangs can get your contact management tasks done faster than traditional GUI apps. Interested? Jump to the <<Quick Start>> to get started. Enjoy!
 
+
 == Quick Start
 
 .  Ensure you have Java version `9` or later installed in your Computer.
@@ -32,7 +33,8 @@ image::Ui.png[width="790"]
 .  Type the command in the command box and press kbd:[Enter] to execute it. +
 e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 
-[[aspiringdevslog-start-01]]
+// tag::quick-start[]
+
 .  The application launch in a state which grant *read-only rights* to the user. Some of the commands that are available in this state includes:
 
 - <<help>>
@@ -56,8 +58,6 @@ An example in the context of an interest group: Only committee members should be
 
 - <<create_an_account_code_create_code>>
 - <<login_to_an_account_code_login_code>>
-
-[[aspiringdevslog-end-01]]
 
 .  Some example commands you can try:
 * *`list`* : lists all person
@@ -579,6 +579,7 @@ Examples:
 
 * `view_slots_ranked n/happyfriends num/4`
 
+// tag::security-mechanism[]
 == Security (Leslie)
 === Create an account: `create`
 

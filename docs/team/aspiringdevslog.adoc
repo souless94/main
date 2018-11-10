@@ -53,7 +53,7 @@ An example of a situation where this would be useful is in the context of an int
 |===
 
 include::../UserGuide.adoc[tag=quick-start]
-include::../UserGuide.adoc[tag=security]
+include::../UserGuide.adoc[tag=security-mechanism]
 
 == Contributions to the Developer Guide
 
@@ -62,5 +62,9 @@ include::../UserGuide.adoc[tag=security]
 |===
 
 include::../DeveloperGuide.adoc[tag=security-mechanism]
+include::../DeveloperGuide.adoc[tag=security-mechanism-use-case-01]
+include::../DeveloperGuide.adoc[tag=security-mechanism-use-case-02]
+include::../DeveloperGuide.adoc[tag=security-mechanism-use-case-03]
+
 
 
