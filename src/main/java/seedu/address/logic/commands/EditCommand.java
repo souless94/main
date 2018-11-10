@@ -36,6 +36,8 @@ public class EditCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
 
+    public static final String ALIAS = "e";
+
     public static final String MESSAGE_USAGE =
         COMMAND_WORD + ": Edits the details of the person identified "
             + "by the index number used in the displayed person list. "

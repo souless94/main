@@ -25,6 +25,8 @@ public class EditGroupCommand extends Command {
 
     public static final String COMMAND_WORD = "edit_group";
 
+    public static final String ALIAS = "eg";
+
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
             + "by the name of group. "
             + "Existing values will be overwritten by the input values.\n"
@@ -64,6 +66,10 @@ public class EditGroupCommand extends Command {
 
         if (!groupToBeEdited.isSame(editedGroup) && model.has(editedGroup)) {
             throw new CommandException(MESSAGE_DUPLICATE_GROUP);
+        }
+
+        for (Person person : editedGroup.getGroupMembers()) {
+            CommandUtil.replaceGroupInPerson(model, person, groupToBeEdited, editedGroup);
         }
 
         model.update(groupToBeEdited, editedGroup);

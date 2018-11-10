@@ -72,6 +72,7 @@ public class TimetableData {
             String[] rows = timetableString.split("\n");
             if (rows.length > getRows()) {
                 this.isCorrectSize = false;
+                return timetableMatrix;
             }
             for (int i = 0; i < getRows(); i++) {
                 String[] decodedRows = rows[i].split(",");
@@ -119,7 +120,6 @@ public class TimetableData {
     }
 
     /**
-     *
      * @return a 2D boolean matrix of a timetable
      */
     public boolean[][] getBooleanTimetableData() {
@@ -150,6 +150,11 @@ public class TimetableData {
                 if (i >= getRows()) {
                     this.isCorrectSize = false;
                     break;
+                }
+                for (int j = 0; j < getColumns(); j++) {
+                    if ("".equals(timetableRow[j])) {
+                        timetableRow[j] = " ";
+                    }
                 }
                 timetableMatrix[i] = timetableRow;
                 i++;

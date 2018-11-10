@@ -23,6 +23,8 @@ public class DeleteGroupCommand extends Command {
 
     public static final String COMMAND_WORD = "delete_group";
 
+    public static final String ALIAS = "dg";
+
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes an existing group. "
             + "Parameters: "
             + PREFIX_NAME + "GROUP NAME ";

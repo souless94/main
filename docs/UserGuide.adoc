@@ -14,7 +14,7 @@ ifdef::env-github[]
 endif::[]
 :repoURL: https://github.com/CS2103-AY1819S1-F11-4/main
 
-By: `Team SE-EDU`      Since: `Jun 2016`      Licence: `MIT`
+By: `Team F11-4`      Since: `Jun 2016`      Licence: `MIT`
 
 == Introduction
 
@@ -96,10 +96,13 @@ Address book data are saved in the hard disk automatically after any command tha
 There is no need to save manually.
 
 == Person
-=== Adding a person: `add`
+=== Adding a person: `add` (ZhiWei)
+
+Short form/Alias: `a`
 
 Adds a person to the address book +
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...`
+Format: `add n/NAME [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
+
 * Inputs in square brackets are optional
 
 [TIP]
@@ -109,14 +112,19 @@ Examples:
 
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
-* `add n/Nancy t/friend`
-* `add n/James  t/friend e/betsycrowe@example.com t/criminal`
+* `add n/Nancy t/friend t/neighbour`
+* `add n/James t/friend e/james@example.com t/classmates`
+* `a n/Joji t/Singer`
 
 [[list]]
 === Listing all persons : `list`
 
+Short form/Alias: `l`
+
 Shows a list of all persons in the address book. +
 Format: `list`
+
+// tag::list[]
 
 === Listing all groups a person is in : `list` (Melodies)
 
@@ -134,8 +142,11 @@ Example:
 * `list 1`
 
 (lists all the groups that the person at index 1 is added to previously)
+// end::list[]
 
 === Editing a person : `edit`
+
+Short form/Alias: `e`
 
 Edits an existing person in the address book. +
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS]
@@ -156,7 +167,7 @@ Examples:
 Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 * `edit 2 n/Betsy Crower t/` +
 Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
-* `edit 1 sl/C:\Users\admin\Downloads\cs2103\tiredAndSadness` +
+* `edit 1 fl/C:\Users\admin\Downloads\cs2103\tiredAndSadness` +
 Edits the stored location of the 1st person to be `C:/Users/admin/Downloads/cs2103/tiredAndSadness/` respectively.
 
 [[find]]
@@ -165,12 +176,16 @@ Edits the stored location of the 1st person to be `C:/Users/admin/Downloads/cs21
 Finds all persons in NusHangs, whose contain keywords provided by prefix(es). +
 Format: `find [n/NAME...] [p/PHONE_NUMBER...] [e/EMAIL...] [a/ADDRESS...] [t/TAG...]`
 
+[TIP]
+Inputs in square brackets are optional
+
 ****
 * The search is case insensitive. e.g `hans` will match `Hans`
 * The order of the keywords and the prefix does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * All information of a person will be searched, provided by the prefix
 * Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* Persons matching at least one keyword will be returned (i.e. `OR` search). +
+e.g. `Hans Bo` will return `Hans Gruber` and `Bo Yang`
 ****
 
 Examples:
@@ -180,11 +195,13 @@ Returns any person having names with `alex`
 * `find n/Betsy Tim John` +
 Returns any person having names `Betsy`, `Tim`, or `John`
 * `find n/alex bernice t/friends` +
-Returns any person having `alex` and 'bernice' in name and `friends` in tags
+Returns any person having `alex` and `bernice` in name and `friends` in tags
 * `find a/tampines p/12345678 87654321` +
-Returns any person having `Tampines` in address and '12345678' & '87654321' in phone
+Returns any person having `Tampines` in address and `12345678` & `87654321` in phone
 
 === Deleting a person : `delete`
+
+Short form/Alias: `ds`
 
 Deletes the specified person from the address book. +
 Format: `delete INDEX`
@@ -293,6 +310,9 @@ Format: `clear`
 == Timetable(Wen Kai)
 
 === Adding a timetable: `add_timetable`
+
+Short form/Alias: `at`
+
 User to download timetable template first before using download_timetable INDEX and change csv at the location. +
 Reload page by clicking on another person and then click on the person again +
 Or right click on timetable and select the reload page option.
@@ -300,30 +320,50 @@ Or right click on timetable and select the reload page option.
 Format: `add_timetable INDEX [fl/FILE_LOCATION]`
 
 ****
-* add details of a timetable csv file to the person specified by `INDEX` from the stored folder of the person specified by `INDEX` if no file location is present.
-* Adds details of a timetable csv file to the person specified by the `INDEX` from file location if file location is present.
-* Add the timetable at the specified `INDEX`.
 * Existing values will be updated to the input values.
+* timings are start time of the event. Eg. if timetable shows 0800, it means the event is from 0800 to 0900.
 * The index refers to the index number shown in the displayed person list.
 * The index *must be a positive integer* 1, 2, 3, ...
-* Will not be able to add if timetable is not present in the stored location of person specified by `INDEX`
 ****
 
-Examples:
+Example (user does not provide a file path):
 
 * `add_timetable 1`
+* add_timetable will add timetable from the given csv file from the person specified by the `INDEX` from file location if file location is present. If not, NUSHangs will throw an error message if the file cannot be found from the given (typed) file path
+* Will not be able to add if timetable is not present in the stored location of person specified by `INDEX`
+
+Example (user provides a file path):
 
 * `add_timetable 1 fl/C:\Users\timetable\timetable.csv`
 
+* FOR WINDOWS:
+** `add_timetable fl/C:\Users\timetable\timetable.csv` (absolute pathing) or
+** `add_timetable fl/timetable.csv` (relative pathing - if you save the .csv file in the same directory as the .jar file).
+* FOR MAC:
+** `add_timetable 1 fl//FILEPATH` (absolute pathing - note the double slashes) or
+** `add_timetable 1 fl/timetable.csv` (relative pathing).
+* add_timetable will add timetable from the given csv file.
+* the first row and first column should be left alone
+* can only edit in given rows and columns of the timetable.
+* any invalid timetable will be ignored.
+* example of correctly formatted timetable is given below
+
+image::add_timetable_fl.png[width="700"]
+
 === Editing a timetable: `edit_timetable`
+
+Short form/Alias: `et`
+
 Edits a timetable timeslot of the timetable from the person specified by the `INDEX`. +
-Format: `add_timetable INDEX day/DAY timing/TIMING [m/DETAILS]  `
+Format: `edit_timetable INDEX day/DAY timing/TIMING [m/DETAILS]`
 
 ****
 * timings are in 24h format from 0800 to 2300.
+* timings are start time of the event. Eg. if timetable shows 0800, it means the event is from 0800 to 0900.
 * Existing values will be overwritten by the input details.
 * days are days of a week in *full name(case insensitive)* from Monday to Friday.
 * edit the timetable at the specified `INDEX`.
+* can only edit 1 hour timeslot at a time.
 * The index refers to the index number shown in the displayed person list.
 * The index *must be a positive integer* 1, 2, 3, ...
 ****
@@ -336,6 +376,8 @@ Examples:
 
 === Download timetable : `download_timetable`
 
+Short form/Alias: `dlt`
+
 Download a timetable from the person specified by the `INDEX` to the stored folder from the person specified by the `INDEX` as a csv file.  +
 Format: `download_timetable INDEX `
 
@@ -344,6 +386,7 @@ Format: `download_timetable INDEX `
 * The index refers to the index number shown in the displayed person list.
 * The index *must be a positive integer* 1, 2, 3, ...
 * Will not download if there is a file with same filename as the filename of the timetable from the person specified by the `INDEX`.
+* Will not download if there is no such folder to download the timetable csv file given by the file location from the person specified by the `INDEX`.
 ****
 
 Examples:
@@ -351,6 +394,8 @@ Examples:
 * `download_timetable 1` +
 
 === Deleting a timetable : `delete_timetable`
+
+Short form/Alias: `dt`
 
 delete csv file of the timetable from stored location from the person specified by the `INDEX` and adds a default timetable to the person specified by the `INDEX`.Resets the timetable of the person if there is no timetable in the stored location from the person specified by the `INDEX`. +
 Format: `delete_timetable INDEX`
@@ -370,8 +415,11 @@ Deletes the 2nd timetable in the address book.
 `delete_timetable 1` +
 Deletes the 1st timetable in the results of the `find_timetable` command.
 
+// tag::groups[]
 == Groups (Melodies)
 === Adding a group: `add_group`
+
+Short form/Alias: `ag`
 
 Add a group to the System +
 Format: `add_group n/GROUPNAME [d/GROUPDESCRIPTION]`
@@ -384,6 +432,8 @@ Examples:
 * `add_group n/Bestfriends
 
 === Editing a group : `edit_group`
+
+Short form/Alias: `eg`
 
 Edit a group's details. OLDGROUPNAME must be entered. There must be at least 1 field non-empty. +
 If field is empty, system assumes that the field remains unedited.
@@ -404,6 +454,8 @@ Examples:
 [[find_group]]
 === Locating group by name: `find_group`
 
+Short form/Alias: `fg`
+
 Find groups whose names contain any of the given keywords +
 Format: `find_group KEYWORD [MORE_KEYWORDS]`
 
@@ -413,17 +465,7 @@ Format: `find_group KEYWORD [MORE_KEYWORDS]`
 * Only the group name is searched.
 * Only full words will be matched e.g. `Family` will not match `Families`
 ****
-TAG]...`
-75
-* Inputs in square brackets are optional
-76
-​
-77
-[TIP]
-78
-A person can have any number of tags (including 0)
-79
-​
+
 Examples:
 
 * `find_group John` +
@@ -432,6 +474,8 @@ Returns `john family` and `John House`
 Returns any group having names `Betsy`, `Tim`, or `John`
 
 === Deleting a group : `delete_group`
+
+Short form/Alias: `dg`
 
 Delete a group in the system by name +
 Format: `delete_group n/GROUPNAME`
@@ -445,6 +489,8 @@ Examples:
 * `delete_group n/happyfriends`
 
 === Add a person to group : `register`
+
+Short form/Alias: `r`
 
 Adds a person using the person index to a group if group exists +
 Format: `register PERSON_INDEX n/GROUP_NAME`
@@ -467,6 +513,8 @@ Examples:
 [[view_group]]
 === List all persons of a group : `view_group`
 
+Short form/Alias: `vg`
+
 shows a list of all persons in a group +
 Format: `view_group n/GROUP_NAME`
 
@@ -482,6 +530,8 @@ Examples:
 
 === Delete a person from group : `delete_member`
 
+Short form/Alias: `dm`
+
 Delete a person from a group using person index displayed with `view_group`. +
 Format: `delete_member PERSON_INDEX n/GROUP_NAME`
 
@@ -494,15 +544,16 @@ Examples:
 
 * `view_group n/happyfriends`
 * `delete_member 1 n/happyfriends`
-
 (deletes the 1st person displayed in `view_group` command.)
+// end::groups[]
 
 == Time slots (Nigel)
 [[view_slots_all]]
 === List all time slots of a group at which everyone is available : `view_slots_all`
+Short form/Alias: `va`
 
 List all of the available time slots in a group +
-Format: `view_slots_all n/GROUP_NAME`
+Format: `view_slots_all n/GROUP_NAME `
 
 ****
 * List all time slots in a group at which all person in the group is available at the specified `GROUPNAME`
@@ -512,17 +563,21 @@ Examples:
 
 * `view_slots_all n/happyfriends`
 
-[[view_slots_ranked]]
-=== List all time slots of a group in descending order of availability: `view_slots_ranked`
 
-List all time slots of a group in descending order of availability: +
-Format: `view_slots_ranked n/GROUP_NAME`
+=== List all time slots of a group in descending order of availability with a minimum number of people available required: `view_slots_ranked`
 
-* List all time slots of a group in descending order of availability at the specified `GROUPNAME`
+
+Short form/Alias: `vr`
+List all time slots of a group in descending order of availability with a minimum number of people available required: +
+Format: `view_slots_ranked n/GROUP_NAME num/NUM_REQ`
+
+****
+* List all time slots of a group in descending order of availability at the specified `GROUPNAME` with a minimum number of people available required
+****
 
 Examples:
 
-* `view_slots_ranked n/happyfriends`
+* `view_slots_ranked n/happyfriends num/4`
 
 == Security (Leslie)
 === Create an account: `create`
@@ -619,13 +674,13 @@ e.g. `list 1`
 * *redo*
 * *history*: Lists all the commands that you have entered in reverse chronological order.
 * *add_timetable*: `add_timetable INDEX [fl/FILE_LOCATION]` +
-e.g. `add_timetable 1`
+e.g. `add_timetable 1 fl/C:\Users\timetable\timetable.csv`
 * *edit_timetable*: `edit_timetable INDEX day/DAY timing/TIMING [m/DETAILS]` +
 e.g. `edit_timetable 1 day/wednesday timing/1800 m/do cs2103`
 * *download_timetable* : `download_timetable INDEX` +
-e.g. `download_timetable 1 l/C://Users/abc/mysecretstash`
-* *delete_timetable* : `delete INDEX p/password` +
-e.g. `delete_timetable 3 p/password`
+e.g. `download_timetable 1`
+* *delete_timetable* : `delete_timetable INDEX` +
+e.g. `delete_timetable 3`
 * *add_group*: `add_group n/GROUPNAME [d/GROUPDESCRIPTION]`` +
 e.g. `add_group n/happyfriends d/a group of happy friends`
 * *edit_group* : `edit_group OLDGROUPNAME [n/NEWGROUPNAME] [d/NEWGROUPDESCRIPTION]` +
@@ -648,12 +703,5 @@ e.g. `view_group n/Family` +
 e.g. `create u/user pw/strongpass`
 * *login* : `login u/USERNAME pw/PASSWORD` +
 e.g. `login u/user pw/strongpass`
-* *update_pw* : `update_pw c/CURRENT_PASSWORD n/NEW_PASSWORD` +
-e.g. `update_pw c/password n/newpass`
-* *get* : `get`
-* *reset* : `reset a/SECURITY_ANSWER n/NEW_PASSWORD` +
-e.g. `reset a/SECURITY_ANSWER n/NEW_PASSWORD`
-* *update_sq* : `update_sq c/CURRENT_PASSWORD [n/NEWSECURITY_QUESTION]  [a/SECURITY_ANSWER]` +
-e.g. `update_pw c/password n/why me? a/because it is cs2103`
 
 

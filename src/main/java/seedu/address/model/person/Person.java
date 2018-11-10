@@ -19,8 +19,7 @@ import seedu.address.model.tag.Tag;
 
 /**
  * Represents a Person in the address book. Guarantees: details are present and not null, field
- * values are validated, immutable. #TODO: Remove setGroups method and combine 2 constructors into 1
- * (by v1.3)
+ * values are validated, immutable. #TODO: Remove setGroups method
  */
 public class Person extends Entity {
 
