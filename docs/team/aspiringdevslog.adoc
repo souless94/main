@@ -62,6 +62,7 @@ include::../UserGuide.adoc[tag=security-mechanism]
 |===
 
 include::../DeveloperGuide.adoc[tag=security-mechanism]
+include::../DeveloperGuide.adoc[tag=manual-test]
 include::../DeveloperGuide.adoc[tag=security-mechanism-use-case]
 
 
