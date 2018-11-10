@@ -450,6 +450,8 @@ Account credentials are stored in a hashmap. The problem with the current storag
 
 There are no restrictions on password, namely there is no checks to ensure that the passwords are strong. This means that users can use weak passwords or even leave the password field empty to make it easy to log in.
 
+// end::security-mechanism[]
+
 // tag::groups[]
 === Group Feature
 
