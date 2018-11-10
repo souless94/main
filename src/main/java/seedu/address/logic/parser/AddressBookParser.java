@@ -199,6 +199,9 @@ public class AddressBookParser {
             case LoginCommand.COMMAND_WORD:
                 return new LoginCommandParser().parse(arguments);
 
+            case CreateCommand.COMMAND_WORD:
+                return new CreateCommandParser().parse(arguments);
+
             case SelectCommand.COMMAND_WORD:
                 return new SelectCommandParser().parse(arguments);
 
