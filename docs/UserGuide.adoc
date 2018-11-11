@@ -513,31 +513,26 @@ Format: `register PERSON_INDEX n/GROUP_NAME`
 * Adds this person to the group with GROUPNAME.
 ****
 
-Examples:
+Examples: (Adds the first person in the displayed person panel to the group happyfriends)
 
 `list` +
 
-`register 1 n/happyfriends `
+`register 1 n/happyfriends`
 
-(Adds the first person in the displayed person panel to the group happyfriends)
-
-[[view_group]]
 === List all persons of a group : `view_group`
 
 Short form/Alias: `vg`
 
-shows a list of all persons in a group +
+Displays a list of all persons in a group +
 Format: `view_group n/GROUP_NAME`
 
 ****
 * List all persons of a group at the specified `GROUPNAME`.
 ****
 
-Examples:
+Examples: (lists the persons added to group happyfriends in the displayed person list)
 
 * ` view_group n/happyfriends`
-
-(lists the person added to group happyfriends in the displayed person list)
 
 === Delete a person from group : `delete_member`
 
@@ -546,16 +541,13 @@ Short form/Alias: `dm`
 Delete a person from a group using person index displayed with `view_group`. +
 Format: `delete_member PERSON_INDEX n/GROUP_NAME`
 
-****
-* `view_group` command should be performed before the `delete_member` command.
+* *Remember to `view_group` before using register command.*
 * The PERSON_INDEX is the index of the displayed person list AFTER `view_group` command is performed.
-****
 
-Examples:
+Examples: (deletes the 1st person displayed in `view_group` command.)
 
 * `view_group n/happyfriends`
 * `delete_member 1 n/happyfriends`
-(deletes the 1st person displayed in `view_group` command.)
 // end::groups[]
 
 == Time slots (Nigel)
