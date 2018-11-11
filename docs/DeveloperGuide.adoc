@@ -289,7 +289,7 @@ Given below is an example usage scenario and how the `add_timetable` behaves at 
 
 Step 1: The user launches the application for the first time. The NUS Hangs will initialise the person with the timetable with the details which was stored using Storage.
 
-Step 2:  user finds a timetable of first `person` in the stored location which is called 495011161 timetable.csv. Using this command, User does not need to find the timetable. As shown in the diagram below its easy to see what event the person has.
+Step 2:  user finds a timetable of first `person` in the stored location which is called 495011161 timetable.csv. Using this command, User does not need to type in the timetable name. As shown in the diagram below its easy to see what event the person has.
 
 image::addTimetable-step-2.png[width="500"]
 

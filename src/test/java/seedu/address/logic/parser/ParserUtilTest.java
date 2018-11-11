@@ -4,7 +4,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
-import static seedu.address.logic.parser.ParserUtil.parseDetails;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 
 import java.io.File;
@@ -258,7 +257,7 @@ public class ParserUtilTest {
     @Test
     public void parseDetailsSuccess() throws Exception {
         String expectedDetails = VALID_DETAILS;
-        assertEquals(expectedDetails, parseDetails(VALID_DETAILS));
+        assertEquals(expectedDetails, ParserUtil.parseDetails(VALID_DETAILS));
     }
 
     @Test
