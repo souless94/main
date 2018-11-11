@@ -15,7 +15,7 @@ import seedu.address.model.Model;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 
 /**
- * Finds and lists all persons in address book whose name contains any of the argument keywords.
+ * Finds and lists all persons in NUS Hangs whose name contains any of the argument keywords.
  * Keyword matching is case insensitive.
  */
 public class FindCommand extends Command {
@@ -24,7 +24,7 @@ public class FindCommand extends Command {
 
     public static final String ALIAS = "f";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all person in the address book "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all person in NUS Hangs "
             + "(Prefix Search/ Case-Insensitive) and displays them as a list.\n"
             + "Parameters:\n"
             + PREFIX_NAME + "NAME "

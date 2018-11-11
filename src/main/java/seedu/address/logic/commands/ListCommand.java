@@ -15,7 +15,7 @@ import seedu.address.model.group.Group;
 import seedu.address.model.person.Person;
 
 /**
- * Lists all persons and groups in the address book to the user if no further parameter given.
+ * Lists all persons and groups in NUS Hangs to the user if no further parameter given.
  * Lists all groups that a person is enrolled in if index of person is inputted.
  * #TODO: Edit User Guide list function
  */

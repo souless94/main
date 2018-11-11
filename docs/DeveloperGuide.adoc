@@ -541,28 +541,28 @@ Cons: Can be more expensive to look for groups for a particular person.
 
 === Person Feature
 
-The 'Person' class extends the `Entity` abstract class and it is contained within 'Model'.
+The 'Person' class extends the `Entity` abstract class and it is contained within `Model`.
 
-'Person' feature make use of 'Timetable' and 'Group' class to assign respective information to each instance of a person.
+`Person` feature make use of `Timetable` and `Group` class to assign respective information to each instance of a person.
 
 ==== Current Implementation
 
 The current person implementation are:
 
-* 'add' -- add any person with the choice of adding address, phone, email and tags
-* 'find' -- finds all persons in NusHangs, whose contain keywords provided by prefix(es)
+* `add` -- add any person with the choice of adding address, phone, email and tags
+* `find` -- finds all persons in NusHangs, whose contain keywords provided by prefix(es)
 
 Given below is the Sequence Diagram for interactions within the Logic component for the execute("find n/alex") API call.
 
-image::FindSequence1.png[width="800"]
+image::FindSequence.png[width="800"]
 
 The following activity diagram shows how 'find' feature works:
 
-image::FindFeature1.png[width="800"]
+image::FindActivity.png[width="600"]
 
 ==== Design Considerations
 
-===== Aspect: How should each specific 'find' feature work
+===== Aspect: How should each specific `find` feature work
 
 *Alternative 1 (Current Choice) :* Use prefixes for specific search (e.g. find n/alex bernice t/friends)
 
