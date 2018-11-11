@@ -1435,10 +1435,10 @@ Expected: list all persons in NUS Hangs with keyword 'yu' in their name
 .. Test case: `select 1` +
 Expected: Selects the 1st person in the list
 
-==== `find_group` *unexpected results; TODO: bug fix*
+==== `find_group`
 1. Find groups whose names contain any of the given keywords
-.. Test case: `find_group ` +
-Expected:
+.. Test case: `find_group sadfriends` +
+Expected: List group with name that has "sadfriends" in it
 
 
 ==== `view_group`
