@@ -22,7 +22,7 @@ This feature allows users to find any persons in Nus Hangs, with improved prefix
 
 ** Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.
 
-* *Code contributed*: [https://nus-cs2103-ay1819s1.github.io/cs2103-dashboard/#=undefined&search=zhiwei94[Functional and Test code]]  _{give links to collated code files}_
+* *Code contributed*: [https://nus-cs2103-ay1819s1.github.io/cs2103-dashboard/#=undefined&search=zhiwei94[Functional and Test code]]
 
 * *Other contributions*:
 
