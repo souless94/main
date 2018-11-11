@@ -16,7 +16,7 @@ import seedu.address.model.group.Group;
 import seedu.address.model.person.Person;
 
 /**
- * Deletes a person identified using it's displayed index from the address book and delete it as
+ * Deletes a person identified using it's displayed index from NUS Hangs and delete it as
  * member from all groups that it is in.
  */
 public class DeleteCommand extends Command {
