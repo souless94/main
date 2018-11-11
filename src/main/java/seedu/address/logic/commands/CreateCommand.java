@@ -42,7 +42,6 @@ public class CreateCommand extends Command {
      */
     public CreateCommand(Accounts account) {
 
-        Accounts newAccount = account;
         String username = account.getUsername();
         String password = account.getPassword();
 
