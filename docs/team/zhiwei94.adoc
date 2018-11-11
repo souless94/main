@@ -14,10 +14,10 @@ NUS Hangs is a desktop Schedule Manager application. It has a GUI but most of th
 == Summary of contributions
 
 * *Major enhancement*: Enhance person features to fit requirements of NUS Hangs:
-** add: Add a person to NUS Hangs with optional inputs. +
+** `add`: Add a person to NUS Hangs with optional inputs. +
 This feature improves the product accessibility because the user has the option to leave out certain inputs.
 
-** find: Find all persons in NUS Hangs, provided by prefix(es). +
+** `find`: Find all persons in NUS Hangs, provided by prefix(es). +
 This feature allows users to find any persons in Nus Hangs, with improved prefix search to widen/narrow search results.
 
 ** Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.
