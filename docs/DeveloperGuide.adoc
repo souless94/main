@@ -1077,15 +1077,14 @@ Use case ends.
 Use case ends.
 
 [discrete]
-=== Use case: check available time slot of the group
+=== Use case: Find time slots at which every member of a group is available
 
 *MSS*
 
-1.	User logins to System and requests help to see available time slots
-2.  System shows how to find available time slot of the group
+1.	User requests help to see time slots at which everyone in the group is available
+2.  System shows how to find these time slots
 3.	User enters inputs accordingly
-4.	System asks if user wants to see the time slots listed in descending order in terms of the number of conflict if there are no available time slots.
-5.	System shows time slots listed in descending order in terms of the number of conflict
+4.  System lists all of these time slots in ascending order in terms of timing.
 
 *Extensions*
 
@@ -1095,12 +1094,47 @@ Use case ends.
 ** 3a1.System shows an error message.
 +
 Use case resumes at step 2.
-* 4a. Group or Person or both is not in the System.
+* 4a. There are no members in the specified group
 +
 [none]
-** 4a1.System shows an error message.
+** 4a1.System indicates that there are no members in the specified group
++
+Use case ends.
+* 4b. There are no time slots at which every member of the specified group is available at.
++
+[none]
+** 4b1.System indicates that there are no available time slots.
+Use case ends.
+
+[discrete]
+=== Use case: Sort and list all time slots with a specified required minimum number of people available
+
+*MSS*
+
+1.	User requests help to see a sorted list of time slots
+2.  System shows how to list all time slots in order in terms of number of people available of a specified group, with a specified required minimum number of people.
+3.	User enters inputs accordingly
+4.  System lists time slots that fits the requirement, in descending order in terms of number of people available, and then in ascending order in terms of timing.
+
+*Extensions*
+
+* 3a. User enters invalid input.
++
+[none]
+** 3a1.System shows an error message.
 +
 Use case resumes at step 2.
+* 4a. There are no members in the specified group
++
+[none]
+** 4a1.System indicates that there are no members in the specified group
++
+Use case ends.
+* 4b. There are no time slots that meets the requirement.
++
+[none]
+** 4b1.System indicates that there are no available time slots.
+Use case ends.
 
 [discrete]
 === Use case: Add a group
@@ -1451,14 +1485,14 @@ Expected: shows a list of all persons in the group "happyfriends"
 ==== `view_slots_all`
 1. List all of the available time slots in a group
 .. Test case: `view_slots_all n/happyfriends` +
-Expected: output list of all available time slots
+Expected: output list of all time slots at which everyone in the group is available
 
 
 
 ==== `view_slots_ranked`
 1. List all time slots of a group in descending order of availability with a minimum number of people available required
 .. Test case: `view_slots_ranked n/happyfriends num/1` +
-Expected: output list of all available time slots with at least 1 person available; if any
+Expected: output list of all time slots with at least 1 person available, if any, in sorted order
 
 === Add and Edit Commands
 

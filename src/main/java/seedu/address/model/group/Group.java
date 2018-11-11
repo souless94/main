@@ -82,7 +82,7 @@ public class Group extends Entity {
         }
         return builder.toString();
     }
-
+    //@@author nigelngyy
     /**
      * Returns the string representation of the integer variable "day" used in listAvailableTimeslots
      * and listRankedAvailableTimeslots
@@ -166,6 +166,7 @@ public class Group extends Entity {
         }
         return builder.toString();
     }
+
     /**
      * Returns the time slots among the group as a String in descending order with respect to number of
      * people available and then ascending order in terms of timing, with the parameter being the
@@ -223,6 +224,7 @@ public class Group extends Entity {
         }
         return builder.toString();
     }
+    //@@author
 
     /**
      * Returns true if both groups of the same name.

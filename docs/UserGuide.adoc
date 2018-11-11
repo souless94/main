@@ -554,31 +554,29 @@ Examples: (deletes the 1st person displayed in `view_group` command.)
 
 == Time slots (Nigel)
 [[view_slots_all]]
-=== List all time slots of a group at which everyone is available : `view_slots_all`
+=== List all time slots at which everyone of a group is available : `view_slots_all`
 Short form/Alias: `va`
 
-List all of the available time slots in a group +
+List all of the time slots at which everyone in a group is available +
 Format: `view_slots_all n/GROUP_NAME `
 
 ****
-* List all time slots in a group at which all person in the group is available at the specified `GROUPNAME`
+* List all time slots at which all persons in a group is available, for the specified `GROUPNAME`
 ****
 
 Examples:
 
 * `view_slots_all n/happyfriends`
 
-
-=== List all time slots of a group in descending order of availability with a minimum number of people available required: `view_slots_ranked`
-
 [[view_slots_ranked]]
-
+=== List all time slots of a group in descending order of availability with a minimum number of people available required: `view_slots_ranked`
 Short form/Alias: `vr`
+
 List all time slots of a group in descending order of availability with a minimum number of people available required: +
 Format: `view_slots_ranked n/GROUP_NAME num/NUM_REQ`
 
 ****
-* List all time slots of a group in descending order of availability at the specified `GROUPNAME` with a minimum number of people available required
+* List all time slots of a group in descending order of availability, for the specified `GROUPNAME`, with a specified minimum number of people available required
 ****
 
 Examples:
