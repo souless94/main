@@ -4,12 +4,15 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PASSWORD;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_USERNAME;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.model.Model;
 import seedu.address.model.person.Accounts;
 import seedu.address.storage.UserAccountStorage;
+
+import java.util.logging.Logger;
 
 //@@author aspiringdevslog
 
@@ -34,20 +37,28 @@ public class LoginCommand extends Command {
 
     private static final String MESSAGE_FAILURE = "Login failed! "
         + "Please check your username and/or password.";
-    //TODO: throw exception message
+
+    private final Logger logger = LogsCenter.getLogger(this.getClass());
 
     /**
      * Login
      */
     public LoginCommand(Accounts account) {
-        if (!UserAccountStorage.checkDuplicateUser(account.getUsername())) {
+
+        String username = account.getUsername();
+        String password = account.getPassword();
+
+        if (!UserAccountStorage.checkDuplicateUser(username)) {
             loginIsSuccessful = false;
-        } else if (UserAccountStorage.checkPasswordMatch(account.getUsername(), account.getPassword())) {
+        } else if (UserAccountStorage.checkPasswordMatch(username, password)){
             loginIsSuccessful = true;
             AddressBookParser.updateLoggedOnStatus(true);
         } else {
             loginIsSuccessful = false;
         }
+
+        logger.info("Account Login Status: " + loginIsSuccessful
+            + " Username: " + username);
     }
 
 

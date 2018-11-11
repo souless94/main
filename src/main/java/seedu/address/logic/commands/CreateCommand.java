@@ -4,11 +4,14 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PASSWORD;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_USERNAME;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Accounts;
 import seedu.address.storage.UserAccountStorage;
+
+import java.util.logging.Logger;
 
 //@@author aspiringdevslog
 
@@ -23,6 +26,7 @@ public class CreateCommand extends Command {
 
     private static boolean createIsSuccessful = false;
 
+
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Creates an account in NUS Hangs. "
             + "Parameters: "
             + PREFIX_USERNAME + "USERNAME "
@@ -31,19 +35,28 @@ public class CreateCommand extends Command {
             + PREFIX_USERNAME + "username "
             + PREFIX_PASSWORD + "password ";
 
+    private final Logger logger = LogsCenter.getLogger(this.getClass());
+
     /**
      * Creates an CreateCommand to add the specified {@code Account}
      */
     public CreateCommand(Accounts account) {
 
         Accounts newAccount = account;
+        String username = account.getUsername();
+        String password = account.getPassword();
 
-        if (!UserAccountStorage.checkDuplicateUser(account.getUsername())) {
-            UserAccountStorage.addNewAccount(account.getUsername(), account.getPassword());
+        if (!UserAccountStorage.checkDuplicateUser(username)) {
+            UserAccountStorage.addNewAccount(username, password);
             createIsSuccessful = true;
         } else {
             createIsSuccessful = false;
         }
+
+        logger.info("Account Creation Status: " + createIsSuccessful
+            + " Username chosen: " + username
+            + " Password Length: " + password.length());
+
     }
 
     public boolean getCreateIsSuccessful() {
