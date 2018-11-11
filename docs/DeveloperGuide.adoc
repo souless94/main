@@ -506,7 +506,6 @@ Step 4: `FilteredPersonList` and `FilteredGroupList` is also updated correspondi
 
 Step 5: Before the application is closed, all groups and persons are stored in `addressbook.xml` using `XmlAdaptedGroup` and `XmlAdaptedPerson` classes. _(Refer to High level sequence diagrams Figure 3 and 4 for a similar illustration of the concept.)_
 
-
 ==== Design Considerations
 
 ===== Aspect: How to implement `Group` class
