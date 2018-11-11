@@ -1,9 +1,9 @@
 package seedu.address.logic.commands;
 
 import static org.junit.Assert.assertTrue;
-import static seedu.address.commons.core.Messages.MESSAGE_TIMETABLE_NOT_FOUND;
 import static seedu.address.logic.commands.AddTimetableCommand.MESSAGE_INVALID_TIMETABLE;
 import static seedu.address.logic.commands.AddTimetableCommand.MESSAGE_INVALID_TIMETABLE_SIZE;
+import static seedu.address.logic.commands.AddTimetableCommand.MESSAGE_TIMETABLE_NOT_FOUND;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.PersonBuilder.DEFAULT_STORED_INVALID_TIMETABLE_LOCATION;
@@ -94,7 +94,7 @@ public class AddTimetableCommandTest {
         }
         AddTimetableCommand addTimetableCommand = new AddTimetableCommand(INDEX_FIRST, null);
         assertCommandFailure(addTimetableCommand, model, commandHistory,
-            MESSAGE_TIMETABLE_NOT_FOUND);
+            MESSAGE_TIMETABLE_NOT_FOUND + personToAddTimetable.getStoredLocation());
     }
 
     @Test

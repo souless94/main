@@ -16,7 +16,6 @@ public class Messages {
     public static final String MESSAGE_NO_MATCH_TO_EXISTING_GROUP = "There is no match to an existing group.";
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
     public static final String MESSAGE_GROUPS_LISTED_OVERVIEW = "%1$d groups listed!";
-    public static final String MESSAGE_TIMETABLE_NOT_FOUND = "timetable to be added is not found";
     public static final String MESSAGE_DETAILS_EMPTY = "details to edit cannot be empty";
     public static final String MESSAGE_USER_NOT_LOGGED_IN = "Please login or create an account to continue.";
     public static final String MESSAGE_USER_ALREADY_LOGGED_IN = "User is already logged in.";
