@@ -98,6 +98,8 @@ NUS Hangs data are saved in the hard disk automatically after any command that c
 There is no need to save manually.
 
 == Person
+
+[[add]]
 === Adding a person: `add` (ZhiWei)
 
 Short form/Alias: `a`
