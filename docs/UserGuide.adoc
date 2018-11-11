@@ -173,7 +173,7 @@ Edits the name of the 2nd person to be `Betsy Crower` and clears all existing ta
 Edits the stored location of the 1st person to be `C:/Users/admin/Downloads/cs2103/tiredAndSadness/` respectively.
 
 [[find]]
-=== Finding a person : `find`
+=== Finding a person : `find` (ZhiWei)
 
 Finds all persons in NusHangs, whose contain keywords provided by prefix(es). +
 Format: `find [n/NAME...] [p/PHONE_NUMBER...] [e/EMAIL...] [a/ADDRESS...] [t/TAG...]`
