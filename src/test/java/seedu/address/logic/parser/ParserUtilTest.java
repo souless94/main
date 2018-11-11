@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
+import static seedu.address.logic.parser.ParserUtil.parseDetails;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 
 import java.io.File;
@@ -34,6 +35,7 @@ public class ParserUtilTest {
     private static final String INVALID_TIMING = "10006";
     private static final String INVALID_DAY = "firday";
     private static final String INVALID_LOCATION = "something.s";
+    private static final String INVALID_DETAILS = "";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
@@ -44,6 +46,7 @@ public class ParserUtilTest {
     private static final String VALID_TIMING = "1000";
     private static final String VALID_DAY = "friday";
     private static final String VALID_LOCATION = "something.csv";
+    private static final String VALID_DETAILS = "something";
 
 
     private static final String WHITESPACE = " \t\r\n";
@@ -248,8 +251,20 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseLocationFailure() {
+    public void parseDetailsFailure() {
         Assert.assertThrows(ParseException.class, () -> ParserUtil.parseLocation(INVALID_LOCATION));
     }
+
+    @Test
+    public void parseDetailsSuccess() throws Exception {
+        String expectedDetails = VALID_DETAILS;
+        assertEquals(expectedDetails, parseDetails(VALID_DETAILS));
+    }
+
+    @Test
+    public void parseLocationFailure() {
+        Assert.assertThrows(ParseException.class, () -> ParserUtil.parseDetails(INVALID_DETAILS));
+    }
+
 
 }
