@@ -15,7 +15,6 @@ import seedu.address.model.person.Accounts;
 import seedu.address.storage.UserAccountStorage;
 
 
-
 //@@author aspiringdevslog
 
 /**
@@ -52,7 +51,7 @@ public class LoginCommand extends Command {
 
         if (!UserAccountStorage.checkDuplicateUser(username)) {
             loginIsSuccessful = false;
-        } else if (UserAccountStorage.checkPasswordMatch(username, password)){
+        } else if (UserAccountStorage.checkPasswordMatch(username, password)) {
             loginIsSuccessful = true;
             AddressBookParser.updateLoggedOnStatus(true);
         } else {
