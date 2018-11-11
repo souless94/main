@@ -98,7 +98,6 @@ public class DeleteGroupCommandTest {
 
         // different types -> returns false
         assertFalse(deleteFirstCommand.equals(1));
-        assertFalse(deleteFirstCommand.equals("deleteFirstCommand"));
 
         // null -> returns false
         assertFalse(deleteFirstCommand.equals(null));

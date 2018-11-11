@@ -2,7 +2,6 @@ package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.address.commons.core.Messages.MESSAGE_USER_ALREADY_LOGGED_IN;
 import static seedu.address.commons.core.Messages.MESSAGE_USER_NOT_LOGGED_IN;
 
 import java.util.regex.Matcher;
@@ -177,7 +176,7 @@ public class AddressBookParser {
                 return new CreateCommandParser().parse(arguments);
 
             case LoginCommand.COMMAND_WORD:
-                throw new ParseException(MESSAGE_USER_ALREADY_LOGGED_IN);
+                return new LoginCommandParser().parse(arguments);
 
             default:
                 throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
@@ -197,11 +196,11 @@ public class AddressBookParser {
             case RedoCommand.COMMAND_WORD:
                 return new RedoCommand();
 
-            case CreateCommand.COMMAND_WORD:
-                return new CreateCommandParser().parse(arguments);
-
             case LoginCommand.COMMAND_WORD:
                 return new LoginCommandParser().parse(arguments);
+
+            case CreateCommand.COMMAND_WORD:
+                return new CreateCommandParser().parse(arguments);
 
             case SelectCommand.COMMAND_WORD:
                 return new SelectCommandParser().parse(arguments);

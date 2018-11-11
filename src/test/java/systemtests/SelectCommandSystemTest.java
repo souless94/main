@@ -26,9 +26,9 @@ public class SelectCommandSystemTest extends AddressBookSystemTest {
         /* ------------------------ Perform select operations on the shown unfiltered list -------------------------- */
 
         /* Case: create account and login first */
-        String createCommand = CreateCommand.COMMAND_WORD + " u/user pw/pass";
+        String createCommand = CreateCommand.COMMAND_WORD + " u/admin pw/adminPassword";
         executeCommand(createCommand);
-        String loginCommand = LoginCommand.COMMAND_WORD + " u/user pw/pass";
+        String loginCommand = LoginCommand.COMMAND_WORD + " u/admin pw/adminPassword";
         executeCommand(loginCommand);
 
         /* Case: select the first card in the person list, command with leading spaces and trailing spaces

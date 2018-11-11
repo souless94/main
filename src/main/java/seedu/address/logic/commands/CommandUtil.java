@@ -60,8 +60,7 @@ public class CommandUtil {
         Person personToUpdate) {
         List<Group> editedGroupList = new ArrayList<>(personToUpdate.getGroups());
         editedGroupList.remove(groupToDelete);
-        Person newPerson = personToUpdate;
-        newPerson.setGroups(editedGroupList);
+        Person newPerson = personToUpdate.defensiveSetGroups(editedGroupList);
         model.update(personToUpdate, newPerson);
     }
 

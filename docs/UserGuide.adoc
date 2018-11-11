@@ -20,6 +20,7 @@ By: `Team F11-4`      Since: `Jun 2016`      Licence: `MIT`
 
 NUS Hangs is for those who *Wants to find a convenient time slot for the people who are joining his/her event*. More importantly, NUS Hangs is *optimized for those who prefer to work with a Command Line Interface* (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast,NUS Hangs can get your contact management tasks done faster than traditional GUI apps. Interested? Jump to the <<Quick Start>> to get started. Enjoy!
 
+
 == Quick Start
 
 .  Ensure you have Java version `9` or later installed in your Computer.
@@ -32,25 +33,33 @@ image::Ui.png[width="790"]
 .  Type the command in the command box and press kbd:[Enter] to execute it. +
 e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 
+// tag::quick-start[]
 
-. The application launch in a state which grant *read-only rights* to the user. Some of the commands that are available in this state includes:
+.  The application launch in a state which grant *read-only rights* to the user. Some of the commands that are available in this state includes:
 
-- <<_viewing_help_code_help_code>>
-- <<_locating_group_by_name_code_find_group_code>>
-- <<_list_all_persons_of_a_group_code_view_group_code>>
-- <<_list_all_time_slots_of_a_group_at_which_everyone_is_available_code_view_slots_all_code>>
-- <<_list_all_time_slots_of_a_group_in_descending_order_of_availability_code_view_slots_ranked_code>>
+- <<help>>
+- <<list>>
+- <<find>>
+- <<select>>
+- <<find_group>>
+- <<view_group>>
+- <<view_slots_all>>
+- <<view_slots_ranked>>
 
-- <<_listing_all_persons_code_list_code>>
-- <<_finding_a_person_code_find_code>>
-- <<_selecting_a_person_code_select_code>>
 
+.  To make use of functions that add or edit information, the application requires the user to create and login to an account.
 
-. To make use of functions that add or edit information, the application requires the user to create and login to an account.
++
+[NOTE]
+The default username is "*admin*" and the default password is "*adminPassword*". +
+To prevent unauthorized users from creating an account, `create` *can only be executed when a user is logged on*. +
+An example in the context of an interest group: Only committee members should be allowed to make changes to the data while members are restricted to viewing rights.
++
 
-- <<_create_an_account_code_create_code>>
-- <<_login_to_an_account_code_login_code>>
+- <<create_an_account_code_create_code>>
+- <<login_to_an_account_code_login_code>>
 
+// end::quick-start[]
 
 .  Some example commands you can try:
 * *`list`* : lists all person
@@ -73,6 +82,7 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 
 == common
 
+[[help]]
 === Viewing help : `help`
 
 Format: `help`
@@ -108,12 +118,15 @@ Examples:
 * `add n/James t/friend e/james@example.com t/classmates`
 * `a n/Joji t/Singer`
 
+[[list]]
 === Listing all persons : `list`
 
 Short form/Alias: `l`
 
 Shows a list of all persons in the address book. +
 Format: `list`
+
+// tag::list[]
 
 === Listing all groups a person is in : `list` (Melodies)
 
@@ -131,6 +144,7 @@ Example:
 * `list 1`
 
 (lists all the groups that the person at index 1 is added to previously)
+// end::list[]
 
 === Editing a person : `edit`
 
@@ -158,6 +172,7 @@ Edits the name of the 2nd person to be `Betsy Crower` and clears all existing ta
 * `edit 1 fl/C:\Users\admin\Downloads\cs2103\tiredAndSadness` +
 Edits the stored location of the 1st person to be `C:/Users/admin/Downloads/cs2103/tiredAndSadness/` respectively.
 
+[[find]]
 === Finding a person : `find`
 
 Finds all persons in NusHangs, whose contain keywords provided by prefix(es). +
@@ -208,6 +223,7 @@ Deletes the 2nd person in the address book.
 `delete 1` +
 Deletes the 1st person in the results of the `find` command.
 
+[[select]]
 === Selecting a person : `select`
 
 Selects the person identified by the index number used in the displayed person list. +
@@ -402,9 +418,9 @@ Deletes the 2nd timetable in the address book.
 * `find_timetable Betsy` +
 `delete_timetable 1` +
 Deletes the 1st timetable in the results of the `find_timetable` command.
-
 // end::timetable[]
 
+// tag::groups[]
 == Groups (Melodies)
 === Adding a group: `add_group`
 
@@ -440,6 +456,7 @@ Examples:
 
 (Changes only description.)
 
+[[find_group]]
 === Locating group by name: `find_group`
 
 Short form/Alias: `fg`
@@ -498,6 +515,7 @@ Examples:
 
 (Adds the first person in the displayed person panel to the group happyfriends)
 
+[[view_group]]
 === List all persons of a group : `view_group`
 
 Short form/Alias: `vg`
@@ -531,11 +549,11 @@ Examples:
 
 * `view_group n/happyfriends`
 * `delete_member 1 n/happyfriends`
-
 (deletes the 1st person displayed in `view_group` command.)
+// end::groups[]
 
 == Time slots (Nigel)
-
+[[view_slots_all]]
 === List all time slots of a group at which everyone is available : `view_slots_all`
 Short form/Alias: `va`
 
@@ -550,7 +568,10 @@ Examples:
 
 * `view_slots_all n/happyfriends`
 
+
 === List all time slots of a group in descending order of availability with a minimum number of people available required: `view_slots_ranked`
+
+[[view_slots_ranked]]
 
 Short form/Alias: `vr`
 List all time slots of a group in descending order of availability with a minimum number of people available required: +
@@ -564,13 +585,21 @@ Examples:
 
 * `view_slots_ranked n/happyfriends num/4`
 
+// tag::security-mechanism[]
 == Security (Leslie)
 === Create an account: `create`
 
-Create an account in the system. The password and security answer are both case sensitive. +
+Create an account in the system. The password is case sensitive. +
 Format: `create u/USERNAME pw/PASSWORD`
 
-(Coming in v2.0: Stores account details after closing and reopening app. *At this stage, the user is required to create a new account each time they restart the application*)
+(Coming in v2.0: Stores account details after closing and reopening app.)
+
+
+[NOTE]
+At this stage, the user is required to create a new account each time they restart the application +
+To prevent unauthorized users from creating an account, only admin or other logged in users can create account +
+Admin Username: *admin*, Admin Password: *adminPassword*
+
 
 Examples:
 
@@ -624,9 +653,9 @@ Format: `update_sq c/CURRENT_PASSWORD [n/NEWSECURITY_QUESTION]  [a/SECURITY_ANSW
 ****
 Examples:
 
-* `update_pw c/password n/why me? a/because it is cs2103`
+* `update_pw c/password n/Is this a good question? a/A better question is if this is a good answer`
 
-
+// end::security-mechanism[]
 
 == FAQ
 
@@ -681,5 +710,3 @@ e.g. `view_group n/Family` +
 e.g. `create u/user pw/strongpass`
 * *login* : `login u/USERNAME pw/PASSWORD` +
 e.g. `login u/user pw/strongpass`
-
-
