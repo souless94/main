@@ -571,6 +571,7 @@ Examples:
 
 === List all time slots of a group in descending order of availability with a minimum number of people available required: `view_slots_ranked`
 
+[[view_slots_ranked]]
 
 Short form/Alias: `vr`
 List all time slots of a group in descending order of availability with a minimum number of people available required: +

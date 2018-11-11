@@ -496,17 +496,15 @@ Step 2: The user enters the command `dg n/Family` to delete the existing group w
 
 .Sequence Diagram of DeleteGroupCommand (Model component)
 image::DeleteGroupCommandModelSD.png[width="700"]
-
 * After retrieving the actual group `g` with name "Family" from Model `m`, the model performs deletion of the group using an internal function `delete(g)`.
 
 * However, the group still has to be deleted from the groupList from all of its members. _(Refer to GroupPersonClassDiagram above.)_ `deleteGroupFromMembers(m, g)` is called from DeleteGroupCommand object to do so. This method calls the `UnModifiableObservableList()` method in its UniqueList<Person> to return a list of `members` in `g`. For every `member` in the list of `members` (for loop), `updatePersonDeleteGroupFromGroupList(m, g, member)` deletes the reference to `g` in `member`.
 
 * Finally, the address book is committed with all the changes.
 
-Step 4: `FilteredPersonList` and `FilteredGroupList` is also updated correspondingly to display the new groups and persons in the `UI`. A successful message is also displayed to the user below the UI's command box. 
+Step 4: `FilteredPersonList` and `FilteredGroupList` is also updated correspondingly to display the new groups and persons in the `UI`. A successful message is also displayed to the user below the UI's command box.
 
 Step 5: Before the application is closed, all groups and persons are stored in `addressbook.xml` using `XmlAdaptedGroup` and `XmlAdaptedPerson` classes. _(Refer to High level sequence diagrams Figure 3 and 4 for a similar illustration of the concept.)_
-
 
 ==== Design Considerations
 
@@ -1348,6 +1346,7 @@ _{More to be added}_
 Windows, Linux, Unix, OS-X
 
 
+// tag::manual-test[]
 [appendix]
 == Instructions for Manual Testing
 
@@ -1370,18 +1369,204 @@ These instructions only provide a starting point for testers to work on; testers
 .. Re-launch the app by double-clicking the jar file. +
    Expected: The most recent window size and location is retained.
 
-_{ more test cases ... }_
 
-=== Deleting a person
 
-. Deleting a person while all persons are listed
+=== Creating an Account
 
-.. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+. You can use NUS Hangs without creating an account. In that case, you are restricted to the following read-only commands:
+.. `help`
+.. `list`
+.. `find`
+.. `select`
+.. `find_group`
+.. `view_group`
+.. `view_slots_all`
+.. `view_slots_ranked`
+
+
+
+. Prerequisites: The application is set up such that you have to login in order to create an account. This prevents unauthorized creation of account and manipulation of stored information.
+.. Login with the following command `login u/admin pw/adminPassword`
+.. Create a new account using `create u/newuser pw/strongerpassword`
+.. Login to the new account using `login u/newuser pw/strongerpassword`
+
+
+[NOTE]
+At the current version, user account credentials are *lost* upon closing the application. +
+If you restart the application during testing, you are required to create a new account or simply make use of the default admin account provided.
+
+==== Create command
+
+.. Test case: `create u/newuser pw/pass` +
+Expected: Account is successfully created.
+.. Test case: `create u/nopass pw/` +
+Expected: Account is successfully created. The password field is allowed to be blank, although not recommended. This is a way to allow admin to quickly login to the application.
+.. Test case: `create u/ pw/` +
+Expected: Account is successfully created. The username and password fields are both allowed to be blank, although not recommended. This is a way to allow admin to quickly login to the application.
+.. Test case: `create u/admin pw/pass` +
+Expected: Account is not created as the username is already in use.
+
+
+
+
+=== Read-Only Commands
+
+These commands can be used regardless of whether the user is logged in or not.
+
+==== `list`
+
+1. List all persons and groups
+
+.. Test case: `list` +
+Expected: output multiple persons and groups in the list.
+.. Test case: `list 1` +
+Expected: output the group that person 1 belongs to and filter the list to show only person 1
+
+==== `find`
+1. Finds all persons in NUS Hangs, whose contain keywords provided by prefix(es).
+.. Test case: `find a/serangoon` +
+Expected: list all persons in NUS Hangs with keyword 'serangoon' in their address
+.. Test case: `find n/yu` +
+Expected: list all persons in NUS Hangs with keyword 'yu' in their name
+
+==== `select`
+1. Selects the person identified by the index number used in the displayed person list.
+. Prerequisite: the displayed person lists is not empty. Use `list` command to display the current list of persons or use `find` to create a custom filter of the list.
+.. Test case: `select 1` +
+Expected: Selects the 1st person in the list
+
+==== `find_group` *unexpected results; TODO: bug fix*
+1. Find groups whose names contain any of the given keywords
+.. Test case: `find_group ` +
+Expected:
+
+
+==== `view_group`
+1. shows a list of all persons in a group
+
+.. Test case: `view_group n/happyfriends` +
+Expected: shows a list of all persons in the group "happyfriends"
+
+
+==== `view_slots_all`
+1. List all of the available time slots in a group
+.. Test case: `view_slots_all n/happyfriends` +
+Expected: output list of all available time slots
+
+
+
+==== `view_slots_ranked`
+1. List all time slots of a group in descending order of availability with a minimum number of people available required
+.. Test case: `view_slots_ranked n/happyfriends num/1` +
+Expected: output list of all available time slots with at least 1 person available; if any
+
+=== Add and Edit Commands
+
+These commands can only be used if the user is logged in.
+
+Prerequisites: login with the following command: `login u/admin pw/adminPassword`
+
+*Commands related to Person*
+
+==== `add`
+1. Adds a person to NUS Hangs application
+.. Test case: `add n/Johnathon p/98765432 e/johnd@example.com a/John street, block 123, #01-01` +
+Expected: Adds a new person with the supplied details into the application
+.. Test case: `add n/Johnathon p/98765432 e/johnd@example.com a/John street, block 123, #01-01` +
+Expected: Since the person already exist, we expect to see the following error message: "This person already exists in the address book"
+
+
+==== `edit`
+1. Edits an existing person in the application based on the given index.
+.. Test case: `edit 1 p/91234567` +
+Expected: Changes the phone number of the first person to 91234567
+
+
+==== `delete`
+1. Deletes the specified person in the application
 .. Test case: `delete 1` +
-   Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
-.. Test case: `delete 0` +
-   Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
-.. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size) _{give more}_ +
-   Expected: Similar to previous.
+Expected: Deletes the 1st person in the list; if any
 
-_{ more test cases ... }_
+
+*Commands related to Time Table*
+
+==== `add_timetable`
+1. Adds timetable to person specified by the index
+- Prerequisite: User to download timetable template first using `download_timetable [index]`; where index is the index number of the person whose timetable you are trying to add. This template serves as an easy way to update the timetable of the user.
+.. Test case: +
+`download_timetable 1` +
+`add_timetable 1` +
+Expected: adds the timetable to person 1
+
+
+==== `edit_timetable`
+1. Edits a timetable timeslot of the timetable from the person specified by the INDEX.
+.. Test case: `edit_timetable 1 day/wednesday timing/0900 m/Work on CS2103` +
+Expected: Change the time table of person 1 on Wednesday, 0900 to "Work on CS2103"
+.. Test case: `edit_timetable 1 day/wednesday timing/0900 m/` +
+Expected: Change the time table of person 1 on Wednesday, 0900 to an empty slot; i.e. free slot
+
+
+==== `download_timetable`
+1. Download a timetable from the person specified by the `INDEX` to the stored folder from the person specified by the `INDEX` as a csv file
+.. Test case: `download_timetable 1` +
+Expected: creation of a .csv file in the respective folder
+
+
+==== `delete_timetable`
+1. Delete csv file of the timetable from stored location from the person specified by the `INDEX` and adds a default timetable to the person specified by the `INDEX`.Resets the timetable of the person if there is no timetable in the stored location from the person specified by the `INDEX`.
+.. Test case: `delete_timetable 1` +
+Expected: Deletes the time table of the 1st person in the list
+
+
+*Commands related to Group*
+
+==== `add_group`
+1. Adds a group to the application
+.. Test case: `add_group n/Happy Friends d/a group of happy friends` +
+Expected: New group is added and displayed on the list
+.. Test case: `add_group n/Happy Friends` +
+Expected: Group is not added as it already exist
+
+
+==== `edit_group`
+1. Edit a group’s details. `OLDGROUPNAME` must be entered. There must be at least 1 field non-empty.
+If field is empty, system assumes that the field remains unedited.
+- Prerequisite: The target group exist in the list of groups.
+.. Test case: `edit_group Happy Friends n/Sad Friends d/sad because of cs2103` +
+Expected: Change the group "Happy Friends" into "Sad Friends" with the new group description
+.. Test case: `add_group n/New Group` +
+`edit_group New Group n/Sad Friends d/This won't work` +
+Expected: The edit won't execute as the supplied new group name is already in use.
+
+
+
+==== `delete_group`
+1. Delete a group in the application by group name
+.. Test case: `delete_group n/Sad Friends` +
+Expected: Group successfully deleted
+.. Test case: `delete_group n/Sad Friends` +
+Expected: Group does not exist, hence could not be deleted
+
+==== `register`
+1. Adds a person using the person index to a group if group exists
+.. Test case: `add_group n/CS2103 Dry Run` +
+`register 1 n/CS2103 Dry Run` +
+Expected: 1st person in the list successfully added into the group.
+`register 2 n/CS2103 Dry Run` +
+Expected: 2nd person in the list successfully added into the group.
+`register 1 n/CS2103 Dry Run` +
+Expected: Since the person already exist in the group, it will not be added again.
+`register 1 n/CS2103 Dry Runs` +
+Expected: As there is a typo in the group name, the person will not be added; unless the mistyped group does exist.
+
+
+==== `delete_member`
+1. Delete a person from a group using person index displayed with view_group
+- Prerequisite: view the details of any group in the list. For example, `view_group n/CS2103 Dry Run`
+.. Test case: `delete_member 1 n/CS2103 Dry Run` +
+Expected: 1st member in the group is deleted.
+
+// end::manual-test[]
+
+
