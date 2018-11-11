@@ -13,7 +13,7 @@ NUS Hangs is a desktop Schedule Manager application. It has a GUI but most of th
 
 == Summary of contributions
 
-* *Major enhancement*: Enhance person features to fit requirements of NUS Hangs:*
+* *Major enhancement*: Enhance person features to fit requirements of NUS Hangs:
 ** add: Add a person to NUS Hangs with optional inputs. +
 This feature improves the product accessibility because the user has the option to leave out certain inputs.
 
