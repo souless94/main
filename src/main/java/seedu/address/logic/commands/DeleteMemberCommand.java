@@ -5,7 +5,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
 import java.util.function.Predicate;
 
-import javafx.util.Pair;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -22,6 +21,8 @@ public class DeleteMemberCommand extends Command {
 
     public static final String COMMAND_WORD = "delete_member";
 
+    public static final String ALIAS = "dm";
+
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Delete an existing member of an existing group "
             + "Parameters: INDEX of person in view_group displayed list (must be a positive integer)\n"
             + "[" + PREFIX_NAME + " GROUP NAME]\n"
@@ -29,8 +30,8 @@ public class DeleteMemberCommand extends Command {
             + PREFIX_NAME + "Family ";
 
     public static final String MISSING_GROUP_NAME = "Please enter group name.";
-    private static final String MESSAGE_EDIT_GROUP_SUCCESS = "Deleted member from group: %1$s";
-    private static final String NO_MEMBER_WITH_GIVEN_INDEX = "Please input the correct index of person to delete. "
+    public static final String MESSAGE_SUCCESS = "Deleted member from group: %1$s";
+    public static final String NO_MEMBER_WITH_GIVEN_INDEX = "Please input the correct index of person to delete. "
             + "(Index from view_group displayed list.)";
 
 
@@ -55,18 +56,9 @@ public class DeleteMemberCommand extends Command {
         Group groupToBeEdited = CommandUtil.retrieveGroupFromName(model, groupName);
 
         try {
-            Pair<Group, Person> pair = deleteMemberFromGroup(groupToBeEdited, index);
-            Group editedGroup = pair.getKey();
-            model.update(groupToBeEdited, editedGroup);
-
-            //Update person to have group removed from Person's grouplist
-            Person member = pair.getValue();
-            CommandUtil.updatePersonDeleteGroupFromGroupList(model, editedGroup, member);
-
-            Predicate<Person> predicateShowAllMembers = person -> editedGroup.getGroupMembers().contains(person);
-            model.updateFilteredPersonList(predicateShowAllMembers);
+            Group editedGroup = deleteMemberFromGroup(model, groupToBeEdited, index);
             model.commitAddressBook();
-            return new CommandResult(String.format(MESSAGE_EDIT_GROUP_SUCCESS, editedGroup));
+            return new CommandResult(String.format(MESSAGE_SUCCESS, editedGroup));
 
         } catch (IndexOutOfBoundsException e) {
             throw new CommandException(NO_MEMBER_WITH_GIVEN_INDEX);
@@ -75,20 +67,30 @@ public class DeleteMemberCommand extends Command {
     }
 
     /**
-     * Creates and returns a {@code group} with a member deleted {@code indexToDelete}
-     * in {@code groupToBeEdited}
+     * Creates and returns a {@code newGroup} with a member at {@code index} deleted
+     * in {@code groupToBeEdited}.
+     * Creates a new person {@code newPerson} by removing the reference to {@code group} from person at {@code index}
+     * Updates model with {@code newGroup} and {@code newPersons}.
+     * Updates the model filteredGroupList with Predicate showing only the group and its remaining members.
      */
-    private static Pair<Group, Person> deleteMemberFromGroup(Group groupToBeEdited, Index index)
+    public static Group deleteMemberFromGroup(Model model, Group groupToBeEdited, Index index)
             throws IndexOutOfBoundsException {
         try {
             assert groupToBeEdited != null;
+            assert index != null;
 
             UniqueList<Person> newGroupMembers = new UniqueList<>();
             newGroupMembers.setElements(groupToBeEdited.getGroupMembers());
             Person personToDelete = groupToBeEdited.getGroupMembers().get(index.getZeroBased());
             newGroupMembers.remove(personToDelete);
-            return new Pair<>(new Group(groupToBeEdited.getName(), groupToBeEdited.getDescription(), newGroupMembers),
-                    personToDelete);
+            Group newGroup = new Group(groupToBeEdited.getName(), groupToBeEdited.getDescription(), newGroupMembers);
+            model.update(groupToBeEdited, newGroup);
+
+            //Update personToDelete to have group removed from his grouplist
+            CommandUtil.updatePersonDeleteGroupFromGroupList(model, groupToBeEdited, personToDelete);
+            Predicate<Person> predicateShowAllMembers = person -> newGroup.getGroupMembers().contains(person);
+            model.updateFilteredPersonList(predicateShowAllMembers);
+            return newGroup;
         } catch (IndexOutOfBoundsException e) {
             throw new IndexOutOfBoundsException();
         }

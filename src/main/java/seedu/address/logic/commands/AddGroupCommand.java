@@ -17,6 +17,8 @@ public class AddGroupCommand extends Command {
 
     public static final String COMMAND_WORD = "add_group";
 
+    public static final String ALIAS = "ag";
+
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a new group. "
             + "Parameters: "
             + PREFIX_NAME + "GROUP NAME "

@@ -12,7 +12,7 @@ We are a team based in the http://www.comp.nus.edu.sg[School of Computing, Natio
 
 === SIM MING HUI MELODIES
 image::Happytreat.png[width="200", align="left"]
-{empty}[http://github.com/happytreat[github]] [<<johndoe#, portfolio>>]
+{empty}[http://github.com/happytreat[github]] [<<happytreat#, portfolio>>]
 
 Role: Developer +
 Responsibilities: Model, Storage, UI and making sure team is on track and updated with each other's progress.
@@ -21,7 +21,7 @@ Responsibilities: Model, Storage, UI and making sure team is on track and update
 
 === TAN ZHI WEI
 image::zhiwei94.png[width="150", align="left"]
-{empty}[http://github.com/ZhiWei94[github]] [<<johndoe#, portfolio>>]
+{empty}[http://github.com/ZhiWei94[github]] [<<ZhiWei94#, portfolio>>]
 
 Role: Developer +
 Responsibilities: Documentation.
@@ -30,7 +30,7 @@ Responsibilities: Documentation.
 
 === CHIA WEN KAI
 image::souless94.png[width="150", align="left"]
-{empty}[http://github.com/souless94[github]] [<<johndoe#, portfolio>>]
+{empty}[http://github.com/souless94[github]] [<<souless94#, portfolio>>]
 
 Role: Developer +
 Responsibilities: Testing and Logic.
@@ -39,14 +39,14 @@ Responsibilities: Testing and Logic.
 
 === TANG WEE JIE LESLIE
 image::aspiringdevslog.png[width="150", align="left"]
-{empty}[http://github.com/aspiringdevslog[github]] [<<johndoe#, portfolio>>]
+{empty}[http://github.com/aspiringdevslog[github]] [<<aspiringdevslog#, portfolio>>]
 
 Role: Developer +
 Responsibilities: Scheduling and Tracking.
 
 === NG YUAN YUN NIGEL
 image::nigelngyy.png[width="150", align="left"]
-{empty}[http://github.com/nigelngyy[github]] [<<johndoe#, portfolio>>]
+{empty}[http://github.com/nigelngyy[github]] [<<nigelngyy#, portfolio>>]
 
 Role: Developer +
 Responsibilities: Testing.

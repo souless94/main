@@ -24,9 +24,9 @@ public class FindCommandSystemTest extends AddressBookSystemTest {
     @Test
     public void find() {
         /* Case: create account and login first */
-        String createCommand = CreateCommand.COMMAND_WORD + " u/user pw/pass";
+        String createCommand = CreateCommand.COMMAND_WORD + " u/admin pw/adminPassword";
         executeCommand(createCommand);
-        String loginCommand = LoginCommand.COMMAND_WORD + " u/user pw/pass";
+        String loginCommand = LoginCommand.COMMAND_WORD + " u/admin pw/adminPassword";
         executeCommand(loginCommand);
 
         /* Case: find multiple persons in address book, command with leading spaces and trailing spaces

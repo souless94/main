@@ -4,7 +4,6 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_DAY;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_DAY_AND_TIMING;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_TIMING;
-import static seedu.address.commons.core.Messages.MESSAGE_NOT_UNIQUE_PREFIX_INPUT;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_DAY_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TIMING_AND_DAY_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TIMING_DESC;
@@ -131,15 +130,5 @@ public class EditTimetableCommandParserTest {
         EditTimetableCommand expectedCommand = new EditTimetableCommand(targetIndex, "friday",
             "0900", " ");
         assertParseSuccess(parser, userInput, expectedCommand);
-    }
-
-    @Test
-    public void parseEditTimetableWithTwoInputsFailure() {
-        Index targetIndex = INDEX_SECOND;
-        String userInput = targetIndex.getOneBased() + VALID_EDIT_TIMETABLE_COMMAND_WITH_DETAILS
-            + " " + PREFIX_DAY + VALID_DAY;
-        String expectedMessage = MESSAGE_NOT_UNIQUE_PREFIX_INPUT;
-        assertParseFailure(parser, userInput, expectedMessage);
-
     }
 }

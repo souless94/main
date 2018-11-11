@@ -13,6 +13,7 @@ public class CreateCommandTest {
     private String testPassword = "test-password";
     private Accounts account = new Accounts(testUsername, testPassword);
 
+
     @Test
     public void executeCreateSuccess() {
         CreateCommand create = new CreateCommand(account);

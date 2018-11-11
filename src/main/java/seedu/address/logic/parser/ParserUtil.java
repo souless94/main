@@ -2,8 +2,9 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_FILE_EXTENSION;
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_FILE_PATH;
 import static seedu.address.commons.core.Messages.MESSAGE_IS_FILE_DIRECTORY;
+import static seedu.address.model.person.timetable.TimetableData.DAYS_IN_LOWER_CASE;
+import static seedu.address.model.person.timetable.TimetableData.TIMINGS;
 
 import java.io.File;
 
@@ -22,7 +23,6 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
-import seedu.address.model.person.timetable.TimetableData;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -31,6 +31,7 @@ import seedu.address.model.tag.Tag;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_INVALID_NUMBER = "Number required is not an unsigned integer";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing
@@ -45,6 +46,21 @@ public class ParserUtil {
             throw new ParseException(MESSAGE_INVALID_INDEX);
         }
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
+    }
+
+    /**
+     * Parses {@code numReq} into an {@code int} and returns it. Leading and trailing whitespaces
+     * will be trimmed. Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the specified number is invalid (not unsigned integer).
+     */
+    public static Integer parseNumReq(String numReq) throws ParseException {
+        requireNonNull(numReq);
+        String trimmedNumReq = numReq.trim();
+        if (!StringUtil.isNonZeroUnsignedInteger(trimmedNumReq)) {
+            throw new ParseException(MESSAGE_INVALID_NUMBER);
+        }
+        return Integer.parseInt(numReq);
     }
 
     /**
@@ -166,13 +182,6 @@ public class ParserUtil {
         String fileExtension = FilenameUtils.getExtension(trimmedLocation);
         if ("csv".equals(fileExtension)) {
             File timetable = new File(trimmedLocation);
-            if (timetable.getParent() == null) {
-                throw new ParseException(MESSAGE_INVALID_FILE_PATH);
-            }
-            File timetableParent = new File(timetable.getParent());
-            if (!timetableParent.exists() || !timetableParent.isDirectory()) {
-                throw new ParseException(MESSAGE_INVALID_FILE_PATH);
-            }
             if (timetable.isDirectory()) {
                 throw new ParseException(MESSAGE_IS_FILE_DIRECTORY);
             }
@@ -192,8 +201,7 @@ public class ParserUtil {
     public static String parseDay(String day) throws ParseException {
         requireNonNull(day);
         String trimmedDay = day.trim();
-        String[] validDays = new TimetableData(null, null, 1, null, null, null)
-            .getDaysInLowerCase();
+        String[] validDays = DAYS_IN_LOWER_CASE;
         if (ArrayUtils.contains(validDays, trimmedDay.toLowerCase())) {
             return trimmedDay;
         } else {
@@ -210,8 +218,7 @@ public class ParserUtil {
     public static String parseTiming(String timing) throws ParseException {
         requireNonNull(timing);
         String trimmedTiming = timing.trim();
-        String[] validTiming = new TimetableData(null, null, 1, null, null, null)
-            .getTimings();
+        String[] validTiming = TIMINGS;
         if (ArrayUtils.contains(validTiming, trimmedTiming)) {
             return trimmedTiming;
         } else {
@@ -240,11 +247,9 @@ public class ParserUtil {
     public static void checkBothDayAndTiming(String day, String timing) throws ParseException {
 
         String trimmedDay = day.trim();
-        String[] validDays = new TimetableData(null, null, 1, null, null, null)
-            .getDaysInLowerCase();
+        String[] validDays = DAYS_IN_LOWER_CASE;
         String trimmedTiming = timing.trim();
-        String[] validTiming = new TimetableData(null, null, 1, null, null, null)
-            .getTimings();
+        String[] validTiming = TIMINGS;
         if (!ArrayUtils.contains(validDays, trimmedDay.toLowerCase())
             && !ArrayUtils.contains(validTiming, trimmedTiming)) {
             throw new ParseException(Messages.MESSAGE_INVALID_DAY_AND_TIMING);
