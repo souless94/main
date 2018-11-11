@@ -26,6 +26,7 @@ NUS Hangs is a desktop Schedule Manager application. It has a GUI but most of th
 *** opencsv from com.opencsv
 *** jsoup from org.jsoup
 *** grokonez from https://grokonez.com/java/java-read-write-csv-file-opencsv-example
+*** Laurence Gonsalves from https://stackoverflow.com/questions/923863/converting-a-string-to-hexadecimal-in-java
 
 * *Minor enhancement*: allow timetable to be viewed without internet.
 

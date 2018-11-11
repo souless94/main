@@ -3,7 +3,6 @@ package seedu.address.model.person.timetable;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.testutil.TypicalPersons.BOB;
 
 import org.junit.Test;
@@ -47,12 +46,6 @@ public class TimetableDataTest {
 
         // check if timetableData has correct first Rows and Columns
         assertTrue(timetableData.hasCorrectFirstRowsAndColumns());
-
-        // check if timetableData has correct timings for boths
-        assertEquals(timetableData.getTimings(), timetableData.getTimings());
-
-        // check if timetableData has correct days for boths
-        assertEquals(timetableData.getDaysInLowerCase(), timetableData.getDaysInLowerCase());
 
         // check wrongtimetableData has incorrect size
         assertFalse(timetableDataWrongSize.isCorrectSize());

@@ -3,6 +3,8 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_FILE_EXTENSION;
 import static seedu.address.commons.core.Messages.MESSAGE_IS_FILE_DIRECTORY;
+import static seedu.address.model.person.timetable.TimetableData.DAYS_IN_LOWER_CASE;
+import static seedu.address.model.person.timetable.TimetableData.TIMINGS;
 
 import java.io.File;
 
@@ -21,7 +23,6 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
-import seedu.address.model.person.timetable.TimetableData;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -48,8 +49,8 @@ public class ParserUtil {
     }
 
     /**
-     * Parses {@code numReq} into an {@code int} and returns it. Leading and trailing
-     * whitespaces will be trimmed. Leading and trailing whitespaces will be trimmed.
+     * Parses {@code numReq} into an {@code int} and returns it. Leading and trailing whitespaces
+     * will be trimmed. Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the specified number is invalid (not unsigned integer).
      */
@@ -200,8 +201,7 @@ public class ParserUtil {
     public static String parseDay(String day) throws ParseException {
         requireNonNull(day);
         String trimmedDay = day.trim();
-        String[] validDays = new TimetableData(null, null, 1, null, null, null)
-            .getDaysInLowerCase();
+        String[] validDays = DAYS_IN_LOWER_CASE;
         if (ArrayUtils.contains(validDays, trimmedDay.toLowerCase())) {
             return trimmedDay;
         } else {
@@ -218,8 +218,7 @@ public class ParserUtil {
     public static String parseTiming(String timing) throws ParseException {
         requireNonNull(timing);
         String trimmedTiming = timing.trim();
-        String[] validTiming = new TimetableData(null, null, 1, null, null, null)
-            .getTimings();
+        String[] validTiming = TIMINGS;
         if (ArrayUtils.contains(validTiming, trimmedTiming)) {
             return trimmedTiming;
         } else {
@@ -248,11 +247,9 @@ public class ParserUtil {
     public static void checkBothDayAndTiming(String day, String timing) throws ParseException {
 
         String trimmedDay = day.trim();
-        String[] validDays = new TimetableData(null, null, 1, null, null, null)
-            .getDaysInLowerCase();
+        String[] validDays = DAYS_IN_LOWER_CASE;
         String trimmedTiming = timing.trim();
-        String[] validTiming = new TimetableData(null, null, 1, null, null, null)
-            .getTimings();
+        String[] validTiming = TIMINGS;
         if (!ArrayUtils.contains(validDays, trimmedDay.toLowerCase())
             && !ArrayUtils.contains(validTiming, trimmedTiming)) {
             throw new ParseException(Messages.MESSAGE_INVALID_DAY_AND_TIMING);

@@ -7,13 +7,18 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.testutil.TypicalGroups.FAMILY;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BOB;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import seedu.address.model.group.Group;
 import seedu.address.testutil.PersonBuilder;
 
 public class PersonTest {
@@ -25,6 +30,12 @@ public class PersonTest {
         Person person = new PersonBuilder().build();
         thrown.expect(UnsupportedOperationException.class);
         person.getTags().remove(0);
+    }
+
+    @Test
+    public void nullInDefensiveSetGroupsMethodReturnsSamePerson() {
+        Person person = ALICE.defensiveSetGroups(null);
+        assertTrue(ALICE == person);
     }
 
     @Test
@@ -55,6 +66,12 @@ public class PersonTest {
 
         // same name, same phone, same email, different attributes -> returns true
         editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND).build();
+        assertTrue(ALICE.isSame(editedAlice));
+
+        // same name, same phone, same email, different group list -> returns true
+        List<Group> newGroups = new ArrayList<>();
+        newGroups.add(FAMILY);
+        editedAlice = ALICE.defensiveSetGroups(newGroups);
         assertTrue(ALICE.isSame(editedAlice));
     }
 
@@ -95,5 +112,11 @@ public class PersonTest {
         // different tags -> returns false
         editedAlice = new PersonBuilder(ALICE).withTags(VALID_TAG_HUSBAND).build();
         assertFalse(ALICE.equals(editedAlice));
+
+        // different groups -> return true
+        List<Group> newGroups = new ArrayList<>();
+        newGroups.add(FAMILY);
+        editedAlice = ALICE.defensiveSetGroups(newGroups);
+        assertTrue(ALICE.equals(editedAlice));
     }
 }

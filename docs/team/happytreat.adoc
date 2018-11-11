@@ -13,8 +13,6 @@ NUS Hangs is a desktop Schedule Manager application. It has a GUI but most of th
 == Summary of contributions
 
 * *Major enhancement*: Created a group class and added corresponding group functions:
-i.e. add_group, delete_group, edit_group, register, delete_member, find_group, view_group.
-** What it does: The group class allows users to categorise persons into groups and facilitate free time slot allocation.
 *** add_group: Add a new group which will appear in the right group panel of UI.
 *** delete_group: Delete an existing group and remove all current members from that group.
 *** edit_group: Edit an existing group's name/description.
@@ -24,35 +22,32 @@ i.e. add_group, delete_group, edit_group, register, delete_member, find_group, v
 *** view_group: View all members of the group in UI.
 
 ** Justification: This feature improves the product's functionality significantly because a user can now better organise his contacts into groups and easily coordinate common time slots to meet.
-** Highlights: This enhancement affects existing commands and commands to be added in future.The implementation too was challenging as it required changes to existing commands:
-*** The integration of Group and Person Class. For instance, delete_group requires the group to be deleted and all reference to the group in all Persons registered to be deleted. https://github.com/CS2103-AY1819S1-F11-4/main/pull/92[#92]
+** Highlights: This enhancement affects existing and future commands. The implementation was challenging due to:
+*** Integration of Group and Person Class. For instance, delete_group requires the group to be deleted and all reference to the group in all Persons registered to be deleted.
 *** Changes in the UI and Storage components. For instance, the GroupPanel has to be created to show and update all groups. Group Data have to stored after the app closes inside addressbook.xml and reloaded into the app as Group objects once the user reopens the app.
 
 * *Minor enhancement*: Enhance `list` command to list both groups and persons. Added a `list INDEX` command to show all the groups that the person at INDEX is currently in.
 
-* *Minor enhancement*: Created short hands/short forms for most commands. (https://github.com/CS2103-AY1819S1-F11-4/main/pull/208[#208])
+* *Minor enhancement*: Created short forms for commands. (https://github.com/CS2103-AY1819S1-F11-4/main/pull/208[#208])
 
-* *Minor enhancement*: Refactored UniquePersonList into UniqueList<T> for different classes: Groups, Person and Timetable.
+* *Minor enhancement*: Created an Abstract class Entity which Group and Person extends from to allow for polymorphism: Refactored the ModelManager and AddressBook function to include Polymorphism. E.g. addPerson() --> add() which performs add on Group or Person class based on polymorphism. Also, refactored UniquePersonList into UniqueList<T> for different classes: Group and Person.
 
-* *Minor enhancement*: Created an Abstract class Entity which Group and Person extends from to allow for polymorphism: Refactored the ModelManager and AddressBook function to include Polymorphism. E.g. addPerson() --> add() which performs add on Group or Person class based on polymorphism.
+* *Minor enhancement*: Created a defensive defensiveSetGroups method in Person class enforcing compulsory association of Person and groupList- instead of setGroup() which can alter a private groupList field in Person and also checks for null entries of groupList (https://github.com/CS2103-AY1819S1-F11-4/main/pull/222[#222]).
 
 * *Code contributed*: [https://nus-cs2103-ay1819s1.github.io/cs2103-dashboard/#=undefined&search=happytreat[Functional and Test code]]
 
 * *Other contributions*:
-
 ** Project management:
 *** Managed releases `v1.1` - `v1.3` (3 releases) on GitHub
 *** Edited the badges: Codacy badge, Coverage and Build status on README.adoc.
 ** Enhancements to existing features:
-*** Wrote additional tests for existing features to increase coverage by >4% (Pull requests https://github.com/CS2103-AY1819S1-F11-4/main/pull/80[#80], https://github.com/CS2103-AY1819S1-F11-4/main/pull/123[#123], https://github.com/CS2103-AY1819S1-F11-4/main/pull/146[#146])
+*** Wrote additional tests to increase coverage by >5% (Pull requests https://github.com/CS2103-AY1819S1-F11-4/main/pull/222[#222], https://github.com/CS2103-AY1819S1-F11-4/main/pull/80[#80], https://github.com/CS2103-AY1819S1-F11-4/main/pull/123[#123], https://github.com/CS2103-AY1819S1-F11-4/main/pull/146[#146])
 ** Documentation:
-*** Edit the Model OOP Class Diagram in Dev Guide to include new classes: https://github.com/CS2103-AY1819S1-F11-4/main/pull/202[#202]
-*** Edit the Storage Class Diagram in Dev Guide to include new class: https://github.com/CS2103-AY1819S1-F11-4/main/pull/200[#200]
-*** Update Logic and High Level Sequence Diagrams to current implementation https://github.com/CS2103-AY1819S1-F11-4/main/pull/213[#213]
+*** Update the Model, Storage Class diagrams Logic and High level Sequence Diagrams in DG: https://github.com/CS2103-AY1819S1-F11-4/main/pull/202[#202], https://github.com/CS2103-AY1819S1-F11-4/main/pull/200[#200], https://github.com/CS2103-AY1819S1-F11-4/main/pull/213[#213]
 ** Community:
-*** PRs reviewed (with non-trivial review comments): https://github.com/CS2103-AY1819S1-F11-4/main/pull/71[#71])
-*** Some parts of the group feature I added was adopted by several other teammates (https://github.com/CS2103-AY1819S1-F11-4/main/pull/155[#155], https://github.com/CS2103-AY1819S1-F11-4/main/pull/160[#160])
-*** Create a CommandUtil.java with many common functions reused by different commands including those in AB4 and those used by other teammates.
+*** PRs reviewed (with non-trivial review comments): https://github.com/CS2103-AY1819S1-F11-4/main/pull/71[#71], https://github.com/CS2103-AY1819S1-F11-4/main/pull/155[#155])
+*** Parts of the group feature adopted by other teammates (https://github.com/CS2103-AY1819S1-F11-4/main/pull/160[#160])
+*** Create a CommandUtil.java with common functions reused by different commands in AB4 and those used by other teammates (https://github.com/CS2103-AY1819S1-F11-4/main/pull/211[#211])
 
 == Contributions to the User Guide
 |===

@@ -19,7 +19,7 @@ import seedu.address.model.tag.Tag;
 
 /**
  * Represents a Person in the address book. Guarantees: details are present and not null, field
- * values are validated, immutable. #TODO: Remove setGroups method
+ * values are validated, immutable.
  */
 public class Person extends Entity {
 
@@ -73,6 +73,7 @@ public class Person extends Entity {
     public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags,
         UniqueList<Group> groups,
         String storedLocation, String timetableString) {
+        requireAllNonNull(name, phone, email, address, tags, groups);
         Person temp = new Person(name, phone, email, address, tags, storedLocation,
             timetableString);
 
@@ -116,9 +117,20 @@ public class Person extends Entity {
         return groups.asUnmodifiableObservableList();
     }
 
-    public void setGroups(List<Group> groupList) {
-        this.groups = new UniqueList<>();
-        this.groups.setElements(groupList);
+    /**
+     * Return a new Person object with all fields same except groups changed to {@code groupList}.
+     * Checks if {@code groupList} is null, returns the Person itself.
+     * Defensive programming instead of creating a setGroups function to change the groups field of Person.
+     */
+    public Person defensiveSetGroups(List<Group> groupList) {
+        if (groupList == null) {
+            return this;
+        }
+
+        UniqueList<Group> groups = new UniqueList<>();
+        groups.setElements(groupList);
+        return new Person(name, phone, email, address, tags, groups, storedLocation,
+                timetable.generateTimetableDataString());
     }
 
     /**
