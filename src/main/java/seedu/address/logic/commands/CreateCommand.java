@@ -34,7 +34,7 @@ public class CreateCommand extends Command {
     /**
      * Creates an CreateCommand to add the specified {@code Account}
      */
-    public CreateCommand(Accounts account){
+    public CreateCommand(Accounts account) {
 
         Accounts newAccount = account;
 
