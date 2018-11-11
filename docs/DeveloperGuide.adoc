@@ -502,7 +502,7 @@ image::DeleteGroupCommandModelSD.png[width="700"]
 
 * Finally, the address book is committed with all the changes.
 
-Step 4: `FilteredPersonList` and `FilteredGroupList` is also updated correspondingly to display the new groups and persons in the `UI`. A successful message is also displayed to the user below the UI's command box. 
+Step 4: `FilteredPersonList` and `FilteredGroupList` is also updated correspondingly to display the new groups and persons in the `UI`. A successful message is also displayed to the user below the UI's command box.
 
 Step 5: Before the application is closed, all groups and persons are stored in `addressbook.xml` using `XmlAdaptedGroup` and `XmlAdaptedPerson` classes. _(Refer to High level sequence diagrams Figure 3 and 4 for a similar illustration of the concept.)_
 
