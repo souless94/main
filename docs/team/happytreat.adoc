@@ -50,7 +50,6 @@ NUS Hangs is a desktop Schedule Manager application. It has a GUI but most of th
 |===
 |_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
 |===
-include::../UserGuide.adoc[tag=list]
 include::../UserGuide.adoc[tag=groups]
 
 == Contributions to the Developer Guide
