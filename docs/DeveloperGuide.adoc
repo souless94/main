@@ -556,7 +556,6 @@ Given below is the Sequence Diagram for interactions within the Logic component 
 
 image::FindSequence.png[width="800"]
 
-
 The following activity diagram shows how 'find' feature works:
 
 image::FindActivity.png[width="600"]
