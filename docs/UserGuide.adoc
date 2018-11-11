@@ -319,7 +319,7 @@ Short form/Alias: `at`
 
 User to download timetable template first before using download_timetable INDEX and change csv at the location. +
 Reload page by clicking on another person and then click on the person again +
-Or right click on timetable and select the reload page option.
+Or right click on timetable and select the reload page option(Not working).
 
 Format: `add_timetable INDEX [fl/FILE_LOCATION]`
 
@@ -370,11 +370,17 @@ Format: `edit_timetable INDEX day/DAY timing/TIMING [m/DETAILS]`
 * can only edit 1 hour timeslot at a time.
 * The index refers to the index number shown in the displayed person list.
 * The index *must be a positive integer* 1, 2, 3, ...
+* DETAILS cannot be empty.
+* If no DETAILS is inputted, the value will be deleted at the timeslot
 ****
 
-Examples:
+Example:
 
 * `edit_timetable 1 day/wednesday timing/0900 m/do cs2103`
+
+Example(User clear event at timeslot):
+
+* `edit_timetable 1 day/wednesday timing/0900`
 
 
 
@@ -415,9 +421,9 @@ Examples:
 * `list_timetable` +
 `delete_timetable 2` +
 Deletes the 2nd timetable in NUS Hangs.
-* `find_timetable Betsy` +
+* `find Betsy` +
 `delete_timetable 1` +
-Deletes the 1st timetable in the results of the `find_timetable` command.
+Deletes the 1st timetable in the results of the `find` command.
 // end::timetable[]
 
 // tag::groups[]

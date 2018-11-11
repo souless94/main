@@ -289,7 +289,7 @@ Given below is an example usage scenario and how the `add_timetable` behaves at 
 
 Step 1: The user launches the application for the first time. The NUS Hangs will initialise the person with the timetable with the details which was stored using Storage.
 
-Step 2:  user finds a timetable of first `person` in the stored location which is called 495011161 timetable.csv. Using this command, User does not need to find the timetable. As shown in the diagram below its easy to see what event the person has.
+Step 2:  user finds a timetable of first `person` in the stored location which is called 495011161 timetable.csv. Using this command, User does not need to type in the timetable name. As shown in the diagram below its easy to see what event the person has.
 
 image::addTimetable-step-2.png[width="500"]
 
@@ -1496,14 +1496,14 @@ Expected: Deletes the 1st person in the list; if any
 .. Test case: +
 `download_timetable 1` +
 `add_timetable 1` +
-Expected: adds the timetable to person 1
+Expected: adds the timetable to person 1 from timetable from person 1 stored location.
 
 
 ==== `edit_timetable`
 1. Edits a timetable timeslot of the timetable from the person specified by the INDEX.
 .. Test case: `edit_timetable 1 day/wednesday timing/0900 m/Work on CS2103` +
 Expected: Change the time table of person 1 on Wednesday, 0900 to "Work on CS2103"
-.. Test case: `edit_timetable 1 day/wednesday timing/0900 m/` +
+.. Test case: `edit_timetable 1 day/wednesday timing/0900` +
 Expected: Change the time table of person 1 on Wednesday, 0900 to an empty slot; i.e. free slot
 
 
@@ -1516,7 +1516,7 @@ Expected: creation of a .csv file in the respective folder
 ==== `delete_timetable`
 1. Delete csv file of the timetable from stored location from the person specified by the `INDEX` and adds a default timetable to the person specified by the `INDEX`.Resets the timetable of the person if there is no timetable in the stored location from the person specified by the `INDEX`.
 .. Test case: `delete_timetable 1` +
-Expected: Deletes the time table of the 1st person in the list
+Expected: Deletes the time table of the 1st person in the list.
 
 
 *Commands related to Group*

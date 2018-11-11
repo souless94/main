@@ -34,6 +34,7 @@ public class ParserUtilTest {
     private static final String INVALID_TIMING = "10006";
     private static final String INVALID_DAY = "firday";
     private static final String INVALID_LOCATION = "something.s";
+    private static final String INVALID_DETAILS = "";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
@@ -44,6 +45,7 @@ public class ParserUtilTest {
     private static final String VALID_TIMING = "1000";
     private static final String VALID_DAY = "friday";
     private static final String VALID_LOCATION = "something.csv";
+    private static final String VALID_DETAILS = "something";
 
 
     private static final String WHITESPACE = " \t\r\n";
@@ -248,8 +250,20 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseLocationFailure() {
+    public void parseDetailsFailure() {
         Assert.assertThrows(ParseException.class, () -> ParserUtil.parseLocation(INVALID_LOCATION));
     }
+
+    @Test
+    public void parseDetailsSuccess() throws Exception {
+        String expectedDetails = VALID_DETAILS;
+        assertEquals(expectedDetails, ParserUtil.parseDetails(VALID_DETAILS));
+    }
+
+    @Test
+    public void parseLocationFailure() {
+        Assert.assertThrows(ParseException.class, () -> ParserUtil.parseDetails(INVALID_DETAILS));
+    }
+
 
 }
