@@ -40,6 +40,7 @@ public class Email {
         value = email;
     }
 
+    //@@author ZhiWei94
     /**
      * Returns if a given string is a valid email.
      */
@@ -47,6 +48,7 @@ public class Email {
         return test.matches(EMAIL_VALIDATION_REGEX) || ("<no input>".equals(test));
     }
 
+    //@@author
     @Override
     public String toString() {
         return value;

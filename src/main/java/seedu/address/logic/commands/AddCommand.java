@@ -21,6 +21,7 @@ public class AddCommand extends Command {
 
     public static final String ALIAS = "a";
 
+    //@@author ZhiWei94
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to NUS Hangs. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
@@ -45,6 +46,7 @@ public class AddCommand extends Command {
 
     private final Person toAdd;
 
+    //@@author
     /**
      * Creates an AddCommand to add the specified {@code Person}
      */

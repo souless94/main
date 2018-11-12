@@ -20,6 +20,7 @@ public class FindCommandParserTest {
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
     }
 
+    //@@author ZhiWei94
     @Test
     public void parseDoublePrefixThrowsParseException() {
         assertParseFailure(parser, " n/alex n/bernice t/friends",
@@ -32,7 +33,7 @@ public class FindCommandParserTest {
         FindCommand expectedFindCommand =
                 prepareFindCommand(
                         "Alice", "", "", "", "owesMoney");
-        assertParseSuccess(parser, " n/Alice t/owesMoney", expectedFindCommand);
+        assertParseSuccess(parser, " n/Alice t/owesMoney ", expectedFindCommand);
 
         // multiple whitespaces between keywords
         assertParseSuccess(parser, " \n n/Alice \n \t t/owesMoney  \t", expectedFindCommand);

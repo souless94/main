@@ -31,6 +31,7 @@ public class Address {
         value = address;
     }
 
+    //@@author ZhiWei94
     /**
      * Returns true if a given string is a valid email.
      */
@@ -38,6 +39,7 @@ public class Address {
         return test.matches(ADDRESS_VALIDATION_REGEX) || ("<no input>".equals(test));
     }
 
+    //@@author
     @Override
     public String toString() {
         return value;
