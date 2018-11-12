@@ -323,9 +323,9 @@ image::addtimetablediagram.png[width="500"]
 ** Pros: Faster Time efficiency because using 1 for loops to fill the Matrix with the data. Able to use functions in ArrayList
 ** Cons: Harder for new Computer Science student undergraduates to understand, who are likely to be the new incoming developers of our project. Less intuition to access entries of the matrix (matrix.get(i).get(j)).
 // end::timetable[]
-// tag::security-mechanism[]
-=== Security Mechanism
 
+=== Security Mechanism
+// tag::security-mechanism[]
 ==== Reason for Implementation
 In a typical interest group setting, there are two main stakeholders. The (1) committee members whom organizes events and the (2) group members whom participates in the event. In this context, these two stakeholders are the main users of NUS Hangs.
 
