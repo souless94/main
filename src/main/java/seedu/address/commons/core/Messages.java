@@ -24,6 +24,5 @@ public class Messages {
         "Admin rights required to create an account. " +
             "Please login to admin account or contact an admin to continue. " +
             "Refer to User Guide section 5.1 for details";
-    
 
 }
