@@ -628,7 +628,7 @@ The time slot feature makes use of the `Timetable` and `Group` classes each `Per
 The current time slot commands added are:
 
 * `view_slots_all`/`va` -- lists all time slots at which every member of a specfied group is free at
-* `view_slots_ranked/`vr`` -- sorts and lists all time slots in terms of number of members available, for a specified group and specified required minimum number of people
+* `view_slots_ranked`/`vr` -- sorts and lists all time slots in terms of number of members available, for a specified group and specified required minimum number of people
 
 The activity diagram is as follows.
 
