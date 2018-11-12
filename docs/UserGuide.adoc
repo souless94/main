@@ -312,7 +312,7 @@ Clears all entries from the NUS Hangs. +
 Format: `clear`
 
 ****
-* clear does not delete timetable in the stored folder of the person.
+* `clear` does not delete timetable in the stored folder of the person.
 ****
 
 
