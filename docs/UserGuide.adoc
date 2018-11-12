@@ -311,6 +311,10 @@ The `redo` command fails as there are no `undo` commands executed previously.
 Clears all entries from the NUS Hangs. +
 Format: `clear`
 
+****
+* clear does not delete timetable in the stored folder of the person.
+****
+
 
 == Timetable(Wen Kai)
 // tag::timetable[]
