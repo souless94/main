@@ -608,8 +608,6 @@ Examples:
 * `view_slots_ranked n/happyfriends num/4`
 // end::timeslot[]
 
-
-
 == FAQ
 
 *Q*: How do I transfer my data to another Computer? +
@@ -618,7 +616,12 @@ Examples:
 == Command Summary
 
 * *help* : `help`
-* *add*: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…` *Inputs in square brackets are optional* +
+* *login* : `login u/USERNAME pw/PASSWORD` +
+e.g. `login u/admin pw/adminPassword` +
+(*remember to login using admin account in above example before being able to create new accounts/perform other functions!*)
+* *create* : `create u/USERNAME pw/PASSWORD` +
+e.g. `create u/user pw/strongpass`
+* *add*: `add n/NAME [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…` *Inputs in square brackets are optional* +
 e.g. `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * *edit*: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [fl/STORED_LOCATION] [t/TAG]…` +
 e.g. `edit 1 p/91234567 e/johndoe@example.com`
@@ -648,18 +651,20 @@ e.g. `edit_group happyfriends n/sadfriends d/sad because of cs2103`
 * *find_group* : `find_group KEYWORD [MORE_KEYWORDS]` +
 e.g. `find_group Family Friends`
 * *delete_group* : `delete n/GROUPNAMR` +
-e.g. `delete_group Family`
+e.g. `delete_group n/Family`
 * *view_group* : View a group's members `view_group n/GROUPNAME`+
-e.g. `view_group Family`
+e.g. `view_group n/Family`
 * *register* `register PERSON_INDEX n/GROUP_NAME` +
 e.g. `register 1 n/Family`
 * *delete_member*: Always use view_group before doing delete_member +
 `delete_member PERSON_INDEX n/GROUP_NAME` +
 e.g. `view_group n/Family` +
 `delete_member 1 n/Family`
-* *view_slots_all*: `view_slots_all n/GROUP_NAME`
-* *view_slots_ranked*: `view_slots_ranked n/GROUP_NAME num/NUM_REQ`
-* *create* : `create u/USERNAME pw/PASSWORD` +
-e.g. `create u/user pw/strongpass`
-* *login* : `login u/USERNAME pw/PASSWORD` +
-e.g. `login u/user pw/strongpass`
+* *view_slots_all*: View all common time slots between everyone in the group +
+`view_slots_all n/GROUP_NAME` +
+e.g. `view_slots_all n/Family` +
+shows all the time slots where every person in Family group is free.
+* *view_slots_ranked*: View time slots ranked with at least`NUM_REQ` people free on these time slots +
+`view_slots_ranked n/GROUP_NAME num/NUM_REQ` +
+e.g. `view_slots_ranked n/Family num/2` +
+shows all the time slots where at least 2 persons in the Family group are free.
