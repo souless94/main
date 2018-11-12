@@ -540,6 +540,7 @@ Pros: Less issues with enforcing referential integrity (see alternative 1).
 Cons: Can be more expensive to look for groups for a particular person.
 // end::groups[]
 
+// tag::person_addfind[]
 === Person Feature
 
 The 'Person' class extends the `Entity` abstract class and it is contained within `Model`.
@@ -590,6 +591,7 @@ Cons: Harder to implement.
 Pros: Simple command for users.
 
 Cons: Unable to utilize or classify information when needed.
+// end::person_addfind[]
 
 == Documentation
 
