@@ -18,6 +18,7 @@ public class ViewGroupRankedAvailableTimeslotCommandParser implements Parser<Vie
     /**
      * Parses the given {@code String} of arguments in the context of the ViewGroupRankedAvailableTimeSlotCommand
      * and returns an ViewGroupRankedAvailableTimeSlotCommand object for execution.
+     *
      * @throws ParseException if the user input does not conform the expected format
      */
     public ViewGroupRankedAvailableTimeslotCommand parse(String args) throws ParseException {
