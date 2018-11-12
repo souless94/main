@@ -183,6 +183,8 @@ Format: `list`
 
 === Listing all groups a person is in : `list` (Melodies)
 
+Short form/Alias: `l`
+
 Shows a list of all groups the person specified by his PERSON_INDEX is in. +
 Format: `list PERSON_INDEX`
 
