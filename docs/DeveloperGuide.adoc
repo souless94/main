@@ -391,7 +391,7 @@ The following sequence diagram illustrates the interactions between the differen
 .Sequence Diagram of Login Command
 image::LoginCommandSequenceDiagram.png[width="800"]
 
-*There are four new classes that are added to AddressBook4 in the implementation of account creation:*
+*There are four new classes that are added to AddressBook4 in the implementation of account login:*
 
 -	LoginCommandParser: parses input arguments and creates a new LoginCommand object
 -	LoginCommand: login to an account of NUS Hangs
