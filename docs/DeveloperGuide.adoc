@@ -265,6 +265,10 @@ This section describes some noteworthy details on how certain features are imple
 // tag::timetable[]
 === Timetable Feature
 
+As shown in the diagram below, timetable and person classes are associated. A person contains 1 timetable.
+
+image::timetableclassdiagram.png[width="100"]
+
 ==== Reason for implementation
 The objective of the `add_timetable` feature is to to add data entries of a timetable into NUS Hangs. But it is hard to visualise the adding of the entries so we allowed user to add directly all the entries from a csv file. For `edit_timetable` , it is for User who just want to edit entries without going to find the timetable. For `download_timetable`, it is to allow the user to share their timetable to their friends.
 
