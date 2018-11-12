@@ -97,6 +97,52 @@ Format: `exit`
 NUS Hangs data are saved in the hard disk automatically after any command that changes the data. +
 There is no need to save manually.
 
+// tag::security-mechanism[]
+== Security (Leslie)
+=== Create an account: `create`
+
+Create an account in the system. The password is case sensitive. +
+Format: `create u/USERNAME pw/PASSWORD`
+
+(Coming in v2.0: Stores account details after closing and reopening app.)
+
+
+[NOTE]
+At this stage, the user is required to create a new account each time they restart the application +
+To prevent unauthorized users from creating an account, only admin or other logged in users can create account +
+Admin Username: *admin*, Admin Password: *adminPassword*
+
+
+Examples:
+
+* `create u/sampleUser pw/dontUseWeakPassword`
+
+=== Login to an account : `login`
+Login into the system. +
+Users are required to login to execute most commands of the NUS Hangs
+
+Format: `login u/USERNAME pw/PASSWORD`
+
+Examples:
+
+* `login u/username pw/dontUseWeakPassword`
+
+===	Encrypt password
+
+Encrypts password so that it will not be stored as plain text.
+This function runs when dealing with user's password.
+
+=== Changing password: `update_pw` [coming in v2.0]
+
+Change the user password, requires user to be logged in first. +
+Format: `update_pw c/CURRENT_PASSWORD n/NEW_PASSWORD`
+
+Examples:
+
+* `update_pw c/password n/newpass`
+
+// end::security-mechanism[]
+
 == Person
 
 [[add]]
@@ -316,9 +362,8 @@ Format: `clear`
 * `clear` does not delete timetable in the stored folder of the person.
 ****
 
-
-== Timetable(Wen Kai)
 // tag::timetable[]
+== Timetable(Wen Kai)
 
 === Adding a timetable: `add_timetable`
 
@@ -554,51 +599,7 @@ Examples:
 
 * `view_slots_ranked n/happyfriends num/4`
 
-// tag::security-mechanism[]
-== Security (Leslie)
-=== Create an account: `create`
 
-Create an account in the system. The password is case sensitive. +
-Format: `create u/USERNAME pw/PASSWORD`
-
-(Coming in v2.0: Stores account details after closing and reopening app.)
-
-
-[NOTE]
-At this stage, the user is required to create a new account each time they restart the application +
-To prevent unauthorized users from creating an account, only admin or other logged in users can create account +
-Admin Username: *admin*, Admin Password: *adminPassword*
-
-
-Examples:
-
-* `create u/sampleUser pw/dontUseWeakPassword`
-
-=== Login to an account : `login`
-Login into the system. +
-Users are required to login to execute most commands of the NUS Hangs
-
-Format: `login u/USERNAME pw/PASSWORD`
-
-Examples:
-
-* `login u/username pw/dontUseWeakPassword`
-
-===	Encrypt password
-
-Encrypts password so that it will not be stored as plain text.
-This function runs when dealing with user's password.
-
-=== Changing password: `update_pw` [coming in v2.0]
-
-Change the user password, requires user to be logged in first. +
-Format: `update_pw c/CURRENT_PASSWORD n/NEW_PASSWORD`
-
-Examples:
-
-* `update_pw c/password n/newpass`
-
-// end::security-mechanism[]
 
 == FAQ
 
