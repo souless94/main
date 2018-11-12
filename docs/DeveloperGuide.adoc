@@ -328,8 +328,8 @@ image::addtimetablediagram.png[width="500"]
 ** Cons: Harder for new Computer Science student undergraduates to understand, who are likely to be the new incoming developers of our project. Less intuition to access entries of the matrix (matrix.get(i).get(j)).
 // end::timetable[]
 
-=== Security Mechanism
 // tag::security-mechanism[]
+=== Security Mechanism
 ==== Reason for Implementation
 In a typical interest group setting, there are two main stakeholders. The (1) committee members whom organizes events and the (2) group members whom participates in the event. In this context, these two stakeholders are the main users of NUS Hangs.
 
@@ -391,14 +391,18 @@ The following sequence diagram illustrates the interactions between the differen
 .Sequence Diagram of Login Command
 image::LoginCommandSequenceDiagram.png[width="800"]
 
-There are four new classes that are added to AddressBook4 in the implementation of account creation:
+*There are four new classes that are added to AddressBook4 in the implementation of account login:*
+
 -	LoginCommandParser: parses input arguments and creates a new LoginCommand object
 -	LoginCommand: login to an account of NUS Hangs
 -	Accounts: represents an account with username and password fields
 -	UserAccountStorage: retrieval and checking of account credentials in a hashmap
-Minor extensions are added to the other existing classes in AddressBook4:
+
+*Minor extensions are added to the other existing classes in AddressBook4:*
+
 -	AddressBookParser: added the login command keyword for parsing, added a check on login status to control commands execution
 -	ParserUtil: added functions to parse username and password
+
 
 ==== Design Considerations
 
