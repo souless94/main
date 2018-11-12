@@ -355,7 +355,8 @@ Example (user provides a file path):
 ** `add_timetable 1 fl//FILEPATH` (absolute pathing - note the double slashes) or
 ** `add_timetable 1 fl/timetable.csv` (relative pathing).
 * add_timetable will add timetable from the given csv file.
-* the first row and first column should be left alone
+* the first row and first column should be left alone.
+* the top left corner entry can be edited.
 * can only edit in given rows and columns of the timetable.
 * any invalid timetable will be ignored.
 * example of correctly formatted timetable is given below
