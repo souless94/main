@@ -21,8 +21,8 @@ public class Messages {
     public static final String MESSAGE_USER_NOT_LOGGED_IN = "Please login or create an account to continue.";
     public static final String MESSAGE_USER_ALREADY_LOGGED_IN = "User is already logged in.";
     public static final String MESSAGE_ADMIN_RIGHTS_REQUIRED_TO_CREATE_ACCOUNT =
-        "Admin rights required to create an account. " +
-            "Please login to admin account or contact an admin to continue. " +
-            "Refer to User Guide section 5.1 for details";
+        "Admin rights required to create an account. "
+            + "Please login to admin account or contact an admin to continue. "
+            + "Refer to User Guide section 5.1 for details";
 
 }
