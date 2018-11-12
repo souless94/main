@@ -512,6 +512,7 @@ Examples:
 
 * `edit_group sadfriends d/very very miserable` (Changes only description.)
 
+[[find_group]]
 === Locating group by name: `find_group` (Short form/Alias: `fg`)
 
 Find groups whose names contain any of the given keywords +
@@ -548,6 +549,7 @@ Examples: (Adds the first person in the displayed person panel to the group happ
 `list` +
 `register 1 n/happyfriends`
 
+[[view_group]]
 === List all persons of a group : `view_group` (Short form/Alias: `vg`)
 
 Displays a list of all persons in a group +
@@ -587,10 +589,8 @@ Examples:
 
 * `view_slots_all n/happyfriends`
 
-
-=== List all time slots of a group in descending order of availability with a minimum number of people available required: `view_slots_ranked`
-
 [[view_slots_ranked]]
+=== List all time slots of a group in descending order of availability with a minimum number of people available required: `view_slots_ranked`
 
 Short form/Alias: `vr`
 List all time slots of a group in descending order of availability with a minimum number of people available required: +
