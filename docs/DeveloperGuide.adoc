@@ -566,15 +566,29 @@ image::FindActivity.png[width="600"]
 
 *Alternative 1 (Current Choice) :* Use prefixes for specific search (e.g. find n/alex bernice t/friends)
 
-Pros: Higher flexibility. Greater control of search range
+Pros: Higher flexibility. Greater control of search range.
 
-Cons: Harder to implement
+Cons: Harder to implement.
 
 *Alternative 2 :* Create a class for each information (e.g. find_address)
 
-Pros: Easy to implement, with specific search focus
+Pros: Easy to implement, with specific search focus.
 
-Cons: Repetitive code base with less flexibility
+Cons: Repetitive code base with less flexibility.
+
+===== Aspect: How should each `add` feature work
+
+*Alternative 1 (Current Choice) :* Allow optional prefix (e.g. add n/alex t/friends)
+
+Pros: Higher flexibility. Allow users to gain greater control over particulars.
+
+Cons: Harder to implement.
+
+*Alternative 2 :* Only name input is required (e.g. add alex)
+
+Pros: Simple command for users.
+
+Cons: Unable to utilize or classify information when needed.
 
 == Documentation
 

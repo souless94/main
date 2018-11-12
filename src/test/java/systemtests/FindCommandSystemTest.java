@@ -3,6 +3,7 @@ package systemtests;
 import static org.junit.Assert.assertFalse;
 import static seedu.address.commons.core.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
 import static seedu.address.testutil.TypicalPersons.CARL;
 import static seedu.address.testutil.TypicalPersons.DANIEL;
@@ -48,6 +49,30 @@ public class FindCommandSystemTest extends AddressBookSystemTest {
         /* Case: find person where person list is not displaying the person we are finding -> 1 person found */
         command = FindCommand.COMMAND_WORD + " n/Carl";
         ModelHelper.setFilteredList(expectedModel, CARL);
+        assertCommandSuccess(command, expectedModel);
+        assertSelectedCardUnchanged();
+
+        /* Case: find persons in address book, 1 keywords of phone type  -> 1 persons found */
+        command = FindCommand.COMMAND_WORD + " p/98765432";
+        ModelHelper.setFilteredList(expectedModel, BENSON);
+        assertCommandSuccess(command, expectedModel);
+        assertSelectedCardUnchanged();
+
+        /* Case: find persons in address book, 1 keywords of phone type  -> 1 persons found */
+        command = FindCommand.COMMAND_WORD + " e/heinz@example.com";
+        ModelHelper.setFilteredList(expectedModel, CARL);
+        assertCommandSuccess(command, expectedModel);
+        assertSelectedCardUnchanged();
+
+        /* Case: find multiple persons in address book, 3 keywords of 2 prefix types  -> 3 persons found */
+        command = FindCommand.COMMAND_WORD + " n/Benson Daniel a/jurong";
+        ModelHelper.setFilteredList(expectedModel, ALICE, BENSON, DANIEL);
+        assertCommandSuccess(command, expectedModel);
+        assertSelectedCardUnchanged();
+
+        /* Case: find multiple persons in address book, 4 keywords of 2 prefix types  -> 3 persons found */
+        command = FindCommand.COMMAND_WORD + " n/Benson Daniel a/jurong clementi";
+        ModelHelper.setFilteredList(expectedModel, ALICE, BENSON, DANIEL);
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
@@ -135,6 +160,7 @@ public class FindCommandSystemTest extends AddressBookSystemTest {
         /* Case: mixed case command word -> rejected */
         command = "FiNd Meier";
         assertCommandFailure(command, MESSAGE_UNKNOWN_COMMAND);
+
     }
 
     /**
