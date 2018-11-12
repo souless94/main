@@ -98,7 +98,7 @@ NUS Hangs data are saved in the hard disk automatically after any command that c
 There is no need to save manually.
 
 == Person
-// tag::person_add[]
+// tag::add[]
 [[add]]
 === Adding a person: `add` (ZhiWei)
 
@@ -120,7 +120,7 @@ Examples:
 * `add n/James t/friend e/james@example.com t/classmates`
 * `a n/Joji t/Singer`
 
-// end::person_add[]
+// end::add[]
 
 [[list]]
 === Listing all persons : `list`
@@ -176,7 +176,7 @@ Edits the name of the 2nd person to be `Betsy Crower` and clears all existing ta
 * `edit 1 fl/C:\Users\admin\Downloads\cs2103\tiredAndSadness` +
 Edits the stored location of the 1st person to be `C:/Users/admin/Downloads/cs2103/tiredAndSadness/` respectively.
 
-// tag::person_find[]
+// tag::find[]
 [[find]]
 === Finding a person : `find` (ZhiWei)
 
@@ -206,7 +206,7 @@ Returns any person having `alex` and `bernice` in name and `friends` in tags
 * `find a/tampines p/12345678 87654321` +
 Returns any person having `Tampines` in address and `12345678` & `87654321` in phone
 
-// tag::person_find[]
+// tag::find[]
 
 === Deleting a person : `delete`
 
