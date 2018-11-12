@@ -153,7 +153,7 @@ public class Group extends Entity {
             }
         }
         if (availableSlots.size() == 0) {
-            return "There are no available slots";
+            return "There are no slots at which everyone is available";
         }
         Iterator<Integer> slotsItr = availableSlots.iterator();
         while (slotsItr.hasNext()) {
@@ -198,7 +198,7 @@ public class Group extends Entity {
             }
         }
         if (availableSlots.size() == 0) {
-            return "There are no available slots";
+            return "There are no slots with at least " + numberRequired + " person(s) available";
         }
         Map<Integer, Integer> sortedSlots = availableSlots.entrySet().stream()
                                                           .sorted(Collections.reverseOrder
@@ -211,6 +211,9 @@ public class Group extends Entity {
             int day = currTimeslot / 100;
             int timing = (currTimeslot % 100 + 7) * 100;
             int availablePersons = sortedSlots.get(key);
+            if (prev == 0 && availablePersons < numberRequired) {
+                return "There are no slots with at least " + numberRequired + " person(s) available";
+            }
             if (availablePersons < numberRequired) {
                 return builder.toString();
             }
