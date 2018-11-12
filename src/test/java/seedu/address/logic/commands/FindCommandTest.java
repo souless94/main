@@ -7,9 +7,11 @@ import static seedu.address.commons.core.Messages.MESSAGE_PERSONS_LISTED_OVERVIE
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
+import static seedu.address.testutil.TypicalPersons.ELLE;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import org.junit.Test;
@@ -65,40 +67,30 @@ public class FindCommandTest {
         assertFalse(findFirstCommand.equals(findSecondCommand));
     }
 
-    //@Test
-    //public void execute_zeroKeywords_noPersonFound() {
-    //    String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
-    //    NameContainsKeywordsPredicate predicate = preparePredicate(" ");
-    //    FindCommand command = new FindCommand(predicate);
-    //    expectedModel.updateFilteredPersonList(predicate);
-    //    assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
-    //    assertEquals(Collections.emptyList(), model.getFilteredPersonList());
-    //}
+    @Test
+    public void executeZeroKeywordsNoPersonFound() {
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
+        NameContainsKeywordsPredicate predicate = preparePredicate("", "", "", "", "");
+        FindCommand command = prepareFindCommand("", "", "", "", "");
+        expectedModel.updateFilteredPersonList(predicate);
+        assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
+        assertEquals(Collections.emptyList(), model.getFilteredPersonList());
+    }
 
     @Test
     public void execute_multipleKeywords_multiplePersonsFound() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 2);
-
-        //NameContainsKeywordsPredicate predicate = preparePredicate("Kurz Elle Kunz");
-        //FindCommand command = new FindCommand(predicate);
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
 
         FindCommand command = prepareFindCommand(
-                "Alice", "", "", "", "owesMoney");
+                "Alice Elle", "", "", "", "owesMoney");
 
         NameContainsKeywordsPredicate predicate = preparePredicate(
-                "Alice", "", "", "", "owesMoney");
+                "Alice Elle", "", "", "", "owesMoney");
 
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(ALICE, BENSON), model.getFilteredPersonList());
+        assertEquals(Arrays.asList(ALICE, BENSON, ELLE), model.getFilteredPersonList());
     }
-
-    /**
-     * Parses {@code userInput} into a {@code NameContainsKeywordsPredicate}.
-     */
-    //private NameContainsKeywordsPredicate preparePredicate(String userInput) {
-    //    return new NameContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+")));
-    //}
 
     /**
      * Parses {@code nameInput, phoneInput, addressInput, emailInput, tagInput}
@@ -107,41 +99,11 @@ public class FindCommandTest {
     private FindCommand prepareFindCommand(String name, String phone,
                                            String address, String email, String tag) {
 
-        String[] nameKeywords;
-        String[] phoneKeywords;
-        String[] addressKeywords;
-        String[] emailKeywords;
-        String[] tagKeywords;
-
-        if (!"".equals(name)) {
-            nameKeywords = name.split("\\s+");
-        } else {
-            nameKeywords = new String[0];
-        }
-
-        if (!"".equals(phone)) {
-            phoneKeywords = phone.split("\\s+");
-        } else {
-            phoneKeywords = new String[0];
-        }
-
-        if (!"".equals(address)) {
-            addressKeywords = address.split("\\s+");
-        } else {
-            addressKeywords = new String[0];
-        }
-
-        if (!"".equals(email)) {
-            emailKeywords = email.split("\\s+");
-        } else {
-            emailKeywords = new String[0];
-        }
-
-        if (!"".equals(tag)) {
-            tagKeywords = tag.split("\\s+");
-        } else {
-            tagKeywords = new String[0];
-        }
+        String[] nameKeywords = getKeywords(name);
+        String[] phoneKeywords = getKeywords(phone);
+        String[] addressKeywords = getKeywords(address);
+        String[] emailKeywords = getKeywords(email);
+        String[] tagKeywords = getKeywords(tag);
 
         return new FindCommand(Arrays.asList(nameKeywords),
                 Arrays.asList(phoneKeywords), Arrays.asList(addressKeywords),
@@ -155,46 +117,30 @@ public class FindCommandTest {
     private NameContainsKeywordsPredicate preparePredicate(String name, String phone,
                                                            String address, String email, String tag) {
 
-        String[] nameKeywords;
-        String[] phoneKeywords;
-        String[] addressKeywords;
-        String[] emailKeywords;
-        String[] tagKeywords;
-
-        if (!"".equals(name)) {
-            nameKeywords = name.split("\\s+");
-        } else {
-            nameKeywords = new String[0];
-        }
-
-        if (!"".equals(phone)) {
-            phoneKeywords = phone.split("\\s+");
-        } else {
-            phoneKeywords = new String[0];
-        }
-
-        if (!"".equals(address)) {
-            addressKeywords = address.split("\\s+");
-        } else {
-            addressKeywords = new String[0];
-        }
-
-        if (!"".equals(email)) {
-            emailKeywords = email.split("\\s+");
-        } else {
-            emailKeywords = new String[0];
-        }
-
-        if (!"".equals(tag)) {
-            tagKeywords = tag.split("\\s+");
-        } else {
-            tagKeywords = new String[0];
-        }
+        String[] nameKeywords = getKeywords(name);
+        String[] phoneKeywords = getKeywords(phone);
+        String[] addressKeywords = getKeywords(address);
+        String[] emailKeywords = getKeywords(email);
+        String[] tagKeywords = getKeywords(tag);
 
         return new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords),
                 Arrays.asList(phoneKeywords), Arrays.asList(addressKeywords),
                 Arrays.asList(emailKeywords), Arrays.asList(tagKeywords),
                 "all");
+    }
+
+    /**
+     * Parses the given {@code input} of arguments
+     * to split into keywords of individual words.
+     */
+    private String[] getKeywords(String input) {
+        String[] keywords;
+        if (!"".equals(input)) {
+            keywords = input.split("\\s+");
+        } else {
+            keywords = new String[0];
+        }
+        return keywords;
     }
 
 }

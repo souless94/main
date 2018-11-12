@@ -76,11 +76,11 @@ An example in the context of an interest group: Only committee members should be
 *Command Format*
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `n/NAME_OF_FRIEND`, `NAME_OF_FRIEND` is a parameter which can be used as `add n/John Doe`.
-* Items in square brackets are optional e.g `n/NAME [i/INDEX_OF_TIMETABLE]` can be used as `n/John Doe i/1` or as `n/John Doe`.
-* Parameters can be in any order e.g. if the command specifies `n/GROUPNAME INDEX`, `INDEX n/GROUPNAME` is also acceptable.
+* Items in square brackets are optional e.g `n/NAME [i/INDEX]` can be used as `n/John Doe i/1` or as `n/John Doe`.
+* Parameters can be in any order e.g. if the command specifies `n/NAME INDEX`, `INDEX n/NAME` is also acceptable.
 ====
 
-== common
+== Common
 
 [[help]]
 === Viewing help : `help`
@@ -97,8 +97,54 @@ Format: `exit`
 NUS Hangs data are saved in the hard disk automatically after any command that changes the data. +
 There is no need to save manually.
 
-== Person
+// tag::security-mechanism[]
+== Security (Leslie)
+=== Create an account: `create`
 
+Create an account in the system. The password is case sensitive. +
+Format: `create u/USERNAME pw/PASSWORD`
+
+(Coming in v2.0: Stores account details after closing and reopening app.)
+
+
+[NOTE]
+At this stage, the user is required to create a new account each time they restart the application +
+To prevent unauthorized users from creating an account, only admin or other logged in users can create account +
+Admin Username: *admin*, Admin Password: *adminPassword*
+
+
+Examples:
+
+* `create u/sampleUser pw/dontUseWeakPassword`
+
+=== Login to an account : `login`
+Login into the system. +
+Users are required to login to execute most commands of the NUS Hangs
+
+Format: `login u/USERNAME pw/PASSWORD`
+
+Examples:
+
+* `login u/username pw/dontUseWeakPassword`
+
+===	Encrypt password
+
+Encrypts password so that it will not be stored as plain text.
+This function runs when dealing with user's password.
+
+=== Changing password: `update_pw` [coming in v2.0]
+
+Change the user password, requires user to be logged in first. +
+Format: `update_pw c/CURRENT_PASSWORD n/NEW_PASSWORD`
+
+Examples:
+
+* `update_pw c/password n/newpass`
+
+// end::security-mechanism[]
+
+== Person
+// tag::add[]
 [[add]]
 === Adding a person: `add` (ZhiWei)
 
@@ -119,6 +165,8 @@ Examples:
 * `add n/Nancy t/friend t/neighbour`
 * `add n/James t/friend e/james@example.com t/classmates`
 * `a n/Joji t/Singer`
+
+// end::add[]
 
 [[list]]
 === Listing all persons : `list`
@@ -174,6 +222,7 @@ Edits the name of the 2nd person to be `Betsy Crower` and clears all existing ta
 * `edit 1 fl/C:\Users\admin\Downloads\cs2103\tiredAndSadness` +
 Edits the stored location of the 1st person to be `C:/Users/admin/Downloads/cs2103/tiredAndSadness/` respectively.
 
+// tag::find[]
 [[find]]
 === Finding a person : `find` (ZhiWei)
 
@@ -203,6 +252,8 @@ Returns any person having `alex` and `bernice` in name and `friends` in tags
 * `find a/tampines p/12345678 87654321` +
 Returns any person having `Tampines` in address and `12345678` & `87654321` in phone
 
+// tag::find[]
+
 === Deleting a person : `delete`
 
 Short form/Alias: `ds`
@@ -214,6 +265,7 @@ Format: `delete INDEX`
 * Deletes the person at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list.
 * The index *must be a positive integer* 1, 2, 3, ...
+* The timetable of the person will be deleted from the stored folder of the person.
 ****
 
 Examples:
@@ -311,9 +363,12 @@ The `redo` command fails as there are no `undo` commands executed previously.
 Clears all entries from the NUS Hangs. +
 Format: `clear`
 
+****
+* `clear` does not delete timetable in the stored folder of the person.
+****
 
-== Timetable(Wen Kai)
 // tag::timetable[]
+== Timetable(Wen Kai)
 
 === Adding a timetable: `add_timetable`
 
@@ -330,6 +385,7 @@ Format: `add_timetable INDEX [fl/FILE_LOCATION]`
 * timings are start time of the event. Eg. if timetable shows 0800, it means the event is from 0800 to 0900.
 * The index refers to the index number shown in the displayed person list.
 * The index *must be a positive integer* 1, 2, 3, ...
+* Time zone used is Singapore (GMT+8)
 ****
 
 Example (user does not provide a file path):
@@ -349,7 +405,8 @@ Example (user provides a file path):
 ** `add_timetable 1 fl//FILEPATH` (absolute pathing - note the double slashes) or
 ** `add_timetable 1 fl/timetable.csv` (relative pathing).
 * add_timetable will add timetable from the given csv file.
-* the first row and first column should be left alone
+* the first row and first column should be left alone.
+* the top left corner entry can be edited (the blank space at the top of Monday in the first column).
 * can only edit in given rows and columns of the timetable.
 * any invalid timetable will be ignored.
 * example of correctly formatted timetable is given below
@@ -372,6 +429,7 @@ Format: `edit_timetable INDEX day/DAY timing/TIMING [m/DETAILS]`
 * can only edit 1 hour timeslot at a time.
 * The index refers to the index number shown in the displayed person list.
 * The index *must be a positive integer* 1, 2, 3, ...
+* Time zone used is Singapore (GMT+8)
 * DETAILS cannot be empty.
 * If no DETAILS is inputted, the value will be deleted at the timeslot
 ****
@@ -397,7 +455,7 @@ Format: `download_timetable INDEX `
 * Download the timetable at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list.
 * The index *must be a positive integer* 1, 2, 3, ...
-* Will not download if there is a file with same filename as the filename of the timetable from the person specified by the `INDEX`.
+* Will not download if there is a file with same filename in the folder as the filename of the timetable from the person specified by the `INDEX`.
 * Will not download if there is no such folder to download the timetable csv file given by the file location from the person specified by the `INDEX`.
 ****
 
@@ -454,6 +512,7 @@ Examples:
 
 * `edit_group sadfriends d/very very miserable` (Changes only description.)
 
+[[find_group]]
 === Locating group by name: `find_group` (Short form/Alias: `fg`)
 
 Find groups whose names contain any of the given keywords +
@@ -490,6 +549,7 @@ Examples: (Adds the first person in the displayed person panel to the group happ
 `list` +
 `register 1 n/happyfriends`
 
+[[view_group]]
 === List all persons of a group : `view_group` (Short form/Alias: `vg`)
 
 Displays a list of all persons in a group +
@@ -532,6 +592,7 @@ Examples:
 
 [[view_slots_ranked]]
 === List all time slots in order in terms of number of people available within the group: `view_slots_ranked`
+
 Short form/Alias: `vr`
 
 List all time slots of a group in descending order in terms of the number of people available, and then in ascending order in terms of timing. The additional parameter specifies the required minimum number of people available +
@@ -546,51 +607,7 @@ Examples:
 * `view_slots_ranked n/happyfriends num/4`
 // end::timeslot[]
 
-// tag::security-mechanism[]
-== Security (Leslie)
-=== Create an account: `create`
 
-Create an account in the system. The password is case sensitive. +
-Format: `create u/USERNAME pw/PASSWORD`
-
-(Coming in v2.0: Stores account details after closing and reopening app.)
-
-
-[NOTE]
-At this stage, the user is required to create a new account each time they restart the application +
-To prevent unauthorized users from creating an account, only admin or other logged in users can create account +
-Admin Username: *admin*, Admin Password: *adminPassword*
-
-
-Examples:
-
-* `create u/sampleUser pw/dontUseWeakPassword`
-
-=== Login to an account : `login`
-Login into the system. +
-Users are required to login to execute most commands of the NUS Hangs
-
-Format: `login u/USERNAME pw/PASSWORD`
-
-Examples:
-
-* `login u/username pw/dontUseWeakPassword`
-
-===	Encrypt timetable data
-
-Encrypts password so that it will not be stored as plain text.
-This function runs when dealing with user's password.
-
-=== Changing password: `update_pw` [coming in v2.0]
-
-Change the user password, requires user to be logged in first. +
-Format: `update_pw c/CURRENT_PASSWORD n/NEW_PASSWORD`
-
-Examples:
-
-* `update_pw c/password n/newpass`
-
-// end::security-mechanism[]
 
 == FAQ
 
