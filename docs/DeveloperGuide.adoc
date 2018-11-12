@@ -802,9 +802,9 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* * *` |user  |View my timetable  |I can see when i am free for the week
 
-|`* * *` |user  |Have <<standardised,standardised>> Date,time,time zone format  |I am clear on the meeting time and dates
+|`* * *` |user  |Have standardised Date,time,time zone format  |I am clear on the meeting time and dates
 
-|`* *` |user  |view timetable in <<horizontal_mode,horizontal mode>> or <<vertical_mode,vertical mode>> |I can view my timetable faster for the mode i am familiar with
+|`* *` |user  |view timetable in a format i am used to |I can view my timetable faster
 
 |`* *` |user  |Upload my timetable
 In excel format
@@ -1333,6 +1333,8 @@ _{More to be added}_
 
 [[mainstream-os]] Mainstream OS::
 Windows, Linux, Unix, OS-X
+
+
 
 
 
