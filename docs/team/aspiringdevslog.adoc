@@ -38,13 +38,11 @@ NUS Hangs is a desktop Schedule Manager application. It has a GUI but most of th
 ** Documentation:
 *** Created initial UI mockup [https://github.com/CS2103-AY1819S1-F11-4/main/pull/1[#1]]
 *** Updated Quick Start portion in User Guide [https://github.com/CS2103-AY1819S1-F11-4/main/pull/209/commits/c2ac0183c643fd9621d6e77a781e0d53039444ab[#209]]
-*** Updated Manual Testing portion in Developer Guide
+*** Updated Manual Testing portion in Developer Guide [https://github.com/CS2103-AY1819S1-F11-4/main/pull/225[#225]]
 ** Community
-*** Created Initial Personal Portfolio Pages for all members [https://github.com/CS2103-AY1819S1-F11-4/main/pull/197/files[#197]]
-
+*** Created Initial Personal Portfolio Pages for all members [https://github.com/CS2103-AY1819S1-F11-4/main/pull/197[#197]]
 
 == Contributions to the User Guide
-
 
 |===
 |_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
