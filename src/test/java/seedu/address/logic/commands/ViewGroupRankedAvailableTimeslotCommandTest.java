@@ -40,10 +40,10 @@ public class ViewGroupRankedAvailableTimeslotCommandTest {
 
     @Test
     public void executeViewSlotsRankedWithFreeMembers() {
-    	Group testGroupWithMembers = new GroupBuilder().withName("testGroup").withSampleMembers().build();
-        model.add(testGroupWithMembers);
-        assertCommandSuccess(new ViewGroupRankedAvailableTimeslotCommand(testGroupWithMembers.getName(), 1), model, commandHistory,
+        Group testGroup = new GroupBuilder().withName("testGroup").withSampleMembers().build();
+        model.add(testGroup);
+        assertCommandSuccess(new ViewGroupRankedAvailableTimeslotCommand(testGroup.getName(), 1), model, commandHistory,
                 ViewGroupRankedAvailableTimeslotCommand.MESSAGE_SUCCESS + "1 person(s) available:\n"
-                        + testGroupWithMembers.listRankedAvailableTimeslots(1), expectedModel);
+                        + testGroup.listRankedAvailableTimeslots(1), expectedModel);
     }
 }

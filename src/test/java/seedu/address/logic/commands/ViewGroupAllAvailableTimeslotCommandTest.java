@@ -40,10 +40,10 @@ public class ViewGroupAllAvailableTimeslotCommandTest {
 
     @Test
     public void executeViewSlotsAllWithFreeMembers() {
-    	Group testGroupWithMembers = new GroupBuilder().withName("testGroup").withSampleMembers().build();
-        model.add(testGroupWithMembers);
-        assertCommandSuccess(new ViewGroupAllAvailableTimeslotCommand(testGroupWithMembers.getName()), model, commandHistory,
+        Group testGroup = new GroupBuilder().withName("testGroup").withSampleMembers().build();
+        model.add(testGroup);
+        assertCommandSuccess(new ViewGroupAllAvailableTimeslotCommand(testGroup.getName()), model, commandHistory,
                 ViewGroupAllAvailableTimeslotCommand.MESSAGE_SUCCESS
-                        + testGroupWithMembers.listAllAvailableTimeslots(), expectedModel);
+                        + testGroup.listAllAvailableTimeslots(), expectedModel);
     }
 }
