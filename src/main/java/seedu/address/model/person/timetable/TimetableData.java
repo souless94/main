@@ -132,6 +132,7 @@ public class TimetableData {
         return timetableMatrix;
     }
 
+    // @@author nigelngyy
     /**
      * @return a 2D boolean matrix of a timetable
      */
@@ -139,6 +140,7 @@ public class TimetableData {
         String[][] timetableMatrix = this.getTimetable();
         return stringMatrixToBooleanMatrix(timetableMatrix);
     }
+    // @@author
 
     /**
      * read the data from the csv file in the stored location and write it to timetable Matrix
@@ -304,6 +306,7 @@ public class TimetableData {
         // @@author
     }
 
+    // @@author nigelngyy
     /**
      * takes in 2d string matrix and converts it into a 2d boolean matrix
      *
@@ -322,4 +325,5 @@ public class TimetableData {
         }
         return booleanTimetable;
     }
+    // @@author
 }

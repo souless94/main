@@ -573,16 +573,17 @@ Examples: (deletes the 1st person displayed in `view_group` command.)
 * `delete_member 1 n/happyfriends`
 // end::groups[]
 
+// tag::timeslot[]
 == Time slots (Nigel)
 [[view_slots_all]]
-=== List all time slots of a group at which everyone is available : `view_slots_all`
+=== List all time slots at which everyone of a group is available : `view_slots_all`
 Short form/Alias: `va`
 
-List all of the available time slots in a group +
+List all of the time slots at which everyone in the group is available +
 Format: `view_slots_all n/GROUP_NAME `
 
 ****
-* List all time slots in a group at which all person in the group is available at the specified `GROUPNAME`
+* List all time slots at which all persons in a group is available, for the group with specified`GROUP_NAME`
 ****
 
 Examples:
@@ -590,19 +591,21 @@ Examples:
 * `view_slots_all n/happyfriends`
 
 [[view_slots_ranked]]
-=== List all time slots of a group in descending order of availability with a minimum number of people available required: `view_slots_ranked`
+=== List all time slots in order in terms of number of people available within the group: `view_slots_ranked`
 
 Short form/Alias: `vr`
-List all time slots of a group in descending order of availability with a minimum number of people available required: +
+
+List all time slots of a group in descending order in terms of the number of people available, and then in ascending order in terms of timing. The additional parameter specifies the required minimum number of people available +
 Format: `view_slots_ranked n/GROUP_NAME num/NUM_REQ`
 
 ****
-* List all time slots of a group in descending order of availability at the specified `GROUPNAME` with a minimum number of people available required
+* List all time slots of a group in descending order of availability, for the group with specified `GROUP_NAME`, and with a specified 'NUM_REQ' of people available.
 ****
 
 Examples:
 
 * `view_slots_ranked n/happyfriends num/4`
+// end::timeslot[]
 
 
 
@@ -654,7 +657,7 @@ e.g. `register 1 n/Family`
 e.g. `view_group n/Family` +
 `delete_member 1 n/Family`
 * *view_slots_all*: `view_slots_all n/GROUP_NAME`
-* *view_slots_ranked*: `view_slots_ranked n/GROUP_NAME`
+* *view_slots_ranked*: `view_slots_ranked n/GROUP_NAME num/NUM_REQ`
 * *create* : `create u/USERNAME pw/PASSWORD` +
 e.g. `create u/user pw/strongpass`
 * *login* : `login u/USERNAME pw/PASSWORD` +

@@ -82,7 +82,7 @@ public class Group extends Entity {
         }
         return builder.toString();
     }
-
+    //@@author nigelngyy
     /**
      * Returns the string representation of the integer variable "day" used in listAvailableTimeslots
      * and listRankedAvailableTimeslots
@@ -153,7 +153,7 @@ public class Group extends Entity {
             }
         }
         if (availableSlots.size() == 0) {
-            return "There are no available slots";
+            return "There are no slots at which everyone is available";
         }
         Iterator<Integer> slotsItr = availableSlots.iterator();
         while (slotsItr.hasNext()) {
@@ -166,6 +166,7 @@ public class Group extends Entity {
         }
         return builder.toString();
     }
+
     /**
      * Returns the time slots among the group as a String in descending order with respect to number of
      * people available and then ascending order in terms of timing, with the parameter being the
@@ -197,7 +198,7 @@ public class Group extends Entity {
             }
         }
         if (availableSlots.size() == 0) {
-            return "There are no available slots";
+            return "There are no slots with at least " + numberRequired + " person(s) available";
         }
         Map<Integer, Integer> sortedSlots = availableSlots.entrySet().stream()
                                                           .sorted(Collections.reverseOrder
@@ -210,6 +211,9 @@ public class Group extends Entity {
             int day = currTimeslot / 100;
             int timing = (currTimeslot % 100 + 7) * 100;
             int availablePersons = sortedSlots.get(key);
+            if (prev == 0 && availablePersons < numberRequired) {
+                return "There are no slots with at least " + numberRequired + " person(s) available";
+            }
             if (availablePersons < numberRequired) {
                 return builder.toString();
             }
@@ -223,6 +227,7 @@ public class Group extends Entity {
         }
         return builder.toString();
     }
+    //@@author
 
     /**
      * Returns true if both groups of the same name.
