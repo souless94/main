@@ -304,7 +304,7 @@ public class TimetableData {
         }
         // @@author
     }
-    
+
     // @@author nigelngyy
     /**
      * takes in 2d string matrix and converts it into a 2d boolean matrix
