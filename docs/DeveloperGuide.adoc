@@ -262,6 +262,7 @@ Certain properties of the application can be controlled (e.g App name, logging l
 
 This section describes some noteworthy details on how certain features are implemented.
 
+// tag::timetable[]
 === Timetable Feature
 
 ==== Reason for implementation
@@ -321,7 +322,7 @@ image::addtimetablediagram.png[width="500"]
 * **Alternative 2:** Use ArrayList<ArrayList<String>>
 ** Pros: Faster Time efficiency because using 1 for loops to fill the Matrix with the data. Able to use functions in ArrayList
 ** Cons: Harder for new Computer Science student undergraduates to understand, who are likely to be the new incoming developers of our project. Less intuition to access entries of the matrix (matrix.get(i).get(j)).
-
+// end::timetable[]
 // tag::security-mechanism[]
 === Security Mechanism
 
