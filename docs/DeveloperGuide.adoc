@@ -330,6 +330,7 @@ image::addtimetablediagram.png[width="500"]
 
 // tag::security-mechanism[]
 === Security Mechanism
+
 ==== Reason for Implementation
 In a typical interest group setting, there are two main stakeholders. The (1) committee members whom organizes events and the (2) group members whom participates in the event. In this context, these two stakeholders are the main users of NUS Hangs.
 
@@ -929,8 +930,8 @@ Use case ends.
 *MSS*
 
 1.	User logins to System and requests help to list all person
-2.      User enters list command.
-2.	System shows a list of all persons and groups.
+2.  User enters list command.
+3.	System shows a list of all persons and groups.
 
 [discrete]
 === Use case: Delete a person
