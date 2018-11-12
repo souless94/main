@@ -40,9 +40,9 @@ This feature allows users to find any persons in Nus Hangs, with improved prefix
 |_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
 |===
 
-include::../UserGuide.adoc[tag=add]
+include::../UserGuide.adoc[tag=person-add]
 
-include::../UserGuide.adoc[tag=find]
+include::../UserGuide.adoc[tag=person-find]
 
 == Contributions to the Developer Guide
 
