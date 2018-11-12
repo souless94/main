@@ -226,6 +226,8 @@ Edits the stored location of the 1st person to be `C:/Users/admin/Downloads/cs21
 [[find]]
 === Finding a person : `find` (ZhiWei)
 
+Short form/Alias: `f`
+
 Finds all persons in NusHangs, whose contain keywords provided by prefix(es). +
 Format: `find [n/NAME...] [p/PHONE_NUMBER...] [e/EMAIL...] [a/ADDRESS...] [t/TAG...]`
 
