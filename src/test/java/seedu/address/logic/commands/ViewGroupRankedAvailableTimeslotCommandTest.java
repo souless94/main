@@ -30,7 +30,8 @@ public class ViewGroupRankedAvailableTimeslotCommandTest {
 
     @Test
     public void executeViewSlotsRankedWithNobodyInGroup() {
-    	Group testGroup = new GroupBuilder(testGroup).build();
+    	Group testGroup = new GroupBuilder();
+    	testGroup = testGroup.withName("testGroup");
     	model.add(testGroup);
     	assertCommandSuccess(new ViewGroupRankedAvailableTimeslotCommand(testGroup.getName(), 1), model, commandHistory,
     	        ViewGroupRankedAvailableTimeslotCommand.MESSAGE_SUCCESS + "1 person(s) available:\n"

@@ -30,7 +30,8 @@ public class ViewGroupAllAvailableTimeslotCommandTest {
 
     @Test
     public void executeViewSlotsAllWithNobodyInGroup() {
-    	Group testGroup = new GroupBuilder(testGroup).build();
+    	Group testGroup = new GroupBuilder();
+    	testGroup = testGroup.withName("testGroup");
     	model.add(testGroup);
     	assertCommandSuccess(new ViewGroupAllAvailableTimeslotCommand(testGroup.getName()), model, commandHistory,
     	        ViewGroupAllAvailableTimeslotCommand.MESSAGE_SUCCESS + testGroup.listAllAvailableTimeslots(), expectedModel);
