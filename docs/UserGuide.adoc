@@ -176,7 +176,7 @@ Edits the name of the 2nd person to be `Betsy Crower` and clears all existing ta
 * `edit 1 fl/C:\Users\admin\Downloads\cs2103\tiredAndSadness` +
 Edits the stored location of the 1st person to be `C:/Users/admin/Downloads/cs2103/tiredAndSadness/` respectively.
 
-// tag::persons_find[]
+// tag::person_find[]
 [[find]]
 === Finding a person : `find` (ZhiWei)
 
@@ -206,7 +206,7 @@ Returns any person having `alex` and `bernice` in name and `friends` in tags
 * `find a/tampines p/12345678 87654321` +
 Returns any person having `Tampines` in address and `12345678` & `87654321` in phone
 
-// tag::persons_find[]
+// tag::person_find[]
 
 === Deleting a person : `delete`
 
