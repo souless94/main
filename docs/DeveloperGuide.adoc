@@ -310,7 +310,7 @@ image::addtimetablediagram.png[width="500"]
 * **Alternative 2 (current choice) :** adds the timetable via a csv file from other locations.
 ** Pros: Easier for user to visualise and edit his timetable and allows user a choice on where to edit his timetable.
 ** Cons: Hard to implement, and user has to know how to get file location of a file.
-* **Alternative 3:** User knows how to edit via the xml file of the person.
+* **Alternative 3:** adds the timetable edit by editing the xml file of the person.
 ** Pros: Easier to implement
 ** Cons: User must know how to edit via the xml file of the person, and harder for User to visualise.
 
