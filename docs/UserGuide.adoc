@@ -473,7 +473,7 @@ Examples:
 
 Short form/Alias: `dt`
 
-delete csv file of the timetable from stored location from the person specified by the `INDEX` and adds a default timetable to the person specified by the `INDEX`.Resets the timetable of the person if there is no timetable in the stored location from the person specified by the `INDEX`. +
+delete csv file of the timetable from stored location from the person specified by the `INDEX` and adds a default timetable to the person specified by the `INDEX`.Resets the timetable of the person to the default timetable if there is no timetable in the stored location from the person specified by the `INDEX`. +
 Format: `delete_timetable INDEX`
 
 ****
