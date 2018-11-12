@@ -12,6 +12,7 @@ import java.util.Arrays;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
+//@@author ZhiWei94
 /**
  * Parses input arguments and creates a new FindCommand object
  */
@@ -47,44 +48,28 @@ public class FindCommandParser implements Parser<FindCommand> {
         String address = argMultimap.getValue(PREFIX_ADDRESS).orElse("");
         String tag = argMultimap.getValue(PREFIX_TAG).orElse("");
 
-        String[] nameKeywords;
-        String[] phoneKeywords;
-        String[] addressKeywords;
-        String[] emailKeywords;
-        String[] tagKeywords;
-
-        if (!"".equals(name)) {
-            nameKeywords = name.split("\\s+");
-        } else {
-            nameKeywords = new String[0];
-        }
-
-        if (!"".equals(phone)) {
-            phoneKeywords = phone.split("\\s+");
-        } else {
-            phoneKeywords = new String[0];
-        }
-
-        if (!"".equals(address)) {
-            addressKeywords = address.split("\\s+");
-        } else {
-            addressKeywords = new String[0];
-        }
-
-        if (!"".equals(email)) {
-            emailKeywords = email.split("\\s+");
-        } else {
-            emailKeywords = new String[0];
-        }
-
-        if (!"".equals(tag)) {
-            tagKeywords = tag.split("\\s+");
-        } else {
-            tagKeywords = new String[0];
-        }
+        String[] nameKeywords = getKeywords(name);
+        String[] phoneKeywords = getKeywords(phone);
+        String[] addressKeywords = getKeywords(address);
+        String[] emailKeywords = getKeywords(email);
+        String[] tagKeywords = getKeywords(tag);
 
         return new FindCommand(Arrays.asList(nameKeywords), Arrays.asList(phoneKeywords),
                 Arrays.asList(addressKeywords), Arrays.asList(emailKeywords), Arrays.asList(tagKeywords));
+    }
+
+    /**
+     * Parses the given {@code input} of arguments
+     * to split into keywords of individual words.
+     */
+    private String[] getKeywords(String input) {
+        String[] keywords;
+        if (!"".equals(input)) {
+            keywords = input.split("\\s+");
+        } else {
+            keywords = new String[0];
+        }
+        return keywords;
     }
 
     /**
@@ -92,7 +77,7 @@ public class FindCommandParser implements Parser<FindCommand> {
      * to check no more than 1 prefix of the same type has been keyed.
      * @throws ParseException if the user input does not conform the expected format
      */
-    public static void checkPrefixes(ArgumentMultimap argMultimap, Prefix... prefixes)throws ParseException {
+    private static void checkPrefixes(ArgumentMultimap argMultimap, Prefix... prefixes)throws ParseException {
         for (Prefix prefix: prefixes) {
             if ((argMultimap.getAllValues(prefix).size()) > 1) {
                 throw new ParseException(

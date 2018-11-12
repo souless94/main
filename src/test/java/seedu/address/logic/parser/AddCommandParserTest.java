@@ -100,6 +100,11 @@ public class AddCommandParserTest {
         Person expectedPerson3 = new PersonBuilder(CAT).withoutEmail().withTags(VALID_TAG_FRIEND).build();
         assertParseSuccess(parser, NAME_DESC_CAT + PHONE_DESC_CAT + ADDRESS_DESC_CAT + TAG_DESC_FRIEND,
                 new AddCommand(expectedPerson3));
+
+        // only name
+        Person expectedPerson4 = new PersonBuilder(CAT).withoutEmail().withoutAddress().withoutPhone()
+                .withTags().build();
+        assertParseSuccess(parser, NAME_DESC_CAT, new AddCommand(expectedPerson4));
     }
 
     @Test
