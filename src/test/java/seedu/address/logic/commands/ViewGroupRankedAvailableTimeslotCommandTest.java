@@ -37,4 +37,13 @@ public class ViewGroupRankedAvailableTimeslotCommandTest {
                 ViewGroupRankedAvailableTimeslotCommand.MESSAGE_SUCCESS + "1 person(s) available:\n"
                         + testGroup.listRankedAvailableTimeslots(1), expectedModel);
     }
+
+    @Test
+    public void executeViewSlotsRankedWithFreeMembers() {
+    	Group testGroupWithMembers = new GroupBuilder().withName("testGroup").withSampleMembers().build();
+        model.add(testGroupWithMembers);
+        assertCommandSuccess(new ViewGroupRankedAvailableTimeslotCommand(testGroup.getName(), 1), model, commandHistory,
+                ViewGroupRankedAvailableTimeslotCommand.MESSAGE_SUCCESS + "1 person(s) available:\n"
+                        + testGroup.listRankedAvailableTimeslots(1), expectedModel);
+    }
 }
