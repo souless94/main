@@ -95,6 +95,7 @@ public class AddCommandSystemTest extends AddressBookSystemTest {
         command = PersonUtil.getAddCommand(toAdd);
         assertCommandSuccess(command, toAdd);
 
+        //@@author ZhiWei94
         /* Case: add a person with missing phone and email inputs
          * -> added
          */
@@ -102,6 +103,7 @@ public class AddCommandSystemTest extends AddressBookSystemTest {
         command = PersonUtil.getAddCommand(toAdd);
         assertCommandSuccess(command, toAdd);
 
+        //@@author
         /* Case: add to empty address book -> added */
         deleteAllPersons();
         assertCommandSuccess(ALICE);

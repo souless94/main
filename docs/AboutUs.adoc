@@ -21,7 +21,7 @@ Responsibilities: Model, Storage, UI and making sure team is on track and update
 
 === TAN ZHI WEI
 image::zhiwei94.png[width="150", align="left"]
-{empty}[http://github.com/ZhiWei94[github]] [<<ZhiWei94#, portfolio>>]
+{empty}[http://github.com/zhiwei94[github]] [<<zhiwei94#, portfolio>>]
 
 Role: Developer +
 Responsibilities: Documentation.
