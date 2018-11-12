@@ -76,8 +76,8 @@ An example in the context of an interest group: Only committee members should be
 *Command Format*
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `n/NAME_OF_FRIEND`, `NAME_OF_FRIEND` is a parameter which can be used as `add n/John Doe`.
-* Items in square brackets are optional e.g `n/NAME [i/INDEX_OF_TIMETABLE]` can be used as `n/John Doe i/1` or as `n/John Doe`.
-* Parameters can be in any order e.g. if the command specifies `n/GROUPNAME INDEX`, `INDEX n/GROUPNAME` is also acceptable.
+* Items in square brackets are optional e.g `n/NAME [i/INDEX]` can be used as `n/John Doe i/1` or as `n/John Doe`.
+* Parameters can be in any order e.g. if the command specifies `n/NAME INDEX`, `INDEX n/NAME` is also acceptable.
 ====
 
 == common
@@ -214,6 +214,7 @@ Format: `delete INDEX`
 * Deletes the person at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list.
 * The index *must be a positive integer* 1, 2, 3, ...
+* The timetable of the person will be deleted from the stored folder of the person.
 ****
 
 Examples:
@@ -311,6 +312,10 @@ The `redo` command fails as there are no `undo` commands executed previously.
 Clears all entries from the NUS Hangs. +
 Format: `clear`
 
+****
+* `clear` does not delete timetable in the stored folder of the person.
+****
+
 
 == Timetable(Wen Kai)
 // tag::timetable[]
@@ -330,6 +335,7 @@ Format: `add_timetable INDEX [fl/FILE_LOCATION]`
 * timings are start time of the event. Eg. if timetable shows 0800, it means the event is from 0800 to 0900.
 * The index refers to the index number shown in the displayed person list.
 * The index *must be a positive integer* 1, 2, 3, ...
+* Time zone used is Singapore (GMT+8)
 ****
 
 Example (user does not provide a file path):
@@ -372,6 +378,7 @@ Format: `edit_timetable INDEX day/DAY timing/TIMING [m/DETAILS]`
 * can only edit 1 hour timeslot at a time.
 * The index refers to the index number shown in the displayed person list.
 * The index *must be a positive integer* 1, 2, 3, ...
+* Time zone used is Singapore (GMT+8)
 * DETAILS cannot be empty.
 * If no DETAILS is inputted, the value will be deleted at the timeslot
 ****
@@ -397,7 +404,7 @@ Format: `download_timetable INDEX `
 * Download the timetable at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list.
 * The index *must be a positive integer* 1, 2, 3, ...
-* Will not download if there is a file with same filename as the filename of the timetable from the person specified by the `INDEX`.
+* Will not download if there is a file with same filename in the folder as the filename of the timetable from the person specified by the `INDEX`.
 * Will not download if there is no such folder to download the timetable csv file given by the file location from the person specified by the `INDEX`.
 ****
 
@@ -576,7 +583,7 @@ Examples:
 
 * `login u/username pw/dontUseWeakPassword`
 
-===	Encrypt timetable data
+===	Encrypt password
 
 Encrypts password so that it will not be stored as plain text.
 This function runs when dealing with user's password.

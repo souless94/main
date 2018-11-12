@@ -310,7 +310,7 @@ image::addtimetablediagram.png[width="500"]
 * **Alternative 2 (current choice) :** adds the timetable via a csv file from other locations.
 ** Pros: Easier for user to visualise and edit his timetable and allows user a choice on where to edit his timetable.
 ** Cons: Hard to implement, and user has to know how to get file location of a file.
-* **Alternative 3:** User knows how to edit via the xml file of the person.
+* **Alternative 3:** adds the timetable edit by editing the xml file of the person.
 ** Pros: Easier to implement
 ** Cons: User must know how to edit via the xml file of the person, and harder for User to visualise.
 
@@ -323,9 +323,9 @@ image::addtimetablediagram.png[width="500"]
 ** Pros: Faster Time efficiency because using 1 for loops to fill the Matrix with the data. Able to use functions in ArrayList
 ** Cons: Harder for new Computer Science student undergraduates to understand, who are likely to be the new incoming developers of our project. Less intuition to access entries of the matrix (matrix.get(i).get(j)).
 // end::timetable[]
-// tag::security-mechanism[]
-=== Security Mechanism
 
+=== Security Mechanism
+// tag::security-mechanism[]
 ==== Reason for Implementation
 In a typical interest group setting, there are two main stakeholders. The (1) committee members whom organizes events and the (2) group members whom participates in the event. In this context, these two stakeholders are the main users of NUS Hangs.
 
@@ -802,9 +802,9 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* * *` |user  |View my timetable  |I can see when i am free for the week
 
-|`* * *` |user  |Have <<standardised,standardised>> Date,time,time zone format  |I am clear on the meeting time and dates
+|`* * *` |user  |Have standardised Date,time,time zone format  |I am clear on the meeting time and dates
 
-|`* *` |user  |view timetable in <<horizontal_mode,horizontal mode>> or <<vertical_mode,vertical mode>> |I can view my timetable faster for the mode i am familiar with
+|`* *` |user  |view timetable in a format i am used to |I can view my timetable faster
 
 |`* *` |user  |Upload my timetable
 In excel format
@@ -987,12 +987,6 @@ Use case ends.
 ** 3a1.System shows an error message.
 +
 Use case resumes at step 2.
-* 3b. User adds timetable via a link and there is no internet.
-+
-[none]
-** 3b1.System shows there is no internet connection.
-+
-Use case resumes at step 2.
 * 4a.User does not confirm the addition of the timetable into the System.
 +
 Use case ends
@@ -1029,7 +1023,7 @@ Use case ends
 2.	System shows how to download a timetable
 3.	User enters inputs accordingly
 4.	System shows his timetable and ask user for confirmation.
-5.	User confirms the edit of his timetable into the System.
+5.	User confirms the download of the timetable.
 6.	System shows his timetable is edit successfully.
 
 
@@ -1066,12 +1060,6 @@ Use case ends
 ** 3a1.System shows an error message.
 +
 Use case resumes at step 2.
-* 4a. Timetable is not in the System.
-+
-[none]
-** 4a1.System shows an error message.
-+
-Use case ends.
 * 5a. User does not confirm the deletion of the timetable
 +
 
@@ -1345,6 +1333,8 @@ _{More to be added}_
 
 [[mainstream-os]] Mainstream OS::
 Windows, Linux, Unix, OS-X
+
+
 
 
 

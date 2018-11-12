@@ -17,10 +17,10 @@ public class TimetableDataTest {
         BOB.getStoredLocation(),
         "0700,800,900,1000," + timetableString, 1, null, null, null);
 
-    private String wrongTimetableString =
-        "aG9yaXpvbnRhbA==,aG9yaXpvbnRhbA==," + timetableString.substring(5);
+    private String wrongTimetableRowString =
+        "aG9yaXpvbnRhbA==,aG9yaXpvbnRhbA==," + timetableString.substring(14);
     private TimetableData timetableDataWrongFirstRow = new TimetableData(
-        BOB.getStoredLocation(), wrongTimetableString, 1, null, null,
+        BOB.getStoredLocation(), wrongTimetableRowString, 1, null, null,
         null);
 
 
@@ -50,7 +50,8 @@ public class TimetableDataTest {
         // check wrongtimetableData has incorrect size
         assertFalse(timetableDataWrongSize.isCorrectSize());
 
-        // check  wrongTimetableData has incorrect first Rows and Columns
+        // check wrongTimetableData with wrong first row
+        // has incorrect first Rows and Columns
         assertFalse(timetableDataWrongFirstRow.hasCorrectFirstRowsAndColumns());
     }
 
