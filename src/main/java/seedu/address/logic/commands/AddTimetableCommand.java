@@ -2,7 +2,6 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.isNull;
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.core.Messages.MESSAGE_TIMETABLE_NOT_FOUND;
 import static seedu.address.logic.commands.EditTimetableCommand.createUpdatedPerson;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FILE_LOCATION;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
@@ -37,6 +36,7 @@ public class AddTimetableCommand extends Command {
             + PREFIX_FILE_LOCATION
             + "C:/Users/wen kai/Downloads/y4s1/cs2103/project2/data/timetable/495011161 timetable";
 
+    public static final String MESSAGE_TIMETABLE_NOT_FOUND = "timetable to be added is not found at : ";
     public static final String MESSAGE_ADD_TIMETABLE_SUCCESS = "timetable added successfully: %1$s";
     public static final String MESSAGE_INVALID_TIMETABLE_SIZE =
         "timetable to be added is wrong: \n"
@@ -104,7 +104,7 @@ public class AddTimetableCommand extends Command {
             return new CommandResult(
                 String.format(MESSAGE_ADD_TIMETABLE_SUCCESS, updatedPerson.getStoredLocation()));
         } else {
-            throw new CommandException(MESSAGE_TIMETABLE_NOT_FOUND);
+            throw new CommandException(MESSAGE_TIMETABLE_NOT_FOUND + filePath);
         }
     }
 

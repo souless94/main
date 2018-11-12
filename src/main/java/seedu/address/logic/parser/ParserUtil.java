@@ -1,7 +1,11 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.MESSAGE_DETAILS_EMPTY;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_DAY;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_DAY_AND_TIMING;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_FILE_EXTENSION;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_TIMING;
 import static seedu.address.commons.core.Messages.MESSAGE_IS_FILE_DIRECTORY;
 import static seedu.address.model.person.timetable.TimetableData.DAYS_IN_LOWER_CASE;
 import static seedu.address.model.person.timetable.TimetableData.TIMINGS;
@@ -15,7 +19,6 @@ import java.util.Set;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.ArrayUtils;
 
-import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -205,7 +208,7 @@ public class ParserUtil {
         if (ArrayUtils.contains(validDays, trimmedDay.toLowerCase())) {
             return trimmedDay;
         } else {
-            throw new ParseException(Messages.MESSAGE_INVALID_DAY);
+            throw new ParseException(MESSAGE_INVALID_DAY);
         }
     }
 
@@ -222,7 +225,7 @@ public class ParserUtil {
         if (ArrayUtils.contains(validTiming, trimmedTiming)) {
             return trimmedTiming;
         } else {
-            throw new ParseException(Messages.MESSAGE_INVALID_TIMING);
+            throw new ParseException(MESSAGE_INVALID_TIMING);
         }
     }
 
@@ -232,9 +235,13 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code details} is invalid.
      */
-    public static String parseDetails(String details) {
+    public static String parseDetails(String details) throws ParseException {
         requireNonNull(details);
-        return details;
+        if (details.length() > 0) {
+            return details;
+        } else {
+            throw new ParseException(MESSAGE_DETAILS_EMPTY);
+        }
     }
 
     /**
@@ -252,7 +259,7 @@ public class ParserUtil {
         String[] validTiming = TIMINGS;
         if (!ArrayUtils.contains(validDays, trimmedDay.toLowerCase())
             && !ArrayUtils.contains(validTiming, trimmedTiming)) {
-            throw new ParseException(Messages.MESSAGE_INVALID_DAY_AND_TIMING);
+            throw new ParseException(MESSAGE_INVALID_DAY_AND_TIMING);
         }
     }
 }

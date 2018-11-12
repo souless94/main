@@ -4,35 +4,31 @@
 :stylesDir: ../stylesheets
 
 == PROJECT: NUS Hangs
-
----
-
 == Overview
-NUS Hangs is a desktop Schedule Manager application. It has a GUI but most of the user interactions happen using a CLI (Command Line Interface). It is a Java application written by developers of F11-4, to target small/mid-size interest/sttudy groups in NUS.
+NUS Hangs is a desktop Schedule Manager application. It has a GUI but most user interactions occur on CLI (Command Line Interface). It is written in Java by developers of F11-4, to target small/mid-size interest/study groups in NUS.
 
 == Summary of contributions
-
 * *Major enhancement*: Created a group class and added corresponding group functions:
-*** add_group: Add a new group which will appear in the right group panel of UI.
-*** delete_group: Delete an existing group and remove all current members from that group.
-*** edit_group: Edit an existing group's name/description.
-*** register: Register an existing person as a member of the group.
-*** delete_member: Delete an existing member of the group.
-*** find_group: Find a group based on its name.
-*** view_group: View all members of the group in UI.
+** add_group: Add a new group which will appear in the right group panel of UI.
+** delete_group: Delete an existing group and remove all current members from that group.
+** edit_group: Edit an existing group's name/description.
+** register: Register an existing person as a member of the group.
+** delete_member: Delete an existing member of the group.
+** find_group: Find a group based on its name.
+** view_group: View all members of the group in UI.
 
 ** Justification: This feature improves the product's functionality significantly because a user can now better organise his contacts into groups and easily coordinate common time slots to meet.
 ** Highlights: This enhancement affects existing and future commands. The implementation was challenging due to:
 *** Integration of Group and Person Class. For instance, delete_group requires the group to be deleted and all reference to the group in all Persons registered to be deleted.
-*** Changes in the UI and Storage components. For instance, the GroupPanel has to be created to show and update all groups. Group Data have to stored after the app closes inside addressbook.xml and reloaded into the app as Group objects once the user reopens the app.
+*** Changes in the UI and Storage. For instance, GroupPanel has to be created to display groups. Group data have to stored after the app closes and reloaded into the app as Group objects when app is launched.
 
-* *Minor enhancement*: Enhance `list` command to list both groups and persons. Added a `list INDEX` command to show all the groups that the person at INDEX is currently in.
+* *Minor enhancement*: Enhance `list` command to list both groups and persons. Added a `list INDEX` command to show all the groups that the person at INDEX is currently in. (https://github.com/CS2103-AY1819S1-F11-4/main/pull/123[#123])
 
 * *Minor enhancement*: Created short forms for commands. (https://github.com/CS2103-AY1819S1-F11-4/main/pull/208[#208])
 
-* *Minor enhancement*: Created an Abstract class Entity which Group and Person extends from to allow for polymorphism: Refactored the ModelManager and AddressBook function to include Polymorphism. E.g. addPerson() --> add() which performs add on Group or Person class based on polymorphism. Also, refactored UniquePersonList into UniqueList<T> for different classes: Group and Person.
+* *Minor enhancement*: Created Abstract class Entity which Group and Person extends from to allow for polymorphism: Refactored the ModelManager and AddressBook function: E.g. addPerson() --> add() which performs add on Group or Person class based on polymorphism. Also, refactored UniquePersonList into generic UniqueList<T>. (https://github.com/CS2103-AY1819S1-F11-4/main/pull/80[#80])
 
-* *Minor enhancement*: Created a defensive defensiveSetGroups method in Person class enforcing compulsory association of Person and groupList- instead of setGroup() which can alter a private groupList field in Person and also checks for null entries of groupList (https://github.com/CS2103-AY1819S1-F11-4/main/pull/222[#222]).
+* *Minor enhancement*: Created a defensiveSetGroups method in Person class enforcing compulsory association of Person and groupList- instead of setGroup() which can alter a private groupList field in Person and also checks for null entries of groupList (https://github.com/CS2103-AY1819S1-F11-4/main/pull/222[#222]).
 
 * *Code contributed*: [https://nus-cs2103-ay1819s1.github.io/cs2103-dashboard/#=undefined&search=happytreat[Functional and Test code]]
 
@@ -53,7 +49,6 @@ NUS Hangs is a desktop Schedule Manager application. It has a GUI but most of th
 |===
 |_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
 |===
-include::../UserGuide.adoc[tag=list]
 include::../UserGuide.adoc[tag=groups]
 
 == Contributions to the Developer Guide

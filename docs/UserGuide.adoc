@@ -321,7 +321,7 @@ Short form/Alias: `at`
 
 User to download timetable template first before using download_timetable INDEX and change csv at the location. +
 Reload page by clicking on another person and then click on the person again +
-Or right click on timetable and select the reload page option.
+Or right click on timetable and select the reload page option(Not working).
 
 Format: `add_timetable INDEX [fl/FILE_LOCATION]`
 
@@ -372,11 +372,17 @@ Format: `edit_timetable INDEX day/DAY timing/TIMING [m/DETAILS]`
 * can only edit 1 hour timeslot at a time.
 * The index refers to the index number shown in the displayed person list.
 * The index *must be a positive integer* 1, 2, 3, ...
+* DETAILS cannot be empty.
+* If no DETAILS is inputted, the value will be deleted at the timeslot
 ****
 
-Examples:
+Example:
 
 * `edit_timetable 1 day/wednesday timing/0900 m/do cs2103`
+
+Example(User clear event at timeslot):
+
+* `edit_timetable 1 day/wednesday timing/0900`
 
 
 
@@ -417,33 +423,26 @@ Examples:
 * `list_timetable` +
 `delete_timetable 2` +
 Deletes the 2nd timetable in NUS Hangs.
-* `find_timetable Betsy` +
+* `find Betsy` +
 `delete_timetable 1` +
-Deletes the 1st timetable in the results of the `find_timetable` command.
+Deletes the 1st timetable in the results of the `find` command.
 // end::timetable[]
 
 // tag::groups[]
 == Groups (Melodies)
-=== Adding a group: `add_group`
-
-Short form/Alias: `ag`
+=== Adding a group: `add_group` (Short form/Alias: `ag`)
 
 Add a group to the System +
 Format: `add_group n/GROUPNAME [d/GROUPDESCRIPTION]`
-
-(`d/GROUPDESCRIPTION` is optional)
 
 Examples:
 
 * `add_group n/happyfriends d/a group of happy friends`
 * `add_group n/Bestfriends
 
-=== Editing a group : `edit_group`
+=== Editing a group : `edit_group` (Short form/Alias: `eg`)
 
-Short form/Alias: `eg`
-
-Edit a group's details. OLDGROUPNAME must be entered. There must be at least 1 field non-empty. +
-If field is empty, system assumes that the field remains unedited.
+Edit a group's details. OLDGROUPNAME must be entered. There must be at least 1 field non-empty. If field is empty, system assumes that the field remains unedited.
 
 Format: `edit_group OLDGROUPNAME [n/NEWGROUPNAME] [d/NEWGROUPDESCRIPTION]`
 
@@ -451,27 +450,17 @@ Examples:
 
 * `add_group n/happyfriends d/a group of happy friends`
 * `edit_group happyfriends n/sadfriends d/sad because of cs2103`
-
 (Changes the name of group from "happyfriends" to "sadfriends" and description)
 
-* `edit_group sadfriends d/very very miserable`
+* `edit_group sadfriends d/very very miserable` (Changes only description.)
 
-(Changes only description.)
-
-[[find_group]]
-=== Locating group by name: `find_group`
-
-Short form/Alias: `fg`
+=== Locating group by name: `find_group` (Short form/Alias: `fg`)
 
 Find groups whose names contain any of the given keywords +
 Format: `find_group KEYWORD [MORE_KEYWORDS]`
 
-****
-* The search is case insensitive. e.g `family` will match `Family`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Only the group name is searched.
 * Only full words will be matched e.g. `Family` will not match `Families`
-****
 
 Examples:
 
@@ -480,78 +469,48 @@ Returns `john family` and `John House`
 * `find_group Betsy Tim John` +
 Returns any group having names `Betsy`, `Tim`, or `John`
 
-=== Deleting a group : `delete_group`
-
-Short form/Alias: `dg`
+=== Deleting a group : `delete_group` (Short form/Alias: `dg`)
 
 Delete a group in the system by name +
 Format: `delete_group n/GROUPNAME`
-
-****
-* Deletes the group with the specified `GROUPNAME`
-****
 
 Examples:
 
 * `delete_group n/happyfriends`
 
-=== Add a person to group : `register`
-
-Short form/Alias: `r`
+=== Add a person to group : `register` (Short form/Alias: `r`)
 
 Adds a person using the person index to a group if group exists +
 Format: `register PERSON_INDEX n/GROUP_NAME`
 
-*Remember to `list` before using register command.*
+* *Remember to `list` before using register command.*
 
-****
-* Adds the person at the specified `PERSON_INDEX`. The index refers to the index number shown in the displayed person panel. The index *must be a positive integer* 1, 2, 3, ...
-* Adds this person to the group with GROUPNAME.
-****
-
-Examples:
+Examples: (Adds the first person in the displayed person panel to the group happyfriends)
 
 `list` +
+`register 1 n/happyfriends`
 
-`register 1 n/happyfriends `
+=== List all persons of a group : `view_group` (Short form/Alias: `vg`)
 
-(Adds the first person in the displayed person panel to the group happyfriends)
-
-[[view_group]]
-=== List all persons of a group : `view_group`
-
-Short form/Alias: `vg`
-
-shows a list of all persons in a group +
+Displays a list of all persons in a group +
 Format: `view_group n/GROUP_NAME`
 
-****
-* List all persons of a group at the specified `GROUPNAME`.
-****
-
-Examples:
+Examples: (lists the persons added to group happyfriends in the displayed person list)
 
 * ` view_group n/happyfriends`
 
-(lists the person added to group happyfriends in the displayed person list)
-
-=== Delete a person from group : `delete_member`
-
-Short form/Alias: `dm`
+=== Delete a person from group : `delete_member` (Short form/Alias: `dm`)
 
 Delete a person from a group using person index displayed with `view_group`. +
 Format: `delete_member PERSON_INDEX n/GROUP_NAME`
 
-****
-* `view_group` command should be performed before the `delete_member` command.
+* *Remember to `view_group` before using register command.*
 * The PERSON_INDEX is the index of the displayed person list AFTER `view_group` command is performed.
-****
 
-Examples:
+Examples: (deletes the 1st person displayed in `view_group` command.)
 
 * `view_group n/happyfriends`
 * `delete_member 1 n/happyfriends`
-(deletes the 1st person displayed in `view_group` command.)
 // end::groups[]
 
 == Time slots (Nigel)
@@ -612,6 +571,7 @@ Login into the system. +
 Users are required to login to execute most commands of the NUS Hangs
 
 Format: `login u/USERNAME pw/PASSWORD`
+
 Examples:
 
 * `login u/username pw/dontUseWeakPassword`
@@ -621,7 +581,7 @@ Examples:
 Encrypts password so that it will not be stored as plain text.
 This function runs when dealing with user's password.
 
-=== Changing password: `update_pw `  `[coming in v2.0]`
+=== Changing password: `update_pw` [coming in v2.0]
 
 Change the user password, requires user to be logged in first. +
 Format: `update_pw c/CURRENT_PASSWORD n/NEW_PASSWORD`
@@ -629,33 +589,6 @@ Format: `update_pw c/CURRENT_PASSWORD n/NEW_PASSWORD`
 Examples:
 
 * `update_pw c/password n/newpass`
-
-
-=== get Security question password : `get` `[coming in v2.0]`
-Shows the security question . +
-Format: `get`
-
-===	Reset password  : `reset` `[coming in v2.0]`
-
-Resets a password by answering the security question correctly. +
-Format: `reset a/SECURITY_ANSWER n/NEW_PASSWORD`
-
-Examples:
-
-* `reset a/My security answer`
-
-===	Changing security question and answer : `update_sq` `[coming in v2.0]`
-
-Change the user security question and answer, requires user to be logged in first. +
-Format: `update_sq c/CURRENT_PASSWORD [n/NEWSECURITY_QUESTION]  [a/SECURITY_ANSWER]`
-
-****
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-****
-Examples:
-
-* `update_pw c/password n/Is this a good question? a/A better question is if this is a good answer`
 
 // end::security-mechanism[]
 

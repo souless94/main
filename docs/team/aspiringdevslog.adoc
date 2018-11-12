@@ -17,10 +17,7 @@ NUS Hangs is a desktop Schedule Manager application. It has a GUI but most of th
 ** What it does: manages command execution rights to two main stakeholders
 *** Guest users (users without account): can only execute read-only commands
 *** Admins (users with account): can execute all commands accessible by guest users. On top of that, is able to execute commands related to add and editing of data.
-** Justification: This feature secures the information stored in the application by preventing unauthorised users from manipulating it, while allowing all users to view the data. +
-An example of a situation where this would be useful is in the context of an interest group. In an interest group, committee members would need to organize activities while maximizing attendance. In that case, only the committee members should have the rights to add and update the information within the application. After the committee members setup the schedule, members whom are interested would be able to gain read-only access to view the information available. Alternatively, members could also access the application to verify if the information are accurate.
-
-
+** Justification: This feature secures the information stored in the application by restricting write and modification rights to admins (typically committee members of an interest group), while allowing all users to reading rights to the data.
 
 
 * *Minor enhancement*: *added an encrypt function*
@@ -41,19 +38,16 @@ An example of a situation where this would be useful is in the context of an int
 ** Documentation:
 *** Created initial UI mockup [https://github.com/CS2103-AY1819S1-F11-4/main/pull/1[#1]]
 *** Updated Quick Start portion in User Guide [https://github.com/CS2103-AY1819S1-F11-4/main/pull/209/commits/c2ac0183c643fd9621d6e77a781e0d53039444ab[#209]]
-*** Updated Manual Testing portion in Developer Guide [https://github.com/CS2103-AY1819S1-F11-4/main/pull/225/[#225]]
+*** Updated Manual Testing portion in Developer Guide [https://github.com/CS2103-AY1819S1-F11-4/main/pull/225[#225]]
 ** Community
-*** Created Initial Personal Portfolio Pages for all members [https://github.com/CS2103-AY1819S1-F11-4/main/pull/197/files[#197]]
-
+*** Created Initial Personal Portfolio Pages for all members [https://github.com/CS2103-AY1819S1-F11-4/main/pull/197[#197]]
 
 == Contributions to the User Guide
-
 
 |===
 |_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
 |===
 
-include::../UserGuide.adoc[tag=quick-start]
 include::../UserGuide.adoc[tag=security-mechanism]
 
 == Contributions to the Developer Guide
@@ -63,8 +57,5 @@ include::../UserGuide.adoc[tag=security-mechanism]
 |===
 
 include::../DeveloperGuide.adoc[tag=security-mechanism]
-include::../DeveloperGuide.adoc[tag=manual-test]
-include::../DeveloperGuide.adoc[tag=security-mechanism-use-case]
-
-
+include::../DeveloperGuide.adoc[tag=manual-test-highlights]
 

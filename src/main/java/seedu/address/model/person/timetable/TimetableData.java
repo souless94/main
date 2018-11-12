@@ -31,7 +31,7 @@ public class TimetableData {
     public static final String[] TIMINGS = {"0800", "0900", "1000", "1100", "1200", "1300",
         "1400", "1500", "1600", "1700", "1800", "1900", "2000", "2100", "2200", "2300"};
 
-    private static Logger logger = Logger.getLogger("Foo");
+    private static Logger logger = Logger.getLogger("timetable");
     private static String wrongNoOfRows = "has more rows than expected";
     private static String wrongNoOfColumns = "has more columns than expected";
     private static String noOfExpectedRows = "number of rows should be 8";
@@ -69,8 +69,8 @@ public class TimetableData {
             timetable = getTimetableFromString(timetableString);
             int rowToChange = ArrayUtils.indexOf(DAYS_IN_LOWER_CASE, day.toLowerCase()) + 1;
             int columnToChange = ArrayUtils.indexOf(TIMINGS, timing) + 1;
-            assert rowToChange > 0 && rowToChange < 8 : expectedRowToChange;
-            assert columnToChange > 0 && columnToChange < 17 : expectedColumnToChange;
+            assert rowToChange > 0 && rowToChange < getRows() : expectedRowToChange;
+            assert columnToChange > 0 && columnToChange < getColumns() : expectedColumnToChange;
             timetable[rowToChange][columnToChange] = message;
         }
         this.timetable = timetable;
@@ -173,7 +173,7 @@ public class TimetableData {
                 timetableMatrix[i] = timetableRow;
                 i++;
             }
-            if (i != 8) {
+            if (i != getRows()) {
                 this.isCorrectSize = false;
             }
             csvReader.close();
