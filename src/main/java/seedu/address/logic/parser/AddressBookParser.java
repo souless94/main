@@ -206,24 +206,30 @@ public class AddressBookParser {
             case SelectCommand.COMMAND_WORD:
                 return new SelectCommandParser().parse(arguments);
 
+            case FindGroupCommand.ALIAS:
             case FindGroupCommand.COMMAND_WORD:
                 return new FindGroupCommandParser().parse(arguments);
 
+            case ViewGroupCommand.ALIAS:
             case ViewGroupCommand.COMMAND_WORD:
                 return new ViewGroupCommandParser().parse(arguments);
 
+            case ViewGroupRankedAvailableTimeslotCommand.ALIAS:
             case ViewGroupRankedAvailableTimeslotCommand.COMMAND_WORD:
                 return new ViewGroupRankedAvailableTimeslotCommandParser().parse(arguments);
 
+            case ViewGroupAllAvailableTimeslotCommand.ALIAS:
             case ViewGroupAllAvailableTimeslotCommand.COMMAND_WORD:
                 return new ViewGroupAllAvailableTimeslotCommandParser().parse(arguments);
 
+            case FindCommand.ALIAS:
             case FindCommand.COMMAND_WORD:
                 return new FindCommandParser().parse(arguments);
 
             case HistoryCommand.COMMAND_WORD:
                 return new HistoryCommand();
 
+            case ListCommand.ALIAS:
             case ListCommand.COMMAND_WORD:
                 return new ListCommandParser().parse(arguments);
 
