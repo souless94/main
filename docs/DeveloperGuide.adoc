@@ -563,7 +563,24 @@ The current person implementation are:
 * `add` -- add any person with the choice of adding address, phone, email and tags
 * `find` -- finds all persons in NUSHangs, whose contain keywords provided by prefix(es)
 
-Given below is the Sequence Diagram for interactions within the Logic component for the execute("find n/alex") API call.
+==== Reasons for Implementation
+
+The ability to add and find members with flexibility improves the user’s experience of the application.
+
+The `add` command allows users to include or omit particulars of any member.
+
+* This is helpful as the user may not always have all of the particulars of its members.
+* This also promotes flexibility as to how users want to control the information, which can be useful for organising events.
+
+The `find` command allows users to find members based on certain particulars.
+
+* This is useful for interest groups as they can find members based on certain particulars.
+* For example, organisers can find and group users by level of proficiency to perform an event; or
+* The organisers can find based on address to get people who stays close to school to reach earlier to perform certain setup
+
+==== Activity & Sequence Diagram: An example to FindCommand
+
+Given below is the Sequence Diagram for interactions within the Logic component for the - execute("find n/alex") API call.
 
 image::FindSequence.png[width="800"]
 
