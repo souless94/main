@@ -561,7 +561,7 @@ The 'Person' class extends the `Entity` abstract class and it is contained withi
 The current person implementation are:
 
 * `add` -- add any person with the choice of adding address, phone, email and tags
-* `find` -- finds all persons in NusHangs, whose contain keywords provided by prefix(es)
+* `find` -- finds all persons in NUSHangs, whose contain keywords provided by prefix(es)
 
 Given below is the Sequence Diagram for interactions within the Logic component for the execute("find n/alex") API call.
 

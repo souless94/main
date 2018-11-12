@@ -85,7 +85,7 @@ dependencies {
 }
 
 shadowJar {
-    archiveName = 'NUS Hangs.jar'
+    archiveName = 'nus Hangs.jar'
 
     destinationDir = file("${buildDir}/jar/")
 }
