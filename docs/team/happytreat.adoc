@@ -4,9 +4,8 @@
 :stylesDir: ../stylesheets
 
 == PROJECT: NUS Hangs
----
 == Overview
-NUS Hangs is a desktop Schedule Manager application. It has a GUI but most of the user interactions happen using a CLI (Command Line Interface). It is a Java application written by developers of F11-4, to target small/mid-size interest/sttudy groups in NUS.
+NUS Hangs is a desktop Schedule Manager application. It has a GUI but most user interactions occur on CLI (Command Line Interface). It is written in Java by developers of F11-4, to target small/mid-size interest/study groups in NUS.
 
 == Summary of contributions
 * *Major enhancement*: Created a group class and added corresponding group functions:
