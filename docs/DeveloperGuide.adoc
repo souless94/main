@@ -847,7 +847,7 @@ _{More to be added}_
 (For all use cases below, the *System* is the `NUS Hangs` and the *Actor* is the `user`, unless specified otherwise)
 
 [discrete]
-=== Use case: help
+=== Use case: Help
 
 *MSS*
 
@@ -968,7 +968,7 @@ Use case ends.
 2.	System shows a list of all groups a friend is in.
 
 [discrete]
-=== Use case: add a timetable
+=== Use case: Add a timetable
 *MSS*
 
 1.	User logins to System and requests help to add a timetable
@@ -998,7 +998,7 @@ Use case resumes at step 2.
 Use case ends
 
 [discrete]
-=== Use case: edit a timetable
+=== Use case: Edit a timetable
 *MSS*
 
 1.	User logins to System and requests help to edit a timetable
@@ -1022,7 +1022,7 @@ Use case resumes at step 2.
 Use case ends
 
 [discrete]
-=== Use case: download a timetable
+=== Use case: Download a timetable
 *MSS*
 
 1.	User logins to System and requests help to download a timetable
@@ -1244,7 +1244,7 @@ Use case resumes at step 2.
 2.	System shows a list of all members a group have
 
 [discrete]
-=== Use case: add a member to a group
+=== Use case: Add a member to a group
 *MSS*
 
 1.  User logins to System and requests help to add a member to a group
@@ -1268,7 +1268,7 @@ Use case resumes at step 2.
 Use case ends.
 
 [discrete]
-=== Use case: delete a member to a group
+=== Use case: Delete a member to a group
 *MSS*
 
 1.  User logins to System and requests help to delete a member to a group
@@ -1338,7 +1338,7 @@ Use case resumes at step 4
 Use case resumes at step 4
 
 [discrete]
-=== Use case: reset password
+=== Use case: Reset password
 *MSS*
 
 1.	User enters command to reset password
