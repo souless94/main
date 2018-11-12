@@ -1346,7 +1346,8 @@ _{More to be added}_
 Windows, Linux, Unix, OS-X
 
 
-// tag::manual-test[]
+
+// tag::manual-test-highlights[]
 [appendix]
 == Instructions for Manual Testing
 
@@ -1407,7 +1408,7 @@ Expected: Account is successfully created. The username and password fields are 
 Expected: Account is not created as the username is already in use.
 
 
-
+// end::manual-test-highlights[]
 
 === Read-Only Commands
 
@@ -1567,6 +1568,5 @@ Expected: As there is a typo in the group name, the person will not be added; un
 .. Test case: `delete_member 1 n/CS2103 Dry Run` +
 Expected: 1st member in the group is deleted.
 
-// end::manual-test[]
 
 
