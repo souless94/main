@@ -27,10 +27,10 @@ public class EditGroupCommand extends Command {
 
     public static final String ALIAS = "eg";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
-            + "by the name of group. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the group identified. "
+            + "by its name. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: Current name"
+            + "Parameters: Current name "
             + "[" + PREFIX_NAME + "NEW NAME]"
             + "[" + PREFIX_DESCRIPTION + "PHONE]\n"
             + "Example: " + COMMAND_WORD + " MyGroup "

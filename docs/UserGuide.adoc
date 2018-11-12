@@ -56,8 +56,8 @@ To prevent unauthorized users from creating an account, `create` *can only be ex
 An example in the context of an interest group: Only committee members should be allowed to make changes to the data while members are restricted to viewing rights.
 +
 
-- <<create_an_account_code_create_code>>
-- <<login_to_an_account_code_login_code>>
+- <<create>>
+- <<login>>
 
 // end::quick-start[]
 
@@ -99,6 +99,8 @@ There is no need to save manually.
 
 // tag::security-mechanism[]
 == Security (Leslie)
+
+[[create]]
 === Create an account: `create`
 
 Create an account in the system. The password is case sensitive. +
@@ -117,6 +119,7 @@ Examples:
 
 * `create u/sampleUser pw/dontUseWeakPassword`
 
+[[login]]
 === Login to an account : `login`
 Login into the system. +
 Users are required to login to execute most commands of the NUS Hangs
@@ -225,6 +228,8 @@ Edits the stored location of the 1st person to be `C:/Users/admin/Downloads/cs21
 // tag::person-find[]
 [[find]]
 === Finding a person : `find` (ZhiWei)
+
+Short form/Alias: `f`
 
 Finds all persons in NusHangs, whose contain keywords provided by prefix(es). +
 Format: `find [n/NAME...] [p/PHONE_NUMBER...] [e/EMAIL...] [a/ADDRESS...] [t/TAG...]`
@@ -468,7 +473,7 @@ Examples:
 
 Short form/Alias: `dt`
 
-delete csv file of the timetable from stored location from the person specified by the `INDEX` and adds a default timetable to the person specified by the `INDEX`.Resets the timetable of the person if there is no timetable in the stored location from the person specified by the `INDEX`. +
+delete csv file of the timetable from stored location from the person specified by the `INDEX` and adds a default timetable to the person specified by the `INDEX`.Resets the timetable of the person to the default timetable if there is no timetable in the stored location from the person specified by the `INDEX`. +
 Format: `delete_timetable INDEX`
 
 ****
