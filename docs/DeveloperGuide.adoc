@@ -1349,34 +1349,7 @@ Use case resumes at step 4
 ** 4a1.System prompts user on login fail and to try again
 +
 Use case resumes at step 4
-
-[discrete]
-=== Use case: Reset password
-*MSS*
-
-1.	User enters command to reset password
-2.	System prompts user to answer the security question
-3.	After successfully answering the security question, system prompts user to choose a new password
-
-
-*Extensions*
-
-* 1a. User enters username that does not exist in the system
-+
-[none]
-** 1a1.System prompts user to enter username again
-+
-Use case resumes at step 1.
-* 2a. User entered wrong security answer
-+
-[none]
-** 2a1.System prompts user to enter security answer again
-+
-Use case resumes at step 2.
-
 // end::security-mechanism-use-case[]
-
-_{More to be added}_
 
 [appendix]
 == Non Functional Requirements
