@@ -1,12 +1,7 @@
 package seedu.address.logic.commands;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndexes;
-import static seedu.address.testutil.TypicalGroups.FAMILY;
 import static seedu.address.testutil.TypicalGroups.getTypicalAddressBook;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -34,7 +29,7 @@ public class ViewGroupRankedAvailableTimeslotCommandTest {
     }
 
     @Test
-    public void execute_viewSlotsRankedWithNobodyInGroup() {
+    public void executeViewSlotsRankedWithNobodyInGroup() {
     	Group testGroup = new GroupBuilder(testGroup).build();
     	assertCommandSuccess(new ViewGroupRankedAvailableTimeslotCommand(testGroup, 1), model, commandHistory,
     	        ViewGroupRankedAvailableTimeslotCommand.MESSAGE_SUCCESS + "1 person(s) available:\n"
