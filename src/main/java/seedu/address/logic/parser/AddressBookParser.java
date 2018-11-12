@@ -151,6 +151,7 @@ public class AddressBookParser {
             case ClearCommand.COMMAND_WORD:
                 return new ClearCommand();
 
+            case FindCommand.ALIAS:
             case FindCommand.COMMAND_WORD:
                 return new FindCommandParser().parse(arguments);
 
