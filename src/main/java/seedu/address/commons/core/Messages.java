@@ -20,7 +20,8 @@ public class Messages {
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
     public static final String MESSAGE_USER_NOT_LOGGED_IN = "Please login or create an account to continue.";
     public static final String MESSAGE_USER_ALREADY_LOGGED_IN = "User is already logged in.";
-    public static final String MESSAGE_ADMIN_RIGHTS_REQUIRED_TO_CREATE_ACCOUNT = "Please contact an admin to help you create an account.";
+    public static final String MESSAGE_ADMIN_RIGHTS_REQUIRED_TO_CREATE_ACCOUNT =
+        "Please contact an admin to help you create an account.";
 
 
 }
