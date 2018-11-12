@@ -987,12 +987,6 @@ Use case ends.
 ** 3a1.System shows an error message.
 +
 Use case resumes at step 2.
-* 3b. User adds timetable via a link and there is no internet.
-+
-[none]
-** 3b1.System shows there is no internet connection.
-+
-Use case resumes at step 2.
 * 4a.User does not confirm the addition of the timetable into the System.
 +
 Use case ends
@@ -1029,7 +1023,7 @@ Use case ends
 2.	System shows how to download a timetable
 3.	User enters inputs accordingly
 4.	System shows his timetable and ask user for confirmation.
-5.	User confirms the edit of his timetable into the System.
+5.	User confirms the download of the timetable.
 6.	System shows his timetable is edit successfully.
 
 
@@ -1066,12 +1060,6 @@ Use case ends
 ** 3a1.System shows an error message.
 +
 Use case resumes at step 2.
-* 4a. Timetable is not in the System.
-+
-[none]
-** 4a1.System shows an error message.
-+
-Use case ends.
 * 5a. User does not confirm the deletion of the timetable
 +
 
