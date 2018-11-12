@@ -86,7 +86,7 @@ public class TimetableData {
             return timetableMatrix;
         } else {
             String[] rows = timetableString.split("\n");
-            if (rows.length >= getRows()) {
+            if (rows.length > getRows()) {
                 logger.log(Level.WARNING, wrongNoOfRows);
                 this.isCorrectSize = false;
             }
