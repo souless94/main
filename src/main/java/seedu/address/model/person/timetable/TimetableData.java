@@ -86,16 +86,16 @@ public class TimetableData {
             return timetableMatrix;
         } else {
             String[] rows = timetableString.split("\n");
-            if (rows.length > getRows()) {
+            if (rows.length >= getRows()) {
                 logger.log(Level.WARNING, wrongNoOfRows);
                 this.isCorrectSize = false;
-                return timetableMatrix;
             }
             for (int i = 0; i < getRows(); i++) {
                 String[] decodedRows = rows[i].split(",");
                 if (decodedRows.length != getColumns()) {
                     logger.log(Level.WARNING, wrongNoOfColumns);
                     this.isCorrectSize = false;
+                    break;
                 }
                 for (int j = 0; j < getColumns(); j++) {
                     byte[] decodedString = Base64.getDecoder().decode(decodedRows[j]);
