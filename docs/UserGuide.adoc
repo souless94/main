@@ -330,6 +330,7 @@ Format: `add_timetable INDEX [fl/FILE_LOCATION]`
 * timings are start time of the event. Eg. if timetable shows 0800, it means the event is from 0800 to 0900.
 * The index refers to the index number shown in the displayed person list.
 * The index *must be a positive integer* 1, 2, 3, ...
+* Time zone used is Singapore (GMT+8)
 ****
 
 Example (user does not provide a file path):
@@ -372,6 +373,7 @@ Format: `edit_timetable INDEX day/DAY timing/TIMING [m/DETAILS]`
 * can only edit 1 hour timeslot at a time.
 * The index refers to the index number shown in the displayed person list.
 * The index *must be a positive integer* 1, 2, 3, ...
+* Time zone used is Singapore (GMT+8)
 * DETAILS cannot be empty.
 * If no DETAILS is inputted, the value will be deleted at the timeslot
 ****
