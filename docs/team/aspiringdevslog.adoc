@@ -17,7 +17,7 @@ NUS Hangs is a desktop Schedule Manager application. It has a GUI but most of th
 ** What it does: manages command execution rights to two main stakeholders
 *** Guest users (users without account): can only execute read-only commands
 *** Admins (users with account): can execute all commands accessible by guest users. On top of that, is able to execute commands related to add and editing of data.
-** Justification: This feature secures the information stored in the application by restricting write and modification rights to admins (typically committee members of an interest group), while allowing all users to reading rights to the data. 
+** Justification: This feature secures the information stored in the application by restricting write and modification rights to admins (typically committee members of an interest group), while allowing all users to reading rights to the data.
 
 
 * *Minor enhancement*: *added an encrypt function*
