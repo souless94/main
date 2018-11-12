@@ -21,10 +21,10 @@ public class ViewGroupCommand extends Command {
 
     public static final String ALIAS = "vg";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": View group members of a group"
-            + "[" + PREFIX_NAME + " GROUP NAME]\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": View group members of a group."
+            + " Parameters: " + PREFIX_NAME + " GROUP NAME\n"
             + "Example: " + COMMAND_WORD
-            + PREFIX_NAME + "Family ";
+            + " " + PREFIX_NAME + "Family ";
 
     public static final String MESSAGE_SUCCESS = "Listed all members:\n";
 

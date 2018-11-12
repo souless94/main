@@ -23,9 +23,9 @@ public class DeleteMemberCommand extends Command {
 
     public static final String ALIAS = "dm";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Delete an existing member of an existing group "
-            + "Parameters: INDEX of person in view_group displayed list (must be a positive integer)\n"
-            + "[" + PREFIX_NAME + " GROUP NAME]\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Delete an existing member of an existing group. "
+            + "Parameters: INDEX of person after performing view_group\n"
+            + PREFIX_NAME + " GROUP NAME\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_NAME + "Family ";
 
