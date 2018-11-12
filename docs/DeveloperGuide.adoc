@@ -614,11 +614,11 @@ The current time slot commands added are:
 
 The activity diagram is as follows.
 
-image::timeslotactivitydiagram[width="800"]
+image::timeslotactivitydiagram.png[width="800"]
 
 These methods and their parsers are handled in `Logic`, and compares the `Timetable` associated with each `Person` in a specified `Group` during execution. Given below is the Sequence Diagram illustrating the interactions between the various classes when finding the aforementioned slots.
 
-image::timeslotsequencediagram[width="800"]
+image::timeslotsequencediagram.png[width="800"]
 
 ==== Design Considerations
 ===== Aspect: How should time tables be compared when view_slots_all is executed
