@@ -26,12 +26,12 @@ public class FindCommand extends Command {
     public static final String ALIAS = "f";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all person in NUS Hangs "
-            + "(Prefix Search/ Case-Insensitive) and displays them as a list.\n"
+            + "(Prefix Search is case-insensitive) and displays them as a list.\n"
             + "Parameters:\n"
-            + PREFIX_NAME + "NAME "
-            + PREFIX_PHONE + "PHONE "
-            + PREFIX_EMAIL + "EMAIL "
-            + PREFIX_ADDRESS + "ADDRESS "
+            + "[" + PREFIX_NAME + "NAME "
+            + "[" + PREFIX_PHONE + "PHONE "
+            + "[" + PREFIX_EMAIL + "EMAIL "
+            + "[" + PREFIX_ADDRESS + "ADDRESS "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "alex "
