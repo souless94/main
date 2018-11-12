@@ -431,9 +431,7 @@ Deletes the 1st timetable in the results of the `find` command.
 // tag::groups[]
 == Groups (Melodies)
 === Adding a group: `add_group`
-
 Short form/Alias: `ag`
-
 Add a group to the System +
 Format: `add_group n/GROUPNAME [d/GROUPDESCRIPTION]`
 
@@ -443,9 +441,7 @@ Examples:
 * `add_group n/Bestfriends
 
 === Editing a group : `edit_group`
-
 Short form/Alias: `eg`
-
 Edit a group's details. OLDGROUPNAME must be entered. There must be at least 1 field non-empty. If field is empty, system assumes that the field remains unedited.
 
 Format: `edit_group OLDGROUPNAME [n/NEWGROUPNAME] [d/NEWGROUPDESCRIPTION]`
@@ -456,13 +452,10 @@ Examples:
 * `edit_group happyfriends n/sadfriends d/sad because of cs2103`
 (Changes the name of group from "happyfriends" to "sadfriends" and description)
 
-* `edit_group sadfriends d/very very miserable`
-(Changes only description.)
+* `edit_group sadfriends d/very very miserable` (Changes only description.)
 
 === Locating group by name: `find_group`
-
 Short form/Alias: `fg`
-
 Find groups whose names contain any of the given keywords +
 Format: `find_group KEYWORD [MORE_KEYWORDS]`
 
@@ -477,9 +470,7 @@ Returns `john family` and `John House`
 Returns any group having names `Betsy`, `Tim`, or `John`
 
 === Deleting a group : `delete_group`
-
 Short form/Alias: `dg`
-
 Delete a group in the system by name +
 Format: `delete_group n/GROUPNAME`
 
@@ -488,9 +479,7 @@ Examples:
 * `delete_group n/happyfriends`
 
 === Add a person to group : `register`
-
 Short form/Alias: `r`
-
 Adds a person using the person index to a group if group exists +
 Format: `register PERSON_INDEX n/GROUP_NAME`
 
@@ -499,13 +488,10 @@ Format: `register PERSON_INDEX n/GROUP_NAME`
 Examples: (Adds the first person in the displayed person panel to the group happyfriends)
 
 `list` +
-
 `register 1 n/happyfriends`
 
 === List all persons of a group : `view_group`
-
 Short form/Alias: `vg`
-
 Displays a list of all persons in a group +
 Format: `view_group n/GROUP_NAME`
 
@@ -514,9 +500,7 @@ Examples: (lists the persons added to group happyfriends in the displayed person
 * ` view_group n/happyfriends`
 
 === Delete a person from group : `delete_member`
-
 Short form/Alias: `dm`
-
 Delete a person from a group using person index displayed with `view_group`. +
 Format: `delete_member PERSON_INDEX n/GROUP_NAME`
 
