@@ -52,8 +52,3 @@ include::../DeveloperGuide.adoc[tag=timeslot]
 
 
 
-== PROJECT: PowerPointLabs
-
----
-
-_{Optionally, you may include other projects in your portfolio.}_
