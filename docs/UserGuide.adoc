@@ -317,6 +317,7 @@ Format: `undo`
 [NOTE]
 ====
 Undoable commands: those commands that modify the NUS Hangs's content (`add`, `delete`, `edit` and `clear`).
+undo (`delete`) will not undo the delete of the timetable file at the stored location.
 ====
 
 Examples:
