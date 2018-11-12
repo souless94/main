@@ -577,7 +577,7 @@ Pros: Easy to implement, with specific search focus.
 
 Cons: Repetitive code base with less flexibility.
 
-===== Aspect: How should each `add` feature work
+===== Aspect: How should `add` feature work
 
 *Alternative 1 (Current Choice) :* Allow optional prefix (e.g. add n/alex t/friends)
 
