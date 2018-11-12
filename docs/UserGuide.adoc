@@ -56,8 +56,8 @@ To prevent unauthorized users from creating an account, `create` *can only be ex
 An example in the context of an interest group: Only committee members should be allowed to make changes to the data while members are restricted to viewing rights.
 +
 
-- <<create_an_account_code_create_code>>
-- <<login_to_an_account_code_login_code>>
+- <<create>>
+- <<login>>
 
 // end::quick-start[]
 
@@ -99,6 +99,8 @@ There is no need to save manually.
 
 // tag::security-mechanism[]
 == Security (Leslie)
+
+[[create]]
 === Create an account: `create`
 
 Create an account in the system. The password is case sensitive. +
@@ -117,6 +119,7 @@ Examples:
 
 * `create u/sampleUser pw/dontUseWeakPassword`
 
+[[login]]
 === Login to an account : `login`
 Login into the system. +
 Users are required to login to execute most commands of the NUS Hangs
