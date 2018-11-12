@@ -592,6 +592,7 @@ Format: `view_slots_all n/GROUP_NAME `
 
 ****
 * List all time slots at which all persons in a group is available, for the group with specified`GROUP_NAME`
+* Will indicate accordingly if the input is invalid, if there are no members in the groups and if there are no time slots at which everyone is available.
 ****
 
 Examples:
@@ -608,6 +609,8 @@ Format: `view_slots_ranked n/GROUP_NAME num/NUM_REQ`
 
 ****
 * List all time slots of a group in descending order of availability, for the group with specified `GROUP_NAME`, and with a specified 'NUM_REQ' of people available.
+* `NUM_REQ` has to be an unsigned positive integer, but can be larger than the number of members in the group
+* Will indicate accordingly if the input is invalid, if there are no members in the groups and if there are no time slots with at least the required number of people available
 ****
 
 Examples:

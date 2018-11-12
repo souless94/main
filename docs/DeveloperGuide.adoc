@@ -626,27 +626,28 @@ The time slot feature makes use of the `Timetable` and `Group` classes each `Per
 
 ==== Current Implementation
 The current time slot commands added are:
+
 * `view_slots_all`/`va` -- lists all time slots at which every member of a specfied group is free at
 * `view_slots_ranked/`vr`` -- sorts and lists all time slots in terms of number of members available, for a specified group and specified required minimum number of people
 
 The activity diagram is as follows.
 
-image::timeslotactivitydiagram
+image::timeslotactivitydiagram[width="800"]
 
 These methods and their parsers are handled in `Logic`, and compares the `Timetable` associated with each `Person` in a specified `Group` during execution. Given below is the Sequence Diagram illustrating the interactions between the various classes when finding the aforementioned slots.
 
-image::timeslotsequencediagram
+image::timeslotsequencediagram[width="800"]
 
 ==== Design Considerations
 ===== Aspect: How should time tables be compared when view_slots_all is executed
 
-*Alternative 1 (current choice): Get a 2d boolean array based on the 2d string array data in the `Timetable` associated with each `Person` to determine if the `Person` is free at a particular time slot.
+* Alternative 1 (current choice): Get a 2d boolean array based on the 2d string array data in the `Timetable` associated with each `Person` to determine if the `Person` is free at a particular time slot.
 
 Pros: The true/false nature of a 2d boolean array is intuitive when determining if a person is free. No strings have to be parsed during the method call, which allows for faster comparisons.
 
 Cons: It will be harder to implement additional features based on the 2d boolean array as its entries can only be true or false.
 
-*Alternative 2: Directly compare the 2d string array of the `Timetable` class associcated with each `Person`
+* Alternative 2: Directly compare the 2d string array of the `Timetable` class associcated with each `Person`
 
 Pros: Less code needed and debugging would be easier. Furthermore, implementation would also be more direct.
 
@@ -668,13 +669,13 @@ Cons: Very slow due to O(n) find and deletion.
 
 ====== Aspect: How should the results be returned
 
-*Alternative 1 (current choice): Return the results in a form of a string
+* Alternative 1 (current choice): Return the results in a form of a string
 
 Pros: Relatively fast due to stringbuilder and easy to implement.
 
 Cons: Harder to use and manipulate the results for implementation of other features.
 
-*Alternative 2: Return the results in a form of a `Timetable`
+* Alternative 2: Return the results in a form of a `Timetable`
 
 Pros: Can be used in various ways due to the available timetable methods and can also be downloaded as an excel file.
 
