@@ -1,5 +1,6 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.commons.core.Messages.MESSAGE_ADMIN_RIGHTS_REQUIRED_TO_CREATE_ACCOUNT;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.commons.core.Messages.MESSAGE_USER_NOT_LOGGED_IN;
@@ -200,7 +201,7 @@ public class AddressBookParser {
                 return new LoginCommandParser().parse(arguments);
 
             case CreateCommand.COMMAND_WORD:
-                return new CreateCommandParser().parse(arguments);
+                throw new ParseException(MESSAGE_ADMIN_RIGHTS_REQUIRED_TO_CREATE_ACCOUNT);
 
             case SelectCommand.COMMAND_WORD:
                 return new SelectCommandParser().parse(arguments);
