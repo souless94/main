@@ -89,19 +89,20 @@ public class TimetableData {
             if (rows.length != getRows()) {
                 logger.log(Level.WARNING, wrongNoOfRows);
                 this.isCorrectSize = false;
-            }
-            for (int i = 0; i < getRows(); i++) {
-                String[] decodedRows = rows[i].split(",");
-                if (decodedRows.length != getColumns()) {
-                    logger.log(Level.WARNING, wrongNoOfColumns);
-                    this.isCorrectSize = false;
-                    break;
+            } else {
+                for (int i = 0; i < getRows(); i++) {
+                    String[] decodedRows = rows[i].split(",");
+                    if (decodedRows.length != getColumns()) {
+                        logger.log(Level.WARNING, wrongNoOfColumns);
+                        this.isCorrectSize = false;
+                        break;
+                    }
+                    for (int j = 0; j < getColumns(); j++) {
+                        byte[] decodedString = Base64.getDecoder().decode(decodedRows[j]);
+                        decodedRows[j] = new String(decodedString);
+                    }
+                    timetableMatrix[i] = decodedRows;
                 }
-                for (int j = 0; j < getColumns(); j++) {
-                    byte[] decodedString = Base64.getDecoder().decode(decodedRows[j]);
-                    decodedRows[j] = new String(decodedString);
-                }
-                timetableMatrix[i] = decodedRows;
             }
             return timetableMatrix;
         }
