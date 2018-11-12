@@ -362,9 +362,8 @@ Format: `clear`
 * `clear` does not delete timetable in the stored folder of the person.
 ****
 
-
-== Timetable(Wen Kai)
 // tag::timetable[]
+== Timetable(Wen Kai)
 
 === Adding a timetable: `add_timetable`
 
