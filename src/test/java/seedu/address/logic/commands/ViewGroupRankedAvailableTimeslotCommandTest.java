@@ -40,3 +40,4 @@ public class ViewGroupRankedAvailableTimeslotCommandTest {
     	        ViewGroupRankedAvailableTimeslotCommand.MESSAGE_SUCCESS + "1 person(s) available:\n"
                 + group.listRankedAvailableTimeslots(numberRequired), expectedModel);
     }
+}

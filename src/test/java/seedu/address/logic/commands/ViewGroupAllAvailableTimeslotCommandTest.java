@@ -39,3 +39,4 @@ public class ViewGroupAllAvailableTimeslotCommandTest {
     	assertCommandSuccess(new ViewGroupAllAvailableTimeslotCommand(testGroup), model, commandHistory,
     	        ViewGroupALlAvailableTimeslotCommand.MESSAGE_SUCCESS + testGroup.listAllAvailableTimeslots(), expectedModel);
     }
+}

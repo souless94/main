@@ -638,7 +638,7 @@ e.g. `register 1 n/Family`
 e.g. `view_group n/Family` +
 `delete_member 1 n/Family`
 * *view_slots_all*: `view_slots_all n/GROUP_NAME`
-* *view_slots_ranked*: `view_slots_ranked n/GROUP_NAME`
+* *view_slots_ranked*: `view_slots_ranked n/GROUP_NAME num/NUM_REQ`
 * *create* : `create u/USERNAME pw/PASSWORD` +
 e.g. `create u/user pw/strongpass`
 * *login* : `login u/USERNAME pw/PASSWORD` +
