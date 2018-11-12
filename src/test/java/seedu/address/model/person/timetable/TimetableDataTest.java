@@ -50,7 +50,7 @@ public class TimetableDataTest {
         // check wrongtimetableData has incorrect size
         assertFalse(timetableDataWrongSize.isCorrectSize());
 
-        // check  wrongTimetableData has incorrect first Rows and Columns
+        // check wrongTimetableData with WrongFirstRow has incorrect first Rows and Columns
         assertFalse(timetableDataWrongFirstRow.hasCorrectFirstRowsAndColumns());
     }
 
