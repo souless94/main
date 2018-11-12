@@ -636,7 +636,7 @@ Cons: If there are many `Person` in a group, it will take a longer time to find 
 
 ====== Aspect: How should time slots be sorted when view_slots_ranked is executed
 
-* Alternative 1 (current choice): Store the available time slots in a treemap with the key being the slots in integer form, and the value being the number of people available at the that slot. 
+* Alternative 1 (current choice): Store the available time slots in a treemap with the key being the slots in integer form, and the value being the number of people available at the that slot.
 
 Pros: Very fast and can be easily sorted in terms of number of people available using a custom comparator while collecting the elements in a linkedhashmap. This preserves the order of the elements so that they are first sorted in number of people available and then in terms of timing. While iterating through the linkedhashmap, it can return immediately when a slot has less people available than required.
 
