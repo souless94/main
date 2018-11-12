@@ -9,6 +9,7 @@ import seedu.address.model.Entity;
 import seedu.address.model.group.Group;
 import seedu.address.model.tag.Tag;
 
+//@@author ZhiWei94
 /**
  * Tests that a {@code Name} matches any of the keywords given.
  */
@@ -89,6 +90,7 @@ public class NameContainsKeywordsPredicate<T extends Entity> implements Predicat
         return false;
     }
 
+    //@@author
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object

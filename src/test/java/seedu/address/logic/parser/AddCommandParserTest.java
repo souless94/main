@@ -79,6 +79,7 @@ public class AddCommandParserTest {
                 + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, new AddCommand(expectedPersonMultipleTags));
     }
 
+    //@@author ZhiWei94
     @Test
     public void parse_optionalFieldsMissing_success() {
         // zero tags
@@ -123,6 +124,7 @@ public class AddCommandParserTest {
         assertParseFailure(parser, "", expectedMessage);
     }
 
+    //@@author
     @Test
     public void parse_invalidValue_failure() {
         // invalid name
