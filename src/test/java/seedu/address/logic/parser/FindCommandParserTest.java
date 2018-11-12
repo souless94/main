@@ -21,13 +21,13 @@ public class FindCommandParserTest {
     }
 
     @Test
-    public void parse_doublePrefix_throwsParseException() {
+    public void parseDoublePrefixThrowsParseException() {
         assertParseFailure(parser, " n/alex n/bernice t/friends",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
     }
 
     @Test
-    public void parse_validArgs_returnsFindCommand() {
+    public void parseValidArgsReturnsFindCommand() {
         // no leading and trailing whitespaces
         FindCommand expectedFindCommand =
                 prepareFindCommand(
