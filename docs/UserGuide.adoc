@@ -407,10 +407,10 @@ Example (user provides a file path):
 * `add_timetable 1 fl/C:\Users\timetable\timetable.csv`
 
 * WINDOWS:
-** `add_timetable fl/C:\Users\timetable\timetable.csv` (absolute pathing) or
+** `add_timetable fl/C:\Users\timetable\timetable.csv` (absolute pathing)
 ** `add_timetable fl/timetable.csv` (relative pathing: when the csv file is in the same directory as the jar file).
 * MAC:
-** `add_timetable 1 fl//FILEPATH` (absolute pathing: note the double slashes) or
+** `add_timetable 1 fl//FILEPATH` (absolute pathing: note the double slashes)
 ** `add_timetable 1 fl/timetable.csv` (relative pathing).
 * add_timetable will add timetable from the given csv file.
 * the first row and first column should be left alone.
