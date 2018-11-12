@@ -80,7 +80,7 @@ An example in the context of an interest group: Only committee members should be
 * Parameters can be in any order e.g. if the command specifies `n/NAME INDEX`, `INDEX n/NAME` is also acceptable.
 ====
 
-== common
+== Common
 
 [[help]]
 === Viewing help : `help`
