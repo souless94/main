@@ -620,7 +620,7 @@ Examples:
 Encrypts password so that it will not be stored as plain text.
 This function runs when dealing with user's password.
 
-=== Changing password: `update_pw `  `[coming in v2.0]`
+=== Changing password: `update_pw` [coming in v2.0]
 
 Change the user password, requires user to be logged in first. +
 Format: `update_pw c/CURRENT_PASSWORD n/NEW_PASSWORD`
