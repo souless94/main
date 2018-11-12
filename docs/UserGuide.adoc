@@ -513,6 +513,7 @@ Examples: (deletes the 1st person displayed in `view_group` command.)
 * `delete_member 1 n/happyfriends`
 // end::groups[]
 
+// tag::timeslot[]
 == Time slots (Nigel)
 [[view_slots_all]]
 === List all time slots at which everyone of a group is available : `view_slots_all`
@@ -543,6 +544,7 @@ Format: `view_slots_ranked n/GROUP_NAME num/NUM_REQ`
 Examples:
 
 * `view_slots_ranked n/happyfriends num/4`
+// end::timeslot[]
 
 // tag::security-mechanism[]
 == Security (Leslie)
