@@ -48,9 +48,11 @@ public class Guess extends Entity {
 
     private float getCount(Set<Character> keySet) {
         float count = 0;
-        for (char character : keySet) {
-            if (commandHashMap.containsKey(character)) {
-                count++;
+        if (keySet.size() < commandHashMap.size()) {
+            for (char character : keySet) {
+                if (commandHashMap.containsKey(character)) {
+                    count++;
+                }
             }
         }
         return count;
