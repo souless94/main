@@ -20,13 +20,16 @@ public class Guess extends Entity {
     private HashMap<Character, Integer> guessHashMap;
     private HashMap<Character, Integer> commandHashMap;
     private TreeMap<Float, String> treeMap;
+    private boolean canGuess;
 
     public Guess(String guess) {
         requireAllNonNull(guess);
         guessHashMap = new HashMap<>();
         commandHashMap = new HashMap<>();
         treeMap = new TreeMap<>();
+        canGuess = true;
         this.guess = predictGuess(guess);
+
     }
 
     private void setCommandHashMap(String commandWord) {
@@ -39,20 +42,26 @@ public class Guess extends Entity {
         Set<Character> keySet = guessHashMap.keySet();
         for (String command : COMMAND_WORDS) {
             setCommandHashMap(command);
-            float countOfOccurrences = getCount(keySet) / command.length();
-            treeMap.put(countOfOccurrences, command);
-            commandHashMap.clear();
+            float countOfOccurrences = 0;
+            if (guess.length() < command.length()) {
+                countOfOccurrences = getCount(keySet) / command.length();
+                treeMap.put(countOfOccurrences, command);
+                commandHashMap.clear();
+            }
         }
-        return treeMap.lastEntry().getValue();
+        if (!treeMap.isEmpty()) {
+            return treeMap.lastEntry().getValue();
+        } else {
+            this.canGuess = false;
+            return finalGuess;
+        }
     }
 
     private float getCount(Set<Character> keySet) {
         float count = 0;
-        if (keySet.size() < commandHashMap.size()) {
-            for (char character : keySet) {
-                if (commandHashMap.containsKey(character)) {
-                    count++;
-                }
+        for (char character : keySet) {
+            if (commandHashMap.containsKey(character)) {
+                count++;
             }
         }
         return count;
@@ -84,6 +93,10 @@ public class Guess extends Entity {
             return this.guess;
         }
         return this.guess + QUESTION_MARK;
+    }
+
+    public boolean isCanGuess() {
+        return this.canGuess;
     }
 
     @Override

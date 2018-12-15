@@ -24,7 +24,10 @@ public class GuessCommand extends Command {
         requireNonNull(model);
         Guess aGuess = new Guess(guess);
         String finalGuess = aGuess.getGuess();
-        return new CommandResult(
-                String.format(MESSAGE_GUESS,finalGuess));
+        if (aGuess.isCanGuess()) {
+            return new CommandResult(
+                    String.format(MESSAGE_GUESS, finalGuess));
+        }
+        return new CommandResult(finalGuess);
     }
 }
